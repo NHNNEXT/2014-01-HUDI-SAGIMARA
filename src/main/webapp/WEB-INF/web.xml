@@ -7,7 +7,7 @@
 	<description>SAGIMARA</description>
 	<servlet>
 		<servlet-name>sagimara2</servlet-name>
-		<servlet-class>sagimara2.SagimaraServlet</servlet-class>
+		<servlet-class>framework.FrontController</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>sagimara2</servlet-name>
