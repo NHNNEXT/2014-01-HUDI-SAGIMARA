@@ -22,15 +22,14 @@ public class FrontController extends HttpServlet {
 	@Override
 	public void init() throws ServletException {
 		super.init();
-		map.put("sagimara2", "/index.jsp");
+		map.put("/sagimara2", "/index.jsp");
+		map.put("/", "/index.jsp");
 	}
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
 		//RequestDispatcher dispather = request.getRequestDispatcher("error");
 		
 		String path = request.getContextPath();
-		System.out.println(request.getParameter("abc"));
-		path = path.replaceFirst("/", "");
 		String result = map.get(path);
 		
 		RequestDispatcher dispather = getServletContext().getRequestDispatcher(result);
