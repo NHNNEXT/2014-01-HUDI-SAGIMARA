@@ -2,6 +2,7 @@ package framework;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,7 +11,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class FrontController extends HttpServlet {
-	HashMap<String, String> map = new HashMap();
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	Map<String, String> map = new HashMap<String, String>();
 
 	@Override
 	public void init() throws ServletException {
@@ -19,14 +26,29 @@ public class FrontController extends HttpServlet {
 	}
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
+		//RequestDispatcher dispather = request.getRequestDispatcher("error");
+		
 		String path = request.getContextPath();
+		System.out.println(request.getParameter("abc"));
 		path = path.replaceFirst("/", "");
-		System.out.println(path);
 		String result = map.get(path);
-		System.out.println(result);
 		
 		RequestDispatcher dispather = getServletContext().getRequestDispatcher(result);
 		dispather.forward(request, response);
 	}
 
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		super.doPost(req, resp);
+	}
+
+	@Override
+	public void destroy() {
+		// TODO Auto-generated method stub
+		super.destroy();
+	}
+	
+	
+	
 }
