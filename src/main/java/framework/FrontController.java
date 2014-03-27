@@ -17,7 +17,7 @@ public class FrontController extends HttpServlet {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	Map<String, String> map = new HashMap<String, String>();
+	HashMap<String, String> map = new HashMap<String, String>();
 
 	@Override
 	public void init() throws ServletException {
