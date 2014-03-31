@@ -1,6 +1,7 @@
 package framework;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,6 +32,10 @@ public class FrontController extends HttpServlet {
 		
 		String path = request.getContextPath();
 		String result = map.get(path);
+		PrintWriter out = response.getWriter();
+		out.println(path);
+		out.flush();
+		out.close();
 		
 		RequestDispatcher dispather = getServletContext().getRequestDispatcher(result);
 		dispather.forward(request, response);
