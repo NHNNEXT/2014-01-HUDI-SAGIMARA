@@ -34,6 +34,7 @@ public class FrontController extends HttpServlet {
 		String result = map.get(path);
 		PrintWriter out = response.getWriter();
 		out.println(path);
+		out.println("test");
 		out.flush();
 		out.close();
 		
