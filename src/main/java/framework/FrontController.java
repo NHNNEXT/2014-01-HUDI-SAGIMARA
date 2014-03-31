@@ -23,20 +23,23 @@ public class FrontController extends HttpServlet {
 	@Override
 	public void init() throws ServletException {
 		super.init();
-		map.put("/sagimara2", "/index.jsp");
+		map.put("/sagimara2/", "/index.jsp");
 		map.put("/", "/index.jsp");
 	}
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
 		//RequestDispatcher dispather = request.getRequestDispatcher("error");
 		
-		String path = request.getContextPath();
-		String result = map.get(path);
-		PrintWriter out = response.getWriter();
-		out.println(path);
-		out.println("test");
-		out.flush();
-		out.close();
+		String path1 = request.getServletPath();
+		String path2 = request.getRequestURI();
+		String result = map.get(path1);
+//		PrintWriter out = response.getWriter();
+//		out.println(path1);
+//		out.println(path2);
+//		out.println(result);
+//		out.println("test");
+//		out.flush();
+//		out.close();
 		
 		RequestDispatcher dispather = getServletContext().getRequestDispatcher(result);
 		dispather.forward(request, response);
