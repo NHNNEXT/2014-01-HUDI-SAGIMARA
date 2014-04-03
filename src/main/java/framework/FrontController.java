@@ -23,7 +23,7 @@ public class FrontController extends HttpServlet {
 	@Override
 	public void init() throws ServletException {
 		super.init();
-		map.put("/sagimara2", "/index.jsp");
+		map.put("/test", "/test.jsp");
 		map.put("/", "/index.jsp");
 	}
 
@@ -37,9 +37,10 @@ public class FrontController extends HttpServlet {
 			dispather.forward(request, response);
 		} else {
 			PrintWriter out = response.getWriter();
+			out.println("path error");
 			out.println(path);
 			out.println(result);
-			out.println("error");
+			
 			out.flush();
 			out.close();
 		}
