@@ -8,5 +8,9 @@
 </head>
 <body>
 <h2>hello, SAGIMARA</h2>
+<form name="finder" method="post" action="/find">
+	<input type="text" name="id">
+</form>
+
 </body>
 </html>

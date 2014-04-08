@@ -32,13 +32,6 @@ public class FrontController extends HttpServlet {
 		String path = request.getServletPath();
 		String result = map.get(path);
 		
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-		} catch (ClassNotFoundException e) {
-			System.out.println("error!!");
-			e.printStackTrace();
-		}
-		
 		if (result != null) {
 			RequestDispatcher dispather = getServletContext().getRequestDispatcher(result);
 			dispather.forward(request, response);
@@ -58,7 +51,11 @@ public class FrontController extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		String id = (String) req.getAttribute("id");
+		String find = (String) req.getAttribute("finder");
+		System.out.println(id);
+		System.out.println(find);
+
 		super.doPost(req, resp);
 	}
 
