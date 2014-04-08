@@ -36,27 +36,44 @@ public class FrontController extends HttpServlet {
 			RequestDispatcher dispather = getServletContext().getRequestDispatcher(result);
 			dispather.forward(request, response);
 		} else {
-			PrintWriter out = response.getWriter();
-			out.println("path error");
-			out.println(path);
-			out.println(result);
-			
-			out.flush();
-			out.close();
+			System.out.println("path error");
+			System.out.println(path);
+			System.out.println(result);
 		}
 
-		
 		
 	}
 
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String id = (String) req.getAttribute("id");
-		String find = (String) req.getAttribute("finder");
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		DatabaseController dbc = new DatabaseByMysql();
+		JsonBuilder jb = new JsonBuilder();
+		
+		String path = request.getServletPath();
+		String result = map.get(path);
+		String id = (String) request.getParameter("id");
+		System.out.println(path);
+		System.out.println(result);
 		System.out.println(id);
-		System.out.println(find);
+		
+		DatabaseUserTable dut = dbc.readtable("test", id);
+		String json = jb.javaToJson(dut);
+		System.out.println(json);
+		
+		request.setAttribute("json", json);
+		String tt = (String) request.getAttribute("json");
+		System.out.println(tt);
 
-		super.doPost(req, resp);
+		if (result != null) {
+			RequestDispatcher dispather = getServletContext().getRequestDispatcher(result);
+			dispather.forward(request, response);
+		} else {
+			System.out.println("path error");
+			System.out.println(path);
+			System.out.println(result);
+		}
+
+		//super.doPost(request, response);
 	}
 
 	@Override

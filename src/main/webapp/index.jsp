@@ -8,7 +8,7 @@
 </head>
 <body>
 <h2>hello, SAGIMARA</h2>
-<form name="finder" method="post" action="/find">
+<form name="finder" method="post" action="/test">
 	<input type="text" name="id">
 </form>
 
