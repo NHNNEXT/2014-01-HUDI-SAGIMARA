@@ -1,6 +1,7 @@
 package framework;
 
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.HashMap;
 
 import javax.servlet.RequestDispatcher;
@@ -61,17 +62,20 @@ public class FrontController extends HttpServlet {
 		System.out.println(json);
 		
 		request.setAttribute("json", json);
-		String tt = (String) request.getAttribute("json");
-		System.out.println(tt);
+		
+		OutputStreamWriter writer = new OutputStreamWriter(response.getOutputStream(), "utf8");
+		writer.write(json);
+		writer.close();
 
-		if (result != null) {
-			RequestDispatcher dispather = getServletContext().getRequestDispatcher(result);
-			dispather.forward(request, response);
-		} else {
-			System.out.println("path error");
-			System.out.println(path);
-			System.out.println(result);
-		}
+
+//		if (result != null) {
+//			RequestDispatcher dispather = getServletContext().getRequestDispatcher(result);
+//			dispather.forward(request, response);
+//		} else {
+//			System.out.println("path error");
+//			System.out.println(path);
+//			System.out.println(result);
+//		}
 
 		//super.doPost(request, response);
 	}
