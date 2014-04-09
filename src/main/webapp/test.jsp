@@ -10,7 +10,7 @@ String json = (String) request.getAttribute("json");
 <title>Sagimara</title>
 </head>
 <body>
-<h2>this is testpage</h2>
+<h2>this is testpage for JSON</h2>
 <%=json%>
 </body>
 </html>

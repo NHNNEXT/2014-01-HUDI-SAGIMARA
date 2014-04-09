@@ -20,7 +20,7 @@ public class DatabaseByMysql implements DatabaseController {
 
 	private void init() {
 		String addr = "jdbc:mysql://localhost:3306/sagimara";
-		String user = "sagimara";
+		String user = "dev";
 		String password = "elqlgkwk"; 
 		System.out.println("init");
 		try {

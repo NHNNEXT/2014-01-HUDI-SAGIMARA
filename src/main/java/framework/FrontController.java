@@ -1,9 +1,7 @@
 package framework;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -19,12 +17,17 @@ public class FrontController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	HashMap<String, String> map = new HashMap<String, String>();
+	DatabaseController dbc;
+	JsonBuilder jb;
 
 	@Override
 	public void init() throws ServletException {
 		super.init();
 		map.put("/test", "/test.jsp");
 		map.put("/", "/index.jsp");
+		
+		dbc = new DatabaseByMysql();
+		jb = new JsonBuilder();
 	}
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
@@ -46,9 +49,6 @@ public class FrontController extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		DatabaseController dbc = new DatabaseByMysql();
-		JsonBuilder jb = new JsonBuilder();
-		
 		String path = request.getServletPath();
 		String result = map.get(path);
 		String id = (String) request.getParameter("id");
