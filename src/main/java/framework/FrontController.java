@@ -2,6 +2,7 @@ package framework;
 
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.util.HashMap;
 
 import javax.servlet.RequestDispatcher;
@@ -63,9 +64,12 @@ public class FrontController extends HttpServlet {
 		
 		request.setAttribute("json", json);
 		
-		OutputStreamWriter writer = new OutputStreamWriter(response.getOutputStream(), "utf8");
-		writer.write(json);
-		writer.close();
+		PrintWriter out = response.getWriter();
+		out.println(json);
+		
+//		OutputStreamWriter writer = new OutputStreamWriter(response.getOutputStream(), "utf8");
+//		writer.write(json);
+//		writer.close();
 
 
 //		if (result != null) {
