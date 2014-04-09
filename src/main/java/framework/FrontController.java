@@ -66,22 +66,22 @@ public class FrontController extends HttpServlet {
 		
 		request.setAttribute("json", json);
 		
-		PrintWriter out = response.getWriter();
-		out.println(json);
+//		PrintWriter out = response.getWriter();
+//		out.println(json);
 		
 //		OutputStreamWriter writer = new OutputStreamWriter(response.getOutputStream(), "utf8");
 //		writer.write(json);
 //		writer.close();
 
 
-//		if (result != null) {
-//			RequestDispatcher dispather = getServletContext().getRequestDispatcher(result);
-//			dispather.forward(request, response);
-//		} else {
-//			System.out.println("path error");
-//			System.out.println(path);
-//			System.out.println(result);
-//		}
+		if (result != null) {
+			RequestDispatcher dispather = getServletContext().getRequestDispatcher(result);
+			dispather.forward(request, response);
+		} else {
+			System.out.println("path error");
+			System.out.println(path);
+			System.out.println(result);
+		}
 
 		//super.doPost(request, response);
 	}
