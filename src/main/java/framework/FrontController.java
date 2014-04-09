@@ -61,6 +61,8 @@ public class FrontController extends HttpServlet {
 		DatabaseUserTable dut = dbc.readtable("test", id);
 		String json = jb.javaToJson(dut);
 		System.out.println(json);
+		response.setCharacterEncoding("utf8");
+		request.setCharacterEncoding("utf8");
 		
 		request.setAttribute("json", json);
 		
