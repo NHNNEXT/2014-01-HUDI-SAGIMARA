@@ -10,9 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import type.UserProfile;
 import database.DatabaseByMysql;
 import database.DatabaseController;
-import database.TableUSER_PROFILE;
 
 public class FrontController extends HttpServlet {
 	
@@ -82,7 +82,7 @@ public class FrontController extends HttpServlet {
 		String result = map.get(path);
 		String id = (String) request.getParameter("id");
 		
-		TableUSER_PROFILE dut = dbc.readtable("USER_PROFILE", id);
+		UserProfile dut = dbc.readtable("USER_PROFILE", id);
 		String json = jb.javaToJson(dut);
 		System.out.println(json);
 		response.setCharacterEncoding("utf8");

@@ -1,6 +1,6 @@
-package database;
+package type;
 
-public class TableUSER {
+public class User {
 	private String user_phone;
 	private String user_password;
 	

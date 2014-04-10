@@ -1,6 +1,6 @@
-package database;
+package type;
 
-public class TableINQUIRY {
+public class Inquiry {
 	private String inquiry_id;
 	private String inquiry_time;
 	

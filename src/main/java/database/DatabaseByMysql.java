@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import type.UserProfile;
+
 public class DatabaseByMysql implements DatabaseController {
 	Connection conn;
 	Statement stmt;
@@ -54,8 +56,8 @@ public class DatabaseByMysql implements DatabaseController {
 	}
 
 	@Override
-	public TableUSER_PROFILE readtable(String table, String key) {
-		TableUSER_PROFILE result = new TableUSER_PROFILE();
+	public UserProfile readtable(String table, String key) {
+		UserProfile result = new UserProfile();
 
 		try {
 			sql = "select * from " + table + " where profile_phone = ?";

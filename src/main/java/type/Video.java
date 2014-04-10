@@ -1,6 +1,6 @@
-package database;
+package type;
 
-public class TableVIDEO {
+public class Video {
 	private String video_id;
 	private String video_link;
 	

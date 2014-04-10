@@ -1,6 +1,6 @@
-package database;
+package type;
 
-public class TableUSER_PROFILE {
+public class UserProfile {
 	private String profile_phone;
 	private String profile_status;
 	private String profile_verification;

@@ -1,6 +1,6 @@
-package database;
+package type;
 
-public class TableLOCATION {
+public class Location {
 	private String location_id;
 	private String location_time;
 	private String location_coordinate;

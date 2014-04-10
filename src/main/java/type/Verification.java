@@ -1,6 +1,6 @@
-package database;
+package type;
 
-public class TableVERIFICATION {
+public class Verification {
 	private String verification_id;
 	private String verification_time;
 	
