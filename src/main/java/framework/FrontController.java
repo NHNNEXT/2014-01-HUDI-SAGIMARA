@@ -36,6 +36,8 @@ public class FrontController extends HttpServlet {
 
 		String path = request.getServletPath();
 		String result = map.get(path);
+		response.setCharacterEncoding("utf8");
+		request.setCharacterEncoding("utf8");
 		
 		if (result != null) {
 			RequestDispatcher dispather = getServletContext().getRequestDispatcher(result);
@@ -44,19 +46,38 @@ public class FrontController extends HttpServlet {
 			System.out.println("path error");
 			System.out.println(path);
 			System.out.println(result);
+			//한글 출력문제
+			OutputStreamWriter writer = new OutputStreamWriter(response.getOutputStream(), "utf-8");
+			String notify = "존재하지 않는 주소입니다.";
+			String notify_uft8 = new String(notify.getBytes(),"utf-8");
+			writer.write(notify_uft8);
+			writer.close();
 		}
 
 		
 	}
 
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
+		String path = request.getServletPath();
+		
+		if(path.equals("/test")) {
+			test(request, response);
+		}
+			
+		//super.doPost(request, response);
+	}
+
+	@Override
+	public void destroy() {
+		// TODO Auto-generated method stub
+		super.destroy();
+	}
+	
+	private void test(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String path = request.getServletPath();
 		String result = map.get(path);
 		String id = (String) request.getParameter("id");
-		System.out.println(path);
-		System.out.println(result);
-		System.out.println(id);
 		
 		DatabaseUserTable dut = dbc.readtable("test", id);
 		String json = jb.javaToJson(dut);
@@ -69,27 +90,19 @@ public class FrontController extends HttpServlet {
 //		PrintWriter out = response.getWriter();
 //		out.println(json);
 		
-		OutputStreamWriter writer = new OutputStreamWriter(response.getOutputStream(), "utf8");
-		writer.write(json);
-		writer.close();
+//		OutputStreamWriter writer = new OutputStreamWriter(response.getOutputStream(), "utf8");
+//		writer.write(json);
+//		writer.close();
 
 
-//		if (result != null) {
-//			RequestDispatcher dispather = getServletContext().getRequestDispatcher(result);
-//			dispather.forward(request, response);
-//		} else {
-//			System.out.println("path error");
-//			System.out.println(path);
-//			System.out.println(result);
-//		}
-
-		//super.doPost(request, response);
-	}
-
-	@Override
-	public void destroy() {
-		// TODO Auto-generated method stub
-		super.destroy();
+		if (result != null) {
+			RequestDispatcher dispather = getServletContext().getRequestDispatcher(result);
+			dispather.forward(request, response);
+		} else {
+			System.out.println("path error");
+			System.out.println(path);
+			System.out.println(result);
+		}
 	}
 	
 	
