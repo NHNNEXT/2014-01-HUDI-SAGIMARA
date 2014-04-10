@@ -1,6 +1,6 @@
-package framework;
+package database;
 
-public class DatabaseUserTable {
+public class Tabletest implements Table{
 	private String id;
 	private String name;
 	
@@ -15,6 +15,16 @@ public class DatabaseUserTable {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	@Override
+	public Table getter() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public void setter(Table table) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

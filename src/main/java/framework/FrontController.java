@@ -2,7 +2,6 @@ package framework;
 
 import java.io.IOException;
 import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
 import java.util.HashMap;
 
 import javax.servlet.RequestDispatcher;
@@ -10,6 +9,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import database.DatabaseByMysql;
+import database.DatabaseController;
+import database.Table;
+import database.TableUSER_PROFILE;
+import database.Tabletest;
 
 public class FrontController extends HttpServlet {
 	
@@ -79,7 +84,7 @@ public class FrontController extends HttpServlet {
 		String result = map.get(path);
 		String id = (String) request.getParameter("id");
 		
-		DatabaseUserTable dut = dbc.readtable("test", id);
+		TableUSER_PROFILE dut = dbc.readtable("USER_PROFILE", id);
 		String json = jb.javaToJson(dut);
 		System.out.println(json);
 		response.setCharacterEncoding("utf8");
