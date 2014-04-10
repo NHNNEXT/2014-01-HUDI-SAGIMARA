@@ -56,14 +56,6 @@ public class DatabaseByMysql implements DatabaseController {
 	@Override
 	public TableUSER_PROFILE readtable(String table, String key) {
 		TableUSER_PROFILE result = new TableUSER_PROFILE();
-//		try {
-//			Class newclass = Class.forName("Table"+table);
-//			//Object result = newclass.newInstance();
-//		} catch (ClassNotFoundException e1) {
-//			// TODO Auto-generated catch block
-//			e1.printStackTrace();
-//		}
-		//ArrayList<String> columns = getColumns(table);
 
 		try {
 			sql = "select * from " + table + " where profile_phone = ?";

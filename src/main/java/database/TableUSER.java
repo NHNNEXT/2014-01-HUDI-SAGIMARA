@@ -1,6 +1,6 @@
 package database;
 
-public class TableUSER implements Table{
+public class TableUSER {
 	private String user_phone;
 	private String user_password;
 	
@@ -16,14 +16,5 @@ public class TableUSER implements Table{
 	public void setUser_password(String user_password) {
 		this.user_password = user_password;
 	}
-	@Override
-	public Table getter() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public void setter(Table table) {
-		// TODO Auto-generated method stub
-		
-	}
+
 }

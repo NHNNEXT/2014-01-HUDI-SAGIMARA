@@ -5,7 +5,11 @@
 [기획서](https://drive.google.com/file/d/0B59pCp_IugLPQndWQmIyanNxREU/edit?usp=sharing) |
 [수업스케줄 문서](https://docs.google.com/spreadsheet/ccc?key=0AoxIypuVqGVVdF9SYXFubzFhZmxvMnJEWVVsZHVuRkE&usp=drive_web#gid=0) |
 [깃문법](http://guides.github.com/overviews/mastering-markdown/) |
-[스터디자료](https://drive.google.com/?usp=chrome_app#folders/0B0QWiqWi3LLdVlhnZDBhZGN0Q1k)
+[스터디자료](https://drive.google.com/?usp=chrome_app#folders/0B0QWiqWi3LLdVlhnZDBhZGN0Q1k)<br>
+[iOS Repo](https://github.com/NHNNEXT/2014-01-HUDI-SAGIMARA-iOS) |
+[Android Repo](https://github.com/NHNNEXT/2014-01-HUDI-SAGIMARA-Android)
+
+
 
 SAGIMARA INFORMATION
 ====================

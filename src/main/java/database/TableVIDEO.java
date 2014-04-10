@@ -1,6 +1,6 @@
 package database;
 
-public class TableVIDEO implements Table {
+public class TableVIDEO {
 	private String video_id;
 	private String video_link;
 	
@@ -16,14 +16,5 @@ public class TableVIDEO implements Table {
 	public void setVideo_link(String video_link) {
 		this.video_link = video_link;
 	}
-	@Override
-	public Table getter() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public void setter(Table table) {
-		// TODO Auto-generated method stub
-		
-	}
+
 }

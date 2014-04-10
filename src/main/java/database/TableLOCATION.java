@@ -1,6 +1,6 @@
 package database;
 
-public class TableLOCATION implements Table{
+public class TableLOCATION {
 	private String location_id;
 	private String location_time;
 	private String location_coordinate;
@@ -23,14 +23,5 @@ public class TableLOCATION implements Table{
 	public void setLocation_coordinate(String location_coordinate) {
 		this.location_coordinate = location_coordinate;
 	}
-	@Override
-	public Table getter() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public void setter(Table table) {
-		// TODO Auto-generated method stub
-		
-	}
+
 }

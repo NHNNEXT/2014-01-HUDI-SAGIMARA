@@ -1,6 +1,6 @@
 package database;
 
-public class TableVERIFICATION implements Table {
+public class TableVERIFICATION {
 	private String verification_id;
 	private String verification_time;
 	
@@ -16,14 +16,5 @@ public class TableVERIFICATION implements Table {
 	public void setVerification_time(String verification_time) {
 		this.verification_time = verification_time;
 	}
-	@Override
-	public Table getter() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public void setter(Table table) {
-		// TODO Auto-generated method stub
-		
-	}
+
 }

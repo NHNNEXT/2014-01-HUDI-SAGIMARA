@@ -1,6 +1,6 @@
 package database;
 
-public class TableUSER_PROFILE implements Table {
+public class TableUSER_PROFILE {
 	private String profile_phone;
 	private String profile_status;
 	private String profile_verification;
@@ -43,16 +43,6 @@ public class TableUSER_PROFILE implements Table {
 	}
 	public void setProfile_inquiry(String profile_inquiry) {
 		this.profile_inquiry = profile_inquiry;
-	}
-	@Override
-	public Table getter() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public void setter(Table table) {
-		// TODO Auto-generated method stub
-		
 	}
 	
 }

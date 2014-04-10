@@ -1,6 +1,6 @@
 package database;
 
-public class TableINQUIRY implements Table {
+public class TableINQUIRY {
 	private String inquiry_id;
 	private String inquiry_time;
 	
@@ -15,15 +15,5 @@ public class TableINQUIRY implements Table {
 	}
 	public void setInquiry_time(String inquiry_time) {
 		this.inquiry_time = inquiry_time;
-	}
-	@Override
-	public Table getter() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public void setter(Table table) {
-		// TODO Auto-generated method stub
-		
 	}
 }
