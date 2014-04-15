@@ -46,15 +46,9 @@ public class FrontController extends HttpServlet {
 			RequestDispatcher dispather = getServletContext().getRequestDispatcher(result);
 			dispather.forward(request, response);
 		} else {
-			System.out.println("path error");
-			System.out.println(path);
-			System.out.println(result);
-			//한글 출력문제
-			OutputStreamWriter writer = new OutputStreamWriter(response.getOutputStream(), "utf-8");
-			String notify = "존재하지 않는 주소입니다.";
-			String notify_uft8 = new String(notify.getBytes(),"utf-8");
-			writer.write(notify_uft8);
-			writer.close();
+			request.setAttribute("error", "존재하지 않는 주소입니다");
+			RequestDispatcher dispather = getServletContext().getRequestDispatcher("/error.jsp");
+			dispather.forward(request, response);
 		}
 
 		
