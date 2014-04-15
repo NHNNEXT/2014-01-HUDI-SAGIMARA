@@ -66,12 +66,12 @@ public class DatabaseByMysql implements DatabaseController {
 			rs = pstmt.executeQuery();
 			
 			rs.next();
-			result.setProfile_phone(rs.getString("profile_phone"));
-			result.setProfile_inquiry(rs.getString("profile_inquiry"));
-			result.setProfile_location(rs.getString("profile_location"));
-			result.setProfile_status(rs.getString("profile_status"));
-			result.setProfile_verification(rs.getString("profile_verification"));
-			result.setProfile_video(rs.getString("profile_video"));
+			result.setProfilePhone(rs.getString("profile_phone"));
+			result.setProfileInquiry(rs.getString("profile_inquiry"));
+			result.setProfileLocation(rs.getString("profile_location"));
+			result.setProfileStatus(rs.getString("profile_status"));
+			result.setProfileVerification(rs.getString("profile_verification"));
+			result.setProfileVideo(rs.getString("profile_video"));
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

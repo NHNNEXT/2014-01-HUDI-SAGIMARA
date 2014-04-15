@@ -1,20 +1,20 @@
 package type;
 
 public class Video {
-	private String video_id;
-	private String video_link;
+	private String videoId;
+	private String videoLink;
 	
-	public String getVideo_id() {
-		return video_id;
+	public String getVideoId() {
+		return videoId;
 	}
-	public void setVideo_id(String video_id) {
-		this.video_id = video_id;
+	public void setVideoId(String videoId) {
+		this.videoId = videoId;
 	}
-	public String getVideo_link() {
-		return video_link;
+	public String getVideoLink() {
+		return videoLink;
 	}
-	public void setVideo_link(String video_link) {
-		this.video_link = video_link;
+	public void setVideoLink(String videoLink) {
+		this.videoLink = videoLink;
 	}
 
 }

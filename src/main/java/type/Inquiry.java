@@ -1,19 +1,19 @@
 package type;
 
 public class Inquiry {
-	private String inquiry_id;
-	private String inquiry_time;
+	private String inquiryId;
+	private String inquiryTime;
 	
-	public String getInquiry_id() {
-		return inquiry_id;
+	public String getInquiryId() {
+		return inquiryId;
 	}
-	public void setInquiry_id(String inquiry_id) {
-		this.inquiry_id = inquiry_id;
+	public void setInquiryId(String inquiryId) {
+		this.inquiryId = inquiryId;
 	}
-	public String getInquiry_time() {
-		return inquiry_time;
+	public String getInquiryTime() {
+		return inquiryTime;
 	}
-	public void setInquiry_time(String inquiry_time) {
-		this.inquiry_time = inquiry_time;
+	public void setInquiryTime(String inquiryTime) {
+		this.inquiryTime = inquiryTime;
 	}
 }
