@@ -1,7 +1,6 @@
 package framework;
 
 import java.io.IOException;
-import java.io.OutputStreamWriter;
 import java.util.HashMap;
 
 import javax.servlet.RequestDispatcher;
@@ -83,14 +82,6 @@ public class FrontController extends HttpServlet {
 		request.setCharacterEncoding("utf8");
 		
 		request.setAttribute("json", json);
-		
-//		PrintWriter out = response.getWriter();
-//		out.println(json);
-		
-//		OutputStreamWriter writer = new OutputStreamWriter(response.getOutputStream(), "utf8");
-//		writer.write(json);
-//		writer.close();
-
 
 		if (result != null) {
 			RequestDispatcher dispather = getServletContext().getRequestDispatcher(result);
