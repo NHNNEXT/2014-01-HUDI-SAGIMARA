@@ -1,27 +1,27 @@
 package type;
 
 public class Location {
-	private String location_id;
-	private String location_time;
-	private String location_coordinate;
+	private String locationId;
+	private String locationTime;
+	private String locationCoordinate;
 	
-	public String getLocation_id() {
-		return location_id;
+	public String getLocationId() {
+		return locationId;
 	}
-	public void setLocation_id(String location_id) {
-		this.location_id = location_id;
+	public void setLocationId(String locationId) {
+		this.locationId = locationId;
 	}
-	public String getLocation_time() {
-		return location_time;
+	public String getLocationTime() {
+		return locationTime;
 	}
-	public void setLocation_time(String location_time) {
-		this.location_time = location_time;
+	public void setLocationTime(String locationTime) {
+		this.locationTime = locationTime;
 	}
-	public String getLocation_coordinate() {
-		return location_coordinate;
+	public String getLocationCoordinate() {
+		return locationCoordinate;
 	}
-	public void setLocation_coordinate(String location_coordinate) {
-		this.location_coordinate = location_coordinate;
+	public void setLocationCoordinate(String locationCoordinate) {
+		this.locationCoordinate = locationCoordinate;
 	}
 
 }

@@ -1,20 +1,20 @@
 package type;
 
 public class Verification {
-	private String verification_id;
-	private String verification_time;
+	private String verificationId;
+	private String verificationTime;
 	
-	public String getVerification_id() {
-		return verification_id;
+	public String getVerificationId() {
+		return verificationId;
 	}
-	public void setVerification_id(String verification_id) {
-		this.verification_id = verification_id;
+	public void setVerificationId(String verificationId) {
+		this.verificationId = verificationId;
 	}
-	public String getVerification_time() {
-		return verification_time;
+	public String getVerificationTime() {
+		return verificationTime;
 	}
-	public void setVerification_time(String verification_time) {
-		this.verification_time = verification_time;
+	public void setVerificationTime(String verificationTime) {
+		this.verificationTime = verificationTime;
 	}
 
 }
