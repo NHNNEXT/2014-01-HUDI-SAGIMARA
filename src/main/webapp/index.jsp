@@ -4,17 +4,28 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>Sagimara</title>
+	<link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/reset.css">
 	<link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/index.css">
+	<link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/header.css">
 </head>
 <body>
 	<div id="wrap">
     	<div id="header">
-    		this is header
+    		<div class="column">
+    			<p>SAGIMARA</p>
+    		</div>
+    		<div class="column">
+	    		<form name="finder" method="post" action="/test">
+	    			<input class="search-input" placeholder="Enter phone-numer for search..." type="text" name="id">
+	    			<input class="search-submit" type="submit" value="">
+					<span class="search-icon">S</span>
+	    		</form>
+    		</div>
     	</div>
     	
     	<div id="container">
      		<div id="content">
-        		<form id="search" name="finder" method="post" action="/test">
+<!--         		<form id="search" name="finder" method="post" action="/test">
           			<div class="search_area">
             			<h2>
               				<a alt="사기마라" href="#"></a> 
@@ -27,7 +38,7 @@
               				</label>
            				</fieldset>
           			</div>
-        		</form>
+        		</form> -->
       		</div>
     	</div>
     	
