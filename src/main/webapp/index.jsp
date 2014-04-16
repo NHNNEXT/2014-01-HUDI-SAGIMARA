@@ -4,7 +4,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>Sagimara</title>
-	<link rel="stylesheet" type="text/css" media="screen" href="stylesheets/index.css">
+	<link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/index.css">
 </head>
 <body>
 	<div id="wrap">
@@ -18,7 +18,7 @@
           			<div class="search_area">
             			<h2>
               				<a alt="사기마라" href="#"></a> 
-              				<img src="images/police.jpg" alt="철컹철컹" class="img-circle">
+              				<img src="/images/police.jpg" alt="철컹철컹" class="img-circle">
             			</h2>
             			
             			<fieldset>
