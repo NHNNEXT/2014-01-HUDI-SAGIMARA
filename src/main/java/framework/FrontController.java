@@ -64,12 +64,6 @@ public class FrontController extends HttpServlet {
 			
 		//super.doPost(request, response);
 	}
-
-	@Override
-	public void destroy() {
-		// TODO Auto-generated method stub
-		super.destroy();
-	}
 	
 	private void test(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String path = request.getServletPath();
