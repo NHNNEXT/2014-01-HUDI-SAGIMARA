@@ -17,7 +17,6 @@
 	    			<input class="search-input" placeholder="Enter phone-numer for search..." type="text" name="id">
 	    			<input class="search-submit" type="submit" value="">
 					<span class="search-icon">
-					S
 					</span>
 	    		</form>
     		</div>
