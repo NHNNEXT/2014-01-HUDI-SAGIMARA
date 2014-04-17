@@ -52,7 +52,7 @@ div, section, article {
 	outline: none;
 	background: #fff;
 	width: 100%;
-	height: 60px;
+	height: 40px;
 	margin: 0;
 	z-index: 10;
 	padding: 0px 0px 0px 20px;
@@ -64,15 +64,15 @@ div, section, article {
 
 .search-icon,
 .search-submit  {
-	width: 60px;
-	height: 60px;
+	width: 40px;
+	height: 40px;
 	display: block;
 	position: absolute;
 	right: 0;
 	top: 0;
 	padding: 0;
 	margin: 0;
-	line-height: 60px;
+	line-height: 40px;
 	text-align: center;
 	cursor: pointer;
 }
