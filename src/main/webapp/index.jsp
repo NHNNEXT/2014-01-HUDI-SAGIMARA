@@ -10,7 +10,9 @@
 	<div id="wrap">
     	<div id="header">
     		<div class="column">
-    			<p>SAGIMARA</p>
+    			<div class="logo">
+    				SAGIMARA
+    			</div>
     		</div>
     		<div class="column">
 	    		<form name="finder" method="post" action="/test">
