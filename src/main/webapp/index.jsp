@@ -16,7 +16,9 @@
 	    		<form name="finder" method="post" action="/test">
 	    			<input class="search-input" placeholder="Enter phone-numer for search..." type="text" name="id">
 	    			<input class="search-submit" type="submit" value="">
-					<span class="search-icon">S</span>
+					<span class="search-icon">
+					S
+					</span>
 	    		</form>
     		</div>
     	</div>
@@ -44,6 +46,5 @@
     		this is footer
     	</div>
     </div>
->>>>>>> 9e552a53177dc7664c0c0076d1821a2e1ef27cf8
 </body>
 </html>

@@ -31,10 +31,11 @@
 	height: 60px;
 	margin: 0;
 	z-index: 10;
-	padding: 0px 0px 0px 0px;
+	padding: 0px 0px 0px 20px;
 	font-family: inherit;
 	font-size: 20px;
 	color: #2c3e50;
+	overflow: hidden;
 }
 
 .search-icon,
@@ -60,13 +61,13 @@
 	color: transparent;
 	border: none;
 	outline: none;
-	z-index: -1;
+	z-index: 12;
 }
 			
 .search-icon {
 	background: #da6d0d;
 	color: #fff;
-	z-index: 90;
+	z-index: 11;
 	font-size: 22px;
 	font-family: 'icomoon';
 	speak: none;
