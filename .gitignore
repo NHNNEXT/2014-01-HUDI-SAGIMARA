@@ -2,7 +2,7 @@ target
 .project
 .classpath
 .settings
-src/main/java/framework/test
+src/main/java/framework/_test/
 bin/*
 
 #https://github.com/github/gitignore/blob/master/Maven.gitignore 참조함
