@@ -50,6 +50,22 @@
 	overflow: hidden;
 }
 
+.search-input::-webkit-input-placeholder {
+	color: #efb480;
+}
+
+.search-input:-moz-placeholder {
+	color: #efb480;
+}
+
+.search-input::-moz-placeholder {
+	color: #efb480;
+}
+
+.search-input:-ms-input-placeholder {
+	color: #efb480;
+}
+
 .search-icon,
 .search-submit  {
 	width: 60px;
