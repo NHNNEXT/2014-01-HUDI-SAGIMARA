@@ -1,3 +1,6 @@
+/*
+	Header CSS
+*/
 #header {
 	padding: 0 2em;
 	min-height: 300px;
@@ -73,3 +76,8 @@
 	text-transform: none;
 	-webkit-font-smoothing: antialiased;
 }
+
+/*
+	Container CSS
+*/
+
