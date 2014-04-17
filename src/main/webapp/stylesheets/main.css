@@ -26,6 +26,24 @@ div, section, article {
 	transition: width 0.3s;
 	-webkit-backface-visibility: hidden;
 }
+
+.logo {
+	position: absolute;
+	top: 0;
+	right: 0;
+	border: none;
+	outline: none;
+	width: 100%;
+	height: 60px;
+	line-height:60px;
+	margin: 0;
+	z-index: 10;
+	padding: 0px 0px 0px 0px;
+	font-family: inherit;
+	font-size: 40px;
+	color: #ffffff;
+	overflow: hidden;
+}
 .search-input {
 	position: absolute;
 	top: 0;
@@ -37,10 +55,11 @@ div, section, article {
 	height: 60px;
 	margin: 0;
 	z-index: 10;
-	padding: 0px 0px 0px 0px;
+	padding: 0px 0px 0px 20px;
 	font-family: inherit;
 	font-size: 20px;
 	color: #2c3e50;
+	overflow: hidden;
 }
 
 .search-icon,
@@ -66,13 +85,13 @@ div, section, article {
 	color: transparent;
 	border: none;
 	outline: none;
-	z-index: -1;
+	z-index: 12;
 }
 			
 .search-icon {
 	background: #da6d0d;
 	color: #fff;
-	z-index: 90;
+	z-index: 11;
 	font-size: 22px;
 	font-family: 'icomoon';
 	speak: none;
@@ -81,6 +100,10 @@ div, section, article {
 	font-variant: normal;
 	text-transform: none;
 	-webkit-font-smoothing: antialiased;
+}
+
+.search-icon:before {
+	content: "\e000";
 }
 
 /*

@@ -12,20 +12,22 @@
 </head>
 <body>
 	<div id="wrap">
-		<div id="header">
-			<div class="column">
-				<p>SAGIMARA</p>
-			</div>
-			<div class="column">
-				<form name="finder" method="post" action="/test">
-					<input class="search-input"
-						placeholder="Enter phone-numer for search..." type="text"
-						name="id"> <input class="search-submit" type="submit"
-						value=""> <span class="search-icon">S</span>
-				</form>
-			</div>
-		</div>
-
+    	<div id="header">
+    		<div class="column">
+    			<div class="logo">
+    				SAGIMARA
+    			</div>
+    		</div>
+    		<div class="column">
+	    		<form name="finder" method="post" action="/test">
+	    			<input class="search-input" placeholder="Enter phone-numer for search..." type="text" name="id">
+	    			<input class="search-submit" type="submit" value="">
+					<span class="search-icon">
+					</span>
+	    		</form>
+    		</div>
+    	</div>
+    	
 		<div id="container">
 			<article id="user-profile">
 				<article class="clearfix">
@@ -58,8 +60,9 @@
 					Caution-info Section</article>
 			</article>
 		</div>
-
-		<div id="footer">this is footer</div>
-	</div>
+    	<div id="footer">
+    		this is footer
+    	</div>
+    </div>
 </body>
 </html>
