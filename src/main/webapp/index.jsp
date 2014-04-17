@@ -9,6 +9,7 @@
 	href="/stylesheets/base.css">
 <link rel="stylesheet" type="text/css" media="screen"
 	href="/stylesheets/main.css">
+<script src="/javascripts/main.js"></script>
 </head>
 <body>
 	<div id="wrap">
