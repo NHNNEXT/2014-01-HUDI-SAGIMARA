@@ -1,6 +1,8 @@
 package framework;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 
 import javax.servlet.RequestDispatcher;
@@ -8,6 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 import type.UserProfile;
 import database.DatabaseByMysql;
@@ -33,7 +36,7 @@ public class FrontController extends HttpServlet {
 		dbc = new DatabaseByMysql();
 		jb = new JsonBuilder();
 	}
-
+	
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
 
 		String path = request.getServletPath();
@@ -68,7 +71,10 @@ public class FrontController extends HttpServlet {
 	private void test(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String path = request.getServletPath();
 		String result = map.get(path);
+		System.out.println(request.getHeader("Content-type"));
 		String id = (String) request.getParameter("id");
+		//Part idx = request.getPart("id");
+		System.out.println(id);
 		
 		UserProfile dut = dbc.readtable("USER_PROFILE", id);
 		String json = jb.javaToJson(dut);
@@ -86,8 +92,5 @@ public class FrontController extends HttpServlet {
 			System.out.println(path);
 			System.out.println(result);
 		}
-	}
-	
-	
-	
+	}	
 }
