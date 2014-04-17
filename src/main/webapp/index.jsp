@@ -9,7 +9,6 @@
 	href="/stylesheets/base.css">
 <link rel="stylesheet" type="text/css" media="screen"
 	href="/stylesheets/main.css">
-<script src="/javascripts/main.js"></script>
 </head>
 <body>
 	<div id="wrap">
@@ -65,5 +64,7 @@
     		this is footer
     	</div>
     </div>
+    
+    <script src="/javascripts/main.js"></script>
 </body>
 </html>
