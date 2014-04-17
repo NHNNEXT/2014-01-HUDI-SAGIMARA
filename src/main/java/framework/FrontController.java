@@ -28,7 +28,7 @@ public class FrontController extends HttpServlet {
 	public void init() throws ServletException {
 		super.init();
 		map.put("/test", "/test.jsp");
-		map.put("/", "/index.jsp");
+		map.put("/index", "/index.jsp");
 		
 		dbc = new DatabaseByMysql();
 		jb = new JsonBuilder();
@@ -44,7 +44,8 @@ public class FrontController extends HttpServlet {
 		if (result != null) {
 			RequestDispatcher dispather = getServletContext().getRequestDispatcher(result);
 			dispather.forward(request, response);
-		} else {
+		} 
+		else {
 			request.setAttribute("error", "존재하지 않는 주소입니다");
 			RequestDispatcher dispather = getServletContext().getRequestDispatcher("/error.jsp");
 			dispather.forward(request, response);
@@ -62,12 +63,6 @@ public class FrontController extends HttpServlet {
 		}
 			
 		//super.doPost(request, response);
-	}
-
-	@Override
-	public void destroy() {
-		// TODO Auto-generated method stub
-		super.destroy();
 	}
 	
 	private void test(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
