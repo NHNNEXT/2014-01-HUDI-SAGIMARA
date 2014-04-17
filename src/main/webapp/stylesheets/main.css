@@ -1,6 +1,18 @@
 /*
 	Header CSS
 */
+#header {
+	padding: 0 2em;
+	min-height: 300px;
+	position: relative;
+
+}
+/* Test용
+div, section, article {
+	border:solid 1px red;
+}
+*/
+
 .column {
 	position: relative;
 	margin-top: 10px;
@@ -113,4 +125,70 @@
 /*
 	Container CSS
 */
+.float-left {
+	float:left;
+}
+
+.float-right{
+	float:right;
+}
+
+/*
+	User-Profile Section
+*/
+.clearfix:after {
+	content:".";
+	visibility:hidden;
+	display:block;
+	height:0;
+	clear:both;
+}
+
+#user-profile{
+	background:gray;
+}
+
+#profile-image-article{
+	padding:10px 30px;
+	width:20%;
+}
+
+#profile-detail-article{
+	padding:10px 40px;
+	width:50%;
+}
+
+#profile-image{
+	width:180px;
+}
+
+#profile-status{
+	text-align:center;
+	background:black;
+	height:50px;
+	font-size:30px;
+	line-height:50px; 
+}
+
+#profile-status .h1{
+	
+	
+}
+/*
+	Attention Info Section
+*/
+
+
+
+/*
+	Detail Info Section
+*/
+#detail-info{  
+	
+}
+.detail-info-item {
+	width:50%;
+	color:red;
+}
+
 

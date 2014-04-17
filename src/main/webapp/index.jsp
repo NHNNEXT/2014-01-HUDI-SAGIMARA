@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Sagimara</title>
-	<link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/base.css">
-	<link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/main.css">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>Sagimara</title>
+
+<link rel="stylesheet" type="text/css" media="screen"
+	href="/stylesheets/base.css">
+<link rel="stylesheet" type="text/css" media="screen"
+	href="/stylesheets/main.css">
 </head>
 <body>
 	<div id="wrap">
@@ -24,25 +28,38 @@
     		</div>
     	</div>
     	
-    	<div id="container">
-     		<div id="content">
-<!--         		<form id="search" name="finder" method="post" action="/test">
-          			<div class="search_area">
-            			<h2>
-              				<a alt="사기마라" href="#"></a> 
-              				<img src="/images/police.jpg" alt="철컹철컹" class="img-circle">
-            			</h2>
-            			
-            			<fieldset>
-              				<label for="query" class="type_wdw">
-                				<input type="text" name="id" id="sr_query" title="검색" class="keyword">
-              				</label>
-           				</fieldset>
-          			</div>
-        		</form> -->
-      		</div>
-    	</div>
-    	
+		<div id="container">
+			<article id="user-profile">
+				<article class="clearfix">
+					<article id="profile-image-article" class="float-left">
+						<figure>
+							<img id="profile-image" src="/images/police.jpg">
+						</figure>
+					</article>
+					<article id="profile-detail-article" class="float-right">
+						<p>TestLine 1</p>
+						<p>TestLine 2</p>
+						<p>TestLine 3</p>
+					</article>
+				</article>
+				<article id="profile-status" class="clearfix">
+					Warning
+				</article>
+			</article>
+			<article id="attention-info" class="clearfix">
+				Attention-Info Section
+			</article>
+			<article id="detail-info" class="clearfix">
+				<article id="visited-info" class="detail-info-item float-left">
+					Visted-info</article>
+				<article id="location-info" class="detail-info-item float-right">
+					Location-info Section</article>
+				<article id="watch-info" class="detail-info-item float-left">
+					Watch-info Section</article>
+				<article id="caution-info" class="detail-info-item float-right">
+					Caution-info Section</article>
+			</article>
+		</div>
     	<div id="footer">
     		this is footer
     	</div>
