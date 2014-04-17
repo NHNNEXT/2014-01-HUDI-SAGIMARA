@@ -64,6 +64,5 @@
     		this is footer
     	</div>
     </div>
-    <script src="/javascripts/main.js"></script>
 </body>
 </html>
