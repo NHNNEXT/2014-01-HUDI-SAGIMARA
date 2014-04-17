@@ -5,6 +5,7 @@
 <web-app>
 	<display-name>SAGIMARA</display-name>
 	<description>SAGIMARA</description>
+	
 	<servlet>
 		<servlet-name>index</servlet-name>
 		<servlet-class>framework.FrontController</servlet-class>

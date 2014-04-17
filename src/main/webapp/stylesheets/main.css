@@ -3,7 +3,7 @@
 */
 #header {
 	padding: 0 2em;
-	min-height: 300px;
+	min-height: 80px;
 	position: relative;
 
 }
@@ -60,6 +60,22 @@ div, section, article {
 	font-size: 20px;
 	color: #2c3e50;
 	overflow: hidden;
+}
+
+.search-input::-webkit-input-placeholder {
+	color: #efb480;
+}
+
+.search-input:-moz-placeholder {
+	color: #efb480;
+}
+
+.search-input::-moz-placeholder {
+	color: #efb480;
+}
+
+.search-input:-ms-input-placeholder {
+	color: #efb480;
 }
 
 .search-icon,
