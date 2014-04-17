@@ -4,3 +4,11 @@ target
 .settings
 src/main/java/framework/test
 bin/*
+
+#https://github.com/github/gitignore/blob/master/Maven.gitignore 참조함
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
