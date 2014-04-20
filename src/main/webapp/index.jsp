@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,18 +47,36 @@
 					Warning
 				</article>
 			</article>
-			<article id="attention-info" class="clearfix">
-				Attention-Info Section
-			</article>
-			<article id="detail-info" class="clearfix">
-				<article id="visited-info" class="detail-info-item float-left">
-					Visted-info</article>
-				<article id="location-info" class="detail-info-item float-right">
-					Location-info Section</article>
-				<article id="watch-info" class="detail-info-item float-left">
-					Watch-info Section</article>
-				<article id="caution-info" class="detail-info-item float-right">
-					Caution-info Section</article>
+			<article id="info-wrapper">
+				<article id="attention-info" class="clearfix">
+					Attention-Info Section
+				</article>
+				<article id="detail-info" class="clearfix">
+					<article id="visited-info" class="detail-info-item float-left">
+						오늘하루 검색한 사람의 수
+						<figure>
+							<img id="profile-image" src="/images/1.png">
+						</figure>
+					</article>
+					<article id="location-info" class="detail-info-item float-right">
+						최근 위치 정보
+						<figure>
+							<img id="profile-image" src="/images/2.png">
+						</figure>
+					</article>
+					<article id="watch-info" class="detail-info-item float-left">
+						지켜보는 사람의 수
+						<figure>
+							<img id="profile-image" src="/images/3.png">
+						</figure>
+					</article>
+					<article id="caution-info" class="detail-info-item float-right">
+						신고 현황
+						<figure>
+							<img id="profile-image" src="/images/4.png">
+						</figure>
+					</article>
+				</article>
 			</article>
 		</div>
     	<div id="footer">

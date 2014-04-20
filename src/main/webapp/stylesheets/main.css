@@ -145,26 +145,27 @@ div, section, article {
 }
 
 #user-profile{
-	background:gray;
+	background:#A8A8A8;
 }
 
 #profile-image-article{
-	padding:10px 30px;
+	padding:10px 20px;
 	width:20%;
 }
 
 #profile-detail-article{
-	padding:10px 40px;
-	width:50%;
+	padding:10px 20px;
+	width:70%;
 }
 
 #profile-image{
-	width:180px;
+	min-width: 50px;
+	width:100%;
 }
 
 #profile-status{
 	text-align:center;
-	background:black;
+	background:#da6d0d;
 	height:50px;
 	font-size:30px;
 	line-height:50px; 
@@ -174,10 +175,20 @@ div, section, article {
 	
 	
 }
+
+#info-wrapper{
+	background:#C9C9C9;
+	padding: 20px;
+}
+
 /*
 	Attention Info Section
 */
-
+#attention-info{  
+	min-height: 90px;
+	background: #fff;
+	color:#000000;
+}
 
 
 /*
@@ -187,8 +198,12 @@ div, section, article {
 	
 }
 .detail-info-item {
+	font-size:12px;
 	width:50%;
-	color:red;
+	color:black;
+	min-height: 150px;
+	padding:5px;
+	
 }
 
 
