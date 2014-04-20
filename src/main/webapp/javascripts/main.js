@@ -19,6 +19,7 @@ function requestSearch(e){
 	request.onreadystatechange = function(){
 		if(request.readyState == 4 && request.status == 200){
 			console.log(request.response);
+			//json ajax 통신 부분
 			var jsonObj = JSON.parse(request.response)
 			update[0].innerHTML = "profilePhone : " + jsonObj.profilePhone;
 			update[1].innerHTML = "profileStatus : " + jsonObj.profileStatus;
