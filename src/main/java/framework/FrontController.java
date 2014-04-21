@@ -20,7 +20,7 @@ import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
-import type.UserProfile;
+import model.UserProfile;
 import database.DatabaseByMysql;
 import database.DatabaseController;
 

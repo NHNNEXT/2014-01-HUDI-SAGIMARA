@@ -1,4 +1,4 @@
-package type;
+package model;
 
 public class User {
 	private String userPhone;

@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import type.UserProfile;
+import model.UserProfile;
 
 public class DatabaseByMysql implements DatabaseController {
 	Connection conn;

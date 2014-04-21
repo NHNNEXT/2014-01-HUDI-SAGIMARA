@@ -1,4 +1,4 @@
-package type;
+package model;
 
 public class Location {
 	private String locationId;

@@ -2,7 +2,7 @@ package database;
 
 import java.util.ArrayList;
 
-import type.UserProfile;
+import model.UserProfile;
 
 public interface DatabaseController {
 	public int create();

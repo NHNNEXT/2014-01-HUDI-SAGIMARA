@@ -1,4 +1,4 @@
-package type;
+package model;
 
 public class Video {
 	private String videoId;
