@@ -13,7 +13,7 @@
 </head>
 <body>
 	<div id="wrap">
-    	<div id="header">
+    	<header>
     		<div class="column">
     			<div class="logo">
     				SAGIMARA
@@ -27,61 +27,61 @@
 					</span>
 	    		</form>
     		</div>
-    	</div>
+    	</header>
     	
 		<div id="container">
-			<article id="user-profile">
-				<article class="clearfix">
-					<article id="profile-image-article" class="float-left">
+			<section id="user-profile">
+				<section class="clearfix">
+					<section id="profile-image-section" class="float-left">
 						<figure>
 							<img id="profile-image" src="/images/police.jpg">
 						</figure>
-					</article>
-					<article id="profile-detail-article" class="float-right">
+					</section>
+					<section id="profile-detail-section" class="float-right">
 						<p>TestLine 1</p>
 						<p>TestLine 2</p>
 						<p>TestLine 3</p>
-					</article>
-				</article>
-				<article id="profile-status" class="clearfix">
+					</section>
+				</section>
+				<section id="profile-status" class="clearfix">
 					Warning
-				</article>
-			</article>
-			<article id="info-wrapper">
-				<article id="attention-info" class="clearfix">
+				</section>
+			</section>
+			<section id="info-wrapper">
+				<section id="attention-info" class="clearfix">
 					Attention-Info Section
-				</article>
-				<article id="detail-info" class="clearfix">
-					<article id="visited-info" class="detail-info-item float-left">
+				</section>
+				<section id="detail-info" class="clearfix">
+					<section id="visited-info" class="detail-info-item float-left">
 						오늘하루 검색한 사람의 수
 						<figure>
 							<img id="profile-image" src="/images/1.png">
 						</figure>
-					</article>
-					<article id="location-info" class="detail-info-item float-right">
+					</section>
+					<section id="location-info" class="detail-info-item float-right">
 						최근 위치 정보
 						<figure>
 							<img id="profile-image" src="/images/2.png">
 						</figure>
-					</article>
-					<article id="watch-info" class="detail-info-item float-left">
+					</section>
+					<section id="watch-info" class="detail-info-item float-left">
 						지켜보는 사람의 수
 						<figure>
 							<img id="profile-image" src="/images/3.png">
 						</figure>
-					</article>
-					<article id="caution-info" class="detail-info-item float-right">
+					</section>
+					<section id="caution-info" class="detail-info-item float-right">
 						신고 현황
 						<figure>
 							<img id="profile-image" src="/images/4.png">
 						</figure>
-					</article>
-				</article>
-			</article>
+					</section>
+				</section>
+			</section>
 		</div>
-    	<div id="footer">
+    	<footer>
     		this is footer
-    	</div>
+    	</footer>
     </div>
     
     <script src="/javascripts/main.js"></script>

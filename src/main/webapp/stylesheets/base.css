@@ -17,7 +17,7 @@ body {
 	background: #ffffff;
 }
 
-#header {
+header {
 	padding: 0 2em;
 	min-height: 80px;
 	position: relative;
@@ -32,7 +32,7 @@ body {
   background: #C9C9C9;
 }
 
-#footer {
+footer {
   border-top: 1px solid #000000;
   text-align: center;
 }
