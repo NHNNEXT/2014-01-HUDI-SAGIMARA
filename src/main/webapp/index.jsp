@@ -43,7 +43,7 @@
 						<p>TestLine 3</p>
 					</section>
 				</section>
-				<section id="profile-status" class="clearfix">
+				<section id="profile-status" class="clearfix profile-status">
 					Warning
 				</section>
 			</section>

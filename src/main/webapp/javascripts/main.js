@@ -1,14 +1,28 @@
 console.log("it works");
 
+function updateProfile(userData){
+	var elProfileStatus = document.querySelector("#profile-status");
+	if(userData.profileStatus === "0") {
+//		var oldClassName = elProfileStatus.className;
+//		var newClassName = oldClassName + "-safety";
+//		elProfileStatus.className = newClassName;
+		elProfileStatus.style.background = "#28bf00";
+		elProfileStatus.innerHTML = "Safety";
+	} else if(userData.profileStatus === "1") {
+		elProfileStatus.style.background = "#da6d0d";
+		elProfileStatus.innerHTML = "Warning";
+	} else {
+		elProfileStatus.style.background = "#BF322A";
+		elProfileStatus.innerHTML = "Danger";
+	}
+}
+
 function requestSearch(e){
 	e.preventDefault();
 	console.log("requestSearch Success");
-	console.log(e);
 	var id = e.target.parentElement[0].value;
-	console.log(id);
 	var url = "/test";
-	var update = document.querySelectorAll("#profile-detail-article p");
-	//console.log(update);
+	var testUpdate = document.querySelectorAll("#profile-detail-section p");
 
 	var request = new XMLHttpRequest();
 	request.open("POST", url, true);
@@ -16,19 +30,21 @@ function requestSearch(e){
 	var formdata = new FormData();
 	formdata.append("id", id);
 	request.send(formdata); 
+	
 	request.onreadystatechange = function(){
 		if(request.readyState == 4 && request.status == 200){
 			console.log(request.response);
 			//json ajax 통신 부분
 			var jsonObj = JSON.parse(request.response)
-			update[0].innerHTML = "profilePhone : " + jsonObj.profilePhone;
-			update[1].innerHTML = "profileStatus : " + jsonObj.profileStatus;
-			update[2].innerHTML = "profileVerification : " + jsonObj.profileVerification;
+			updateProfile(jsonObj);
+			testUpdate[0].innerHTML = "profilePhone : " + jsonObj.profilePhone;
+			testUpdate[1].innerHTML = "profileStatus : " + jsonObj.profileStatus;
+			testUpdate[2].innerHTML = "profileVerification : " + jsonObj.profileVerification;
 			//document.location.reload(true);
 		}
 	}
 }
 
-var submit = document.querySelector(".search-submit");
+var elsubmit = document.querySelector(".search-submit");
 
-submit.addEventListener("click", requestSearch, false);
+elsubmit.addEventListener("click", requestSearch, false);

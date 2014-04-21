@@ -159,9 +159,17 @@ div, section, section {
 	width:100%;
 }
 
-#profile-status{
+.profile-status{
 	text-align:center;
 	background:#da6d0d;
+	height:50px;
+	font-size:30px;
+	line-height:50px; 
+}
+
+.profile-status-safety{
+	text-align:center;
+	background:#28BF00;
 	height:50px;
 	font-size:30px;
 	line-height:50px; 
