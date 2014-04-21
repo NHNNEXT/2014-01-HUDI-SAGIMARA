@@ -89,14 +89,14 @@ public class FrontController extends HttpServlet {
 		if (isMultipart) {
 			FileItemFactory factory = new DiskFileItemFactory();
 			ServletFileUpload upload = new ServletFileUpload(factory);
-			List items = null;
+			List<FileItem> items = null;
 			try {
 				items = upload.parseRequest(request);
 			} catch (FileUploadException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			Iterator ir = items.iterator();
+			Iterator<FileItem> ir = items.iterator();
 			while (ir.hasNext()) {
 		        FileItem item = (FileItem) ir.next();
 
