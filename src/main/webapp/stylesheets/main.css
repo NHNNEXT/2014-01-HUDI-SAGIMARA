@@ -164,7 +164,9 @@ div, section, section {
 	background:#da6d0d;
 	height:50px;
 	font-size:30px;
-	line-height:50px; 
+	line-height:50px;
+	-webkit-transition: background 1s, -webkit-transform 1s;
+    transition: background 1s, transform 1s;
 }
 
 .profile-status-safety{
