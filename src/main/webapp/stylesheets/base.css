@@ -14,7 +14,7 @@
 body {
 	font-family: 'Lato', Calibri, Arial, sans-serif;
 	color: #eaeaea;
-	background: #ffffff;
+	background: #ffffff;  /* 동일한 반복이면 #fff 이렇게 써도 되요 */
 }
 
 #header {
@@ -25,7 +25,7 @@ body {
 }
 
 #container {
-  position: relative;
+  position: relative; /* absolute속성을 가진 자식노드의 기준점 역할을 하는것 맞죠? */
   min-height: 580px;
   background: gray;
   margin:0px 40px;
@@ -33,13 +33,14 @@ body {
 }
 
 #footer {
-  border-top: 1px solid #000000;
+  border-top: 1px solid #000000; /* #000 으로 역시 표현할 수 있음 */
   text-align: center;
 }
 
 /*
 UI
 */
+/* 이런건 reset.css 하단에 추가하는 것도 관리적인 측면에서 좋을 듯 */
 img,fieldset{
   border:0
 }

@@ -58,6 +58,7 @@ public class FrontController extends HttpServlet {
 					.getRequestDispatcher(result);
 			dispather.forward(request, response);
 		} else {
+			/* 별건 아니지만 message는 별도의 데이터로 항상 분리하기 */
 			request.setAttribute("error", "존재하지 않는 주소입니다");
 			RequestDispatcher dispather = getServletContext()
 					.getRequestDispatcher("/error.jsp");
@@ -86,6 +87,9 @@ public class FrontController extends HttpServlet {
 		System.out.println(request.getHeader("Content-type"));
 
 		boolean isMultipart = ServletFileUpload.isMultipartContent(request);
+
+		/* 조건문을 최대한 없애는 방법을 고민해도 좋을 듯 */
+
 		if (isMultipart) {
 			FileItemFactory factory = new DiskFileItemFactory();
 			ServletFileUpload upload = new ServletFileUpload(factory);
@@ -120,6 +124,7 @@ public class FrontController extends HttpServlet {
 			id = (String) request.getParameter("id");
 		}
 
+		/*로그 찍는 것도 좀더 우아한 방법은 없을지?. 앞으로는 라이브러리 쓰면 안되면 간단한 로그라이브러리 만들어도 잼날 듯*/
 		System.out.println(id);
 		if(!id.isEmpty()) {
 			UserProfile dut = dbc.readtable("USER_PROFILE", id);

@@ -13,6 +13,7 @@
 </head>
 <body>
 	<div id="wrap">
+		<!-- header에 해당하는 HTML5 Semantic 태그가 없을가요? -->
     	<div id="header">
     		<div class="column">
     			<div class="logo">
@@ -28,7 +29,7 @@
 	    		</form>
     		</div>
     	</div>
-    	
+    	<!--   article은 뉴스기사나 블로그 콘텐츠 내용에 적당할 수 있어요. 혹시 section과 같은 게 더 어울리지 않을까요? -->
 		<div id="container">
 			<article id="user-profile">
 				<article class="clearfix">
@@ -51,7 +52,10 @@
 				<article id="attention-info" class="clearfix">
 					Attention-Info Section
 				</article>
+
+				<!-- 이하는.. UL,LI 나 OL,LI 를 활용해야 하는 건 아닌지 살펴보세요. -->
 				<article id="detail-info" class="clearfix">
+					<!-- css class를 여러개 재사용 잘 하고 있네요 -->
 					<article id="visited-info" class="detail-info-item float-left">
 						오늘하루 검색한 사람의 수
 						<figure>
@@ -79,6 +83,7 @@
 				</article>
 			</article>
 		</div>
+		<!-- header 와 같이 적절한 semantic 태그 찾아보삼 -->
     	<div id="footer">
     		this is footer
     	</div>

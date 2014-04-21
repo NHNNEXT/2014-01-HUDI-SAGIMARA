@@ -3,6 +3,12 @@
    License: none (public domain)
 */
 
+/* 
+reset 관련 css의 용도를 알고 사용해야 합니다. 
+나중에 ul에 왜 list스타일이 나타나지 않지? 하고 어리둥절하지 말아야 하니까요. 
+따라서 한 번 정도는 reset에 정의된 내용들이 무엇이지? 과연 우리에게 필요한 것들이였나? 무엇들이 정의되어 있는지 이해하고 사용해보세요
+*/
+
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
