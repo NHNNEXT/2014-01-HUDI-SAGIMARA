@@ -53,7 +53,7 @@
 					Attention-Info Section</section>
 				<section id="detail-info" class="clearfix">
 					<section id="visited-info" class="detail-info-item float-left">
-						오늘하루 검색한 사람의 수
+						Today
 						<figure>
 							<ul id="q-graph">
 								<li class="qtr" id="q1">4.22
@@ -86,21 +86,21 @@
 						</figure>
 					</section>
 					<section id="location-info" class="detail-info-item float-right">
-						최근 위치 정보
+						Location
 						<figure>
 							<div id="map-canvas"></div>
 						</figure>
 					</section>
 					<section id="watch-info" class="detail-info-item float-left">
-						지켜보는 사람의 수
+						Watch
 						<figure>
-							<img id="profile-image" src="/images/3.png">
+							<div id="watch-tool"></div>
 						</figure>
 					</section>
 					<section id="caution-info" class="detail-info-item float-right">
-						신고 현황
+						Notify
 						<figure>
-							<img id="profile-image" src="/images/4.png">
+							<div id="caution-tool"></div>
 						</figure>
 					</section>
 				</section>

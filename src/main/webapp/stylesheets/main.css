@@ -202,13 +202,9 @@ div, section, section {
 	
 }
 
-#visited-info {
-	position: relative;
-	height: 100%;
-}
-
 .detail-info-item {
-	font-size: 12px;
+	/* font-size: 1.8em; */
+	font-size: 2.0vw;
 	width: 50%;
 	color: black;
 	min-height: 150px;
@@ -216,13 +212,23 @@ div, section, section {
 	font-family: inherit;
 }
 
+/*
+	Detail Info Section - Visited-info
+*/
+#visited-info {
+	position: relative;
+	height: 100%;
+}
+
+
+
 #q-graph {
 	position: relative;
 	height: 300px;
 	padding: 0;
 	background: #fff;
 	list-style: none;
-	font-size: 1.8em;
+	font-size: 0.8em;
 	font-family: inherit;
 }
 
@@ -298,7 +304,42 @@ div, section, section {
 	bottom : 10%;
 }
 
+/*
+	Detail Info Section - Location-info
+*/
+#location-info {
+	height: 100%;
+}
+
 #map-canvas {
+	position: relative;
+	height: 300px;
+	padding: 0;
+	background: #fff;
+	list-style: none;
+}
+
+/*
+	Detail Info Section - watch-info
+*/
+#watch-info {
+	height: 100%;
+}
+#watch-tool {
+	position: relative;
+	height: 300px;
+	padding: 0;
+	background: #fff;
+	list-style: none;
+}
+
+/*
+	Detail Info Section - caution-info
+*/
+#caution-info {
+	height: 100%;
+}
+#caution-tool {
 	position: relative;
 	height: 300px;
 	padding: 0;
