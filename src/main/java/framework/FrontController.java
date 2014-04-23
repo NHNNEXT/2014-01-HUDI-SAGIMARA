@@ -29,7 +29,8 @@ public class FrontController extends HttpServlet {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	static Logger logger = Logger.getLogger(FrontController.class);
+	
 	HashMap<String, String> map = new HashMap<String, String>();
 	DatabaseController dbc;
 	JsonBuilder jb;
@@ -81,6 +82,7 @@ public class FrontController extends HttpServlet {
 		String result = map.get(path);
 		String id = null;
 		System.out.println(request.getHeader("Content-type"));
+		logger.debug("excute test method");
 		
 		
 		boolean isMultipart = ServletFileUpload.isMultipartContent(request);
