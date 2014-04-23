@@ -10,25 +10,33 @@ import java.util.ArrayList;
 
 import model.UserProfile;
 
+import org.apache.log4j.Logger;
+
+import framework.SagimaraLogger;
+
 public class DatabaseByMysql implements DatabaseController {
 	Connection conn;
 	Statement stmt;
 	PreparedStatement pstmt;
 	ResultSet rs;
 	String sql;
-
+	
+	Logger logger;
+	
 	public DatabaseByMysql() {
+		logger = SagimaraLogger.logger;
 		init();
+		
 	}
 
 	private void init() {
 		String addr = "jdbc:mysql://localhost:3306/sagimara";
 		String user = "dev";
 		String password = "elqlgkwk"; 
-		System.out.println("init");
+		logger.info("init");
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			System.out.println("jdbc loading");
+			logger.info("jdbc loading");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -36,7 +44,7 @@ public class DatabaseByMysql implements DatabaseController {
 		try {
 			conn = DriverManager.getConnection(addr,user,password);
 			stmt = conn.createStatement();
-			System.out.println("db connecting");
+			logger.info("db connecting");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
