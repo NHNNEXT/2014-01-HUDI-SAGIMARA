@@ -4,25 +4,20 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import logger.SagimaraLogger;
 import model.UserProfile;
-
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.log4j.Logger;
-
-import database.DatabaseByMysql;
-import database.DatabaseController;
+import database.DatabaseHandler;
 
 public class FrontController extends HttpServlet {
 
@@ -32,7 +27,8 @@ public class FrontController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	HashMap<String, String> map = new HashMap<String, String>();
-	DatabaseController dbc;
+	//DatabaseController dbc;
+	DatabaseHandler db;
 	JsonBuilder jb;
 	Logger logger;
 	
@@ -41,8 +37,11 @@ public class FrontController extends HttpServlet {
 		super.init();
 		map.put("/test", "/test.jsp");
 		map.put("/index", "/index.jsp");
-
-		dbc = new DatabaseByMysql();
+		
+		//dbc = new DatabaseByMysql();
+		db = new DatabaseHandler();
+		db.Connect();
+		
 		jb = new JsonBuilder();
 		
 		logger = SagimaraLogger.logger;
@@ -125,7 +124,7 @@ public class FrontController extends HttpServlet {
 
 		logger.info(id);
 		if (!id.isEmpty()) {
-			UserProfile dut = dbc.readtable("USER_PROFILE", id);
+			UserProfile dut = db.readUserProfile(id);
 			String json = jb.javaToJson(dut);
 			logger.info(json);
 			response.setCharacterEncoding("utf8");
