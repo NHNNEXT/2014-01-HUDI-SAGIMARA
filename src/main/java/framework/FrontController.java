@@ -18,6 +18,7 @@ import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.log4j.Logger;
 
 import database.DatabaseByMysql;
 import database.DatabaseController;
@@ -45,7 +46,6 @@ public class FrontController extends HttpServlet {
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
 		String path = request.getServletPath();
 		String result = map.get(path);
 		response.setCharacterEncoding("utf8");
@@ -67,7 +67,7 @@ public class FrontController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		super.doPost(request, response);
+		//super.doPost(request, response);
 		String path = request.getServletPath();
 
 		if (path.equals("/test")) {
@@ -81,7 +81,8 @@ public class FrontController extends HttpServlet {
 		String result = map.get(path);
 		String id = null;
 		System.out.println(request.getHeader("Content-type"));
-
+		
+		
 		boolean isMultipart = ServletFileUpload.isMultipartContent(request);
 		if (isMultipart) {
 			FileItemFactory factory = new DiskFileItemFactory();
