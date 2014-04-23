@@ -281,3 +281,11 @@ div, section, section {
 #q-graph #q5 {
 	left: 320px;
 }
+
+#map-canvas {
+	position: relative;
+	height: 300px;
+	padding: 0;
+	background: #fff;
+	list-style: none;
+}
