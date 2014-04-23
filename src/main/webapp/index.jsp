@@ -3,14 +3,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<title>Sagimara</title>
+	<title>Sagimara</title>
 
-<link rel="stylesheet" type="text/css" media="screen"
-	href="/stylesheets/base.css">
-<link rel="stylesheet" type="text/css" media="screen"
-	href="/stylesheets/main.css">
+	<link rel="stylesheet" type="text/css" medi	="screen"
+		href="/stylesheets/base.css">
+	<link rel="stylesheet" type="text/css" media="screen"
+		href="/stylesheets/main.css">
+
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+	<script src="/javascripts/maps.js"></script>
 </head>
 <body>
 	<div id="wrap">
@@ -85,7 +88,7 @@
 					<section id="location-info" class="detail-info-item float-right">
 						최근 위치 정보
 						<figure>
-							<img id="profile-image" src="/images/2.png">
+							<div id="map-canvas"></div>
 						</figure>
 					</section>
 					<section id="watch-info" class="detail-info-item float-left">
