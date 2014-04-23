@@ -8,11 +8,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import logger.SagimaraLogger;
 import model.UserProfile;
 
 import org.apache.log4j.Logger;
-
-import framework.SagimaraLogger;
 
 public class DatabaseByMysql implements DatabaseController {
 	Connection conn;
