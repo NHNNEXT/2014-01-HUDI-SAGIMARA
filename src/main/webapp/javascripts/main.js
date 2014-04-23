@@ -1,4 +1,5 @@
 console.log("it works");
+var setBars;
 
 function updateProfile(userData){
 	var elProfileStatus = document.querySelector("#profile-status");
@@ -13,6 +14,42 @@ function updateProfile(userData){
 		elProfileStatus.innerHTML = "Danger";
 	}
 }
+
+function updateBar(index) {
+	var elVisitedInfo = document.querySelector("#visited-info");
+	var elVisitedInfoBar = elVisitedInfo.querySelectorAll("#q-graph .qtr");
+	var length = elVisitedInfoBar.length
+	
+
+	if(index>length-1) {
+		updateVisitedInfo(0,1);
+		return;
+	}
+	
+	console.log(elVisitedInfoBar[index].children[0].children[0].children[0]);
+	//oldHeight = elVisitedInfoBar[index].children[0].children[0].style.height;
+	var newHeight = (120 + i*10) +"px";
+	elVisitedInfoBar[index].children[0].children[0].style.height = newHeight;
+	var a = elVisitedInfoBar[index].children[0].children[0].children[0];
+	updateNumber(a,index+12);
+
+}
+
+function updateNumber(element, number) {
+	element.innerHTML = number;
+}
+
+
+function updateVisitedInfo(userData,state) {
+	i = 0;
+	
+	if(state==0){
+		setBars = setInterval("updateBar(i++)",100);
+	} else {
+		clearInterval(setBars);
+	}
+}
+
 
 function requestSearch(e){
 	e.preventDefault();
@@ -34,6 +71,7 @@ function requestSearch(e){
 			//json ajax 통신 부분
 			var jsonObj = JSON.parse(request.response)
 			updateProfile(jsonObj);
+			setTimeout("updateVisitedInfo(0,0)",500);
 			testUpdate[0].innerHTML = "profilePhone : " + jsonObj.profilePhone;
 			testUpdate[1].innerHTML = "profileStatus : " + jsonObj.profileStatus;
 			testUpdate[2].innerHTML = "profileVerification : " + jsonObj.profileVerification;
@@ -42,6 +80,12 @@ function requestSearch(e){
 	}
 }
 
-var elsubmit = document.querySelector(".search-submit");
+function refresh(e) {
+	window.location.reload(true);
+}
 
-elsubmit.addEventListener("click", requestSearch, false);
+var elSubmit = document.querySelector(".search-submit");
+var elLogo = document.querySelector(".logo");
+
+elSubmit.addEventListener("click", requestSearch, false);
+elLogo.addEventListener("click", refresh, false);
