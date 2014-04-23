@@ -1,5 +1,19 @@
 console.log("it works");
 
+function initialize() {
+  var mapOptions = {
+    zoom: 13,
+    center: new google.maps.LatLng(37.38,127.114),
+    disableDefaultUI: true
+  };
+  var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+  var marker = new google.maps.Marker({
+      position: mapOptions.center,
+      map: map,
+      title: 'Hello World!'
+  });
+}
+
 function updateProfile(userData){
 	var elProfileStatus = document.querySelector("#profile-status");
 	if(userData.profileStatus === "0") {
@@ -45,3 +59,4 @@ function requestSearch(e){
 var elsubmit = document.querySelector(".search-submit");
 
 elsubmit.addEventListener("click", requestSearch, false);
+google.maps.event.addDomListener(window, 'load', initialize);

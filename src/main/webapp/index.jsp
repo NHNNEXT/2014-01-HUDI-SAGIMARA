@@ -84,7 +84,7 @@
 					<section id="location-info" class="detail-info-item float-right">
 						최근 위치 정보
 						<figure>
-							<img id="profile-image" src="/images/2.png">
+							<div id="map-canvas"></div>
 						</figure>
 					</section>
 					<section id="watch-info" class="detail-info-item float-left">
