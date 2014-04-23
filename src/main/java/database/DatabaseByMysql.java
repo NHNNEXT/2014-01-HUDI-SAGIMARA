@@ -8,6 +8,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.sql.DataSource;
 import model.UserProfile;
 
 public class DatabaseByMysql implements DatabaseController {
@@ -22,6 +25,7 @@ public class DatabaseByMysql implements DatabaseController {
 	}
 
 	private void init() {
+		
 		String addr = "jdbc:mysql://localhost:3306/sagimara";
 		String user = "dev";
 		String password = "elqlgkwk"; 
@@ -34,10 +38,14 @@ public class DatabaseByMysql implements DatabaseController {
 		}
 		
 		try {
-			conn = DriverManager.getConnection(addr,user,password);
+			Context initCtx = new InitialContext();
+			Context envCtx = (Context)initCtx.lookup("java:comp/env");
+			DataSource ds = (DataSource)envCtx.lookup("jdbc/DBCP"); 
+			conn = ds.getConnection();
+			
 			stmt = conn.createStatement();
 			System.out.println("db connecting");
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
