@@ -37,6 +37,7 @@ div, section, section {
 	font-size: 40px;
 	color: #ffffff;
 	overflow: hidden;
+	cursor: pointer;
 }
 
 .search-input {
@@ -202,7 +203,8 @@ div, section, section {
 }
 
 #visited-info {
-
+	position: relative;
+	height: 100%;
 }
 
 .detail-info-item {
@@ -216,7 +218,7 @@ div, section, section {
 
 #q-graph {
 	position: relative;
-	height: 240px;
+	height: 280px;
 	padding: 0;
 	background: #fff;
 	list-style: none;
@@ -253,10 +255,12 @@ div, section, section {
 	border: 1px solid;
 	border-bottom: none;
 	color: #000;
+	-webkit-transition: height 1s, -webkit-transform 1s;
+	transition: height 1s, transform 1s;
 }
 
 #q-graph li.bar p {
-	margin: 5px 0 0;
+	margin: -25px 0 0;
 	padding: 0;
 }
 

@@ -14,6 +14,20 @@ function updateProfile(userData){
 	}
 }
 
+function updateVisitedInfo(userData) {
+	var elVisitedInfo = document.querySelector("#visited-info");
+	var elVisitedInfoBar = elVisitedInfo.querySelectorAll("#q-graph .qtr");
+	
+	//console.log(elVisitedInfoBar[0].children);
+	var length = elVisitedInfoBar.length
+	for(var i=0 ; i < length ; i++) {
+		oldHeight = elVisitedInfoBar[i].children[0].children[0].style.height;
+		var newHeight = parseInt(oldHeight) + (120 + i*10) +"px";
+		elVisitedInfoBar[i].children[0].children[0].style.height = newHeight;
+	}
+
+}
+
 function requestSearch(e){
 	e.preventDefault();
 	console.log("requestSearch Success");
@@ -42,6 +56,16 @@ function requestSearch(e){
 	}
 }
 
-var elsubmit = document.querySelector(".search-submit");
+function refresh(e) {
+	window.location.reload(true);
+}
 
-elsubmit.addEventListener("click", requestSearch, false);
+var elSubmit = document.querySelector(".search-submit");
+var elLogo = document.querySelector(".logo");
+
+elSubmit.addEventListener("click", requestSearch, false);
+elLogo.addEventListener("click", refresh, false);
+
+//setInterval("updateVisitedInfo()",1000);
+//updateVisitedInfo();
+setTimeout("updateVisitedInfo()",1000);
