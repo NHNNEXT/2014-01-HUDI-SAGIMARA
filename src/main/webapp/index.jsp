@@ -58,27 +58,27 @@
 							<ul id="q-graph">
 								<li class="qtr" id="q1">4.22
 									<ul>
-										<li class="paid bar" style="height: 0px;"><p>12</p></li>
+										<li class="paid bar" style="height: 0px;"><p></p></li>
 									</ul>
 								</li>
 								<li class="qtr" id="q2">4.23
 									<ul>
-										<li class="paid bar" style="height: 0px;"><p>10</p></li>
+										<li class="paid bar" style="height: 0px;"><p></p></li>
 									</ul>
 								</li>
 								<li class="qtr" id="q3">4.24
 									<ul>
-										<li class="paid bar" style="height: 0px;"><p>20</p></li>
+										<li class="paid bar" style="height: 0px;"><p></p></li>
 									</ul>
 								</li>
 								<li class="qtr" id="q4">4.25
 									<ul>
-										<li class="paid bar" style="height: 0px;"><p>21</p></li>
+										<li class="paid bar" style="height: 0px;"><p></p></li>
 									</ul>
 								</li>
 								<li class="qtr" id="q5">4.26
 									<ul>
-										<li class="sent bar" style="height: 0px;"><p>9</p></li>
+										<li class="sent bar" style="height: 0px;"><p></p></li>
 									</ul>
 								</li>
 								
