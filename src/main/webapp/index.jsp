@@ -7,11 +7,12 @@
 
 	<title>Sagimara</title>
 
-	<link rel="stylesheet" type="text/css" media="screen"
+	<link rel="stylesheet" type="text/css" medi	="screen"
 		href="/stylesheets/base.css">
 	<link rel="stylesheet" type="text/css" media="screen"
 		href="/stylesheets/main.css">
 
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 	<script src="/javascripts/maps.js"></script>
 </head>
 <body>
