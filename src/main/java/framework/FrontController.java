@@ -81,8 +81,8 @@ public class FrontController extends HttpServlet {
 		String path = request.getServletPath();
 		String result = map.get(path);
 		String id = null;
-		System.out.println(request.getHeader("Content-type"));
-		logger.debug("excute test method");
+	
+		logger.info(request.getHeader("Content-type"));
 		
 		
 		boolean isMultipart = ServletFileUpload.isMultipartContent(request);
@@ -105,7 +105,7 @@ public class FrontController extends HttpServlet {
 					String name = item.getFieldName();
 					String value = item.getString();
 					id = value;
-					System.out.println(name + value);
+					logger.info(name + value);
 				} else {
 					// Process uploaded file.
 					// String fieldName = item.getFieldName();
@@ -120,16 +120,16 @@ public class FrontController extends HttpServlet {
 			id = (String) request.getParameter("id");
 		}
 
-		System.out.println(id);
+		logger.info(id);
 		if (!id.isEmpty()) {
 			UserProfile dut = dbc.readtable("USER_PROFILE", id);
 			String json = jb.javaToJson(dut);
-			System.out.println(json);
+			logger.info(json);
 			response.setCharacterEncoding("utf8");
 			request.setCharacterEncoding("utf8");
 			request.setAttribute("json", json);
 		} else {
-			System.out.println("id is null");
+			logger.info("id is null");
 		}
 
 		if (!result.isEmpty()) {
@@ -137,9 +137,9 @@ public class FrontController extends HttpServlet {
 					.getRequestDispatcher(result);
 			dispather.forward(request, response);
 		} else {
-			System.out.println("path error");
-			System.out.println(path);
-			System.out.println(result);
+			logger.info("path error");
+			logger.info(path);
+			logger.info(result);
 		}
 	}
 }
