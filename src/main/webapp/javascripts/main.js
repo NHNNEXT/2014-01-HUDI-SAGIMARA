@@ -3,9 +3,6 @@ console.log("it works");
 function updateProfile(userData){
 	var elProfileStatus = document.querySelector("#profile-status");
 	if(userData.profileStatus === "0") {
-//		var oldClassName = elProfileStatus.className;
-//		var newClassName = oldClassName + "-safety";
-//		elProfileStatus.className = newClassName;
 		elProfileStatus.style.background = "#28bf00";
 		elProfileStatus.innerHTML = "Safety";
 	} else if(userData.profileStatus === "1") {

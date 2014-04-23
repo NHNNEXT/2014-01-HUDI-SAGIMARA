@@ -2,13 +2,11 @@
 	Header CSS
 */
 
-
 /* Test용
 div, section, section {
 	border:solid 1px red;
 }
 */
-
 .column {
 	position: relative;
 	margin-top: 10px;
@@ -31,7 +29,7 @@ div, section, section {
 	outline: none;
 	width: 100%;
 	height: 40px;
-	line-height:40px;
+	line-height: 40px;
 	margin: 0;
 	z-index: 10;
 	padding: 0px 0px 0px 0px;
@@ -40,6 +38,7 @@ div, section, section {
 	color: #ffffff;
 	overflow: hidden;
 }
+
 .search-input {
 	position: absolute;
 	top: 0;
@@ -74,8 +73,7 @@ div, section, section {
 	color: #efb480;
 }
 
-.search-icon,
-.search-submit  {
+.search-icon,.search-submit {
 	width: 40px;
 	height: 40px;
 	display: block;
@@ -91,15 +89,16 @@ div, section, section {
 
 .search-submit {
 	background: #fff; /* IE needs this */
-	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"; /* IE 8 */
-    filter: alpha(opacity=0); /* IE 5-7 */
-    opacity: 0;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+	/* IE 8 */
+	filter: alpha(opacity = 0); /* IE 5-7 */
+	opacity: 0;
 	color: transparent;
 	border: none;
 	outline: none;
 	z-index: 12;
 }
-			
+
 .search-icon {
 	background: #da6d0d;
 	color: #fff;
@@ -122,94 +121,163 @@ div, section, section {
 	Container CSS
 */
 .float-left {
-	float:left;
+	float: left;
 }
 
-.float-right{
-	float:right;
+.float-right {
+	float: right;
 }
 
 /*
 	User-Profile Section
 */
 .clearfix:after {
-	content:".";
-	visibility:hidden;
-	display:block;
-	height:0;
-	clear:both;
+	content: ".";
+	visibility: hidden;
+	display: block;
+	height: 0;
+	clear: both;
 }
 
-#user-profile{
-	background:#A8A8A8;
+#user-profile {
+	background: #A8A8A8;
 }
 
-#profile-image-section{
-	padding:10px 20px;
-	width:20%;
+#profile-image-section {
+	padding: 10px 20px;
+	width: 20%;
 }
 
-#profile-detail-section{
-	padding:10px 20px;
-	width:70%;
+#profile-detail-section {
+	padding: 10px 20px;
+	width: 70%;
 }
 
-#profile-image{
+#profile-image {
 	min-width: 50px;
-	width:100%;
+	width: 100%;
 }
 
-.profile-status{
-	text-align:center;
-	background:#da6d0d;
-	height:50px;
-	font-size:30px;
-	line-height:50px;
+.profile-status {
+	text-align: center;
+	background: #da6d0d;
+	height: 50px;
+	font-size: 30px;
+	line-height: 50px;
 	-webkit-transition: background 1s, -webkit-transform 1s;
-    transition: background 1s, transform 1s;
+	transition: background 1s, transform 1s;
 }
 
-.profile-status-safety{
-	text-align:center;
-	background:#28BF00;
-	height:50px;
-	font-size:30px;
-	line-height:50px; 
+.profile-status-safety {
+	text-align: center;
+	background: #28BF00;
+	height: 50px;
+	font-size: 30px;
+	line-height: 50px;
 }
 
-#profile-status .h1{
+#profile-status .h1 {
 	
-	
 }
 
-#info-wrapper{
-	background:#C9C9C9;
+#info-wrapper {
+	background: #C9C9C9;
 	padding: 20px;
 }
 
 /*
 	Attention Info Section
 */
-#attention-info{  
+#attention-info {
 	min-height: 90px;
 	background: #fff;
-	color:#000000;
+	color: #000000;
 }
-
 
 /*
 	Detail Info Section
 */
-#detail-info{  
+#detail-info {
 	
 }
+
 .detail-info-item {
-	font-size:12px;
-	width:50%;
-	color:black;
+	font-size: 12px;
+	width: 50%;
+	color: black;
 	min-height: 150px;
-	padding:5px;
-	
+	padding: 5px;
 }
 
+#q-graph {
+	position: relative;
+	height: 300px;
+	padding: 0;
+	background: #fff;
+	list-style: none;
+	font: 9px Helvetica, Geneva, sans-serif;
+}
 
+#q-graph ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+#q-graph li {
+	position: absolute;
+	bottom: 0;
+	width: 80px;
+	z-index: 2;
+	margin: 0;
+	padding: 0;
+	text-align: center;
+	list-style: none;
+}
+
+#q-graph li.qtr {
+	height: 298px;
+	padding-top: 2px;
+	border-right: 1px dotted #C4C4C4;
+	color: #AAA;
+}
+
+#q-graph li.bar {
+	width: 60px;
+	border: 1px solid;
+	border-bottom: none;
+	color: #000;
+}
+
+#q-graph li.bar p {
+	margin: 5px 0 0;
+	padding: 0;
+}
+
+#q-graph li.sent {
+	left: 10px;
+	background: #DCA;
+	border-color: #DCA;
+}
+
+#q-graph li.paid {
+	left: 10px;
+	background: #9D9;
+	border-color: #9D9;
+}
+
+#q-graph #q1 {
+	left: 0;
+}
+#q-graph #q2 {
+	left: 80px;
+}
+#q-graph #q3 {
+	left: 160px;
+}
+#q-graph #q4 {
+	left: 240px;
+}
+#q-graph #q5 {
+	left: 320px;
+}
