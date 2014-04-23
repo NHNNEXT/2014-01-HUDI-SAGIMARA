@@ -16,7 +16,7 @@ public class DatabaseByMysql implements DatabaseController {
 	PreparedStatement pstmt;
 	ResultSet rs;
 	String sql;
-
+	
 	public DatabaseByMysql() {
 		init();
 	}

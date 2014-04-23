@@ -29,12 +29,12 @@ public class FrontController extends HttpServlet {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	static Logger logger = Logger.getLogger(FrontController.class);
 	
 	HashMap<String, String> map = new HashMap<String, String>();
 	DatabaseController dbc;
 	JsonBuilder jb;
-
+	Logger logger;
+	
 	@Override
 	public void init() throws ServletException {
 		super.init();
@@ -43,6 +43,8 @@ public class FrontController extends HttpServlet {
 
 		dbc = new DatabaseByMysql();
 		jb = new JsonBuilder();
+		
+		logger = SagimaraLogger.logger;
 	}
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
