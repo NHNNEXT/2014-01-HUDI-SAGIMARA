@@ -3,14 +3,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<title>Sagimara</title>
+	<title>Sagimara</title>
 
-<link rel="stylesheet" type="text/css" media="screen"
-	href="/stylesheets/base.css">
-<link rel="stylesheet" type="text/css" media="screen"
-	href="/stylesheets/main.css">
+	<link rel="stylesheet" type="text/css" medi	="screen"
+		href="/stylesheets/base.css">
+	<link rel="stylesheet" type="text/css" media="screen"
+		href="/stylesheets/main.css">
+
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+	<script src="/javascripts/maps.js"></script>
 </head>
 <body>
 	<div id="wrap">
@@ -53,38 +56,39 @@
 						오늘하루 검색한 사람의 수
 						<figure>
 							<ul id="q-graph">
-								<li class="qtr" id="q1">4월22일
+								<li class="qtr" id="q1">4.22
 									<ul>
 										<li class="paid bar" style="height: 120px;"><p>12</p></li>
 									</ul>
 								</li>
-								<li class="qtr" id="q2">4월23일
+								<li class="qtr" id="q2">4.23
 									<ul>
 										<li class="paid bar" style="height: 100px;"><p>10</p></li>
 									</ul>
 								</li>
-								<li class="qtr" id="q3">4월24일
+								<li class="qtr" id="q3">4.24
 									<ul>
 										<li class="paid bar" style="height: 200px;"><p>20</p></li>
 									</ul>
 								</li>
-								<li class="qtr" id="q4">4월25일
+								<li class="qtr" id="q4">4.25
 									<ul>
 										<li class="paid bar" style="height: 210px;"><p>21</p></li>
 									</ul>
 								</li>
-								<li class="qtr" id="q5">4월26일
+								<li class="qtr" id="q5">4.26
 									<ul>
 										<li class="sent bar" style="height: 90px;"><p>9</p></li>
-									</ul>
+									</ul>s
 								</li>
+								
 							</ul>
 						</figure>
 					</section>
 					<section id="location-info" class="detail-info-item float-right">
 						최근 위치 정보
 						<figure>
-							<img id="profile-image" src="/images/2.png">
+							<div id="map-canvas"></div>
 						</figure>
 					</section>
 					<section id="watch-info" class="detail-info-item float-left">

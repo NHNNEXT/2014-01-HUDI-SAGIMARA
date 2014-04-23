@@ -201,21 +201,27 @@ div, section, section {
 	
 }
 
+#visited-info {
+
+}
+
 .detail-info-item {
 	font-size: 12px;
 	width: 50%;
 	color: black;
 	min-height: 150px;
 	padding: 5px;
+	font-family: inherit;
 }
 
 #q-graph {
 	position: relative;
-	height: 300px;
+	height: 240px;
 	padding: 0;
 	background: #fff;
 	list-style: none;
-	font: 9px Helvetica, Geneva, sans-serif;
+	font-size: 1.8em;
+	font-family: inherit;
 }
 
 #q-graph ul {
@@ -227,7 +233,7 @@ div, section, section {
 #q-graph li {
 	position: absolute;
 	bottom: 0;
-	width: 80px;
+	width: 30%;
 	z-index: 2;
 	margin: 0;
 	padding: 0;
@@ -236,14 +242,14 @@ div, section, section {
 }
 
 #q-graph li.qtr {
-	height: 298px;
+	height: 0px;
 	padding-top: 2px;
-	border-right: 1px dotted #C4C4C4;
+	/* border-right: 1px dotted #C4C4C4; */
 	color: #AAA;
-}
+} 
 
 #q-graph li.bar {
-	width: 60px;
+	width: 40%;
 	border: 1px solid;
 	border-bottom: none;
 	color: #000;
@@ -255,29 +261,43 @@ div, section, section {
 }
 
 #q-graph li.sent {
-	left: 10px;
-	background: #DCA;
-	border-color: #DCA;
+	left: 30%;
+	background: #da6d0d;
+	border-color: #da6d0d;
 }
 
 #q-graph li.paid {
-	left: 10px;
-	background: #9D9;
-	border-color: #9D9;
+	left: 30%;
+	background: #A8A8A8;
+	border-color: #A8A8A8;
 }
 
 #q-graph #q1 {
 	left: 0;
+	bottom : 10%;
 }
+
 #q-graph #q2 {
-	left: 80px;
+	left: 18%;
+	bottom : 10%;
 }
 #q-graph #q3 {
-	left: 160px;
+	left: 36%;
+	bottom : 10%;
 }
 #q-graph #q4 {
-	left: 240px;
+	left: 54%;
+	bottom : 10%;
 }
 #q-graph #q5 {
-	left: 320px;
+	left: 72%;
+	bottom : 10%;
+}
+
+#map-canvas {
+	position: relative;
+	height: 300px;
+	padding: 0;
+	background: #fff;
+	list-style: none;
 }
