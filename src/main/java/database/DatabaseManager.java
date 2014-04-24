@@ -11,7 +11,7 @@ import model.UserProfile;
 
 public class DatabaseManager {
 	public ResultSet selectUserProfile(Connection conn, String id) throws SQLException{
-		String sql = "select * from USER_PROFILE where profile_phone = ?";
+		String sql = "select * from USER_PROFILE where phone_number = ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, id);
 		ResultSet rs = pstmt.executeQuery();
@@ -32,8 +32,9 @@ public class DatabaseManager {
 				+ userProfile.getProfilePhone() + ","
 				+ userProfile.getProfileStatus() + "," 
 				+ userProfile.getProfileVerification() + ","
-				+ userProfile.getProfileVideo() + ","
 				+ userProfile.getProfileLocation() + ","
+				+ userProfile.getProfileWatch() + ","
+				+ userProfile.getProfileNotify() + ","
 				+ userProfile.getProfileInquiry()
 				+")";
 		
