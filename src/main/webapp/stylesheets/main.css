@@ -145,13 +145,15 @@ div, section, section {
 }
 
 #profile-image-section {
-	padding: 10px 20px;
+	padding: 10px 10px 10px 20px;
 	width: 20%;
 }
 
 #profile-detail-section {
-	padding: 10px 20px;
-	width: 70%;
+	padding: 10px 20px 10px 10px;
+	width: 80%;
+	font-family: inherit;
+	font-size: 1.5em;
 }
 
 #profile-image {
@@ -270,13 +272,13 @@ div, section, section {
 	padding: 0;
 }
 
-#q-graph li.sent {
+#q-graph li.today {
 	left: 30%;
 	background: #da6d0d;
 	border-color: #da6d0d;
 }
 
-#q-graph li.paid {
+#q-graph li.past {
 	left: 30%;
 	background: #A8A8A8;
 	border-color: #A8A8A8;
@@ -328,9 +330,17 @@ div, section, section {
 #watch-tool {
 	position: relative;
 	height: 300px;
+	line-height: 300px;
+	width: 100%;
 	padding: 0;
-	background: #fff;
+	background: #fff url("/images/eye.png") no-repeat;
+	background-size:70%;
+	background-position:center;
 	list-style: none;
+	text-align:center;
+	font-size: 3em;
+	font-family: inherit;
+	-webkit-animation:fade-in 3s infinite;
 }
 
 /*
@@ -342,7 +352,13 @@ div, section, section {
 #caution-tool {
 	position: relative;
 	height: 300px;
+	line-height: 300px;
 	padding: 0;
-	background: #fff;
+	background: #fff url("/images/caution.png") no-repeat;
+	background-size:70%;
+	background-position:center;
 	list-style: none;
+	text-align:center;
+	font-size: 3em;
+	font-family: inherit;
 }

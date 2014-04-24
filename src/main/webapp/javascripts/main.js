@@ -50,6 +50,18 @@ function updateVisitedInfo(userData,state) {
 	}
 }
 
+function updateWatch(userData) {
+	var elWatchInfo = document.querySelector("#watch-info");
+	var elWatchInfoDetail = elWatchInfo.querySelector("#watch-tool");
+	updateNumber(elWatchInfoDetail, 5);
+}
+
+function updateCaution(userData) {
+	var elCautionInfo = document.querySelector("#caution-info");
+	var elCautionInfoDetail = elCautionInfo.querySelector("#caution-tool");
+	updateNumber(elCautionInfoDetail, 5);
+}
+
 
 function requestSearch(e){
 	e.preventDefault();
@@ -72,6 +84,8 @@ function requestSearch(e){
 			var jsonObj = JSON.parse(request.response)
 			updateProfile(jsonObj);
 			setTimeout("updateVisitedInfo(0,0)",500);
+			updateWatch(jsonObj);
+			updateCaution(jsonObj);
 			testUpdate[0].innerHTML = "profilePhone : " + jsonObj.profilePhone;
 			testUpdate[1].innerHTML = "profileStatus : " + jsonObj.profileStatus;
 			testUpdate[2].innerHTML = "profileVerification : " + jsonObj.profileVerification;
