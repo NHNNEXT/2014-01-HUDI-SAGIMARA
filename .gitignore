@@ -3,9 +3,11 @@ target
 .classpath
 .settings
 src/main/java/framework/_test/
+src/main/java/_test/
 bin/*
 
 #https://github.com/github/gitignore/blob/master/Maven.gitignore 참조함
+
 target/
 pom.xml.tag
 pom.xml.releaseBackup
