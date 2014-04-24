@@ -4,9 +4,10 @@ public class UserProfile {
 	private String profilePhone;
 	private String profileStatus;
 	private String profileVerification;
-	private String profileVideo;
 	private String profileLocation;
-	private String profileInquiry;
+	private String profileWatch;
+	private String profileNotify;
+	private String[] profileInquiry;
 	
 	public String getProfilePhone() {
 		return profilePhone;
@@ -26,22 +27,28 @@ public class UserProfile {
 	public void setProfileVerification(String profileVerification) {
 		this.profileVerification = profileVerification;
 	}
-	public String getProfileVideo() {
-		return profileVideo;
-	}
-	public void setProfileVideo(String profileVideo) {
-		this.profileVideo = profileVideo;
-	}
 	public String getProfileLocation() {
 		return profileLocation;
 	}
 	public void setProfileLocation(String profileLocation) {
 		this.profileLocation = profileLocation;
 	}
-	public String getProfileInquiry() {
+	public String getProfileWatch() {
+		return profileWatch;
+	}
+	public void setProfileWatch(String profileWatch) {
+		this.profileWatch = profileWatch;
+	}
+	public String getProfileNotify() {
+		return profileNotify;
+	}
+	public void setProfileNotify(String profileNotify) {
+		this.profileNotify = profileNotify;
+	}
+	public String[] getProfileInquiry() {
 		return profileInquiry;
 	}
-	public void setProfileInquiry(String profileInquiry) {
+	public void setProfileInquiry(String[] profileInquiry) {
 		this.profileInquiry = profileInquiry;
 	}
 	

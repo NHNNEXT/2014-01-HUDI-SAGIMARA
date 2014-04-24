@@ -1,7 +1,6 @@
 package database;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -36,31 +35,35 @@ public class DatabaseHandler {
 		
 		try {
 			ResultSet rs = dbm.selectUserProfile(conn, id);
-
+			
 			if (rs.next()) {
 				// 검색결과가 있을때
-				result.setProfilePhone(rs.getString("profile_phone"));
-				result.setProfileInquiry(rs.getString("profile_inquiry"));
-				result.setProfileLocation(rs.getString("profile_location"));
-				result.setProfileStatus(rs.getString("profile_status"));
-				result.setProfileVerification(rs.getString("profile_verification"));
-				result.setProfileVideo(rs.getString("profile_video"));
+				result.setProfilePhone(rs.getString("phone_number"));
+				result.setProfileStatus(rs.getString("status"));
+				result.setProfileVerification(rs.getString("verification"));
+				result.setProfileLocation(rs.getString("location"));
+				result.setProfileWatch(rs.getString("watch"));
+				result.setProfileNotify(rs.getString("notify"));	
+				String[] inquiry = {rs.getString("6day ago"),rs.getString("5day ago"),rs.getString("4day ago"),
+						rs.getString("3day ago"),rs.getString("2day ago"),rs.getString("1day ago"),rs.getString("today")};
+				result.setProfileInquiry(inquiry);
 			} else {
 				// 검색결과가 없을때
+				// 새로운 유저 생성해야됨
 				result.setProfilePhone("검색결과 없음");
-				result.setProfileInquiry("검색결과 없음");
-				result.setProfileLocation("검색결과 없음");
 				result.setProfileStatus("검색결과 없음");
 				result.setProfileVerification("검색결과 없음");
-				result.setProfileVideo("검색결과 없음");
+				result.setProfileLocation("검색결과 없음");
+				result.setProfileWatch("검색결과 없음");
+				result.setProfileNotify("검색결과 없음");
 			}
-
+			rs.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-		
 		return result;
 	}
+	
+	
 	
 }
