@@ -32,8 +32,9 @@ public class DatabaseManager {
 				+ userProfile.getProfilePhone() + ","
 				+ userProfile.getProfileStatus() + "," 
 				+ userProfile.getProfileVerification() + ","
-				+ userProfile.getProfileVideo() + ","
 				+ userProfile.getProfileLocation() + ","
+				+ userProfile.getProfileWatch() + ","
+				+ userProfile.getProfileNotify() + ","
 				+ userProfile.getProfileInquiry()
 				+")";
 		

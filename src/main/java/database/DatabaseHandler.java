@@ -31,7 +31,7 @@ public class DatabaseHandler {
 		}
 	}
 	public boolean add(){
-		UserProfile userProfile = new UserProfile("1", "2", "3", "4", "5", "6");
+		UserProfile userProfile = new UserProfile("1", "2", "3", "4", "5", "6","7");
 		
 		try {
 			int result = dbm.insertUserProfileToData(conn, userProfile);

@@ -14,14 +14,15 @@ public class UserProfile extends BaseModel{
 	
 	public UserProfile(String profilePhone, String profileStatus,
 			String profileVerification, String profileVideo,
-			String profileLocation, String profileInquiry) {
+			String profileLocation, String profileInquiry, String profileNotify) {
 		super();
 		this.profilePhone = profilePhone;
 		this.profileStatus = profileStatus;
 		this.profileVerification = profileVerification;
-		this.profileVideo = profileVideo;
+		this.profileLocation = profileVideo;
 		this.profileLocation = profileLocation;
-		this.profileInquiry = profileInquiry;
+		this.profileWatch = profileInquiry;
+		this.profileNotify = profileNotify;
 	}
 	
 	public String getProfilePhone() {
