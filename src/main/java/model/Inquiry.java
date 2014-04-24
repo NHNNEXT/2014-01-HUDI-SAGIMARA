@@ -1,6 +1,6 @@
 package model;
 
-public class Inquiry {
+public class Inquiry extends BaseModel{
 	private String inquiryId;
 	private String inquiryTime;
 	

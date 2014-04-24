@@ -53,32 +53,32 @@
 					Attention-Info Section</section>
 				<section id="detail-info" class="clearfix">
 					<section id="visited-info" class="detail-info-item float-left">
-						Today
+						Recent Visits
 						<figure>
 							<ul id="q-graph">
 								<li class="qtr" id="q1">4.22
 									<ul>
-										<li class="paid bar" style="height: 0px;"><p></p></li>
+										<li class="past bar" style="height: 0px;"><p></p></li>
 									</ul>
 								</li>
 								<li class="qtr" id="q2">4.23
 									<ul>
-										<li class="paid bar" style="height: 0px;"><p></p></li>
+										<li class="past bar" style="height: 0px;"><p></p></li>
 									</ul>
 								</li>
 								<li class="qtr" id="q3">4.24
 									<ul>
-										<li class="paid bar" style="height: 0px;"><p></p></li>
+										<li class="past bar" style="height: 0px;"><p></p></li>
 									</ul>
 								</li>
 								<li class="qtr" id="q4">4.25
 									<ul>
-										<li class="paid bar" style="height: 0px;"><p></p></li>
+										<li class="past bar" style="height: 0px;"><p></p></li>
 									</ul>
 								</li>
 								<li class="qtr" id="q5">4.26
 									<ul>
-										<li class="sent bar" style="height: 0px;"><p></p></li>
+										<li class="today bar" style="height: 0px;"><p></p></li>
 									</ul>
 								</li>
 								
@@ -98,7 +98,7 @@
 						</figure>
 					</section>
 					<section id="caution-info" class="detail-info-item float-right">
-						Notify
+						Caution
 						<figure>
 							<div id="caution-tool"></div>
 						</figure>

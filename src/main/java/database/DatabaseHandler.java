@@ -4,10 +4,10 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.apache.log4j.Logger;
-
 import logger.SagimaraLogger;
 import model.UserProfile;
+
+import org.apache.log4j.Logger;
 
 public class DatabaseHandler {
 	Connection conn;
@@ -16,10 +16,11 @@ public class DatabaseHandler {
 	
 	public DatabaseHandler(){
 		logger = SagimaraLogger.logger;
-		dbm = new DatabaseManager();
+		dbm = new DatabaseManager();		
+		this.connect();
 	}
 	
-	public void Connect(){
+	private void connect(){
 		DatabaseConnector connector = new DatabaseConnector();
 		
 		//mysql Connection
@@ -28,6 +29,18 @@ public class DatabaseHandler {
 		if(conn==null){
 			logger.error("Database Connection Error");
 		}
+	}
+	public boolean add(){
+		UserProfile userProfile = new UserProfile("1", "2", "3", "4", "5", "6");
+		
+		try {
+			int result = dbm.insertUserProfileToData(conn, userProfile);
+			logger.info("RESULT CODE :" + result);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return false;
 	}
 	
 	public UserProfile readUserProfile(String id) {

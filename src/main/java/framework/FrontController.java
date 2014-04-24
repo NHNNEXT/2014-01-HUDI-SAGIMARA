@@ -40,7 +40,6 @@ public class FrontController extends HttpServlet {
 		
 		//dbc = new DatabaseByMysql();
 		db = new DatabaseHandler();
-		db.Connect();
 		
 		jb = new JsonBuilder();
 		
@@ -85,7 +84,6 @@ public class FrontController extends HttpServlet {
 		String id = null;
 	
 		logger.info(request.getHeader("Content-type"));
-		
 		
 		boolean isMultipart = ServletFileUpload.isMultipartContent(request);
 		if (isMultipart) {
