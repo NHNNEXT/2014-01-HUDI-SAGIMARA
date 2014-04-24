@@ -1,6 +1,6 @@
 package model;
 
-public class Video {
+public class Video extends BaseModel{
 	private String videoId;
 	private String videoLink;
 	

@@ -1,12 +1,27 @@
 package model;
 
-public class UserProfile {
+public class UserProfile extends BaseModel{
 	private String profilePhone;
 	private String profileStatus;
 	private String profileVerification;
 	private String profileVideo;
 	private String profileLocation;
 	private String profileInquiry;
+	
+	public UserProfile() {
+	}
+	
+	public UserProfile(String profilePhone, String profileStatus,
+			String profileVerification, String profileVideo,
+			String profileLocation, String profileInquiry) {
+		super();
+		this.profilePhone = profilePhone;
+		this.profileStatus = profileStatus;
+		this.profileVerification = profileVerification;
+		this.profileVideo = profileVideo;
+		this.profileLocation = profileLocation;
+		this.profileInquiry = profileInquiry;
+	}
 	
 	public String getProfilePhone() {
 		return profilePhone;
