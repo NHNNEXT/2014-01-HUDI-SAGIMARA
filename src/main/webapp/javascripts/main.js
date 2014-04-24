@@ -1,7 +1,52 @@
 console.log("it works");
 var setBars;
 
-function updateProfile(userData){
+
+
+function updateBar(index) {
+	var elVisitedInfo = document.querySelector("#visited-info");
+	var elVisitedInfoBar = elVisitedInfo.querySelectorAll("#q-graph .qtr");
+	var length = elVisitedInfoBar.length
+	
+	if(index>length-1) {
+		barAnimationController(false);
+		return;
+	}
+	
+	var newHeight = (120 + i*10) +"px";
+	elVisitedInfoBar[index].children[0].children[0].style.height = newHeight;
+	var a = elVisitedInfoBar[index].children[0].children[0].children[0];
+	updateInnerHTML(a,index+12);
+
+}
+
+function barAnimationController(state) {
+	i = 0;
+	
+	if(state){
+		setBars = setInterval("updateBar(i++)",100);
+	} else {
+		clearInterval(setBars);
+	}
+}
+
+function updateInnerHTML(element, html) {
+	element.innerHTML = html;
+}
+
+function updateProfile(userData) {
+	var elProfileInfo = document.querySelector("#profile-detail-section");
+	var elProfileInfoDetail = elProfileInfo.querySelectorAll("p");
+	var join = "profilePhone : " + userData.profilePhone;
+	var Verification = "profileStatus : " + userData.profileStatus;
+	var Accept = "profileVerificatione : " + userData.profileVerificatione;
+	updateInnerHTML(elProfileInfoDetail[0],join);
+	updateInnerHTML(elProfileInfoDetail[1],Verification);
+	updateInnerHTML(elProfileInfoDetail[2],Accept);
+	elProfileInfo.style.webkitAnimationPlayState="running";
+}
+
+function updateStatus(userData){
 	var elProfileStatus = document.querySelector("#profile-status");
 	if(userData.profileStatus === "0") {
 		elProfileStatus.style.background = "#28bf00";
@@ -15,46 +60,11 @@ function updateProfile(userData){
 	}
 }
 
-function updateBar(index) {
-	var elVisitedInfo = document.querySelector("#visited-info");
-	var elVisitedInfoBar = elVisitedInfo.querySelectorAll("#q-graph .qtr");
-	var length = elVisitedInfoBar.length
-	
-
-	if(index>length-1) {
-		updateVisitedInfo(0,1);
-		return;
-	}
-	
-	console.log(elVisitedInfoBar[index].children[0].children[0].children[0]);
-	//oldHeight = elVisitedInfoBar[index].children[0].children[0].style.height;
-	var newHeight = (120 + i*10) +"px";
-	elVisitedInfoBar[index].children[0].children[0].style.height = newHeight;
-	var a = elVisitedInfoBar[index].children[0].children[0].children[0];
-	updateNumber(a,index+12);
-
-}
-
-function updateNumber(element, number) {
-	element.innerHTML = number;
-}
-
-
-function updateVisitedInfo(userData,state) {
-	i = 0;
-	
-	if(state==0){
-		setBars = setInterval("updateBar(i++)",100);
-	} else {
-		clearInterval(setBars);
-	}
-}
-
 function updateVisit(userData) {
 	var elVisitInfo = document.querySelector("#visited-info");
 	var elVisitInfoDetail = elVisitInfo.querySelector("#q-graph");
 	elVisitInfoDetail.style.webkitAnimationPlayState="running";
-	setTimeout("updateVisitedInfo(0,0)",500);
+	setTimeout("barAnimationController(true)",1000);
 }
 
 function updateLocation(userData) {
@@ -67,14 +77,14 @@ function updateWatch(userData) {
 	var elWatchInfo = document.querySelector("#watch-info");
 	var elWatchInfoDetail = elWatchInfo.querySelector("#watch-tool p");
 	elWatchInfoDetail.style.webkitAnimationPlayState="running";
-	updateNumber(elWatchInfoDetail, 5);
+	updateInnerHTML(elWatchInfoDetail, 5);
 }
 
 function updateCaution(userData) {
 	var elCautionInfo = document.querySelector("#caution-info");
 	var elCautionInfoDetail = elCautionInfo.querySelector("#caution-tool p");
 	elCautionInfoDetail.style.webkitAnimationPlayState="running";
-	updateNumber(elCautionInfoDetail, 5);
+	updateInnerHTML(elCautionInfoDetail, 5);
 }
 
 
@@ -98,13 +108,11 @@ function requestSearch(e){
 			//json ajax 통신 부분
 			var jsonObj = JSON.parse(request.response)
 			updateProfile(jsonObj);
+			updateStatus(jsonObj);
 			updateVisit(jsonObj);
 			updateLocation(jsonObj);
 			updateWatch(jsonObj);
 			updateCaution(jsonObj);
-			testUpdate[0].innerHTML = "profilePhone : " + jsonObj.profilePhone;
-			testUpdate[1].innerHTML = "profileStatus : " + jsonObj.profileStatus;
-			testUpdate[2].innerHTML = "profileVerification : " + jsonObj.profileVerification;
 			//document.location.reload(true);
 		}
 	}

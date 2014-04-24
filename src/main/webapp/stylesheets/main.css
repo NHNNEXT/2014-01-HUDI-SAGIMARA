@@ -166,6 +166,8 @@ div, section, section {
 	width: 80%;
 	font-family: inherit;
 	font-size: 1.5em;
+	-webkit-animation:fade-in 3s;
+	-webkit-animation-play-state:paused;
 }
 
 #profile-image {
@@ -407,4 +409,20 @@ div, section, section {
 #caution-tool p{
 	-webkit-animation:fade-in 3s;
 	-webkit-animation-play-state:paused;
+}
+
+/*
+	Footer CSS
+*/
+
+.footer-logo {
+	width: 100%;
+	text-align: center;
+	height: 60px;
+	line-height: 60px;
+	margin: 0 auto;
+	padding: 0px 0px 0px 0px;
+	font-family: inherit;
+	font-size: 20px;
+	color: #ffffff;
 }

@@ -91,8 +91,6 @@
 						<figure>
 							<div id="watch-tool">
 									<p></p>
-									<div style="height:50%;">
-								</div>
 							</div>
 						</figure>
 					</section>
@@ -106,7 +104,9 @@
 				</section>
 			</section>
 		</div>
-		<footer> this is footer </footer>
+		<footer>
+			<div class="footer-logo">SAGIMARA</div>
+		</footer>
 	</div>
 
 	<script src="/javascripts/main.js"></script>
