@@ -1,6 +1,6 @@
 package model;
 
-public class Verification {
+public class Verification extends BaseModel{
 	private String verificationId;
 	private String verificationTime;
 	

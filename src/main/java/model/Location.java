@@ -1,6 +1,6 @@
 package model;
 
-public class Location {
+public class Location extends BaseModel{
 	private String locationId;
 	private String locationTime;
 	private String locationCoordinate;
