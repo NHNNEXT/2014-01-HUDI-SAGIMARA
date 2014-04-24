@@ -40,20 +40,18 @@
 						</figure>
 					</section>
 					<section id="profile-detail-section" class="float-right">
-						<p>TestLine 1</p>
-						<p>TestLine 2</p>
-						<p>TestLine 3</p>
+						<p></p>
+						<p></p>
+						<p></p>
 					</section>
 				</section>
 				<section id="profile-status" class="clearfix profile-status">
 					Warning</section>
 			</section>
 			<section id="info-wrapper">
-				<section id="attention-info" class="clearfix">
-					Attention-Info Section</section>
+				<section id="attention-info" class="clearfix"></section>
 				<section id="detail-info" class="clearfix">
 					<section id="visited-info" class="detail-info-item float-left">
-						Recent Visits
 						<figure>
 							<ul id="q-graph">
 								<li class="qtr" id="q1">4.22
@@ -81,26 +79,28 @@
 										<li class="today bar" style="height: 0px;"><p></p></li>
 									</ul>
 								</li>
-								
 							</ul>
 						</figure>
 					</section>
 					<section id="location-info" class="detail-info-item float-right">
-						Location
 						<figure>
 							<div id="map-canvas"></div>
 						</figure>
 					</section>
 					<section id="watch-info" class="detail-info-item float-left">
-						Watch
 						<figure>
-							<div id="watch-tool"></div>
+							<div id="watch-tool">
+									<p></p>
+									<div style="height:50%;">
+								</div>
+							</div>
 						</figure>
 					</section>
 					<section id="caution-info" class="detail-info-item float-right">
-						Caution
 						<figure>
-							<div id="caution-tool"></div>
+							<div id="caution-tool">
+								<p></p>
+							</div>
 						</figure>
 					</section>
 				</section>

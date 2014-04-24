@@ -50,15 +50,30 @@ function updateVisitedInfo(userData,state) {
 	}
 }
 
+function updateVisit(userData) {
+	var elVisitInfo = document.querySelector("#visited-info");
+	var elVisitInfoDetail = elVisitInfo.querySelector("#q-graph");
+	elVisitInfoDetail.style.webkitAnimationPlayState="running";
+	setTimeout("updateVisitedInfo(0,0)",500);
+}
+
+function updateLocation(userData) {
+	var elLocationInfo = document.querySelector("#location-info");
+	var elLocationInfoDetail = elLocationInfo.querySelector("#map-canvas");
+	elLocationInfoDetail.style.webkitAnimationPlayState="running";
+}
+
 function updateWatch(userData) {
 	var elWatchInfo = document.querySelector("#watch-info");
-	var elWatchInfoDetail = elWatchInfo.querySelector("#watch-tool");
+	var elWatchInfoDetail = elWatchInfo.querySelector("#watch-tool p");
+	elWatchInfoDetail.style.webkitAnimationPlayState="running";
 	updateNumber(elWatchInfoDetail, 5);
 }
 
 function updateCaution(userData) {
 	var elCautionInfo = document.querySelector("#caution-info");
-	var elCautionInfoDetail = elCautionInfo.querySelector("#caution-tool");
+	var elCautionInfoDetail = elCautionInfo.querySelector("#caution-tool p");
+	elCautionInfoDetail.style.webkitAnimationPlayState="running";
 	updateNumber(elCautionInfoDetail, 5);
 }
 
@@ -83,7 +98,8 @@ function requestSearch(e){
 			//json ajax 통신 부분
 			var jsonObj = JSON.parse(request.response)
 			updateProfile(jsonObj);
-			setTimeout("updateVisitedInfo(0,0)",500);
+			updateVisit(jsonObj);
+			updateLocation(jsonObj);
 			updateWatch(jsonObj);
 			updateCaution(jsonObj);
 			testUpdate[0].innerHTML = "profilePhone : " + jsonObj.profilePhone;
