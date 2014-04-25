@@ -16,8 +16,25 @@ import org.apache.log4j.Logger;
 
 public class DatabaseManager {
 	Logger logger = SagimaraLogger.logger;
-
-	public ResultSet selectUserProfile(Connection conn, String id)
+	Connection conn;
+	
+	DatabaseManager(){
+		this.connect();
+	}
+	
+	private void connect(){
+		DatabaseConnector connector = new DatabaseConnector();
+		
+		//mysql Connection
+		conn = connector.getMysqlConnection();
+		
+		if(conn==null){
+			logger.error("Database Connection Error");
+		}
+	}
+	
+	
+	public ResultSet selectUserProfile( String id)
 			throws SQLException {
 		String sql = "select * from USER_PROFILE where phone_number = ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -26,7 +43,7 @@ public class DatabaseManager {
 		return rs;
 	}
 
-	public int add(Connection conn, BaseModel model) throws SQLException {
+	public int add(BaseModel model) throws SQLException {
 		String tableName = model.getTableName();
 		
 		PreparedStatement pstmt = null;
@@ -70,7 +87,7 @@ public class DatabaseManager {
 		return 0;
 	}
 
-	public ArrayList<String> getColumns(Connection conn, String table) {
+	public ArrayList<String> getColumns(String table) {
 		ArrayList<String> columns = new ArrayList<String>();
 
 		String sql = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA='sagimara' AND TABLE_NAME='"
