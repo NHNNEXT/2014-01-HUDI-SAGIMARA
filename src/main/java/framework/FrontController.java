@@ -84,7 +84,7 @@ public class FrontController extends HttpServlet {
 		String id = null;
 	
 		logger.info(request.getHeader("Content-type"));
-		
+	
 		boolean isMultipart = ServletFileUpload.isMultipartContent(request);
 		if (isMultipart) {
 			FileItemFactory factory = new DiskFileItemFactory();
@@ -105,7 +105,7 @@ public class FrontController extends HttpServlet {
 					String name = item.getFieldName();
 					String value = item.getString();
 					id = value;
-					logger.info(name + value);
+					logger.info(name +" : "+ value);
 				} else {
 					// Process uploaded file.
 					// String fieldName = item.getFieldName();
@@ -120,6 +120,13 @@ public class FrontController extends HttpServlet {
 			id = (String) request.getParameter("id");
 		}
 
+		/*
+		 * 
+		 * Id 값을 기반으로 User 불러오는 코드 // 있으면 가져오고 없으면 생성 코드.
+		 * 받아온 User로 User.id를 통해 Inquiry(user) 생성
+		 * Inquiry User DB에 삽입
+		 */
+		
 		logger.info(id);
 		if (!id.isEmpty()) {
 			UserProfile dut = db.readUserProfile(id);
@@ -131,7 +138,7 @@ public class FrontController extends HttpServlet {
 		} else {
 			logger.info("id is null");
 		}
-
+		
 		if (!result.isEmpty()) {
 			RequestDispatcher dispather = getServletContext()
 					.getRequestDispatcher(result);

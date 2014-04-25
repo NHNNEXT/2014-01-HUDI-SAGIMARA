@@ -1,8 +1,24 @@
 package model;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 public class Inquiry extends BaseModel{
 	private String inquiryId;
 	private String inquiryTime;
+	
+	public Inquiry(){
+		Calendar calendar = Calendar.getInstance();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		this.inquiryTime = dateFormat.format(calendar.getTime()); 
+	}
+	
+	public Inquiry(User user){
+		this.inquiryId = user.getUserPhone();
+		Calendar calendar = Calendar.getInstance();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		this.inquiryTime = dateFormat.format(calendar.getTime()); 
+	}
 	
 	public String getInquiryId() {
 		return inquiryId;

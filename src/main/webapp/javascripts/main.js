@@ -1,6 +1,7 @@
 console.log("it works");
 var setBars;
 
+
 function updateBar(index) {
 	var elVisitedInfo = document.querySelector("#visited-info");
 	var elVisitedInfoBar = elVisitedInfo.querySelectorAll("#q-graph .qtr");
@@ -75,14 +76,15 @@ function updateWatch(userData) {
 	var elWatchInfo = document.querySelector("#watch-info");
 	var elWatchInfoDetail = elWatchInfo.querySelector("#watch-tool p");
 	elWatchInfoDetail.style.webkitAnimationPlayState="running";
-	updateInnerHTML(elWatchInfoDetail, 5);
+	updateNumber(elWatchInfoDetail, userData.profileWatch);
+
 }
 
 function updateCaution(userData) {
 	var elCautionInfo = document.querySelector("#caution-info");
 	var elCautionInfoDetail = elCautionInfo.querySelector("#caution-tool p");
 	elCautionInfoDetail.style.webkitAnimationPlayState="running";
-	updateInnerHTML(elCautionInfoDetail, 5);
+	updateNumber(elCautionInfoDetail, userData.profileNotify);
 }
 
 

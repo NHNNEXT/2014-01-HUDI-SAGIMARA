@@ -2,7 +2,18 @@ package model;
 
 public class User extends BaseModel{
 	private String userPhone;
-	private String userPassword;
+	private String userVerification;
+	private String userStatus;
+	private String userLocation;
+	
+	User(){}
+	
+	public User(String userPhone, String userVerification, String userStatus, String userLocation){
+		this.userPhone = userPhone;
+		this.userVerification = userVerification;
+		this.userStatus = userStatus;
+		this.userLocation = userLocation;
+	}
 	
 	public String getUserPhone() {
 		return userPhone;
@@ -10,11 +21,23 @@ public class User extends BaseModel{
 	public void setUserPhone(String userPhone) {
 		this.userPhone = userPhone;
 	}
-	public String getUserPassword() {
-		return userPassword;
+	public String getUserVerification() {
+		return userVerification;
 	}
-	public void setUserPassword(String userPassword) {
-		this.userPassword = userPassword;
+	public void setUserVerification(String userVerification) {
+		this.userVerification = userVerification;
 	}
-
+	public String getUserStatus() {
+		return userStatus;
+	}
+	public void setUserStatus(String userStatus) {
+		this.userStatus = userStatus;
+	}
+	public String getUserLocation() {
+		return userLocation;
+	}
+	public void setUserLocation(String userLocation) {
+		this.userLocation = userLocation;
+	}
+	
 }
