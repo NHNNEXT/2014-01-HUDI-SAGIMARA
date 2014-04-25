@@ -15,7 +15,7 @@ function updateProfile(userData){
 	}
 }
 
-function updateBar(index) {
+function updateBar(index, data) {
 	var elVisitedInfo = document.querySelector("#visited-info");
 	var elVisitedInfoBar = elVisitedInfo.querySelectorAll("#q-graph .qtr");
 	var length = elVisitedInfoBar.length
@@ -42,9 +42,9 @@ function updateNumber(element, number) {
 
 function updateVisitedInfo(userData,state) {
 	i = 0;
-	
+	debugger;
 	if(state==0){
-		setBars = setInterval("updateBar(i++)",100);
+		setBars = setInterval("updateBar(i++,)",100);
 	} else {
 		clearInterval(setBars);
 	}
@@ -53,13 +53,13 @@ function updateVisitedInfo(userData,state) {
 function updateWatch(userData) {
 	var elWatchInfo = document.querySelector("#watch-info");
 	var elWatchInfoDetail = elWatchInfo.querySelector("#watch-tool");
-	updateNumber(elWatchInfoDetail, 5);
+	updateNumber(elWatchInfoDetail, userData.profileWatch);
 }
 
 function updateCaution(userData) {
 	var elCautionInfo = document.querySelector("#caution-info");
 	var elCautionInfoDetail = elCautionInfo.querySelector("#caution-tool");
-	updateNumber(elCautionInfoDetail, 5);
+	updateNumber(elCautionInfoDetail, userData.profileNotify);
 }
 
 
@@ -83,7 +83,7 @@ function requestSearch(e){
 			//json ajax 통신 부분
 			var jsonObj = JSON.parse(request.response)
 			updateProfile(jsonObj);
-			setTimeout("updateVisitedInfo(0,0)",500);
+			setTimeout("updateVisitedInfo(jsonObj,0)",500);
 			updateWatch(jsonObj);
 			updateCaution(jsonObj);
 			testUpdate[0].innerHTML = "profilePhone : " + jsonObj.profilePhone;
