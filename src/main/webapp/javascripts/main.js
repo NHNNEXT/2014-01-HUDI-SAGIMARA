@@ -1,8 +1,6 @@
 console.log("it works");
 var setBars;
 
-
-
 function updateBar(index) {
 	var elVisitedInfo = document.querySelector("#visited-info");
 	var elVisitedInfoBar = elVisitedInfo.querySelectorAll("#q-graph .qtr");
