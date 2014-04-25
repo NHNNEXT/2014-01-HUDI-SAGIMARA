@@ -5,7 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import logger.SagimaraLogger;
-import model.BaseModel;
+import model.Inquiry;
 import model.User;
 import model.UserProfile;
 
@@ -52,19 +52,18 @@ public class DatabaseHandler {
 				result.setProfileInquiry(inquiry);
 			} else {
 				User user = new User(id, "false", "1", "위치정보 없음");
+				Inquiry inquiry = new Inquiry(user);
 				
-				if( dbm.add(conn, user) == 1){
-					logger.info("Add User : "+user.getUserPhone());
-				}else{
-					logger.info("Fail Add User");
-				};
+				dbm.add(conn, user);
+				dbm.add(conn, inquiry);
 				
-				result.setProfilePhone("검색결과 없음");
-				result.setProfileStatus("검색결과 없음");
-				result.setProfileVerification("검색결과 없음");
-				result.setProfileLocation("검색결과 없음");
-				result.setProfileWatch("검색결과 없음");
-				result.setProfileNotify("검색결과 없음");
+				// Default 값 전달
+				result.setProfilePhone(user.getUserPhone());
+				result.setProfileStatus("1");
+				result.setProfileVerification("false");
+				result.setProfileLocation("위치정보 없음");
+				result.setProfileWatch("0");
+				result.setProfileNotify("0");
 			}
 			rs.close();
 		} catch (SQLException e) {

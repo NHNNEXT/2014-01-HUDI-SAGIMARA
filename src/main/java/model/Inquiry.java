@@ -10,7 +10,7 @@ public class Inquiry extends BaseModel{
 	Inquiry(){
 	}
 	
-	Inquiry(User user){
+	public Inquiry(User user){
 		this.inquiryId = user.getUserPhone();
 		Calendar calendar = Calendar.getInstance();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
