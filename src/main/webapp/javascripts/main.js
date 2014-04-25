@@ -1,21 +1,32 @@
 console.log("it works");
 var setBars;
 
+var Visitinfo = {
+	"today": new Date(),
+	"visit":[]
+};
+
+
+//function datePaser() {
+//	var today = new Date();
+//	var paserDate = today.split(" ");
+//	return paserDate;
+//}
 
 function updateBar(index) {
 	var elVisitedInfo = document.querySelector("#visited-info");
 	var elVisitedInfoBar = elVisitedInfo.querySelectorAll("#q-graph .qtr");
 	var length = elVisitedInfoBar.length
-	
+	var value = Visitinfo.visit[i+1]
 	if(index>length-1) {
 		barAnimationController(false);
 		return;
 	}
 	
-	var newHeight = (120 + i*10) +"px";
+	var newHeight = (value*10) +"px";
 	elVisitedInfoBar[index].children[0].children[0].style.height = newHeight;
-	var a = elVisitedInfoBar[index].children[0].children[0].children[0];
-	updateInnerHTML(a,index+12);
+	var barValue = elVisitedInfoBar[index].children[0].children[0].children[0];
+	updateInnerHTML(barValue,value);
 
 }
 
@@ -41,7 +52,7 @@ function updateProfile(userData) {
 	var Accept = "profileVerificatione : " + userData.profileVerificatione;
 	updateInnerHTML(elProfileInfoDetail[0],join);
 	updateInnerHTML(elProfileInfoDetail[1],Verification);
-	updateInnerHTML(elProfileInfoDetail[2],Accept);
+	updateInnerHTML(elProfileInfoDetail[2],Accept);	
 	elProfileInfo.style.webkitAnimationPlayState="running";
 }
 
@@ -76,7 +87,7 @@ function updateWatch(userData) {
 	var elWatchInfo = document.querySelector("#watch-info");
 	var elWatchInfoDetail = elWatchInfo.querySelector("#watch-tool p");
 	elWatchInfoDetail.style.webkitAnimationPlayState="running";
-	updateNumber(elWatchInfoDetail, userData.profileWatch);
+	updateInnerHTML(elWatchInfoDetail, userData.profileWatch);
 
 }
 
@@ -84,7 +95,7 @@ function updateCaution(userData) {
 	var elCautionInfo = document.querySelector("#caution-info");
 	var elCautionInfoDetail = elCautionInfo.querySelector("#caution-tool p");
 	elCautionInfoDetail.style.webkitAnimationPlayState="running";
-	updateNumber(elCautionInfoDetail, userData.profileNotify);
+	updateInnerHTML(elCautionInfoDetail, userData.profileNotify);
 }
 
 
@@ -107,6 +118,7 @@ function requestSearch(e){
 			console.log(request.response);
 			//json ajax 통신 부분
 			var jsonObj = JSON.parse(request.response)
+			Visitinfo.visit = jsonObj.profileInquiry;
 			updateProfile(jsonObj);
 			updateStatus(jsonObj);
 			updateVisit(jsonObj);
