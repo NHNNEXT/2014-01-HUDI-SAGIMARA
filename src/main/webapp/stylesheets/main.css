@@ -1,4 +1,16 @@
 /*
+	Animation CSS
+*/
+@-webkit-keyframes fade-in{
+	from{
+	    opacity:0;
+	}
+	to{
+	    opacity:1;
+	}
+}
+
+/*
 	Header CSS
 */
 
@@ -145,15 +157,17 @@ div, section, section {
 }
 
 #profile-image-section {
-	padding: 10px 10px 10px 20px;
+	padding: 10px 10px 10px 30px;
 	width: 20%;
 }
 
 #profile-detail-section {
-	padding: 10px 20px 10px 10px;
+	padding: 10px 30px 10px 10px;
 	width: 80%;
 	font-family: inherit;
 	font-size: 1.5em;
+	-webkit-animation:fade-in 3s;
+	-webkit-animation-play-state:paused;
 }
 
 #profile-image {
@@ -192,6 +206,7 @@ div, section, section {
 	Attention Info Section
 */
 #attention-info {
+	margin: 5px;
 	min-height: 90px;
 	background: #fff;
 	color: #000000;
@@ -220,18 +235,25 @@ div, section, section {
 #visited-info {
 	position: relative;
 	height: 100%;
+	
 }
 
-
+#visited-info figure {
+	background: #fff url("/images/visit.png") no-repeat;
+	background-size:50%;
+	background-position:center;
+}
 
 #q-graph {
 	position: relative;
 	height: 300px;
 	padding: 0;
-	background: #fff;
 	list-style: none;
+	background: #fff;
 	font-size: 0.8em;
 	font-family: inherit;
+	-webkit-animation:fade-in 3s;
+	-webkit-animation-play-state:paused;
 }
 
 #q-graph ul {
@@ -313,12 +335,19 @@ div, section, section {
 	height: 100%;
 }
 
+#location-info figure {
+	background: #fff url("/images/location.png") no-repeat;
+	background-size:50%;
+	background-position:center;
+}
+
 #map-canvas {
 	position: relative;
 	height: 300px;
 	padding: 0;
-	background: #fff;
 	list-style: none;
+	-webkit-animation:fade-in 3s;
+	-webkit-animation-play-state:paused;
 }
 
 /*
@@ -327,20 +356,30 @@ div, section, section {
 #watch-info {
 	height: 100%;
 }
+
+#watch-info figure {
+	background: #fff url("/images/eye.png") no-repeat;
+	background-size:50%;
+	background-position:center;
+}
+
+
 #watch-tool {
 	position: relative;
 	height: 300px;
 	line-height: 300px;
 	width: 100%;
 	padding: 0;
-	background: #fff url("/images/eye.png") no-repeat;
-	background-size:70%;
-	background-position:center;
 	list-style: none;
 	text-align:center;
 	font-size: 3em;
 	font-family: inherit;
-	-webkit-animation:fade-in 3s infinite;
+	
+}
+
+#watch-tool p{
+	-webkit-animation:fade-in 3s;
+	-webkit-animation-play-state:paused;
 }
 
 /*
@@ -349,16 +388,41 @@ div, section, section {
 #caution-info {
 	height: 100%;
 }
+
+#caution-info figure {
+	background: #fff url("/images/caution.png") no-repeat;
+	background-size:50%;
+	background-position:center;
+}
+
 #caution-tool {
 	position: relative;
 	height: 300px;
 	line-height: 300px;
 	padding: 0;
-	background: #fff url("/images/caution.png") no-repeat;
-	background-size:70%;
-	background-position:center;
 	list-style: none;
 	text-align:center;
 	font-size: 3em;
 	font-family: inherit;
+}
+
+#caution-tool p{
+	-webkit-animation:fade-in 3s;
+	-webkit-animation-play-state:paused;
+}
+
+/*
+	Footer CSS
+*/
+
+.footer-logo {
+	width: 100%;
+	text-align: center;
+	height: 60px;
+	line-height: 60px;
+	margin: 0 auto;
+	padding: 0px 0px 0px 0px;
+	font-family: inherit;
+	font-size: 20px;
+	color: #ffffff;
 }
