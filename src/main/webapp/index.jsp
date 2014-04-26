@@ -55,26 +55,31 @@
 						<figure>
 							<ul id="q-graph">
 								<li class="qtr" id="q1">
+									<p></p>
 									<ul>
 										<li class="past bar" style="height: 0px;"><p></p></li>
 									</ul>
 								</li>
 								<li class="qtr" id="q2">
+									<p></p>
 									<ul>
 										<li class="past bar" style="height: 0px;"><p></p></li>
 									</ul>
 								</li>
 								<li class="qtr" id="q3">
+									<p></p>
 									<ul>
 										<li class="past bar" style="height: 0px;"><p></p></li>
 									</ul>
 								</li>
 								<li class="qtr" id="q4">
+									<p></p>
 									<ul>
 										<li class="past bar" style="height: 0px;"><p></p></li>
 									</ul>
 								</li>
 								<li class="qtr" id="q5">
+									<p></p>
 									<ul>
 										<li class="today bar" style="height: 0px;"><p></p></li>
 									</ul>

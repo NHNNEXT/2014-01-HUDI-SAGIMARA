@@ -19,20 +19,22 @@ function updateBar(index) {
 	var elVisitedInfo = document.querySelector("#visited-info");
 	var elVisitedInfoBar = elVisitedInfo.querySelectorAll("#q-graph .qtr");
 	var length = elVisitedInfoBar.length
-	var value = Visitinfo.visit[index + 2]
+
 	if (index > length - 1) {
 		barAnimationController(false);
 		return;
 	}
-
+	
+	var value = Visitinfo.visit[index + 2]
 	var newHeight = (value * 10) + "px";
-	elVisitedInfoBar[index].children[0].children[0].style.height = newHeight;
-	var barValue = elVisitedInfoBar[index].children[0].children[0].children[0];
-	var barDate = elVisitedInfoBar[index];
+	var BarHeight = elVisitedInfoBar[index].querySelector(".bar");
+	var barValue = BarHeight.querySelector("p");;
+	var barDate = elVisitedInfoBar[index].querySelector("p");
+	
+	BarHeight.style.height = newHeight;
 	Visitinfo.getToday();
-	barDate.insertAdjacentHTML('afterbegin', Visitinfo.dateSet[index]);
+	updateInnerHTML(barDate, Visitinfo.dateSet[index]);
 	updateInnerHTML(barValue, value);
-
 }
 
 function barAnimationController(state) {
@@ -79,7 +81,7 @@ function updateVisit(userData) {
 	var elVisitInfo = document.querySelector("#visited-info");
 	var elVisitInfoDetail = elVisitInfo.querySelector("#q-graph");
 	elVisitInfoDetail.style.webkitAnimationPlayState = "running";
-	setTimeout("barAnimationController(true)", 1000);
+	setTimeout("barAnimationController(true)", 100);
 }
 
 function updateLocation(userData) {
