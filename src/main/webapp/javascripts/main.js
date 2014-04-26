@@ -15,6 +15,22 @@ var Visitinfo = {
 	visit : []
 };
 
+function checkBarheight() {
+	var barArray = [];
+	var max = Math.max.apply(null, Visitinfo.visit);
+	if(max>24) {
+		for(var i=0 ; i<5 ; i++) {
+			barArray[i] = Visitinfo.visit[i+2] * 24/max;
+		}
+	} else {
+		for(var i=0 ; i<5 ; i++) {
+			barArray[i] = Visitinfo.visit[i+2];
+		}
+	}
+	
+	return barArray;
+}
+
 function updateBar(index) {
 	var elVisitedInfo = document.querySelector("#visited-info");
 	var elVisitedInfoBar = elVisitedInfo.querySelectorAll("#q-graph .qtr");
@@ -25,7 +41,8 @@ function updateBar(index) {
 		return;
 	}
 	
-	var value = Visitinfo.visit[index + 2]
+	var barArray = checkBarheight();
+	var value = barArray[index];
 	var newHeight = (value * 10) + "px";
 	var BarHeight = elVisitedInfoBar[index].querySelector(".bar");
 	var barValue = BarHeight.querySelector("p");;
@@ -34,7 +51,7 @@ function updateBar(index) {
 	BarHeight.style.height = newHeight;
 	Visitinfo.getToday();
 	updateInnerHTML(barDate, Visitinfo.dateSet[index]);
-	updateInnerHTML(barValue, value);
+	updateInnerHTML(barValue, Visitinfo.visit[index+2]);
 }
 
 function barAnimationController(state) {
@@ -82,6 +99,7 @@ function updateVisit(userData) {
 	var elVisitInfoDetail = elVisitInfo.querySelector("#q-graph");
 	elVisitInfoDetail.style.webkitAnimationPlayState = "running";
 	setTimeout("barAnimationController(true)", 100);
+	checkBarheight();
 }
 
 function updateLocation(userData) {
@@ -146,3 +164,4 @@ var elLogo = document.querySelector(".logo");
 
 elSubmit.addEventListener("click", requestSearch, false);
 elLogo.addEventListener("click", refresh, false);
+
