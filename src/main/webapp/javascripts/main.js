@@ -1,6 +1,11 @@
 console.log("it works");
 
-var Visitinfo = {
+var eventVariable = {
+	elSubmit : document.querySelector(".search-submit"),
+	elLogo : document.querySelector(".logo")
+};
+
+var visitInfo = {
 	setBars : "",
 	dateInfo : new Date(),
 	getToday : function() {
@@ -17,14 +22,14 @@ var Visitinfo = {
 
 function checkBarheight() {
 	var barArray = [];
-	var max = Math.max.apply(null, Visitinfo.visit);
+	var max = Math.max.apply(null, visitInfo.visit);
 	if(max>24) {
 		for(var i=0 ; i<5 ; i++) {
-			barArray[i] = Visitinfo.visit[i+2] * 24/max;
+			barArray[i] = visitInfo.visit[i+2] * 24/max;
 		}
 	} else {
 		for(var i=0 ; i<5 ; i++) {
-			barArray[i] = Visitinfo.visit[i+2];
+			barArray[i] = visitInfo.visit[i+2];
 		}
 	}
 	
@@ -49,18 +54,18 @@ function updateBar(index) {
 	var barDate = elVisitedInfoBar[index].querySelector("p");
 	
 	BarHeight.style.height = newHeight;
-	Visitinfo.getToday();
-	updateInnerHTML(barDate, Visitinfo.dateSet[index]);
-	updateInnerHTML(barValue, Visitinfo.visit[index+2]);
+	visitInfo.getToday();
+	updateInnerHTML(barDate, visitInfo.dateSet[index]);
+	updateInnerHTML(barValue, visitInfo.visit[index+2]);
 }
 
 function barAnimationController(state) {
 	i = 0;
 
 	if (state) {
-		Visitinfo.setBars = setInterval("updateBar(i++)", 100);
+		visitInfo.setBars = setInterval("updateBar(i++)", 100);
 	} else {
-		clearInterval(Visitinfo.setBars);
+		clearInterval(visitInfo.setBars);
 	}
 }
 
@@ -143,7 +148,7 @@ function requestSearch(e) {
 			console.log(request.response);
 			// json ajax 통신 부분
 			var jsonObj = JSON.parse(request.response)
-			Visitinfo.visit = jsonObj.profileInquiry;
+			visitInfo.visit = jsonObj.profileInquiry;
 			updateProfile(jsonObj);
 			updateStatus(jsonObj);
 			updateVisit(jsonObj);
@@ -159,9 +164,7 @@ function refresh(e) {
 	window.location.reload(true);
 }
 
-var elSubmit = document.querySelector(".search-submit");
-var elLogo = document.querySelector(".logo");
 
-elSubmit.addEventListener("click", requestSearch, false);
-elLogo.addEventListener("click", refresh, false);
+eventVariable.elSubmit.addEventListener("click", requestSearch, false);
+eventVariable.elLogo.addEventListener("click", refresh, false);
 
