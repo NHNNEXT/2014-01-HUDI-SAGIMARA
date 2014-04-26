@@ -54,27 +54,27 @@
 					<section id="visited-info" class="detail-info-item float-left">
 						<figure>
 							<ul id="q-graph">
-								<li class="qtr" id="q1">4.22
+								<li class="qtr" id="q1">
 									<ul>
 										<li class="past bar" style="height: 0px;"><p></p></li>
 									</ul>
 								</li>
-								<li class="qtr" id="q2">4.23
+								<li class="qtr" id="q2">
 									<ul>
 										<li class="past bar" style="height: 0px;"><p></p></li>
 									</ul>
 								</li>
-								<li class="qtr" id="q3">4.24
+								<li class="qtr" id="q3">
 									<ul>
 										<li class="past bar" style="height: 0px;"><p></p></li>
 									</ul>
 								</li>
-								<li class="qtr" id="q4">4.25
+								<li class="qtr" id="q4">
 									<ul>
 										<li class="past bar" style="height: 0px;"><p></p></li>
 									</ul>
 								</li>
-								<li class="qtr" id="q5">4.26
+								<li class="qtr" id="q5">
 									<ul>
 										<li class="today bar" style="height: 0px;"><p></p></li>
 									</ul>
