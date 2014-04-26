@@ -19,7 +19,7 @@ function updateBar(index) {
 	var elVisitedInfo = document.querySelector("#visited-info");
 	var elVisitedInfoBar = elVisitedInfo.querySelectorAll("#q-graph .qtr");
 	var length = elVisitedInfoBar.length
-	var value = Visitinfo.visit[i + 1]
+	var value = Visitinfo.visit[index + 2]
 	if (index > length - 1) {
 		barAnimationController(false);
 		return;
