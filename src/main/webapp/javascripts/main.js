@@ -5,6 +5,10 @@ var eventVariable = {
 	elLogo : document.querySelector(".logo")
 };
 
+var locationInfo = {
+	profileLocation : ""
+}
+
 var visitInfo = {
 	setBars : "",
 	dateInfo : new Date(),
@@ -108,9 +112,11 @@ function updateVisit(userData) {
 }
 
 function updateLocation(userData) {
+	moveToTarget();
 	var elLocationInfo = document.querySelector("#location-info");
 	var elLocationInfoDetail = elLocationInfo.querySelector("#map-canvas");
 	elLocationInfoDetail.style.webkitAnimationPlayState = "running";
+	
 }
 
 function updateWatch(userData) {
@@ -149,6 +155,7 @@ function requestSearch(e) {
 			// json ajax 통신 부분
 			var jsonObj = JSON.parse(request.response)
 			visitInfo.visit = jsonObj.profileInquiry;
+			locationInfo.profileLocation = jsonObj.profileLocation;
 			updateProfile(jsonObj);
 			updateStatus(jsonObj);
 			updateVisit(jsonObj);

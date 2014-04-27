@@ -13,7 +13,6 @@
 		href="/stylesheets/main.css">
 
 	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
-	<script src="/javascripts/maps.js"></script>
 </head>
 <body>
 	<div id="wrap">
@@ -115,5 +114,6 @@
 	</div>
 
 	<script src="/javascripts/main.js"></script>
+	<script src="/javascripts/maps.js"></script>
 </body>
 </html>
