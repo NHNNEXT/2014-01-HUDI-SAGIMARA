@@ -167,7 +167,7 @@ div, section, section {
 	font-family: inherit;
 	font-size: 1.5em;
 	-webkit-animation:fade-in 3s;
-	-webkit-animation-play-state:paused;
+	-webkit-animation-play-state: paused;
 }
 
 #profile-image {

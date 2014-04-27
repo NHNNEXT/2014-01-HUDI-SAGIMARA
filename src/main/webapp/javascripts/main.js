@@ -5,10 +5,6 @@ var eventVariable = {
 	elLogo : document.querySelector(".logo")
 };
 
-var locationInfo = {
-	profileLocation : ""
-}
-
 var visitInfo = {
 	setBars : "",
 	dateInfo : new Date(),
@@ -112,11 +108,12 @@ function updateVisit(userData) {
 }
 
 function updateLocation(userData) {
-	moveToTarget();
-	var elLocationInfo = document.querySelector("#location-info");
-	var elLocationInfoDetail = elLocationInfo.querySelector("#map-canvas");
-	elLocationInfoDetail.style.webkitAnimationPlayState = "running";
-	
+	if(userData.profileLocation != "위치정보 없음") {
+		moveToTarget(userData.profileLocation);
+		var elLocationInfo = document.querySelector("#location-info");
+		var elLocationInfoDetail = elLocationInfo.querySelector("#map-canvas");
+		elLocationInfoDetail.style.webkitAnimationPlayState = "running";
+	}
 }
 
 function updateWatch(userData) {
@@ -134,8 +131,20 @@ function updateCaution(userData) {
 	updateInnerHTML(elCautionInfoDetail, userData.profileNotify);
 }
 
+function setDefault() {
+	var elVisitInfoDetail = document.querySelector("#q-graph");
+	elVisitInfoDetail.style.webkitAnimationPlayState = "paused";
+	var elLocationInfoDetail = document.querySelector("#map-canvas");
+	elLocationInfoDetail.style.webkitAnimationPlayState = "paused";
+	var elWatchInfoDetail = document.querySelector("#watch-tool p");
+	elWatchInfoDetail.style.webkitAnimationPlayState = "paused";
+	var elCautionInfoDetail = document.querySelector("#caution-tool p");
+	elCautionInfoDetail.style.webkitAnimationPlayState = "paused";
+}
+
 function requestSearch(e) {
 	e.preventDefault();
+	setDefault();
 	console.log("requestSearch Success");
 	var id = e.target.parentElement[0].value;
 	var url = "/test";
@@ -155,7 +164,6 @@ function requestSearch(e) {
 			// json ajax 통신 부분
 			var jsonObj = JSON.parse(request.response)
 			visitInfo.visit = jsonObj.profileInquiry;
-			locationInfo.profileLocation = jsonObj.profileLocation;
 			updateProfile(jsonObj);
 			updateStatus(jsonObj);
 			updateVisit(jsonObj);

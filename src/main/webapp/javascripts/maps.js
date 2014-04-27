@@ -16,9 +16,7 @@ function initialize() {
 	});
 }
 
-function moveToTarget() {
-	var address = locationInfo.profileLocation;
-	
+function moveToTarget(address) {
 	geocoder.geocode({
 		'address' : address
 	}, function(results, status) {
