@@ -11,7 +11,6 @@
 		href="/stylesheets/base.css">
 	<link rel="stylesheet" type="text/css" media="screen"
 		href="/stylesheets/main.css">
-	<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width, height=device-height">
 
 	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 </head>
