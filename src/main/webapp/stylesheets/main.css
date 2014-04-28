@@ -240,6 +240,10 @@ div, section, section {
 	border-radius: .5em;
 }
 
+.profile-status .button:hover {
+	background: rgba(255, 255, 255, 0.2);
+}
+
 #info-wrapper {
 	background: #fff;
 	padding: 20px;
@@ -384,6 +388,7 @@ div, section, section {
 	line-height: 20px;
 	font-size: 0.8em;
 	text-align:center;	
+	margin: 0 0 5px 0;
 }
 
 #location-info figure {
@@ -398,7 +403,6 @@ div, section, section {
 
 #map-canvas {
 	position: relative;
-	height: 200px;
 	padding: 0;
 	list-style: none;
 }
@@ -429,6 +433,7 @@ div, section, section {
 	line-height: 20px;
 	font-size: 0.8em;
 	text-align:center;	
+	margin: 0 0 5px 0;
 }
 
 #watch-info figure {
@@ -450,7 +455,7 @@ div, section, section {
 	padding: 0;
 	list-style: none;
 	text-align:center;
-	font-size: 3em;
+	font-size: 1.5em;
 	font-family: inherit;
 	background: rgba(255, 255, 255, 0.7);
 }
@@ -472,6 +477,7 @@ div, section, section {
 	line-height: 20px;
 	font-size: 0.8em;
 	text-align:center;	
+	margin: 0 0 5px 0;
 }
 
 #caution-info figure {
@@ -493,7 +499,7 @@ div, section, section {
 	padding: 0;
 	list-style: none;
 	text-align:center;
-	font-size: 3em;
+	font-size: 1.5em;	
 	font-family: inherit;
 	background: rgba(255, 255, 255, 0.7);
 }
