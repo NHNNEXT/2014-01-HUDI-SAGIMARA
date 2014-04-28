@@ -24,26 +24,28 @@ public class DatabaseHandler {
 		UserProfile result = new UserProfile();
 
 		try {
-			ResultSet rs = dbm.selectUserProfile(id);
-			logger.info("[readUserProfile] ResultSet : " + rs.toString()
+			ResultSet rs_profile = dbm.selectUserProfile(id);
+			ResultSet rs_inquiry = dbm.selectUserInquiry(id);
+			
+			logger.info("[readUserProfile] ResultSet : " + rs_profile.toString()
 					+ " : ");
-			if (rs.next()) {
+			if (rs_profile.next()) {
 				logger.info("[readUserProfile] User[" + id + "] 정보 있음 ");
 				Inquiry inquiry = new Inquiry();
 				inquiry.setInquiryId(id);
 
 				dbm.add(inquiry);
 
-				result.setProfilePhone(rs.getString("phone_number"));
-				result.setProfileStatus(rs.getString("status"));
-				result.setProfileVerification(rs.getString("verification"));
-				result.setProfileLocation(rs.getString("location"));
-				result.setProfileWatch(rs.getString("watch"));
-				result.setProfileNotify(rs.getString("notify"));
-				String[] inquiryList = { rs.getString("6day ago"),
-						rs.getString("5day ago"), rs.getString("4day ago"),
-						rs.getString("3day ago"), rs.getString("2day ago"),
-						rs.getString("1day ago"), rs.getString("today") };
+				result.setProfilePhone(rs_profile.getString("phone_number"));
+				result.setProfileStatus(rs_profile.getString("status"));
+				result.setProfileVerification(rs_profile.getString("verification"));
+				result.setProfileLocation(rs_profile.getString("location"));
+				result.setProfileWatch(rs_profile.getString("watch"));
+				result.setProfileNotify(rs_profile.getString("notify"));
+				String[] inquiryList = { rs_inquiry.getString("6day ago"),
+						rs_inquiry.getString("5day ago"), rs_inquiry.getString("4day ago"),
+						rs_inquiry.getString("3day ago"), rs_inquiry.getString("2day ago"),
+						rs_inquiry.getString("1day ago"), rs_inquiry.getString("today") };
 				result.setProfileInquiry(inquiryList);
 			} else {
 				logger.info("[readUserProfile] User[" + id + "] 정보 없음 ");
@@ -62,7 +64,8 @@ public class DatabaseHandler {
 				String[] inquiryList = { "0", "0", "0", "0", "0", "0", "0" };
 				result.setProfileInquiry(inquiryList);
 			}
-			rs.close();
+			rs_profile.close();
+			rs_inquiry.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

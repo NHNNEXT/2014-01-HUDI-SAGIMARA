@@ -42,7 +42,15 @@ public class DatabaseManager {
 		ResultSet rs = pstmt.executeQuery();
 		return rs;
 	}
-
+	
+	public ResultSet selectUserInquiry(String id) throws SQLException {
+		String sql = "select * from USER_INQUIRY where phone_number = ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, id);
+		ResultSet rs = pstmt.executeQuery();
+		return rs;
+	}
+	
 	public int add(BaseModel model) throws SQLException {
 		String tableName = model.getTableName();
 		
@@ -105,4 +113,6 @@ public class DatabaseManager {
 		return columns;
 
 	}
+
+
 }
