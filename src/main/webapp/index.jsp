@@ -3,17 +3,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0">
+	<title>Sagimara</title>
 
-<title>Sagimara</title>
+	<link rel="stylesheet" type="text/css" medi="screen"
+		href="/stylesheets/base.css">
+	<link rel="stylesheet" type="text/css" media="screen"
+		href="/stylesheets/main.css">
 
-<link rel="stylesheet" type="text/css" medi="screen"
-	href="/stylesheets/base.css">
-<link rel="stylesheet" type="text/css" media="screen"
-	href="/stylesheets/main.css">
+	<script	src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 
-<script
-	src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 </head>
 <body>
 	<div id="wrap">
