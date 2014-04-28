@@ -4,19 +4,27 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import logger.SagimaraLogger;
 import model.UserProfile;
+
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.log4j.Logger;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import database.DatabaseHandler;
 
 public class FrontController extends HttpServlet {
@@ -37,22 +45,26 @@ public class FrontController extends HttpServlet {
 		super.init();
 		map.put("/test", "/test.jsp");
 		map.put("/index", "/index.jsp");
-		map.put("/admin", "/admin.jsp");
-		//dbc = new DatabaseByMysql();
+		map.put("/admin/register", "/admin_register.jsp");
+		map.put("/admin/login", "/admin_login.jsp");
+
 		db = new DatabaseHandler();
-		
 		jb = new JsonBuilder();
-		
 		logger = SagimaraLogger.logger;
 	}
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String path = request.getServletPath();
+		String path = request.getRequestURI();
 		String result = map.get(path);
 		response.setCharacterEncoding("utf8");
 		request.setCharacterEncoding("utf8");
-
+		
+		logger.info("[DO GET] get Request URI : " + path);
+		
+		if(path.equals("/admin/register")){
+			adminRegister(request, response);
+		}
 		if (result != null) {
 			RequestDispatcher dispather = getServletContext()
 					.getRequestDispatcher(result);
@@ -69,14 +81,39 @@ public class FrontController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		//super.doPost(request, response);
 		String path = request.getServletPath();
-
+		
+		
 		if (path.equals("/test")) {
 			test(request, response);
 		}
 	}
+	private void adminRegister(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String path, result, id, password;
+		path= request.getRequestURI();
+		result = map.get(path);
+		Map<String, String> resultMap = new HashMap<String, String>();
+		logger.info("[Admin Register] Register Start in : "+path + " : "+ result);
+		
+		resultMap.put("code", "OK");
+		resultMap.put("message", "Register Success");
 
+		Gson gson = new GsonBuilder().create();
+		String json = gson.toJson(resultMap);
+		
+		id = (String) request.getParameter("id");
+		password = (String) request.getParameter("password");
+		logger.info("[Admin Register] id : "+id + " , password : " + password);
+		
+		response.setCharacterEncoding("utf8");
+		request.setCharacterEncoding("utf8");		
+		request.setAttribute("json", json);
+		
+		RequestDispatcher dispather = getServletContext()
+				.getRequestDispatcher(result);
+		dispather.forward(request, response);
+	}
 	private void test(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String path = request.getServletPath();
@@ -93,7 +130,6 @@ public class FrontController extends HttpServlet {
 			try {
 				items = upload.parseRequest(request);
 			} catch (FileUploadException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			Iterator<FileItem> ir = items.iterator();
@@ -120,13 +156,6 @@ public class FrontController extends HttpServlet {
 			id = (String) request.getParameter("id");
 		}
 
-		/*
-		 * 
-		 * Id 값을 기반으로 User 불러오는 코드 // 있으면 가져오고 없으면 생성 코드.
-		 * 받아온 User로 User.id를 통해 Inquiry(user) 생성
-		 * Inquiry User DB에 삽입
-		 */
-		
 		logger.info(id);
 		if (!id.isEmpty()) {
 			UserProfile dut = db.readUserProfile(id);

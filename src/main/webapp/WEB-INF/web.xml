@@ -24,7 +24,7 @@
 		<servlet-name>test</servlet-name>
 		<servlet-class>framework.FrontController</servlet-class>
 	</servlet>
-		<servlet>
+	<servlet>
 		<servlet-name>admin</servlet-name>
 		<servlet-class>framework.FrontController</servlet-class>
 	</servlet>
@@ -37,9 +37,8 @@
 		<servlet-name>test</servlet-name>
 		<url-pattern>/test</url-pattern>
 	</servlet-mapping>
-		<servlet-mapping>
+	<servlet-mapping>
 		<servlet-name>admin</servlet-name>
-		<url-pattern>/admin</url-pattern>
+		<url-pattern>/admin/*</url-pattern>
 	</servlet-mapping>
-
 </web-app>
