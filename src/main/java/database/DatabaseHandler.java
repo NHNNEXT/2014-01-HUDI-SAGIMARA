@@ -28,7 +28,7 @@ public class DatabaseHandler {
 			
 			logger.info("[readUserProfile] ResultSet : " + rs_profile.toString()
 					+ " : ");
-			if (rs_profile.next()) {
+			if (rs_profile.next()&&rs_inquiry.next()) {
 				logger.info("[readUserProfile] User[" + id + "] 정보 있음 ");
 				Inquiry inquiry = new Inquiry();
 				inquiry.setInquiryId(id);
@@ -45,6 +45,7 @@ public class DatabaseHandler {
 						rs_inquiry.getString("5day ago"), rs_inquiry.getString("4day ago"),
 						rs_inquiry.getString("3day ago"), rs_inquiry.getString("2day ago"),
 						rs_inquiry.getString("1day ago"), rs_inquiry.getString("today") };
+				logger.info("!!!!!!!!!!!!!" + inquiryList + "!!!!!!!!!!");
 				result.setProfileInquiry(inquiryList);
 			} else {
 				logger.info("[readUserProfile] User[" + id + "] 정보 없음 ");

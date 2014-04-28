@@ -43,11 +43,19 @@ public class DatabaseManager {
 		return rs;
 	}
 	
-	public ResultSet selectUserInquiry(String id) throws SQLException {
+	public ResultSet selectUserInquiry(String id)  {
 		String sql = "select * from USER_INQUIRY where phone_number = ?";
-		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, id);
-		ResultSet rs = pstmt.executeQuery();
+		PreparedStatement pstmt;
+		ResultSet rs=null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+		} catch (SQLException e) {
+			logger.info("error");
+			e.printStackTrace();
+		}
+
 		return rs;
 	}
 	
