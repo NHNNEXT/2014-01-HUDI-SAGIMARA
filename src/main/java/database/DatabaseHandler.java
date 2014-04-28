@@ -45,7 +45,6 @@ public class DatabaseHandler {
 						rs_inquiry.getString("5day ago"), rs_inquiry.getString("4day ago"),
 						rs_inquiry.getString("3day ago"), rs_inquiry.getString("2day ago"),
 						rs_inquiry.getString("1day ago"), rs_inquiry.getString("today") };
-				logger.info("!!!!!!!!!!!!!" + inquiryList + "!!!!!!!!!!");
 				result.setProfileInquiry(inquiryList);
 			} else {
 				logger.info("[readUserProfile] User[" + id + "] 정보 없음 ");
