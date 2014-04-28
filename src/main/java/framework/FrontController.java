@@ -46,7 +46,8 @@ public class FrontController extends HttpServlet {
 		map.put("/test", "/test.jsp");
 		map.put("/index", "/index.jsp");
 		map.put("/admin/register", "/admin_register.jsp");
-		
+		map.put("/admin/login", "/admin_login.jsp");
+
 		db = new DatabaseHandler();
 		jb = new JsonBuilder();
 		logger = SagimaraLogger.logger;
