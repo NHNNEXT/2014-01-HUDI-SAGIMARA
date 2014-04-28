@@ -29,4 +29,4 @@ function moveToTarget(address) {
 	});
 }
 
-initialize();
+//initialize();

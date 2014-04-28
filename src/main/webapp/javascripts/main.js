@@ -25,11 +25,11 @@ function checkBarheight() {
 	var max = Math.max.apply(null, visitInfo.visit);
 	if (max > 23) {
 		for (var i = 0; i < 5; i++) {
-			barArray[i] = visitInfo.visit[i + 2] * 23 / max;
+			barArray[i] = visitInfo.visit[i+2] * 23 / max;
 		}
 	} else {
 		for (var i = 0; i < 5; i++) {
-			barArray[i] = visitInfo.visit[i + 2];
+			barArray[i] = visitInfo.visit[i+2];
 		}
 	}
 
@@ -120,18 +120,17 @@ function updateVisit(userData) {
 }
 
 function updateLocation(userData) {
-	if (userData.profileLocation != "위치정보 없음") {
-		moveToTarget(userData.profileLocation);
-		var elLocationInfo = document.querySelector("#location-info");
-		var elLocationInfoDetail = elLocationInfo.querySelector("#map-canvas");
-		elLocationInfoDetail.style.webkitAnimationPlayState = "running";
-	}
+		//moveToTarget(userData.profileLocation);
+	var elLocationInfo = document.querySelector("#location-info");
+	var elLocationInfoDetail = elLocationInfo.querySelector("#map-canvas p");
+	elLocationInfo.style.webkitAnimationPlayState = "running";
+	updateInnerHTML(elLocationInfoDetail, userData.profileLocation);
 }
 
 function updateWatch(userData) {
 	var elWatchInfo = document.querySelector("#watch-info");
 	var elWatchInfoDetail = elWatchInfo.querySelector("#watch-tool p");
-	elWatchInfoDetail.style.webkitAnimationPlayState = "running";
+	elWatchInfo.style.webkitAnimationPlayState = "running";
 	updateInnerHTML(elWatchInfoDetail, userData.profileWatch);
 
 }
@@ -139,7 +138,7 @@ function updateWatch(userData) {
 function updateCaution(userData) {
 	var elCautionInfo = document.querySelector("#caution-info");
 	var elCautionInfoDetail = elCautionInfo.querySelector("#caution-tool p");
-	elCautionInfoDetail.style.webkitAnimationPlayState = "running";
+	elCautionInfo.style.webkitAnimationPlayState = "running";
 	updateInnerHTML(elCautionInfoDetail, userData.profileNotify);
 }
 

@@ -241,7 +241,7 @@ div, section, section {
 }
 
 #info-wrapper {
-	background: #C9C9C9;
+	background: #fff;
 	padding: 20px;
 }
 
@@ -374,21 +374,44 @@ div, section, section {
 */
 #location-info {
 	height: 100%;
+	-webkit-animation:fade-in 3s;
+	-webkit-animation-play-state:paused;
+}
+
+#location-info p{
+	font-family: inherit;
+	height: 20px;
+	line-height: 20px;
+	font-size: 0.8em;
+	text-align:center;	
 }
 
 #location-info figure {
 	background: #fff url("/images/location.png") no-repeat;
-	background-size:50%;
+	background-size:70%;
 	background-position:center;
 }
+#location-info figure:before {
+	opacity : 0.2;
+}
+
 
 #map-canvas {
 	position: relative;
 	height: 200px;
 	padding: 0;
 	list-style: none;
-	-webkit-animation:fade-in 3s;
-	-webkit-animation-play-state:paused;
+}
+
+#map-canvas p{
+	height: 200px;
+	line-height: 200px;
+	padding: 0;
+	list-style: none;
+	text-align:center;
+	font-size: 1.5em;
+	font-family: inherit;
+	background: rgba(255, 255, 255, 0.7);
 }
 
 /*
@@ -396,48 +419,75 @@ div, section, section {
 */
 #watch-info {
 	height: 100%;
+	-webkit-animation:fade-in 3s;
+	-webkit-animation-play-state:paused;
+}
+
+#watch-info p{
+	font-family: inherit;
+	height: 20px;
+	line-height: 20px;
+	font-size: 0.8em;
+	text-align:center;	
 }
 
 #watch-info figure {
 	background: #fff url("/images/eye.png") no-repeat;
-	background-size:50%;
+	background-size:70%;
 	background-position:center;
 }
 
 
 #watch-tool {
 	position: relative;
+	width: 100%;
+	padding: 0;
+}
+
+#watch-tool p{
 	height: 200px;
 	line-height: 200px;
-	width: 100%;
 	padding: 0;
 	list-style: none;
 	text-align:center;
 	font-size: 3em;
 	font-family: inherit;
-	
+	background: rgba(255, 255, 255, 0.7);
 }
 
-#watch-tool p{
-	-webkit-animation:fade-in 3s;
-	-webkit-animation-play-state:paused;
-}
+
 
 /*
 	Detail Info Section - caution-info
 */
 #caution-info {
 	height: 100%;
+	-webkit-animation:fade-in 3s;
+	-webkit-animation-play-state:paused;
+}
+
+#caution-info p{
+	font-family: inherit;
+	height: 20px;
+	line-height: 20px;
+	font-size: 0.8em;
+	text-align:center;	
 }
 
 #caution-info figure {
 	background: #fff url("/images/caution.png") no-repeat;
-	background-size:50%;
+	background-size:70%;
 	background-position:center;
 }
 
 #caution-tool {
 	position: relative;
+	width: 100%;
+	padding: 0;
+}
+
+
+#caution-tool p{
 	height: 200px;
 	line-height: 200px;
 	padding: 0;
@@ -445,12 +495,9 @@ div, section, section {
 	text-align:center;
 	font-size: 3em;
 	font-family: inherit;
+	background: rgba(255, 255, 255, 0.7);
 }
 
-#caution-tool p{
-	-webkit-animation:fade-in 3s;
-	-webkit-animation-play-state:paused;
-}
 
 /*
 	Footer CSS
