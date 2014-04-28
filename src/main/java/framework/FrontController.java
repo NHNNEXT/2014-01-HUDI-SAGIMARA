@@ -37,7 +37,7 @@ public class FrontController extends HttpServlet {
 		super.init();
 		map.put("/test", "/test.jsp");
 		map.put("/index", "/index.jsp");
-		
+		map.put("/admin", "/admin.jsp");
 		//dbc = new DatabaseByMysql();
 		db = new DatabaseHandler();
 		
