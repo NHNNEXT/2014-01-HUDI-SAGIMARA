@@ -12,9 +12,9 @@ var visitInfo = {
 		this.today = this.dateInfo.getDate();
 		this.month = this.dateInfo.getMonth() + 1;
 		this.dateSet = new Array();
-		//최근 5일날짜 입력
+		// 최근 5일날짜 입력
 		for (var i = 0; i < 5; i++) {
-			this.dateSet[4-i] = this.month + "." + (this.today - i);
+			this.dateSet[4 - i] = this.month + "." + (this.today - i);
 		}
 	},
 	visit : []
@@ -23,16 +23,16 @@ var visitInfo = {
 function checkBarheight() {
 	var barArray = [];
 	var max = Math.max.apply(null, visitInfo.visit);
-	if(max>24) {
-		for(var i=0 ; i<5 ; i++) {
-			barArray[i] = visitInfo.visit[i+2] * 24/max;
+	if (max > 23) {
+		for (var i = 0; i < 5; i++) {
+			barArray[i] = visitInfo.visit[i + 2] * 23 / max;
 		}
 	} else {
-		for(var i=0 ; i<5 ; i++) {
-			barArray[i] = visitInfo.visit[i+2];
+		for (var i = 0; i < 5; i++) {
+			barArray[i] = visitInfo.visit[i + 2];
 		}
 	}
-	
+
 	return barArray;
 }
 
@@ -45,18 +45,19 @@ function updateBar(index) {
 		barAnimationController(false);
 		return;
 	}
-	
+
 	var barArray = checkBarheight();
 	var value = barArray[index];
 	var newHeight = (value * 10) + "px";
 	var BarHeight = elVisitedInfoBar[index].querySelector(".bar");
-	var barValue = BarHeight.querySelector("p");;
+	var barValue = BarHeight.querySelector("p");
+	;
 	var barDate = elVisitedInfoBar[index].querySelector("p");
-	
+
 	BarHeight.style.height = newHeight;
 	visitInfo.getToday();
 	updateInnerHTML(barDate, visitInfo.dateSet[index]);
-	updateInnerHTML(barValue, visitInfo.visit[index+2]);
+	updateInnerHTML(barValue, visitInfo.visit[index + 2]);
 }
 
 function barAnimationController(state) {
@@ -79,23 +80,34 @@ function updateProfile(userData) {
 	var join = "profilePhone : " + userData.profilePhone;
 	var Verification = "profileStatus : " + userData.profileStatus;
 	var Accept = "profileVerificatione : " + userData.profileVerificatione;
-	updateInnerHTML(elProfileInfoDetail[0], join);
-	updateInnerHTML(elProfileInfoDetail[1], Verification);
-	updateInnerHTML(elProfileInfoDetail[2], Accept);
+	// updateInnerHTML(elProfileInfoDetail[0], join);
+	// updateInnerHTML(elProfileInfoDetail[1], Verification);
+	// updateInnerHTML(elProfileInfoDetail[2], Accept);
 	elProfileInfo.style.webkitAnimationPlayState = "running";
 }
 
 function updateStatus(userData) {
 	var elProfileStatus = document.querySelector("#profile-status");
+	elProfileStatus.style.height = "150px";
 	if (userData.profileStatus === "0") {
 		elProfileStatus.style.background = "#28bf00";
-		elProfileStatus.innerHTML = "Safety";
+		elProfileStatus.innerHTML = "<h1>Safety</h1>"
+				+ "<p>인증된 회원이므로 거래 성사되길 바랍니다.</p>"
+				+ "<p>중고 물품 거래시 상품을 꼭 확인하세요.</p>"
+				+ "<button type=\"button\" class=\"button\">인증 요청</button>";
+		;
 	} else if (userData.profileStatus === "1") {
-		elProfileStatus.style.background = "#da6d0d";
-		elProfileStatus.innerHTML = "Warning";
+		elProfileStatus.style.background = "#ff9600";
+		elProfileStatus.innerHTML = "<h1>Warning</h1>"
+				+ "<p>인증되지 않은 회원이므로 거래시 주의 바랍니다.</p>"
+				+ "<p>중고 물품 거래시 상품을 꼭 확인하세요.</p>"
+				+ "<button type=\"button\" class=\"button\">인증 요청</button>";
 	} else {
 		elProfileStatus.style.background = "#BF322A";
-		elProfileStatus.innerHTML = "Danger";
+		elProfileStatus.innerHTML = "<h1>Danger</h1>"
+			+ "<p>신고된 회원이므로 거래시 주의 바랍니다.</p>"
+			+ "<p>중고 물품 거래시 상품을 꼭 확인하세요.</p>"
+			+ "<button type=\"button\" class=\"button\">인증 요청</button>";
 	}
 }
 
@@ -108,7 +120,7 @@ function updateVisit(userData) {
 }
 
 function updateLocation(userData) {
-	if(userData.profileLocation != "위치정보 없음") {
+	if (userData.profileLocation != "위치정보 없음") {
 		moveToTarget(userData.profileLocation);
 		var elLocationInfo = document.querySelector("#location-info");
 		var elLocationInfoDetail = elLocationInfo.querySelector("#map-canvas");
@@ -163,6 +175,10 @@ function requestSearch(e) {
 			console.log(request.response);
 			// json ajax 통신 부분
 			var jsonObj = JSON.parse(request.response)
+			var elContainer = document.querySelector("#container");
+			elContainer.style.webkitAnimationPlayState = "running";
+			var elFooter = document.querySelector("footer");
+			elFooter.style.webkitAnimationPlayState = "running";
 			visitInfo.visit = jsonObj.profileInquiry;
 			updateProfile(jsonObj);
 			updateStatus(jsonObj);
@@ -179,7 +195,5 @@ function refresh(e) {
 	window.location.reload(true);
 }
 
-
 eventVariable.elSubmit.addEventListener("click", requestSearch, false);
 eventVariable.elLogo.addEventListener("click", refresh, false);
-
