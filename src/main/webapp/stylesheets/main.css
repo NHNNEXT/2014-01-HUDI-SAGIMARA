@@ -1,6 +1,9 @@
 /*
 	Animation CSS
 */
+/* 브라우저마다 처리하는 게 조금씩 다를 수 있으니 찾아서 다른 브라우저에서도 동작하는 방법을 찾아보세요.
+   webkit 과 같은 브라우저 특정 prefix붙은 기능들은 대체로 다 마찬가지일거예요 
+   */
 @-webkit-keyframes fade-in{
 	from{
 	    opacity:0;
@@ -19,6 +22,35 @@ div, section, section {
 	border:solid 1px red;
 }
 */
+
+/* CSS의 C는 Cascading이라고 하죠. 예를들어 아래 코드를 보면, 
+
+.test {
+	top : 10px;
+}
+
+.test {
+	position : absolute;
+}
+
+.test {
+	position : relative;
+}
+
+이렇게 3개를 선언할 수도 있어요. 중복된 건 덮어씌우게 되고요.
+결과적으로 두 개의 속성이 반영되고요.
+possition : relative;
+top : 10px;
+
+또 한가지는 여러개의 selector를 동시에 선언할 수도 있고요.
+.body , #wrapDiv , ul , li { ...}
+
+이런 두 가지 특징을 이용한다면,
+아래 비슷한 속성을 묶어서 따로 선언할 수도 있지 않을까요? 
+
+*/
+
+
 .column {
 	position: relative;
 	margin-top: 10px;
@@ -184,7 +216,7 @@ div, section, section {
 	font-size: 1em;
 	color: #fff;
 	background-color: transparent;
-	padding: .5em 1em .5em 1em;
+	padding: .5em 1em .5em 1em; /* em을 썻다가,, 어디는 px을 썻다가..*/
 }
 
 .button:hover {
@@ -300,7 +332,7 @@ div, section, section {
 #q-graph ul {
 	margin: 0;
 	padding: 0;
-	list-style: none;
+	list-style: none; /* 이거 reset.css 에 혹시 없나요? */
 }
 
 #q-graph li {
@@ -347,6 +379,8 @@ div, section, section {
 	border-color: #37383c;
 }
 
+/* 5개가 6개가 되면 어떻게 수정되야 하죠? 
+그리고 아래 숫자는 어떻게 나온 것인지 ..이해하기 어려울 듯 */
 #q-graph #q1 {
 	left: 0;
 	bottom : 10%;
@@ -436,6 +470,7 @@ div, section, section {
 	background-position:center;
 }
 
+/* padding : 0 이 자주 나오는데 그냥 모든 div의 padding에 무언가 자동으로 생겨서 그런건가요? 차라리 reset에 이런코드를 추가하는 건 어떰?*/
 #caution-tool {
 	position: relative;
 	height: 200px;

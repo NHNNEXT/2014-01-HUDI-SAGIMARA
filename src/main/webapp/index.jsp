@@ -12,6 +12,8 @@
 <link rel="stylesheet" type="text/css" media="screen"
 	href="/stylesheets/main.css">
 
+
+<!-- 이녀석은 아래로 못 옮기나요? -->
 <script
 	src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 </head>
@@ -53,9 +55,11 @@
 					<figure>
 						<ul id="q-graph">
 							<p>최근 5일간 검색한 사람의 수</p>
+							<!-- 아래 아이다가 q1~q5까지 하나씩 써주는 게 반드시 필요할까요? css selector를 그냥 활용하는 것도 생각해보세요. -->
 							<li class="qtr" id="q1">
 								<p></p>
 								<ul>
+									<!-- 뜬금없는 inline css style? --> 
 									<li class="past bar" style="height: 0px;"><p></p></li>
 								</ul>
 							</li>
