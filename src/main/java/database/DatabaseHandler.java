@@ -1,5 +1,6 @@
 package database;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -13,12 +14,26 @@ import org.apache.log4j.Logger;
 public class DatabaseHandler {
 	Logger logger;
 	DatabaseManager dbm;
-
+	Connection conn;
+	
 	public DatabaseHandler() {
 		logger = SagimaraLogger.logger;
-		dbm = new DatabaseManager();
+		connect();
+		dbm = new DatabaseManager(conn);
 	}
-
+	
+	private void connect(){
+		DatabaseConnector connector = new DatabaseConnector();
+		
+		//mysql Connection
+		conn = connector.getMysqlConnection();
+		
+		if(conn==null){
+			logger.error("Database Connection Error");
+		}
+	}
+	
+	
 	public UserProfile readUserProfile(String id) {
 		UserProfile result = new UserProfile();
 
