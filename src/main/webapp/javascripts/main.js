@@ -38,7 +38,7 @@ function checkBarheight() {
 
 function updateBar(index) {
 	var elVisitedInfo = document.querySelector("#visited-info");
-	var elVisitedInfoBar = elVisitedInfo.querySelectorAll("#q-graph .qtr");
+	var elVisitedInfoBar = elVisitedInfo.querySelectorAll("#visited-graph .bar-section");
 	var length = elVisitedInfoBar.length
 
 	if (index > length - 1) {
@@ -113,7 +113,7 @@ function updateStatus(userData) {
 
 function updateVisit(userData) {
 	var elVisitInfo = document.querySelector("#visited-info");
-	var elVisitInfoDetail = elVisitInfo.querySelector("#q-graph");
+	var elVisitInfoDetail = elVisitInfo.querySelector("#visited-graph");
 	elVisitInfoDetail.style.webkitAnimationPlayState = "running";
 	setTimeout("barAnimationController(true)", 100);
 	checkBarheight();
@@ -143,7 +143,7 @@ function updateCaution(userData) {
 }
 
 function setDefault() {
-	var elVisitInfoDetail = document.querySelector("#q-graph");
+	var elVisitInfoDetail = document.querySelector("#visited-graph");
 	elVisitInfoDetail.style.webkitAnimationPlayState = "paused";
 	var elLocationInfoDetail = document.querySelector("#map-canvas");
 	elLocationInfoDetail.style.webkitAnimationPlayState = "paused";

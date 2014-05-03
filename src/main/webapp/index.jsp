@@ -50,36 +50,36 @@
 				</section>
 				<section id="visited-info">
 					<figure>
-						<ul id="q-graph">
+						<ul id="visited-graph">
 							<p>최근 5일간 검색한 사람의 수</p>
-							<li class="qtr" id="q1">
+							<li class="bar-section">
 								<p></p>
 								<ul>
-									<li class="past bar"><p></p></li>
+									<li class="bar"><p></p></li>
 								</ul>
 							</li>
-							<li class="qtr" id="q2">
+							<li class="bar-section">
 								<p></p>
 								<ul>
-									<li class="past bar"><p></p></li>
+									<li class="bar"><p></p></li>
 								</ul>
 							</li>
-							<li class="qtr" id="q3">
+							<li class="bar-section">
 								<p></p>
 								<ul>
-									<li class="past bar"><p></p></li>
+									<li class="bar"><p></p></li>
 								</ul>
 							</li>
-							<li class="qtr" id="q4">
+							<li class="bar-section">
 								<p></p>
 								<ul>
-									<li class="past bar"><p></p></li>
+									<li class="bar"><p></p></li>
 								</ul>
 							</li>
-							<li class="qtr" id="q5">
+							<li class="bar-section">
 								<p></p>
 								<ul>
-									<li class="today bar"><p></p></li>
+									<li class="bar"><p></p></li>
 								</ul>
 							</li>
 						</ul>

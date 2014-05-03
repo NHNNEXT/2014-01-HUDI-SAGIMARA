@@ -228,12 +228,12 @@ div, section, section {
 	font-family: inherit;
 	height: 20px;
 	line-height: 20px;
-	font-size: 8px;
+	font-size: 12px;
 }
 
 .profile-status .button {
 	font-family: inherit;
-	font-size: 8px;
+	font-size: 12px;
 	border: 1px solid;
 	-webkit-border-radius: 8px; 
 	-moz-border-radius: 8px;
@@ -276,7 +276,7 @@ div, section, section {
 
 #visited-info p{
 	font-family: inherit;
- 	font-size: 8px; 
+ 	font-size: 15px; 
  	height: 30px;
  	line-height: 30px;
  	text-align: center;
@@ -289,7 +289,7 @@ div, section, section {
 	background-position:center;
 }
 
-#q-graph {
+#visited-graph {
 	position: relative;
 	height: 300px;
 	margin: 0px 20% 0px 20%;
@@ -301,13 +301,13 @@ div, section, section {
 	-webkit-animation-play-state:paused;
 }
 
-#q-graph ul {
+#visited-graph ul {
 	margin: 0;
 	padding: 0;
 	list-style: none;
 }
 
-#q-graph li {
+#visited-graph li {
 	position: absolute;
 	bottom: 0;
 	width: 30%;
@@ -318,14 +318,13 @@ div, section, section {
 	list-style: none;
 }
 
-#q-graph li.qtr {
+#visited-graph li.bar-section {
 	height: 0px;
 	padding-top: 2px;
-	/* border-right: 1px dotted #C4C4C4; */
 	color: #AAA;
 } 
 
-#q-graph li.bar {
+#visited-graph li.bar {
 	width: 40%;
 	border: 1px solid;
 	border-bottom: none;
@@ -333,43 +332,37 @@ div, section, section {
 	height: 0px;
 	-webkit-transition: height 1s, -webkit-transform 1s;
 	transition: height 1s, transform 1s;
+	left: 30%;
+	background: #37383c;
+	border-color: #37383c;
 }
 
-#q-graph li.bar p {
+#visited-graph li.bar p {
 	margin: -25px 0 0;
 	padding: 0;
 }
 
-#q-graph li.today {
-	left: 30%;
-	background: #37383c;
-	border-color: #37383c;
-}
-
-#q-graph li.past {
-	left: 30%;
-	background: #37383c;
-	border-color: #37383c;
-}
-
-#q-graph #q1 {
+#visited-graph .bar-section:nth-of-type(1) {
 	left: 0;
 	bottom : 10%;
 }
 
-#q-graph #q2 {
+#visited-graph .bar-section:nth-of-type(2) {
 	left: 18%;
 	bottom : 10%;
 }
-#q-graph #q3 {
+
+#visited-graph .bar-section:nth-of-type(3) {
 	left: 36%;
 	bottom : 10%;
 }
-#q-graph #q4 {
+
+#visited-graph .bar-section:nth-of-type(4) {
 	left: 54%;
 	bottom : 10%;
 }
-#q-graph #q5 {
+
+#visited-graph .bar-section:nth-of-type(5) {
 	left: 72%;
 	bottom : 10%;
 }
