@@ -330,6 +330,7 @@ div, section, section {
 	border: 1px solid;
 	border-bottom: none;
 	color: #000;
+	height: 0px;
 	-webkit-transition: height 1s, -webkit-transform 1s;
 	transition: height 1s, transform 1s;
 }

@@ -13,8 +13,6 @@
 	<link rel="stylesheet" type="text/css" media="screen"
 		href="/stylesheets/main.css">
 
-	<script	src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
-
 </head>
 <body>
 	<div id="wrap">
@@ -57,31 +55,31 @@
 							<li class="qtr" id="q1">
 								<p></p>
 								<ul>
-									<li class="past bar" style="height: 0px;"><p></p></li>
+									<li class="past bar"><p></p></li>
 								</ul>
 							</li>
 							<li class="qtr" id="q2">
 								<p></p>
 								<ul>
-									<li class="past bar" style="height: 0px;"><p></p></li>
+									<li class="past bar"><p></p></li>
 								</ul>
 							</li>
 							<li class="qtr" id="q3">
 								<p></p>
 								<ul>
-									<li class="past bar" style="height: 0px;"><p></p></li>
+									<li class="past bar"><p></p></li>
 								</ul>
 							</li>
 							<li class="qtr" id="q4">
 								<p></p>
 								<ul>
-									<li class="past bar" style="height: 0px;"><p></p></li>
+									<li class="past bar"><p></p></li>
 								</ul>
 							</li>
 							<li class="qtr" id="q5">
 								<p></p>
 								<ul>
-									<li class="today bar" style="height: 0px;"><p></p></li>
+									<li class="today bar"><p></p></li>
 								</ul>
 							</li>
 						</ul>
@@ -124,6 +122,8 @@
 	</div>
 
 	<script src="/javascripts/main.js"></script>
+	<script	src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 	<script src="/javascripts/maps.js"></script>
+	
 </body>
 </html>

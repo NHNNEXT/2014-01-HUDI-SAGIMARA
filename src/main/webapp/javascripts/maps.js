@@ -21,7 +21,6 @@ function moveToTarget(address) {
 		'address' : address
 	}, function(results, status) {
 		if (status == google.maps.GeocoderStatus.OK) {
-			console.log(results);
 			map.setCenter(results[0].geometry.location);
 		} else {
 			console.log("검색 결과가 없습니다.");
