@@ -8,7 +8,7 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0">
 	<title>Sagimara</title>
 
-	<link rel="stylesheet" type="text/css" medi="screen"
+	<link rel="stylesheet" type="text/css" media="screen"
 		href="/stylesheets/base.css">
 	<link rel="stylesheet" type="text/css" media="screen"
 		href="/stylesheets/main.css">
@@ -122,8 +122,5 @@
 	</div>
 
 	<script src="/javascripts/main.js"></script>
-	<script	src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
-	<script src="/javascripts/maps.js"></script>
-	
 </body>
 </html>

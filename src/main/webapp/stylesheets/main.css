@@ -46,7 +46,7 @@ div, section, section {
 	z-index: 10;
 	padding: 0px 0px 0px 0px;
 	font-family: inherit;
-	font-size: 2.5em;
+	font-size: 40px;
 	color: #fff;
 	overflow: hidden;
 	cursor: pointer;
@@ -165,7 +165,7 @@ div, section, section {
 	padding: 20px 30px 20px 20px;
 	width: 80%;
 	font-family: inherit;
-	font-size: 1em;
+	font-size: 16px;
 	-webkit-animation:fade-in 3s;
 	-webkit-animation-play-state: running;
 }
@@ -181,10 +181,10 @@ div, section, section {
 	text-align: center;
 	text-decoration: none;
 	font-family: inherit;
-	font-size: 1em;
+	font-size: 16px;
 	color: #fff;
 	background-color: transparent;
-	padding: .5em 1em .5em 1em;
+	padding: 8px 16px 8px 16px;
 }
 
 .button:hover {
@@ -228,16 +228,16 @@ div, section, section {
 	font-family: inherit;
 	height: 20px;
 	line-height: 20px;
-	font-size: 0.5em;
+	font-size: 8px;
 }
 
 .profile-status .button {
 	font-family: inherit;
-	font-size: 0.5em;
+	font-size: 8px;
 	border: 1px solid;
-	-webkit-border-radius: .5em; 
-	-moz-border-radius: .5em;
-	border-radius: .5em;
+	-webkit-border-radius: 8px; 
+	-moz-border-radius: 8px;
+	border-radius: 8px;
 }
 
 .profile-status .button:hover {
@@ -258,7 +258,7 @@ div, section, section {
 
 .detail-info-item {
 	/* font-size: 1.8em; */
-	font-size: 2.0vw;
+	font-size: 29px;
 	width: 33%;
 	color: black;
 	min-height: 150px;
@@ -276,7 +276,7 @@ div, section, section {
 
 #visited-info p{
 	font-family: inherit;
- 	font-size: 1em; 
+ 	font-size: 8px; 
  	height: 30px;
  	line-height: 30px;
  	text-align: center;
@@ -295,7 +295,7 @@ div, section, section {
 	margin: 0px 20% 0px 20%;
 	list-style: none;
 	background: #fff;
-	font-size: 0.8em;
+	font-size: 13px;
 	font-family: inherit;
 	-webkit-animation:fade-in 3s;
 	-webkit-animation-play-state:paused;
@@ -387,7 +387,7 @@ div, section, section {
 	font-family: inherit;
 	height: 20px;
 	line-height: 20px;
-	font-size: 0.8em;
+	font-size: 13px;
 	text-align:center;	
 	margin: 0 0 5px 0;
 }
@@ -414,7 +414,7 @@ div, section, section {
 	padding: 0;
 	list-style: none;
 	text-align:center;
-	font-size: 1.5em;
+	font-size: 24px;
 	font-family: inherit;
 	background: rgba(255, 255, 255, 0.7);
 }
@@ -432,7 +432,7 @@ div, section, section {
 	font-family: inherit;
 	height: 20px;
 	line-height: 20px;
-	font-size: 0.8em;
+	font-size: 13px;
 	text-align:center;	
 	margin: 0 0 5px 0;
 }
@@ -456,7 +456,7 @@ div, section, section {
 	padding: 0;
 	list-style: none;
 	text-align:center;
-	font-size: 1.5em;
+	font-size: 24px;
 	font-family: inherit;
 	background: rgba(255, 255, 255, 0.7);
 }
@@ -476,7 +476,7 @@ div, section, section {
 	font-family: inherit;
 	height: 20px;
 	line-height: 20px;
-	font-size: 0.8em;
+	font-size: 13px;
 	text-align:center;	
 	margin: 0 0 5px 0;
 }
@@ -500,7 +500,7 @@ div, section, section {
 	padding: 0;
 	list-style: none;
 	text-align:center;
-	font-size: 1.5em;	
+	font-size: 24px;	
 	font-family: inherit;
 	background: rgba(255, 255, 255, 0.7);
 }

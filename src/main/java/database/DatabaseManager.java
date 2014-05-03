@@ -18,21 +18,9 @@ public class DatabaseManager {
 	Logger logger = SagimaraLogger.logger;
 	Connection conn;
 	
-	DatabaseManager(){
-		this.connect();
+	DatabaseManager(Connection conn){
+		this.conn = conn;
 	}
-	
-	private void connect(){
-		DatabaseConnector connector = new DatabaseConnector();
-		
-		//mysql Connection
-		conn = connector.getMysqlConnection();
-		
-		if(conn==null){
-			logger.error("Database Connection Error");
-		}
-	}
-	
 	
 	public ResultSet selectUserProfile( String id)
 			throws SQLException {

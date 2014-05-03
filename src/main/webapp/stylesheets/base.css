@@ -24,7 +24,7 @@ body {
 }
 
 header {
-	padding: 0 2em;
+	padding: 0 32px;
 	min-height: 60px;
 	position: fixed;
 	z-index: 10;
@@ -48,7 +48,7 @@ header {
 }
 
 footer {
-	padding: 0 2em;
+	padding: 0 32px;
 	min-height: 60px;
 	position: relative;
 	z-index: 10;
@@ -64,8 +64,4 @@ UI
 */
 img,fieldset{
   border:0
-}
-
-.img-circle {
-  border-radius: 50%;
 }
