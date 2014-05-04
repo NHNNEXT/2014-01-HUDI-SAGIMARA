@@ -386,15 +386,18 @@ div, section, section {
 	font-family: inherit;
 	height: 20px;
 	line-height: 20px;
-	font-size: 13px;
+	font-size: 13px;	
 	text-align:center;	
-	margin: 0 0 5px 0;
+	margin: 0 auto;
+	max-width : 280px;
 }
 
 #location-info figure {
 	background: #fff url("/images/location.png") no-repeat;
 	background-size:70%;
 	background-position:center;
+	margin: 0 auto;
+	max-width : 280px;
 }
 #location-info figure:before {
 	opacity : 0.2;
@@ -433,13 +436,16 @@ div, section, section {
 	line-height: 20px;
 	font-size: 13px;
 	text-align:center;	
-	margin: 0 0 5px 0;
+	margin: 0 auto;
+	max-width : 280px;
 }
 
 #watch-info figure {
 	background: #fff url("/images/eye.png") no-repeat;
 	background-size:70%;
 	background-position:center;
+	margin: 0 auto;
+	max-width : 280px;
 }
 
 
@@ -477,13 +483,16 @@ div, section, section {
 	line-height: 20px;
 	font-size: 13px;
 	text-align:center;	
-	margin: 0 0 5px 0;
+	margin: 0 auto;
+	max-width : 280px;
 }
 
 #caution-info figure {
 	background: #fff url("/images/caution.png") no-repeat;
 	background-size:70%;
 	background-position:center;
+	margin: 0 auto;
+	max-width : 280px;
 }
 
 #caution-tool {
