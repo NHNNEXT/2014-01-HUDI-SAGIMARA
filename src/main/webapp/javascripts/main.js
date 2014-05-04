@@ -28,8 +28,8 @@ var visitInfo = {
 		this.month = this.dateInfo.getMonth() + 1;
 		this.year = this.dateInfo.getFullYear();
 
-		var dateFool = 5;
-		for (var i = 0 ; i < dateFool ; i++) {
+		var datePool = 5;
+		for (var i = 0 ; i < datePool ; i++) {
 			this.dateInfo.setFullYear(this.year, this.month - 1, this.today - i);
 			var day = this.dateInfo.getDate();
 			var month = this.dateInfo.getMonth() + 1;
@@ -94,8 +94,10 @@ var visitBar = {
 };
 
 function updateProfile(userData) {
+	//userProfile부분의 업데이트를 하는 함수
 	var elProfileInfo = document.querySelector("#profile-detail-section");
 	var elProfileInfoDetail = elProfileInfo.querySelectorAll("p");
+	//update될 자료에 대한 확정 필요.
 	var join = "profilePhone : " + userData.profilePhone;
 	var Verification = "profileStatus : " + userData.profileStatus;
 	var Accept = "profileVerificatione : " + userData.profileVerificatione;
@@ -107,32 +109,43 @@ function updateProfile(userData) {
 	setStyle(elProfileInfo, "animation-play-state", "running");
 }
 
+var userStatus = {
+	safety : {
+		code : 0, 
+		color : "#28bf00", 
+		contents : "<h1>Safety</h1><p>인증된 회원이므로 거래 성사되길 바랍니다.</p><p>중고 물품 거래시 상품을 꼭 확인하세요.</p>"
+	},
+	warning : {
+		code: 1, 
+		color : "#ff9600", 
+		contents : "<h1>Warning</h1><p>인증되지 않은 회원이므로 거래시 주의 바랍니다.</p><p>중고 물품 거래시 상품을 꼭 확인하세요.</p>"
+	},
+	danger : {
+		code:2, 
+		color:"#BF322A", 
+		contents:"<h1>Danger</h1><p>신고된 회원이므로 거래시 주의 바랍니다.</p><p>중고 물품 거래시 상품을 꼭 확인하세요.</p>"
+	}
+}
+
 function updateStatus(userData) {
+	//user Status부분의 업데이트
 	var elProfileStatus = document.querySelector("#profile-status");
+	var elProfileStatusContents = elProfileStatus.querySelector(".contents");
 	setStyle(elProfileStatus, "height", "150px");
-	if (userData.profileStatus === "0") {
-		setStyle(elProfileStatus, "background", "#28bf00");
-		elProfileStatus.innerHTML = "<h1>Safety</h1>"
-				+ "<p>인증된 회원이므로 거래 성사되길 바랍니다.</p>"
-				+ "<p>중고 물품 거래시 상품을 꼭 확인하세요.</p>"
-				+ "<button type=\"button\" class=\"button\">인증 요청</button>";
-		;
-	} else if (userData.profileStatus === "1") {
-		setStyle(elProfileStatus, "background", "#ff9600");
-		elProfileStatus.innerHTML = "<h1>Warning</h1>"
-				+ "<p>인증되지 않은 회원이므로 거래시 주의 바랍니다.</p>"
-				+ "<p>중고 물품 거래시 상품을 꼭 확인하세요.</p>"
-				+ "<button type=\"button\" class=\"button\">인증 요청</button>";
+	if (userData.profileStatus == userStatus.safety.code) {
+		setStyle(elProfileStatus, "background", userStatus.safety.color);
+		elProfileStatusContents.innerHTML = userStatus.safety.contents;
+	} else if (userData.profileStatus == userStatus.warning.code) {
+		setStyle(elProfileStatus, "background", userStatus.warning.color);
+		elProfileStatusContents.innerHTML = userStatus.warning.contents;
 	} else {
-		setStyle(elProfileStatus, "background", "#BF322A");
-		elProfileStatus.innerHTML = "<h1>Danger</h1>"
-				+ "<p>신고된 회원이므로 거래시 주의 바랍니다.</p>"
-				+ "<p>중고 물품 거래시 상품을 꼭 확인하세요.</p>"
-				+ "<button type=\"button\" class=\"button\">인증 요청</button>";
+		setStyle(elProfileStatus, "background", userStatus.danger.color);
+		elProfileStatusContents.innerHTML = userStatus.danger.contents;
 	}
 }
 
 function updateVisit(userData) {
+	//해당번호 검색(방문)한 수를 업데이트
 	var elVisitInfo = document.querySelector("#visited-info");
 	var elVisitInfoDetail = elVisitInfo.querySelector("#visited-graph");
 	setStyle(elVisitInfoDetail, "-webkit-animation-play-state", "running");
@@ -143,6 +156,7 @@ function updateVisit(userData) {
 }
 
 function updateLocation(userData) {
+	//user의 위치정보를 업데이트
 	var elLocationInfo = document.querySelector("#location-info");
 	var elLocationInfoDetail = elLocationInfo.querySelector("#map-canvas p");
 	setStyle(elLocationInfo, "-webkit-animation-play-state", "running");
@@ -152,6 +166,7 @@ function updateLocation(userData) {
 }
 
 function updateWatch(userData) {
+	//user를 지켜보고(등록) 있는 사람의 수를 업데이트
 	var elWatchInfo = document.querySelector("#watch-info");
 	var elWatchInfoDetail = elWatchInfo.querySelector("#watch-tool p");
 	setStyle(elWatchInfo, "-webkit-animation-play-state", "running");
@@ -162,6 +177,7 @@ function updateWatch(userData) {
 }
 
 function updateCaution(userData) {
+	//경고나 신고가 들어온 수를 업데이트
 	var elCautionInfo = document.querySelector("#caution-info");
 	var elCautionInfoDetail = elCautionInfo.querySelector("#caution-tool p");
 	setStyle(elCautionInfo, "-webkit-animation-play-state", "running");
@@ -171,6 +187,7 @@ function updateCaution(userData) {
 }
 
 function setDefault() {
+	//업데이트 될 항목에 대해서 애니메이션 초기화
 	var elVisitInfoDetail = document.querySelector("#visited-graph");
 	setStyle(elVisitInfoDetail, "-webkit-animation-play-state", "paused");
 	setStyle(elVisitInfoDetail, "-moz-animation-play-state", "paused");

@@ -85,7 +85,10 @@
 						</ul>
 					</figure>
 				</section>
-				<section id="profile-status" class="clearfix profile-status"></section>
+				<section id="profile-status" class="clearfix profile-status">
+					<div class="contents"></div>
+					<button type="button" class="button">인증 요청</button>
+				</section>
 			</section>
 			<section id="info-wrapper">
 				<section id="detail-info" class="clearfix">
