@@ -4,16 +4,7 @@ var oEventElements = {
 	elLogo : document.querySelector(".logo")
 };
 
-function setStyle(element, type, value) {
-	//해당 element에 주어진 type의 스타일을 value값으로 변경
-	var targetStyle = element.style;
-	targetStyle.setProperty(type, value);
-}
 
-function updateInnerHTML(element, contents) {
-	//해당 element에 contents을 삽입하는 함수
-	element.innerHTML = contents;
-}
 
 var visitInfo = {
 	//해당번호로 검색(방문)한 사람수 관련 정보
@@ -71,7 +62,7 @@ var visitBar = {
 			updateInnerHTML(barDate, visitInfo.dateSet[this.count]);
 			updateInnerHTML(barValue, visitInfo.visitNumberSet[this.count]);
 			this.count++;
-		}).bind(this), 100);
+		}).bind(this), 300);
 	},
 	checkBarHeight : function() {
 		// bar 높이가 특정 높이 이상으로 높아지는 것을 막고 비율에 맞추어 분배해주는 함수
@@ -93,6 +84,18 @@ var visitBar = {
 	}
 };
 
+function setStyle(element, type, value) {
+	//해당 element에 주어진 type의 스타일을 value값으로 변경
+	var targetStyle = element.style;
+	targetStyle.setProperty(type, value);
+}
+
+function updateInnerHTML(element, contents) {
+	//해당 element에 contents을 삽입하는 함수
+	var updateContents = contents;
+	element.innerHTML = contents;
+}
+
 function updateProfile(userData) {
 	//userProfile부분의 업데이트를 하는 함수
 	var elProfileInfo = document.querySelector("#profile-detail-section");
@@ -110,6 +113,7 @@ function updateProfile(userData) {
 }
 
 var userStatus = {
+	//user Status관련 정보
 	safety : {
 		code : 0, 
 		color : "#28bf00", 
@@ -134,13 +138,13 @@ function updateStatus(userData) {
 	setStyle(elProfileStatus, "height", "150px");
 	if (userData.profileStatus == userStatus.safety.code) {
 		setStyle(elProfileStatus, "background", userStatus.safety.color);
-		elProfileStatusContents.innerHTML = userStatus.safety.contents;
+		updateInnerHTML(elProfileStatusContents, userStatus.safety.contents)
 	} else if (userData.profileStatus == userStatus.warning.code) {
 		setStyle(elProfileStatus, "background", userStatus.warning.color);
-		elProfileStatusContents.innerHTML = userStatus.warning.contents;
+		updateInnerHTML(elProfileStatusContents, userStatus.warning.contents)
 	} else {
 		setStyle(elProfileStatus, "background", userStatus.danger.color);
-		elProfileStatusContents.innerHTML = userStatus.danger.contents;
+		updateInnerHTML(elProfileStatusContents, userStatus.danger.contents)
 	}
 }
 
@@ -206,17 +210,50 @@ function setDefault() {
 	setStyle(elCautionInfoDetail, "animation-play-state", "paused");
 }
 
+
+function JSONparse(raw) {
+	//json파일을 json객체로 변환
+	var jsonObj = JSON.parse(raw);
+	
+	return jsonObj;
+}
+
+function updatePage(result) {
+	//각요소 전부에게 새로운 정보를 주고 업데이트 시키는 함수
+	visitInfo.setvisitNumberSet(result.profileInquiry);
+	updateProfile(result);
+	updateStatus(result);
+	updateVisit(result);
+	updateLocation(result);
+	updateWatch(result);
+	updateCaution(result);
+}
+
+function startAnimation() {
+	//페이지 에니메이션을 시작시키는 함수
+	var elContainer = document.querySelector("#container");
+	var elFooter = document.querySelector("footer");
+	
+	setStyle(elContainer, "-webkit-animation-play-state", "running");
+	setStyle(elContainer, "-moz-animation-play-state", "running");
+	setStyle(elContainer, "animation-play-state", "running");
+	setStyle(elFooter, "-webkit-animation-play-state", "running");
+	setStyle(elFooter, "-moz-animation-play-state", "running");
+	setStyle(elFooter, "animation-play-state", "running");
+}
+
+
 function requestSearch(e) {
-	e.preventDefault();
+	requestPreventEvent(e);
 	setDefault();
-	console.log("requestSearch Success");
 	var id = e.target.parentElement[0].value;
 	var url = "/test";
 	var testUpdate = document.querySelectorAll("#profile-detail-section p");
-
 	var request = new XMLHttpRequest();
-	request.open("POST", url, true);
 	var formdata = new FormData();
+	var result;
+	
+	request.open("POST", url, true);
 	formdata.append("id", id);
 	request.send(formdata);
 
@@ -224,26 +261,15 @@ function requestSearch(e) {
 		if (request.readyState == 4 && request.status == 200) {
 			console.log(request.response);
 			// json ajax 통신 부분
-			var jsonObj = JSON.parse(request.response)
-			var elContainer = document.querySelector("#container");
-			var elFooter = document.querySelector("footer");
-			
-			setStyle(elContainer, "-webkit-animation-play-state", "running");
-			setStyle(elContainer, "-moz-animation-play-state", "running");
-			setStyle(elContainer, "animation-play-state", "running");
-			setStyle(elFooter, "-webkit-animation-play-state", "running");
-			setStyle(elFooter, "-moz-animation-play-state", "running");
-			setStyle(elFooter, "animation-play-state", "running");
-
-			visitInfo.setvisitNumberSet(jsonObj.profileInquiry);
-			updateProfile(jsonObj);
-			updateStatus(jsonObj);
-			updateVisit(jsonObj);
-			updateLocation(jsonObj);
-			updateWatch(jsonObj);
-			updateCaution(jsonObj);
+			result = JSONparse(request.response);
+			updatePage(result);
+			startAnimation();
 		}
 	}
+}
+
+function requestPreventEvent(e) {
+	e.preventDefault();
 }
 
 function refresh(e) {
