@@ -1,8 +1,19 @@
 var oEventElements = {
-	//EventListener elements
+	//EventListener를 위한 elements
 	elSubmit : document.querySelector(".search-submit"),
 	elLogo : document.querySelector(".logo")
 };
+
+function setStyle(element, type, value) {
+	//해당 element에 주어진 type의 스타일을 value값으로 변경
+	var targetStyle = element.style;
+	targetStyle.setProperty(type, value);
+}
+
+function updateInnerHTML(element, contents) {
+	//해당 element에 contents을 삽입하는 함수
+	element.innerHTML = contents;
+}
 
 var visitInfo = {
 	//해당번호로 검색(방문)한 사람수 관련 정보
@@ -24,21 +35,14 @@ var visitInfo = {
 			var month = this.dateInfo.getMonth() + 1;
 			this.dateSet[i] = month + "." + day;
 		}
+		this.dateInfo.setFullYear(this.year, this.month - 1, this.today);
 		this.dateSet.reverse();
 	},
 	setvisitNumberSet : function(profileInquiry) {
-		//방문(검색)수를 최근 정보를 가져와 visitNumberSet에 세팅한다.
+		//방문(검색)수를 최근 5일의 정보를 가져와 visitNumberSet에 세팅한다.
 		this.visitNumberSet = profileInquiry;
 	}
 };
-
-function setStyle(element, type, value) {
-	//해당 element에 주어진 type의 스타일을 value값으로 변경
-	var targetStyle = element.style;
-	targetStyle.setProperty(type, value);
-}
-
-
 
 var visitBar = {
 	count : 0,
@@ -65,7 +69,7 @@ var visitBar = {
 			setStyle(BarHeight, "height", newHeight);
 
 			updateInnerHTML(barDate, visitInfo.dateSet[this.count]);
-			updateInnerHTML(barValue, visitInfo.visitNumberSet[this.count + 2]);
+			updateInnerHTML(barValue, visitInfo.visitNumberSet[this.count]);
 			this.count++;
 		}).bind(this), 100);
 	},
@@ -77,22 +81,17 @@ var visitBar = {
 		var max = Math.max.apply(null, visitInfo.visitNumberSet);
 		if (max > maxcount) {
 			for (var i = 0; i < totalNumberOfBar ; i++) {
-				barArray[i] = visitInfo.visitNumberSet[i + 2] * maxcount / max;
+				barArray[i] = visitInfo.visitNumberSet[i] * maxcount / max;
 			}
 		} else {
 			for (var i = 0; i < totalNumberOfBar ; i++) {
-				barArray[i] = visitInfo.visitNumberSet[i + 2];
+				barArray[i] = visitInfo.visitNumberSet[i];
 			}
 		}
 
 		return barArray;
 	}
-}
-
-function updateInnerHTML(element, contents) {
-	//해당 element에 contents을 삽입하는 함수
-	element.innerHTML = contents;
-}
+};
 
 function updateProfile(userData) {
 	var elProfileInfo = document.querySelector("#profile-detail-section");
@@ -139,8 +138,7 @@ function updateVisit(userData) {
 	setStyle(elVisitInfoDetail, "-webkit-animation-play-state", "running");
 	setStyle(elVisitInfoDetail, "-moz-animation-play-state", "running");
 	setStyle(elVisitInfoDetail, "animation-play-state", "running");
-	//barAnimationController(true);
-	visitInfo.setDateSet();
+	
 	visitBar.barAnimationController();
 }
 
@@ -237,3 +235,5 @@ function refresh(e) {
 
 oEventElements.elSubmit.addEventListener("click", requestSearch, false);
 oEventElements.elLogo.addEventListener("click", refresh, false);
+
+window.onload = visitInfo.setDateSet();
