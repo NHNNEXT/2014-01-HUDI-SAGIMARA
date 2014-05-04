@@ -1,4 +1,5 @@
 var oEventElements = {
+	//EventListener elements
 	elSubmit : document.querySelector(".search-submit"),
 	elLogo : document.querySelector(".logo")
 };
@@ -6,18 +7,18 @@ var oEventElements = {
 var visitInfo = {
 	//해당번호로 검색(방문)한 사람수 관련 정보
 	setBars : "",
+	visitNumberSet : [],
 	dateInfo : new Date(),
-	getToday : function() {
+	setDateSet : function() {
+		//최근 5일의 날짜 배열을 dateSet에 세팅한다.
 		this.dateSet = new Array();
 
 		this.today = this.dateInfo.getDate();
 		this.month = this.dateInfo.getMonth() + 1;
 		this.year = this.dateInfo.getFullYear();
 
-		console.log(this.dateInfo.getDate());
-
-		// 최근 5일날짜 입력
-		for (var i = 0 ; i < 5 ; i++) {
+		var dateFool = 5;
+		for (var i = 0 ; i < dateFool ; i++) {
 			this.dateInfo.setFullYear(this.year, this.month - 1, this.today - i);
 			var day = this.dateInfo.getDate();
 			var month = this.dateInfo.getMonth() + 1;
@@ -25,68 +26,71 @@ var visitInfo = {
 		}
 		this.dateSet.reverse();
 	},
-	visit : []
+	setvisitNumberSet : function(profileInquiry) {
+		//방문(검색)수를 최근 정보를 가져와 visitNumberSet에 세팅한다.
+		this.visitNumberSet = profileInquiry;
+	}
 };
 
-function setStyle(target, type, value) {
-	var targetStyle = target.style;
+function setStyle(element, type, value) {
+	//해당 element에 주어진 type의 스타일을 value값으로 변경
+	var targetStyle = element.style;
 	targetStyle.setProperty(type, value);
 }
 
-function checkBarheight() {
-	// bar 높이가 특정 높이 이상으로 높아지는 것을 막고 비율에 맞추어 분배해주는 함수
-	var barArray = [];
-	var maxcount = 23;
-	var max = Math.max.apply(null, visitInfo.visit);
-	if (max > maxcount) {
-		for (var i = 0; i < 5; i++) {
-			barArray[i] = visitInfo.visit[i + 2] * maxcount / max;
+
+
+var visitBar = {
+	count : 0,
+	barAnimationController : function() {
+		// 각각의 bar를 시간차를 두고 에니메이션해주는 함수
+		this.count = 0;
+		var setBars = setInterval((function () {
+			var elVisitedInfo = document.querySelector("#visited-info");
+			var elVisitedInfoBar = elVisitedInfo.querySelectorAll("#visited-graph .bar-section");
+			var numberOfBar = elVisitedInfoBar.length
+
+			if (this.count > numberOfBar - 1) {
+				clearInterval(this.setBars);
+				return;
+			}
+			var barArray = this.checkBarHeight();
+			var visit = barArray[this.count];
+			var visitPerHeight = 10; //방문자 1명당 10px의 높이로 설정 
+			var newHeight = (visit * visitPerHeight) + "px";
+			var BarHeight = elVisitedInfoBar[this.count].querySelector(".bar");
+			var barValue = BarHeight.querySelector("p");
+			var barDate = elVisitedInfoBar[this.count].querySelector("p");
+
+			setStyle(BarHeight, "height", newHeight);
+
+			updateInnerHTML(barDate, visitInfo.dateSet[this.count]);
+			updateInnerHTML(barValue, visitInfo.visitNumberSet[this.count + 2]);
+			this.count++;
+		}).bind(this), 100);
+	},
+	checkBarHeight : function() {
+		// bar 높이가 특정 높이 이상으로 높아지는 것을 막고 비율에 맞추어 분배해주는 함수
+		var barArray = [];
+		var maxcount = 23;
+		var totalNumberOfBar = 5;
+		var max = Math.max.apply(null, visitInfo.visitNumberSet);
+		if (max > maxcount) {
+			for (var i = 0; i < totalNumberOfBar ; i++) {
+				barArray[i] = visitInfo.visitNumberSet[i + 2] * maxcount / max;
+			}
+		} else {
+			for (var i = 0; i < totalNumberOfBar ; i++) {
+				barArray[i] = visitInfo.visitNumberSet[i + 2];
+			}
 		}
-	} else {
-		for (var i = 0; i < 5; i++) {
-			barArray[i] = visitInfo.visit[i + 2];
-		}
-	}
 
-	return barArray;
-}
-
-function updateBar(index) {
-	var elVisitedInfo = document.querySelector("#visited-info");
-	var elVisitedInfoBar = elVisitedInfo
-			.querySelectorAll("#visited-graph .bar-section");
-	var length = elVisitedInfoBar.length
-
-	if (index > length - 1) {
-		barAnimationController(false);
-		return;
-	}
-
-	var barArray = checkBarheight();
-	var value = barArray[index];
-	var newHeight = (value * 10) + "px";
-	var BarHeight = elVisitedInfoBar[index].querySelector(".bar");
-	var barValue = BarHeight.querySelector("p");
-	;
-	var barDate = elVisitedInfoBar[index].querySelector("p");
-
-	setStyle(BarHeight, "height", newHeight);
-
-	updateInnerHTML(barDate, visitInfo.dateSet[index]);
-	updateInnerHTML(barValue, visitInfo.visit[index + 2]);
-}
-
-function barAnimationController(state) {
-	i = 0;
-
-	if (state) {
-		visitInfo.setBars = setInterval("updateBar(i++)", 100);
-	} else {
-		clearInterval(visitInfo.setBars);
+		return barArray;
 	}
 }
 
 function updateInnerHTML(element, contents) {
+	//해당 element에 contents을 삽입하는 함수
 	element.innerHTML = contents;
 }
 
@@ -100,6 +104,8 @@ function updateProfile(userData) {
 	// updateInnerHTML(elProfileInfoDetail[1], Verification);
 	// updateInnerHTML(elProfileInfoDetail[2], Accept);
 	setStyle(elProfileInfo, "-webkit-animation-play-state", "running");
+	setStyle(elProfileInfo, "-moz-animation-play-state", "running");
+	setStyle(elProfileInfo, "animation-play-state", "running");
 }
 
 function updateStatus(userData) {
@@ -131,16 +137,19 @@ function updateVisit(userData) {
 	var elVisitInfo = document.querySelector("#visited-info");
 	var elVisitInfoDetail = elVisitInfo.querySelector("#visited-graph");
 	setStyle(elVisitInfoDetail, "-webkit-animation-play-state", "running");
-	setTimeout("barAnimationController(true)", 100);
-	visitInfo.getToday();
-	checkBarheight();
+	setStyle(elVisitInfoDetail, "-moz-animation-play-state", "running");
+	setStyle(elVisitInfoDetail, "animation-play-state", "running");
+	//barAnimationController(true);
+	visitInfo.setDateSet();
+	visitBar.barAnimationController();
 }
 
 function updateLocation(userData) {
-	// moveToTarget(userData.profileLocation);
 	var elLocationInfo = document.querySelector("#location-info");
 	var elLocationInfoDetail = elLocationInfo.querySelector("#map-canvas p");
 	setStyle(elLocationInfo, "-webkit-animation-play-state", "running");
+	setStyle(elLocationInfo, "-moz-animation-play-state", "running");
+	setStyle(elLocationInfo, "animation-play-state", "running");
 	updateInnerHTML(elLocationInfoDetail, userData.profileLocation);
 }
 
@@ -148,6 +157,8 @@ function updateWatch(userData) {
 	var elWatchInfo = document.querySelector("#watch-info");
 	var elWatchInfoDetail = elWatchInfo.querySelector("#watch-tool p");
 	setStyle(elWatchInfo, "-webkit-animation-play-state", "running");
+	setStyle(elWatchInfo, "-moz-animation-play-state", "running");
+	setStyle(elWatchInfo, "animation-play-state", "running");
 	updateInnerHTML(elWatchInfoDetail, userData.profileWatch);
 
 }
@@ -156,18 +167,28 @@ function updateCaution(userData) {
 	var elCautionInfo = document.querySelector("#caution-info");
 	var elCautionInfoDetail = elCautionInfo.querySelector("#caution-tool p");
 	setStyle(elCautionInfo, "-webkit-animation-play-state", "running");
+	setStyle(elCautionInfo, "-moz-animation-play-state", "running");
+	setStyle(elCautionInfo, "animation-play-state", "running");
 	updateInnerHTML(elCautionInfoDetail, userData.profileNotify);
 }
 
 function setDefault() {
 	var elVisitInfoDetail = document.querySelector("#visited-graph");
 	setStyle(elVisitInfoDetail, "-webkit-animation-play-state", "paused");
+	setStyle(elVisitInfoDetail, "-moz-animation-play-state", "paused");
+	setStyle(elVisitInfoDetail, "animation-play-state", "paused");
 	var elLocationInfoDetail = document.querySelector("#map-canvas");
 	setStyle(elLocationInfoDetail, "-webkit-animation-play-state", "paused");
+	setStyle(elLocationInfoDetail, "-moz-animation-play-state", "paused");
+	setStyle(elLocationInfoDetail, "animation-play-state", "paused");
 	var elWatchInfoDetail = document.querySelector("#watch-tool p");
 	setStyle(elWatchInfoDetail, "-webkit-animation-play-state", "paused");
+	setStyle(elWatchInfoDetail, "-moz-animation-play-state", "paused");
+	setStyle(elWatchInfoDetail, "animation-play-state", "paused");
 	var elCautionInfoDetail = document.querySelector("#caution-tool p");
 	setStyle(elCautionInfoDetail, "-webkit-animation-play-state", "paused");
+	setStyle(elCautionInfoDetail, "-moz-animation-play-state", "paused");
+	setStyle(elCautionInfoDetail, "animation-play-state", "paused");
 }
 
 function requestSearch(e) {
@@ -193,9 +214,13 @@ function requestSearch(e) {
 			var elFooter = document.querySelector("footer");
 			
 			setStyle(elContainer, "-webkit-animation-play-state", "running");
+			setStyle(elContainer, "-moz-animation-play-state", "running");
+			setStyle(elContainer, "animation-play-state", "running");
 			setStyle(elFooter, "-webkit-animation-play-state", "running");
+			setStyle(elFooter, "-moz-animation-play-state", "running");
+			setStyle(elFooter, "animation-play-state", "running");
 
-			visitInfo.visit = jsonObj.profileInquiry;
+			visitInfo.setvisitNumberSet(jsonObj.profileInquiry);
 			updateProfile(jsonObj);
 			updateStatus(jsonObj);
 			updateVisit(jsonObj);
