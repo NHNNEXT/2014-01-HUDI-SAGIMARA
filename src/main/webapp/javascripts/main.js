@@ -101,9 +101,9 @@ function updateProfile(userData) {
 	var elProfileInfo = document.querySelector("#profile-detail-section");
 	var elProfileInfoDetail = elProfileInfo.querySelectorAll("p");
 	//update될 자료에 대한 확정 필요.
-	var join = "profilePhone : " + userData.profilePhone;
-	var Verification = "profileStatus : " + userData.profileStatus;
-	var Accept = "profileVerificatione : " + userData.profileVerificatione;
+	//var join = "profilePhone : " + userData.profilePhone;
+	//var Verification = "profileStatus : " + userData.profileStatus;
+	//var Accept = "profileVerificatione : " + userData.profileVerificatione;
 	// updateInnerHTML(elProfileInfoDetail[0], join);
 	// updateInnerHTML(elProfileInfoDetail[1], Verification);
 	// updateInnerHTML(elProfileInfoDetail[2], Accept);
@@ -112,7 +112,7 @@ function updateProfile(userData) {
 	setStyle(elProfileInfo, "animation-play-state", "running");
 }
 
-var userStatus = {
+var userStatusInfo = {
 	//user Status관련 정보
 	safety : {
 		code : 0, 
@@ -136,15 +136,15 @@ function updateStatus(userData) {
 	var elProfileStatus = document.querySelector("#profile-status");
 	var elProfileStatusContents = elProfileStatus.querySelector(".contents");
 	setStyle(elProfileStatus, "height", "150px");
-	if (userData.profileStatus == userStatus.safety.code) {
-		setStyle(elProfileStatus, "background", userStatus.safety.color);
-		updateInnerHTML(elProfileStatusContents, userStatus.safety.contents)
-	} else if (userData.profileStatus == userStatus.warning.code) {
-		setStyle(elProfileStatus, "background", userStatus.warning.color);
-		updateInnerHTML(elProfileStatusContents, userStatus.warning.contents)
+	if (userData.profileStatus == userStatusInfo.safety.code) {
+		setStyle(elProfileStatus, "background", userStatusInfo.safety.color);
+		updateInnerHTML(elProfileStatusContents, userStatusInfo.safety.contents)
+	} else if (userData.profileStatus == userStatusInfo.warning.code) {
+		setStyle(elProfileStatus, "background", userStatusInfo.warning.color);
+		updateInnerHTML(elProfileStatusContents, userStatusInfo.warning.contents)
 	} else {
-		setStyle(elProfileStatus, "background", userStatus.danger.color);
-		updateInnerHTML(elProfileStatusContents, userStatus.danger.contents)
+		setStyle(elProfileStatus, "background", userStatusInfo.danger.color);
+		updateInnerHTML(elProfileStatusContents, userStatusInfo.danger.contents)
 	}
 }
 
@@ -244,6 +244,7 @@ function startAnimation() {
 
 
 function requestSearch(e) {
+	//검색 요청 처리 및 서버와 통신
 	requestPreventEvent(e);
 	setDefault();
 	var id = e.target.parentElement[0].value;
@@ -259,6 +260,7 @@ function requestSearch(e) {
 
 	request.onreadystatechange = function() {
 		if (request.readyState == 4 && request.status == 200) {
+			//통신이 성공하면 JSON 객체를 받아서 각요소에 보냄
 			console.log(request.response);
 			// json ajax 통신 부분
 			result = JSONparse(request.response);
@@ -269,15 +271,21 @@ function requestSearch(e) {
 }
 
 function requestPreventEvent(e) {
+	//submit 이벤트를 막는 기능
 	e.preventDefault();
 }
 
 function refresh(e) {
+	//화면 리프래쉬 함수
 	window.location.reload(true);
 }
 
 
 function init() {
+	//페이지 초기 세팅 관리 함수
+	//검색 아이콘에 검색 관련 통신 이벤트등록
+	//로고에 리프래쉬 기능 이벤트 등록
+	//4일전~오늘날짜를 계산에서 보관
 	oEventElements.elSubmit.addEventListener("click", requestSearch, false);
 	oEventElements.elLogo.addEventListener("click", refresh, false);
 	visitInfo.setDateSet()
