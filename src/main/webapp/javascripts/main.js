@@ -276,7 +276,12 @@ function refresh(e) {
 	window.location.reload(true);
 }
 
-oEventElements.elSubmit.addEventListener("click", requestSearch, false);
-oEventElements.elLogo.addEventListener("click", refresh, false);
 
-window.onload = visitInfo.setDateSet();
+function init() {
+	oEventElements.elSubmit.addEventListener("click", requestSearch, false);
+	oEventElements.elLogo.addEventListener("click", refresh, false);
+	visitInfo.setDateSet()
+}
+
+
+window.onload = init;
