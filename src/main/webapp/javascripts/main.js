@@ -4,11 +4,10 @@ var oEventElements = {
 	elLogo : document.querySelector(".logo")
 };
 
-
-
-var visitInfo = {
+var visitInfoBarManager = {
 	//해당번호로 검색(방문)한 사람수 관련 정보
 	setBars : "",
+	count : 0,
 	visitNumberSet : [],
 	dateInfo : new Date(),
 	setDateSet : function() {
@@ -32,20 +31,16 @@ var visitInfo = {
 	setvisitNumberSet : function(profileInquiry) {
 		//방문(검색)수를 최근 5일의 정보를 가져와 visitNumberSet에 세팅한다.
 		this.visitNumberSet = profileInquiry;
-	}
-};
-
-var visitBar = {
-	count : 0,
+	},
 	barAnimationController : function() {
 		// 각각의 bar를 시간차를 두고 에니메이션해주는 함수
 		this.count = 0;
 		var setBars = setInterval((function () {
 			var elVisitedInfo = document.querySelector("#visited-info");
 			var elVisitedInfoBar = elVisitedInfo.querySelectorAll("#visited-graph .bar-section");
-			var numberOfBar = elVisitedInfoBar.length
+			var numberOfBar = elVisitedInfoBar.length - 1
 
-			if (this.count > numberOfBar - 1) {
+			if (this.count > numberOfBar) {
 				clearInterval(this.setBars);
 				return;
 			}
@@ -57,10 +52,10 @@ var visitBar = {
 			var barValue = BarHeight.querySelector("p");
 			var barDate = elVisitedInfoBar[this.count].querySelector("p");
 
-			setStyle(BarHeight, "height", newHeight);
+			editor.setStyle(BarHeight, "height", newHeight);
 
-			updateInnerHTML(barDate, visitInfo.dateSet[this.count]);
-			updateInnerHTML(barValue, visitInfo.visitNumberSet[this.count]);
+			editor.updateInnerHTML(barDate, this.dateSet[this.count]);
+			editor.updateInnerHTML(barValue, this.visitNumberSet[this.count]);
 			this.count++;
 		}).bind(this), 300);
 	},
@@ -69,48 +64,20 @@ var visitBar = {
 		var barArray = [];
 		var maxcount = 23;
 		var totalNumberOfBar = 5;
-		var max = Math.max.apply(null, visitInfo.visitNumberSet);
+		var max = Math.max.apply(null, this.visitNumberSet);
 		if (max > maxcount) {
 			for (var i = 0; i < totalNumberOfBar ; i++) {
-				barArray[i] = visitInfo.visitNumberSet[i] * maxcount / max;
+				barArray[i] = this.visitNumberSet[i] * maxcount / max;
 			}
 		} else {
 			for (var i = 0; i < totalNumberOfBar ; i++) {
-				barArray[i] = visitInfo.visitNumberSet[i];
+				barArray[i] = this.visitNumberSet[i];
 			}
 		}
 
 		return barArray;
 	}
 };
-
-function setStyle(element, type, value) {
-	//해당 element에 주어진 type의 스타일을 value값으로 변경
-	var targetStyle = element.style;
-	targetStyle.setProperty(type, value);
-}
-
-function updateInnerHTML(element, contents) {
-	//해당 element에 contents을 삽입하는 함수
-	var updateContents = contents;
-	element.innerHTML = contents;
-}
-
-function updateProfile(userData) {
-	//userProfile부분의 업데이트를 하는 함수
-	var elProfileInfo = document.querySelector("#profile-detail-section");
-	var elProfileInfoDetail = elProfileInfo.querySelectorAll("p");
-	//update될 자료에 대한 확정 필요.
-	//var join = "profilePhone : " + userData.profilePhone;
-	//var Verification = "profileStatus : " + userData.profileStatus;
-	//var Accept = "profileVerificatione : " + userData.profileVerificatione;
-	// updateInnerHTML(elProfileInfoDetail[0], join);
-	// updateInnerHTML(elProfileInfoDetail[1], Verification);
-	// updateInnerHTML(elProfileInfoDetail[2], Accept);
-	setStyle(elProfileInfo, "-webkit-animation-play-state", "running");
-	setStyle(elProfileInfo, "-moz-animation-play-state", "running");
-	setStyle(elProfileInfo, "animation-play-state", "running");
-}
 
 var userStatusInfo = {
 	//user Status관련 정보
@@ -131,165 +98,169 @@ var userStatusInfo = {
 	}
 }
 
-function updateStatus(userData) {
-	//user Status부분의 업데이트
-	var elProfileStatus = document.querySelector("#profile-status");
-	var elProfileStatusContents = elProfileStatus.querySelector(".contents");
-	setStyle(elProfileStatus, "height", "150px");
-	if (userData.profileStatus == userStatusInfo.safety.code) {
-		setStyle(elProfileStatus, "background", userStatusInfo.safety.color);
-		updateInnerHTML(elProfileStatusContents, userStatusInfo.safety.contents)
-	} else if (userData.profileStatus == userStatusInfo.warning.code) {
-		setStyle(elProfileStatus, "background", userStatusInfo.warning.color);
-		updateInnerHTML(elProfileStatusContents, userStatusInfo.warning.contents)
-	} else {
-		setStyle(elProfileStatus, "background", userStatusInfo.danger.color);
-		updateInnerHTML(elProfileStatusContents, userStatusInfo.danger.contents)
+
+var updateManager = {
+	updatePage : function (result) {
+		//각요소 전부에게 새로운 정보를 주고 업데이트 시키는 함수
+		visitInfoBarManager.setvisitNumberSet(result.profileInquiry);
+		this.updateProfile(result);
+		this.updateStatus(result);
+		this.updateVisit(result);
+		this.updateLocation(result);
+		this.updateWatch(result);
+		this.updateCaution(result);
+	},
+	updateProfile : function(userData) {
+		//userProfile부분의 업데이트를 하는 함수
+		var elProfileInfo = document.querySelector("#profile-detail-section");
+		var elProfileInfoDetail = elProfileInfo.querySelectorAll("p");
+		//update될 자료에 대한 확정 필요 - 우선 주석처리
+		//var join = "profilePhone : " + userData.profilePhone;
+		//var Verification = "profileStatus : " + userData.profileStatus;
+		//var Accept = "profileVerificatione : " + userData.profileVerificatione;
+		// editor.updateInnerHTML(elProfileInfoDetail[0], join);
+		// editor.updateInnerHTML(elProfileInfoDetail[1], Verification);
+		// editor.updateInnerHTML(elProfileInfoDetail[2], Accept);
+		editor.setStyle(elProfileInfo, "-webkit-animation-play-state", "running");
+		editor.setStyle(elProfileInfo, "-moz-animation-play-state", "running");
+		editor.setStyle(elProfileInfo, "animation-play-state", "running");
+	},
+	updateStatus : function(userData) {
+		//user Status부분의 업데이트
+		var elProfileStatus = document.querySelector("#profile-status");
+		var elProfileStatusContents = elProfileStatus.querySelector(".contents");
+		editor.setStyle(elProfileStatus, "height", "150px");
+		if (userData.profileStatus == userStatusInfo.safety.code) {
+			editor.setStyle(elProfileStatus, "background", userStatusInfo.safety.color);
+			editor.updateInnerHTML(elProfileStatusContents, userStatusInfo.safety.contents)
+		} else if (userData.profileStatus == userStatusInfo.warning.code) {
+			editor.setStyle(elProfileStatus, "background", userStatusInfo.warning.color);
+			editor.updateInnerHTML(elProfileStatusContents, userStatusInfo.warning.contents)
+		} else {
+			editor.setStyle(elProfileStatus, "background", userStatusInfo.danger.color);
+			editor.updateInnerHTML(elProfileStatusContents, userStatusInfo.danger.contents)
+		}
+	},
+	updateVisit: function(userData) {
+		//해당번호 검색(방문)한 수를 업데이트
+		var elVisitInfo = document.querySelector("#visited-info");
+		var elVisitInfoDetail = elVisitInfo.querySelector("#visited-graph");
+		editor.setStyle(elVisitInfoDetail, "-webkit-animation-play-state", "running");
+		editor.setStyle(elVisitInfoDetail, "-moz-animation-play-state", "running");
+		editor.setStyle(elVisitInfoDetail, "animation-play-state", "running");
+		
+		visitInfoBarManager.barAnimationController();
+	},
+	updateLocation : function(userData) {
+		//user의 위치정보를 업데이트
+		var elLocationInfo = document.querySelector("#location-info");
+		var elLocationInfoDetail = elLocationInfo.querySelector("#map-canvas p");
+		editor.setStyle(elLocationInfo, "-webkit-animation-play-state", "running");
+		editor.setStyle(elLocationInfo, "-moz-animation-play-state", "running");
+		editor.setStyle(elLocationInfo, "animation-play-state", "running");
+		editor.updateInnerHTML(elLocationInfoDetail, userData.profileLocation);
+	},
+
+	updateWatch : function(userData) {
+		//user를 지켜보고(등록) 있는 사람의 수를 업데이트
+		var elWatchInfo = document.querySelector("#watch-info");
+		var elWatchInfoDetail = elWatchInfo.querySelector("#watch-tool p");
+		editor.setStyle(elWatchInfo, "-webkit-animation-play-state", "running");
+		editor.setStyle(elWatchInfo, "-moz-animation-play-state", "running");
+		editor.setStyle(elWatchInfo, "animation-play-state", "running");
+		editor.updateInnerHTML(elWatchInfoDetail, userData.profileWatch);
+
+	},
+	updateCaution: function(userData) {
+		//경고나 신고가 들어온 수를 업데이트
+		var elCautionInfo = document.querySelector("#caution-info");
+		var elCautionInfoDetail = elCautionInfo.querySelector("#caution-tool p");
+		editor.setStyle(elCautionInfo, "-webkit-animation-play-state", "running");
+		editor.setStyle(elCautionInfo, "-moz-animation-play-state", "running");
+		editor.setStyle(elCautionInfo, "animation-play-state", "running");
+		editor.updateInnerHTML(elCautionInfoDetail, userData.profileNotify);
+	},
+	setAnimation : function(state) {
+		//페이지 에니메이션을 시작시키는 함수
+		var elContainer = document.querySelector("#container");
+		var elFooter = document.querySelector("footer");
+		
+		editor.setStyle(elContainer, "-webkit-animation-play-state", state);
+		editor.setStyle(elContainer, "-moz-animation-play-state", state);
+		editor.setStyle(elContainer, "animation-play-state", state);
+		editor.setStyle(elFooter, "-webkit-animation-play-state", state);
+		editor.setStyle(elFooter, "-moz-animation-play-state", state);
+		editor.setStyle(elFooter, "animation-play-state", state);
 	}
 }
 
-function updateVisit(userData) {
-	//해당번호 검색(방문)한 수를 업데이트
-	var elVisitInfo = document.querySelector("#visited-info");
-	var elVisitInfoDetail = elVisitInfo.querySelector("#visited-graph");
-	setStyle(elVisitInfoDetail, "-webkit-animation-play-state", "running");
-	setStyle(elVisitInfoDetail, "-moz-animation-play-state", "running");
-	setStyle(elVisitInfoDetail, "animation-play-state", "running");
-	
-	visitBar.barAnimationController();
-}
 
-function updateLocation(userData) {
-	//user의 위치정보를 업데이트
-	var elLocationInfo = document.querySelector("#location-info");
-	var elLocationInfoDetail = elLocationInfo.querySelector("#map-canvas p");
-	setStyle(elLocationInfo, "-webkit-animation-play-state", "running");
-	setStyle(elLocationInfo, "-moz-animation-play-state", "running");
-	setStyle(elLocationInfo, "animation-play-state", "running");
-	updateInnerHTML(elLocationInfoDetail, userData.profileLocation);
-}
-
-function updateWatch(userData) {
-	//user를 지켜보고(등록) 있는 사람의 수를 업데이트
-	var elWatchInfo = document.querySelector("#watch-info");
-	var elWatchInfoDetail = elWatchInfo.querySelector("#watch-tool p");
-	setStyle(elWatchInfo, "-webkit-animation-play-state", "running");
-	setStyle(elWatchInfo, "-moz-animation-play-state", "running");
-	setStyle(elWatchInfo, "animation-play-state", "running");
-	updateInnerHTML(elWatchInfoDetail, userData.profileWatch);
-
-}
-
-function updateCaution(userData) {
-	//경고나 신고가 들어온 수를 업데이트
-	var elCautionInfo = document.querySelector("#caution-info");
-	var elCautionInfoDetail = elCautionInfo.querySelector("#caution-tool p");
-	setStyle(elCautionInfo, "-webkit-animation-play-state", "running");
-	setStyle(elCautionInfo, "-moz-animation-play-state", "running");
-	setStyle(elCautionInfo, "animation-play-state", "running");
-	updateInnerHTML(elCautionInfoDetail, userData.profileNotify);
-}
-
-function setDefault() {
-	//업데이트 될 항목에 대해서 애니메이션 초기화
-	var elVisitInfoDetail = document.querySelector("#visited-graph");
-	setStyle(elVisitInfoDetail, "-webkit-animation-play-state", "paused");
-	setStyle(elVisitInfoDetail, "-moz-animation-play-state", "paused");
-	setStyle(elVisitInfoDetail, "animation-play-state", "paused");
-	var elLocationInfoDetail = document.querySelector("#map-canvas");
-	setStyle(elLocationInfoDetail, "-webkit-animation-play-state", "paused");
-	setStyle(elLocationInfoDetail, "-moz-animation-play-state", "paused");
-	setStyle(elLocationInfoDetail, "animation-play-state", "paused");
-	var elWatchInfoDetail = document.querySelector("#watch-tool p");
-	setStyle(elWatchInfoDetail, "-webkit-animation-play-state", "paused");
-	setStyle(elWatchInfoDetail, "-moz-animation-play-state", "paused");
-	setStyle(elWatchInfoDetail, "animation-play-state", "paused");
-	var elCautionInfoDetail = document.querySelector("#caution-tool p");
-	setStyle(elCautionInfoDetail, "-webkit-animation-play-state", "paused");
-	setStyle(elCautionInfoDetail, "-moz-animation-play-state", "paused");
-	setStyle(elCautionInfoDetail, "animation-play-state", "paused");
+var utility = {
+	requestPreventEvent : function(e) {
+		//submit 이벤트를 막는 기능
+		e.preventDefault();
+	},
+	refresh : function(e) {
+		//화면 리프래쉬 함수
+		window.location.reload(true);
+	},
+	JSONparse : function(raw) {
+		//json파일을 json객체로 변환
+		var jsonObj = JSON.parse(raw);
+		return jsonObj;
+	}
 }
 
 
-function JSONparse(raw) {
-	//json파일을 json객체로 변환
-	var jsonObj = JSON.parse(raw);
-	
-	return jsonObj;
-}
-
-function updatePage(result) {
-	//각요소 전부에게 새로운 정보를 주고 업데이트 시키는 함수
-	visitInfo.setvisitNumberSet(result.profileInquiry);
-	updateProfile(result);
-	updateStatus(result);
-	updateVisit(result);
-	updateLocation(result);
-	updateWatch(result);
-	updateCaution(result);
-}
-
-function startAnimation() {
-	//페이지 에니메이션을 시작시키는 함수
-	var elContainer = document.querySelector("#container");
-	var elFooter = document.querySelector("footer");
-	
-	setStyle(elContainer, "-webkit-animation-play-state", "running");
-	setStyle(elContainer, "-moz-animation-play-state", "running");
-	setStyle(elContainer, "animation-play-state", "running");
-	setStyle(elFooter, "-webkit-animation-play-state", "running");
-	setStyle(elFooter, "-moz-animation-play-state", "running");
-	setStyle(elFooter, "animation-play-state", "running");
+var editor = {
+	setStyle : function(element, type, value) {
+		//해당 element에 주어진 type의 스타일을 value값으로 변경
+		var targetStyle = element.style;
+		targetStyle.setProperty(type, value);
+	},
+	updateInnerHTML : function(element, contents) {
+		//해당 element에 contents을 삽입하는 함수
+		var updateContents = contents;
+		element.innerHTML = contents;
+	}	
 }
 
 
-function requestSearch(e) {
-	//검색 요청 처리 및 서버와 통신
-	requestPreventEvent(e);
-	setDefault();
-	var id = e.target.parentElement[0].value;
-	var url = "/test";
-	var testUpdate = document.querySelectorAll("#profile-detail-section p");
-	var request = new XMLHttpRequest();
-	var formdata = new FormData();
-	var result;
-	
-	request.open("POST", url, true);
-	formdata.append("id", id);
-	request.send(formdata);
+var sagimaraMain = {
+	init : function() {
+		//페이지 초기 세팅 관리 함수
+		//검색 아이콘에 검색 관련 통신 이벤트등록
+		//로고에 리프래쉬 기능 이벤트 등록
+		//4일전~오늘날짜를 계산에서 보관
+		oEventElements.elSubmit.addEventListener("click", this.requestSearchEvent, false);
+		oEventElements.elLogo.addEventListener("click", utility.refresh, false);
+		visitInfoBarManager.setDateSet()
+	},
+	requestSearchEvent : function(e) {
+		//검색 요청 처리 및 서버와 통신
+		utility.requestPreventEvent(e);
+		updateManager.setAnimation("paused");
+		
+		var id = e.target.parentElement[0].value;
+		var url = "/test";
+		var request = new XMLHttpRequest();
+		var formdata = new FormData();
+		var result;
+		
+		request.open("POST", url, true);
+		formdata.append("id", id);
+		request.send(formdata);
 
-	request.onreadystatechange = function() {
-		if (request.readyState == 4 && request.status == 200) {
-			//통신이 성공하면 JSON 객체를 받아서 각요소에 보냄
-			console.log(request.response);
-			// json ajax 통신 부분
-			result = JSONparse(request.response);
-			updatePage(result);
-			startAnimation();
+		request.onreadystatechange = function() {
+			if (request.readyState == 4 && request.status == 200) {
+				// json ajax 통신 부분
+				//통신이 성공하면 JSON 객체를 받아서 각요소에 보냄
+				result = utility.JSONparse(request.response);
+				updateManager.updatePage(result);
+				updateManager.setAnimation("running");
+			}
 		}
 	}
 }
 
-function requestPreventEvent(e) {
-	//submit 이벤트를 막는 기능
-	e.preventDefault();
-}
-
-function refresh(e) {
-	//화면 리프래쉬 함수
-	window.location.reload(true);
-}
-
-
-function init() {
-	//페이지 초기 세팅 관리 함수
-	//검색 아이콘에 검색 관련 통신 이벤트등록
-	//로고에 리프래쉬 기능 이벤트 등록
-	//4일전~오늘날짜를 계산에서 보관
-	oEventElements.elSubmit.addEventListener("click", requestSearch, false);
-	oEventElements.elLogo.addEventListener("click", refresh, false);
-	visitInfo.setDateSet()
-}
-
-
-window.onload = init;
+window.onload = sagimaraMain.init();
