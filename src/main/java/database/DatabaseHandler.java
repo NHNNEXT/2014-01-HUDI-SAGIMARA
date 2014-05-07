@@ -14,32 +14,34 @@ import org.apache.log4j.Logger;
 public class DatabaseHandler {
 	Logger logger;
 	DatabaseManager dbm;
-	Connection conn;
 	
 	public DatabaseHandler() {
 		logger = SagimaraLogger.logger;
-		connect();
-		dbm = new DatabaseManager(conn);
+		dbm = new DatabaseManager();
 	}
 	
-	private void connect(){
+	private Connection connect(){
 		DatabaseConnector connector = new DatabaseConnector();
 		
-		//mysql Connection
-		conn = connector.getMysqlConnection();
+		Connection conn = connector.getMysqlConnection();
 		
 		if(conn==null){
 			logger.error("Database Connection Error");
 		}
+		return conn;
 	}
 	
 	
 	public UserProfile readUserProfile(String id) {
+		
+		Connection conn = this.connect();
+		
+		
 		UserProfile result = new UserProfile();
 
 		try {
-			ResultSet rs_profile = dbm.selectUserProfile(id);
-			ResultSet rs_inquiry = dbm.selectUserInquiry(id);
+			ResultSet rs_profile = dbm.selectUserProfile(conn, id);
+			ResultSet rs_inquiry = dbm.selectUserInquiry(conn, id);
 			
 			logger.info("[readUserProfile] ResultSet : " + rs_profile.toString()
 					+ " : ");
@@ -48,7 +50,7 @@ public class DatabaseHandler {
 				Inquiry inquiry = new Inquiry();
 				inquiry.setInquiryId(id);
 
-				dbm.add(inquiry);
+				dbm.add(conn, inquiry);
 
 				result.setProfilePhone(rs_profile.getString("phone_number"));
 				result.setProfileStatus(rs_profile.getString("status"));
@@ -65,8 +67,8 @@ public class DatabaseHandler {
 				User user = new User(id, "false", "1", "위치정보 없음");
 				Inquiry inquiry = new Inquiry(user);
 
-				dbm.add(user);
-				dbm.add(inquiry);
+				dbm.add(conn, user);
+				dbm.add(conn, inquiry);
 
 				result.setProfilePhone(user.getUserPhone());
 				result.setProfileStatus("1");
@@ -79,9 +81,13 @@ public class DatabaseHandler {
 			}
 			rs_profile.close();
 			rs_inquiry.close();
+			logger.info("[database] Connection is closed.");
+			conn.close();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
 		return result;
 	}
 

@@ -16,13 +16,8 @@ import org.apache.log4j.Logger;
 
 public class DatabaseManager {
 	Logger logger = SagimaraLogger.logger;
-	Connection conn;
 	
-	DatabaseManager(Connection conn){
-		this.conn = conn;
-	}
-	
-	public ResultSet selectUserProfile( String id)
+	public ResultSet selectUserProfile(Connection conn, String id)
 			throws SQLException {
 		String sql = "select * from USER_PROFILE where phone_number = ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -31,7 +26,7 @@ public class DatabaseManager {
 		return rs;
 	}
 	
-	public ResultSet selectUserInquiry(String id)  {
+	public ResultSet selectUserInquiry(Connection conn, String id)  {
 		String sql = "select * from USER_INQUIRY where phone_number = ?";
 		PreparedStatement pstmt;
 		ResultSet rs=null;
@@ -47,7 +42,7 @@ public class DatabaseManager {
 		return rs;
 	}
 	
-	public int add(BaseModel model) throws SQLException {
+	public int add(Connection conn, BaseModel model) throws SQLException {
 		String tableName = model.getTableName();
 		
 		PreparedStatement pstmt = null;
@@ -91,7 +86,7 @@ public class DatabaseManager {
 		return 0;
 	}
 
-	public ArrayList<String> getColumns(String table) {
+	public ArrayList<String> getColumns(Connection conn, String table) {
 		ArrayList<String> columns = new ArrayList<String>();
 
 		String sql = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA='sagimara' AND TABLE_NAME='"

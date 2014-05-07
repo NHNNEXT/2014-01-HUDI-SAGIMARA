@@ -8,4 +8,6 @@
 	loginForm.style.position= "fixed";
 	loginForm.style.top= formHeight +"px";
 	loginForm.style.left= formWidth +"px";
+
 })();
+
