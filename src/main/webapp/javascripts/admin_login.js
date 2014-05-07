@@ -8,3 +8,4 @@ function loginFormLocaion() {
 	loginForm.style.top= formHeight +"px";
 	loginForm.style.left= formWidth +"px";
 }
+
