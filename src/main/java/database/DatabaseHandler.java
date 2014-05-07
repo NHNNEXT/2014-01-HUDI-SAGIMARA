@@ -14,30 +14,29 @@ import org.apache.log4j.Logger;
 public class DatabaseHandler {
 	Logger logger;
 	DatabaseManager dbm;
-	Connection conn;
 	
 	public DatabaseHandler() {
 		logger = SagimaraLogger.logger;
 		dbm = new DatabaseManager();
 	}
 	
-	private void connect(){
+	private Connection connect(){
 		DatabaseConnector connector = new DatabaseConnector();
 		
-		//mysql Connection
-		conn = connector.getMysqlConnection();
+		Connection conn = connector.getMysqlConnection();
 		
 		if(conn==null){
 			logger.error("Database Connection Error");
 		}
+		return conn;
 	}
 	
 	
 	public UserProfile readUserProfile(String id) {
 		
-		if(conn==null){
-			connect();
-		}
+		Connection conn = this.connect();
+		
+		
 		UserProfile result = new UserProfile();
 
 		try {
@@ -82,7 +81,9 @@ public class DatabaseHandler {
 			}
 			rs_profile.close();
 			rs_inquiry.close();
+			logger.info("[database] Connection is closed.");
 			conn.close();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
