@@ -18,8 +18,7 @@ public class DatabaseHandler {
 	
 	public DatabaseHandler() {
 		logger = SagimaraLogger.logger;
-		connect();
-		dbm = new DatabaseManager(conn);
+		dbm = new DatabaseManager();
 	}
 	
 	private void connect(){
@@ -35,11 +34,15 @@ public class DatabaseHandler {
 	
 	
 	public UserProfile readUserProfile(String id) {
+		
+		if(conn==null){
+			connect();
+		}
 		UserProfile result = new UserProfile();
 
 		try {
-			ResultSet rs_profile = dbm.selectUserProfile(id);
-			ResultSet rs_inquiry = dbm.selectUserInquiry(id);
+			ResultSet rs_profile = dbm.selectUserProfile(conn, id);
+			ResultSet rs_inquiry = dbm.selectUserInquiry(conn, id);
 			
 			logger.info("[readUserProfile] ResultSet : " + rs_profile.toString()
 					+ " : ");
@@ -48,7 +51,7 @@ public class DatabaseHandler {
 				Inquiry inquiry = new Inquiry();
 				inquiry.setInquiryId(id);
 
-				dbm.add(inquiry);
+				dbm.add(conn, inquiry);
 
 				result.setProfilePhone(rs_profile.getString("phone_number"));
 				result.setProfileStatus(rs_profile.getString("status"));
@@ -65,8 +68,8 @@ public class DatabaseHandler {
 				User user = new User(id, "false", "1", "위치정보 없음");
 				Inquiry inquiry = new Inquiry(user);
 
-				dbm.add(user);
-				dbm.add(inquiry);
+				dbm.add(conn, user);
+				dbm.add(conn, inquiry);
 
 				result.setProfilePhone(user.getUserPhone());
 				result.setProfileStatus("1");
@@ -79,9 +82,11 @@ public class DatabaseHandler {
 			}
 			rs_profile.close();
 			rs_inquiry.close();
+			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
 		return result;
 	}
 
