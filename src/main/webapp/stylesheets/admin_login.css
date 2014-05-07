@@ -26,8 +26,7 @@ input {
 	padding: 20px 26px;
 }
 
-
-#loginBox fieldset input {
+.border-radius {
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	border-radius: 3px;
@@ -39,9 +38,10 @@ input {
 	padding: 4px 10px;
 	width: 150px;
 	margin: 15px;
+	line-height: 27px;
 }
 .logintd{
-vertical-align:middle;
+	vertical-align:middle;
 }
 #loginBox fieldset input[type="submit"] {
 	background-color: #f8454a;
@@ -49,5 +49,5 @@ vertical-align:middle;
 	display: block;
 	padding: 4px 0;
 	width: 80px;
-	height: 90px;
+	height: 100px;
 }

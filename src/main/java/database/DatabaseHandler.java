@@ -1,5 +1,6 @@
 package database;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -13,12 +14,26 @@ import org.apache.log4j.Logger;
 public class DatabaseHandler {
 	Logger logger;
 	DatabaseManager dbm;
-
+	Connection conn;
+	
 	public DatabaseHandler() {
 		logger = SagimaraLogger.logger;
-		dbm = new DatabaseManager();
+		connect();
+		dbm = new DatabaseManager(conn);
 	}
-
+	
+	private void connect(){
+		DatabaseConnector connector = new DatabaseConnector();
+		
+		//mysql Connection
+		conn = connector.getMysqlConnection();
+		
+		if(conn==null){
+			logger.error("Database Connection Error");
+		}
+	}
+	
+	
 	public UserProfile readUserProfile(String id) {
 		UserProfile result = new UserProfile();
 
@@ -41,8 +56,7 @@ public class DatabaseHandler {
 				result.setProfileLocation(rs_profile.getString("location"));
 				result.setProfileWatch(rs_profile.getString("watch"));
 				result.setProfileNotify(rs_profile.getString("notify"));
-				String[] inquiryList = { rs_inquiry.getString("6day ago"),
-						rs_inquiry.getString("5day ago"), rs_inquiry.getString("4day ago"),
+				String[] inquiryList = { rs_inquiry.getString("4day ago"),
 						rs_inquiry.getString("3day ago"), rs_inquiry.getString("2day ago"),
 						rs_inquiry.getString("1day ago"), rs_inquiry.getString("today") };
 				result.setProfileInquiry(inquiryList);
@@ -60,7 +74,7 @@ public class DatabaseHandler {
 				result.setProfileLocation("위치정보 없음");
 				result.setProfileWatch("0");
 				result.setProfileNotify("0");
-				String[] inquiryList = { "0", "0", "0", "0", "0", "0", "0" };
+				String[] inquiryList = { "0", "0", "0", "0", "0" };
 				result.setProfileInquiry(inquiryList);
 			}
 			rs_profile.close();

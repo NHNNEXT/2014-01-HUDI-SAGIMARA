@@ -2,12 +2,16 @@
 	Animation CSS
 */
 @-webkit-keyframes fade-in{
-	from{
-	    opacity:0;
-	}
-	to{
-	    opacity:1;
-	}
+	from{opacity:0;}
+	to{opacity:1;}
+}
+@-moz-keyframes fade-in{
+	from{opacity:0;}
+	to{opacity:1;}
+}
+@keyframes fade-in{
+	from{opacity:0;}
+	to{opacity:1;}
 }
 
 /*
@@ -46,7 +50,7 @@ div, section, section {
 	z-index: 10;
 	padding: 0px 0px 0px 0px;
 	font-family: inherit;
-	font-size: 2.5em;
+	font-size: 40px;
 	color: #fff;
 	overflow: hidden;
 	cursor: pointer;
@@ -165,7 +169,7 @@ div, section, section {
 	padding: 20px 30px 20px 20px;
 	width: 80%;
 	font-family: inherit;
-	font-size: 1em;
+	font-size: 16px;
 	-webkit-animation:fade-in 3s;
 	-webkit-animation-play-state: running;
 }
@@ -181,10 +185,10 @@ div, section, section {
 	text-align: center;
 	text-decoration: none;
 	font-family: inherit;
-	font-size: 1em;
+	font-size: 16px;
 	color: #fff;
 	background-color: transparent;
-	padding: .5em 1em .5em 1em;
+	padding: 8px 16px 8px 16px;
 }
 
 .button:hover {
@@ -217,6 +221,7 @@ div, section, section {
 	font-size: 30px;
 	line-height: 50px;
 	-webkit-transition: background 1s, height 0.5s, -webkit-transform 1s;
+	-moz-transition: background 1s, height 0.5s, -webkit-transform 1s;
 	transition: background 1s, height 0.5s, transform 1s;
 }
 
@@ -228,16 +233,16 @@ div, section, section {
 	font-family: inherit;
 	height: 20px;
 	line-height: 20px;
-	font-size: 0.5em;
+	font-size: 12px;
 }
 
 .profile-status .button {
 	font-family: inherit;
-	font-size: 0.5em;
+	font-size: 12px;
 	border: 1px solid;
-	-webkit-border-radius: .5em; 
-	-moz-border-radius: .5em;
-	border-radius: .5em;
+	-webkit-border-radius: 8px; 
+	-moz-border-radius: 8px;
+	border-radius: 8px;
 }
 
 .profile-status .button:hover {
@@ -258,7 +263,7 @@ div, section, section {
 
 .detail-info-item {
 	/* font-size: 1.8em; */
-	font-size: 2.0vw;
+	font-size: 29px;
 	width: 33%;
 	color: black;
 	min-height: 150px;
@@ -276,7 +281,7 @@ div, section, section {
 
 #visited-info p{
 	font-family: inherit;
- 	font-size: 1em; 
+ 	font-size: 15px; 
  	height: 30px;
  	line-height: 30px;
  	text-align: center;
@@ -289,25 +294,25 @@ div, section, section {
 	background-position:center;
 }
 
-#q-graph {
+#visited-graph {
 	position: relative;
 	height: 300px;
 	margin: 0px 20% 0px 20%;
 	list-style: none;
 	background: #fff;
-	font-size: 0.8em;
+	font-size: 13px;
 	font-family: inherit;
 	-webkit-animation:fade-in 3s;
 	-webkit-animation-play-state:paused;
 }
 
-#q-graph ul {
+#visited-graph ul {
 	margin: 0;
 	padding: 0;
 	list-style: none;
 }
 
-#q-graph li {
+#visited-graph li {
 	position: absolute;
 	bottom: 0;
 	width: 30%;
@@ -318,57 +323,52 @@ div, section, section {
 	list-style: none;
 }
 
-#q-graph li.qtr {
+#visited-graph li.bar-section {
 	height: 0px;
 	padding-top: 2px;
-	/* border-right: 1px dotted #C4C4C4; */
 	color: #AAA;
 } 
 
-#q-graph li.bar {
+#visited-graph li.bar {
 	width: 40%;
 	border: 1px solid;
 	border-bottom: none;
 	color: #000;
+	height: 0px;
 	-webkit-transition: height 1s, -webkit-transform 1s;
+	-moz-transition: height 1s, -webkit-transform 1s;
 	transition: height 1s, transform 1s;
+	left: 30%;
+	background: #37383c;
+	border-color: #37383c;
 }
 
-#q-graph li.bar p {
+#visited-graph li.bar p {
 	margin: -25px 0 0;
 	padding: 0;
 }
 
-#q-graph li.today {
-	left: 30%;
-	background: #37383c;
-	border-color: #37383c;
-}
-
-#q-graph li.past {
-	left: 30%;
-	background: #37383c;
-	border-color: #37383c;
-}
-
-#q-graph #q1 {
+#visited-graph .bar-section:nth-of-type(1) {
 	left: 0;
 	bottom : 10%;
 }
 
-#q-graph #q2 {
+#visited-graph .bar-section:nth-of-type(2) {
 	left: 18%;
 	bottom : 10%;
 }
-#q-graph #q3 {
+
+#visited-graph .bar-section:nth-of-type(3) {
 	left: 36%;
 	bottom : 10%;
 }
-#q-graph #q4 {
+
+#visited-graph .bar-section:nth-of-type(4) {
 	left: 54%;
 	bottom : 10%;
 }
-#q-graph #q5 {
+
+#visited-graph .bar-section:nth-of-type(5) {
 	left: 72%;
 	bottom : 10%;
 }
@@ -386,15 +386,18 @@ div, section, section {
 	font-family: inherit;
 	height: 20px;
 	line-height: 20px;
-	font-size: 0.8em;
+	font-size: 13px;	
 	text-align:center;	
-	margin: 0 0 5px 0;
+	margin: 0 auto;
+	max-width : 280px;
 }
 
 #location-info figure {
 	background: #fff url("/images/location.png") no-repeat;
 	background-size:70%;
 	background-position:center;
+	margin: 0 auto;
+	max-width : 280px;
 }
 #location-info figure:before {
 	opacity : 0.2;
@@ -413,7 +416,7 @@ div, section, section {
 	padding: 0;
 	list-style: none;
 	text-align:center;
-	font-size: 1.5em;
+	font-size: 24px;
 	font-family: inherit;
 	background: rgba(255, 255, 255, 0.7);
 }
@@ -431,15 +434,18 @@ div, section, section {
 	font-family: inherit;
 	height: 20px;
 	line-height: 20px;
-	font-size: 0.8em;
+	font-size: 13px;
 	text-align:center;	
-	margin: 0 0 5px 0;
+	margin: 0 auto;
+	max-width : 280px;
 }
 
 #watch-info figure {
 	background: #fff url("/images/eye.png") no-repeat;
 	background-size:70%;
 	background-position:center;
+	margin: 0 auto;
+	max-width : 280px;
 }
 
 
@@ -455,7 +461,7 @@ div, section, section {
 	padding: 0;
 	list-style: none;
 	text-align:center;
-	font-size: 1.5em;
+	font-size: 24px;
 	font-family: inherit;
 	background: rgba(255, 255, 255, 0.7);
 }
@@ -475,15 +481,18 @@ div, section, section {
 	font-family: inherit;
 	height: 20px;
 	line-height: 20px;
-	font-size: 0.8em;
+	font-size: 13px;
 	text-align:center;	
-	margin: 0 0 5px 0;
+	margin: 0 auto;
+	max-width : 280px;
 }
 
 #caution-info figure {
 	background: #fff url("/images/caution.png") no-repeat;
 	background-size:70%;
 	background-position:center;
+	margin: 0 auto;
+	max-width : 280px;
 }
 
 #caution-tool {
@@ -499,7 +508,7 @@ div, section, section {
 	padding: 0;
 	list-style: none;
 	text-align:center;
-	font-size: 1.5em;	
+	font-size: 24px;	
 	font-family: inherit;
 	background: rgba(255, 255, 255, 0.7);
 }

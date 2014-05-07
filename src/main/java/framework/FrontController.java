@@ -35,7 +35,6 @@ public class FrontController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	HashMap<String, String> map = new HashMap<String, String>();
-	//DatabaseController dbc;
 	DatabaseHandler db;
 	JsonBuilder jb;
 	Logger logger;

@@ -10,7 +10,7 @@
 </head>
 <body>
 
-	<div id=loginBox>
+	<div id=loginBox class="border-radius">
 		<form id="adminLoginForm" action="/login" method="POST">
 		<fieldset>
 		<table>
@@ -21,16 +21,16 @@
                 <tr>
                   <th>아이디</th>
                   <td>
-                    <input class="admin_id" placeholder="id" type="text" name="admin_id">
+                    <input class="admin_id border-radius" placeholder="id" type="text" name="admin_id">
                   </td>
                   <td class="logintd" rowspan="2">
-                  	<input class="login-submit" type="submit" tabindex="2" value="Login">
+                  	<input class="login-submit border-radius" type="submit" tabindex="2" value="Login">
                   </td>
                 </tr>
                 <tr>
                   <th>비밀번호</th>
                   <td>
-                    <input class="admin_pw" placeholder="password" type="password" name="admin_pw">
+                    <input class="admin_pw border-radius" placeholder="password" type="password" name="admin_pw">
                   </td>
                 </tr>
               </tbody>

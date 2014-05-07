@@ -8,12 +8,10 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0">
 	<title>Sagimara</title>
 
-	<link rel="stylesheet" type="text/css" medi="screen"
+	<link rel="stylesheet" type="text/css" media="screen"
 		href="/stylesheets/base.css">
 	<link rel="stylesheet" type="text/css" media="screen"
 		href="/stylesheets/main.css">
-
-	<script	src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 
 </head>
 <body>
@@ -52,42 +50,45 @@
 				</section>
 				<section id="visited-info">
 					<figure>
-						<ul id="q-graph">
+						<ul id="visited-graph">
 							<p>최근 5일간 검색한 사람의 수</p>
-							<li class="qtr" id="q1">
+							<li class="bar-section">
 								<p></p>
 								<ul>
-									<li class="past bar" style="height: 0px;"><p></p></li>
+									<li class="bar"><p></p></li>
 								</ul>
 							</li>
-							<li class="qtr" id="q2">
+							<li class="bar-section">
 								<p></p>
 								<ul>
-									<li class="past bar" style="height: 0px;"><p></p></li>
+									<li class="bar"><p></p></li>
 								</ul>
 							</li>
-							<li class="qtr" id="q3">
+							<li class="bar-section">
 								<p></p>
 								<ul>
-									<li class="past bar" style="height: 0px;"><p></p></li>
+									<li class="bar"><p></p></li>
 								</ul>
 							</li>
-							<li class="qtr" id="q4">
+							<li class="bar-section">
 								<p></p>
 								<ul>
-									<li class="past bar" style="height: 0px;"><p></p></li>
+									<li class="bar"><p></p></li>
 								</ul>
 							</li>
-							<li class="qtr" id="q5">
+							<li class="bar-section">
 								<p></p>
 								<ul>
-									<li class="today bar" style="height: 0px;"><p></p></li>
+									<li class="bar"><p></p></li>
 								</ul>
 							</li>
 						</ul>
 					</figure>
 				</section>
-				<section id="profile-status" class="clearfix profile-status"></section>
+				<section id="profile-status" class="clearfix profile-status">
+					<div class="contents"></div>
+					<button type="button" class="button">인증 요청</button>
+				</section>
 			</section>
 			<section id="info-wrapper">
 				<section id="detail-info" class="clearfix">
@@ -124,6 +125,5 @@
 	</div>
 
 	<script src="/javascripts/main.js"></script>
-	<script src="/javascripts/maps.js"></script>
 </body>
 </html>
