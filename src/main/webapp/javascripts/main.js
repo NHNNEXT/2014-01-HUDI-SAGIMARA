@@ -33,7 +33,7 @@ var visitInfoBarManager = {
 		this.visitNumberSet = profileInquiry;
 	},
 	barAnimationController : function() {
-		// 각각의 bar를 시간차를 두고 에니메이션해주는 함수
+		// 각각의 bar를 시간차를 두고 에니메이션해주는 함수 action
 		this.count = 0;
 		var setBars = setInterval((function () {
 			var elVisitedInfo = document.querySelector("#visited-info");
@@ -145,10 +145,11 @@ var updateManager = {
 		//해당번호 검색(방문)한 수를 업데이트
 		var elVisitInfo = document.querySelector("#visited-info");
 		var elVisitInfoDetail = elVisitInfo.querySelector("#visited-graph");
+		//한라인으로 처리
 		editor.setStyle(elVisitInfoDetail, "-webkit-animation-play-state", "running");
 		editor.setStyle(elVisitInfoDetail, "-moz-animation-play-state", "running");
 		editor.setStyle(elVisitInfoDetail, "animation-play-state", "running");
-		
+		//action의 의미
 		visitInfoBarManager.barAnimationController();
 	},
 	updateLocation : function(userData) {
