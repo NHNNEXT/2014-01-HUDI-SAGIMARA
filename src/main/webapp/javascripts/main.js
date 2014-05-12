@@ -98,7 +98,6 @@ var userStatusInfo = {
 	}
 }
 
-
 var updateManager = {
 	updatePage : function (result) {
 		//각요소 전부에게 새로운 정보를 주고 업데이트 시키는 함수
