@@ -40,11 +40,11 @@ public class DatabaseHandler {
 		UserProfile result = new UserProfile();
 
 		try {
-			ResultSet rs_profile = dbm.selectUserProfile(conn, id);
-			ResultSet rs_inquiry = dbm.selectUserInquiry(conn, id);
+			ResultSet rs_profile = dbm.select(conn, new UserProfile(), id);
+			ResultSet rs_inquiry = dbm.select(conn, new Inquiry(), id);
 			
-			logger.info("[readUserProfile] ResultSet : " + rs_profile.toString()
-					+ " : ");
+			//logger.info("[readUserProfile] ResultSet : " + rs_profile.toString()
+			//		+ " : ");
 			if (rs_profile.next()&&rs_inquiry.next()) {
 				logger.info("[readUserProfile] User[" + id + "] 정보 있음 ");
 				Inquiry inquiry = new Inquiry();
@@ -85,6 +85,7 @@ public class DatabaseHandler {
 			conn.close();
 			
 		} catch (SQLException e) {
+			logger.info("[database] Connection is closed.");
 			e.printStackTrace();
 		}
 		

@@ -7,7 +7,7 @@ public class BaseModel {
 	
 	
 	public String getTableName() {
-		tableName = this.getClass().getName().split("model.")[1]
+		this.tableName = this.getClass().getName().split("model.")[1]
 				.toUpperCase();
 		
 		return tableName;

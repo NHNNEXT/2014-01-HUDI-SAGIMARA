@@ -16,7 +16,7 @@ import org.apache.log4j.Logger;
 
 public class DatabaseManager {
 	Logger logger = SagimaraLogger.logger;
-	
+/*
 	public ResultSet selectUserProfile(Connection conn, String id)
 			throws SQLException {
 		String sql = "select * from USER_PROFILE where phone_number = ?";
@@ -25,11 +25,12 @@ public class DatabaseManager {
 		ResultSet rs = pstmt.executeQuery();
 		return rs;
 	}
-	
-	public ResultSet selectUserInquiry(Connection conn, String id)  {
+	*/
+/*
+	public ResultSet selectUserInquiry(Connection conn, String id) {
 		String sql = "select * from USER_INQUIRY where phone_number = ?";
 		PreparedStatement pstmt;
-		ResultSet rs=null;
+		ResultSet rs = null;
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
@@ -41,14 +42,39 @@ public class DatabaseManager {
 
 		return rs;
 	}
-	
+*/
+
+	public ResultSet select(Connection conn, BaseModel model, String id)
+			throws SQLException {
+		String sql, tableName;
+		PreparedStatement pstmt;
+		ResultSet rs;
+		tableName = model.getTableName();
+		logger.info("[DatabaseManager-Select] Table NAME : " + tableName);
+		if (tableName.equals("USERPROFILE")) {
+			sql = "select * from " + "USER_PROFILE" + " where phone_number = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			return rs;
+		} else if (tableName.equals("INQUIRY")) {
+			sql = "select * from " + "USER_INQUIRY" + " where phone_number = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			return rs;
+		}
+		
+		return null;
+	}
+
 	public int add(Connection conn, BaseModel model) throws SQLException {
 		String tableName = model.getTableName();
-		
+
 		PreparedStatement pstmt = null;
 		int result;
-		logger.info("[DatabaseManager] Table NAME : "+tableName);
-		
+		logger.info("[DatabaseManager-add] Table NAME : " + tableName);
+
 		if (tableName.equals("USER")) {
 			User user = (User) model;
 			String sql = "INSERT INTO " + tableName + " VALUES (?, ?, ?, ?)";
@@ -59,29 +85,33 @@ public class DatabaseManager {
 			pstmt.setString(3, user.getUserStatus());
 			pstmt.setString(4, user.getUserLocation());
 		}
-		
-		if(tableName.equals("INQUIRY")){
+
+		if (tableName.equals("INQUIRY")) {
 			Inquiry inquiry = (Inquiry) model;
 
-			String sql = "INSERT INTO " + tableName + " (`USER_user_phone`,`inquiry_time`) VALUES (?, ?)";
-			logger.info("[DatabaseManager] Inquiry :" + inquiry.getInquiryTime() + " : "+inquiry.getInquiryTime());
+			String sql = "INSERT INTO " + tableName
+					+ " (`USER_user_phone`,`inquiry_time`) VALUES (?, ?)";
+			logger.info("[DatabaseManager] Inquiry :"
+					+ inquiry.getInquiryTime() + " : "
+					+ inquiry.getInquiryTime());
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, inquiry.getInquiryId());
 			pstmt.setString(2, inquiry.getInquiryTime());
-			
+
 		}
-		
+
 		try {
 			result = pstmt.executeUpdate();
 			if (result == 1) {
-				logger.info("[DatabaseManager] Add "+tableName+" : " + model);
+				logger.info("[DatabaseManager] Add " + tableName + " : "
+						+ model);
 			} else {
 				logger.info("[DatabaseManager] Fail Add " + tableName);
 			}
-			
+
 			return result;
 		} catch (Exception e) {
-			logger.error("pDatabaseManager] add Error : "+e.getMessage());
+			logger.error("pDatabaseManager] add Error : " + e.getMessage());
 		}
 		return 0;
 	}
@@ -104,6 +134,5 @@ public class DatabaseManager {
 		return columns;
 
 	}
-
 
 }
