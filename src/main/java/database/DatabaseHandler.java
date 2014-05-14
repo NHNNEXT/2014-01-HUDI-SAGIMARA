@@ -6,8 +6,10 @@ import java.sql.SQLException;
 
 import logger.SagimaraLogger;
 import model.Inquiry;
+import model.Location;
 import model.User;
 import model.UserProfile;
+import model.Video;
 
 import org.apache.log4j.Logger;
 
@@ -90,6 +92,39 @@ public class DatabaseHandler {
 		}
 		
 		return result;
+	}
+
+	public void insertLocation(String phone, String cordinate, String time) {
+		Connection conn = this.connect();
+		Location location = new Location();
+		location.setLocationId(phone);
+		location.setLocationTime(time);
+		location.setLocationCoordinate(cordinate);
+		
+		try {
+			dbm.add(conn, location);
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public void insertPhoto(String phone, String videoLink, String time) {
+		Connection conn = this.connect();
+		Video video = new Video();
+		video.setVideoId(phone);
+		video.setVideoLink(videoLink);
+		video.setUploadTime(time);
+		
+		try {
+			dbm.add(conn, video);
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 }
