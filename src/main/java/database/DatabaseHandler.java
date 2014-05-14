@@ -42,27 +42,25 @@ public class DatabaseHandler {
 		UserProfile result = new UserProfile();
 
 		try {
-			ResultSet rs_profile = dbm.select(conn, new UserProfile(), id);
-			ResultSet rs_inquiry = dbm.select(conn, new Inquiry(), id);
+			ResultSet rsProfile = dbm.select(conn, new UserProfile(), id);
+			ResultSet rsInquiry = dbm.select(conn, new Inquiry(), id);
 			
-			//logger.info("[readUserProfile] ResultSet : " + rs_profile.toString()
-			//		+ " : ");
-			if (rs_profile.next()&&rs_inquiry.next()) {
+			if (rsProfile.next()&&rsInquiry.next()) {
 				logger.info("[readUserProfile] User[" + id + "] 정보 있음 ");
 				Inquiry inquiry = new Inquiry();
 				inquiry.setInquiryId(id);
 
 				dbm.add(conn, inquiry);
 
-				result.setProfilePhone(rs_profile.getString("phone_number"));
-				result.setProfileStatus(rs_profile.getString("status"));
-				result.setProfileVerification(rs_profile.getString("verification"));
-				result.setProfileLocation(rs_profile.getString("location"));
-				result.setProfileWatch(rs_profile.getString("watch"));
-				result.setProfileNotify(rs_profile.getString("notify"));
-				String[] inquiryList = { rs_inquiry.getString("4day ago"),
-						rs_inquiry.getString("3day ago"), rs_inquiry.getString("2day ago"),
-						rs_inquiry.getString("1day ago"), rs_inquiry.getString("today") };
+				result.setProfilePhone(rsProfile.getString("phone_number"));
+				result.setProfileStatus(rsProfile.getString("status"));
+				result.setProfileVerification(rsProfile.getString("verification"));
+				result.setProfileLocation(rsProfile.getString("location"));
+				result.setProfileWatch(rsProfile.getString("watch"));
+				result.setProfileNotify(rsProfile.getString("notify"));
+				String[] inquiryList = { rsInquiry.getString("4day ago"),
+						rsInquiry.getString("3day ago"), rsInquiry.getString("2day ago"),
+						rsInquiry.getString("1day ago"), rsInquiry.getString("today") };
 				result.setProfileInquiry(inquiryList);
 			} else {
 				logger.info("[readUserProfile] User[" + id + "] 정보 없음 ");
@@ -81,8 +79,8 @@ public class DatabaseHandler {
 				String[] inquiryList = { "0", "0", "0", "0", "0" };
 				result.setProfileInquiry(inquiryList);
 			}
-			rs_profile.close();
-			rs_inquiry.close();
+			rsProfile.close();
+			rsInquiry.close();
 			logger.info("[database] Connection is closed.");
 			conn.close();
 			
