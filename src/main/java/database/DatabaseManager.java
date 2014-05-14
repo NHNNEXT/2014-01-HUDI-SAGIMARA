@@ -17,34 +17,12 @@ import model.Video;
 import org.apache.log4j.Logger;
 
 public class DatabaseManager {
-	Logger logger = SagimaraLogger.logger;
-/*
-	public ResultSet selectUserProfile(Connection conn, String id)
-			throws SQLException {
-		String sql = "select * from USER_PROFILE where phone_number = ?";
-		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, id);
-		ResultSet rs = pstmt.executeQuery();
-		return rs;
+	Logger logger;
+	
+	public DatabaseManager() {
+		logger = SagimaraLogger.logger;
 	}
-	*/
-/*
-	public ResultSet selectUserInquiry(Connection conn, String id) {
-		String sql = "select * from USER_INQUIRY where phone_number = ?";
-		PreparedStatement pstmt;
-		ResultSet rs = null;
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, id);
-			rs = pstmt.executeQuery();
-		} catch (SQLException e) {
-			logger.info("error");
-			e.printStackTrace();
-		}
 
-		return rs;
-	}
-*/
 
 	public ResultSet select(Connection conn, BaseModel model, String id)
 			throws SQLException {
