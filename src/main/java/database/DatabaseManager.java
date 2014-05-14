@@ -133,13 +133,15 @@ public class DatabaseManager {
 		if(tableName.equals("VIDEO")) {
 			Video video = (Video) model;
 			
-			String sql = "INSERT INTO " + tableName + " VALUES (?, ?)";
+			String sql = "INSERT INTO " + tableName + " VALUES (?, ?, ?)";
 			logger.info("[DatabaseManager] Video :"
 					+ video.getVideoId() + " : "
-					+ video.getVideoLink()); 
+					+ video.getVideoLink() + " : "
+					+ video.getVideoDate()); 
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, video.getVideoId());
 			pstmt.setString(2, video.getVideoLink());
+			pstmt.setString(3, video.getVideoDate());
 		}
 
 		try {
