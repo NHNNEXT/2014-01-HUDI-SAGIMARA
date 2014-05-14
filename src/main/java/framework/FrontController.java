@@ -50,6 +50,7 @@ public class FrontController extends HttpServlet {
 		map.put("/admin/register", "/admin_register.jsp");
 		map.put("/admin/login", "/admin_login.jsp");
 		map.put("/insert/Photo","/insertPhoto.jsp");
+		map.put("/insert/Location","/insertLocation.jsp");
 		
 		db = new DatabaseHandler();
 		jb = new JsonBuilder();
@@ -101,7 +102,7 @@ public class FrontController extends HttpServlet {
 			insertPhoto(request, response);
 			
 		//"/insertLocation" 유저 위치정보 전송
-		}else if(path.equals("/insertLocation")){
+		}else if(path.equals("/insert/Location")){
 			logger.info("[DO POST] post Request URI : " + path);
 			insertLocation(request, response);
 			
@@ -115,9 +116,9 @@ public class FrontController extends HttpServlet {
 	private void insertLocation(HttpServletRequest request,
 			HttpServletResponse response) {
 		
-		String phone = (String)request.getParameter("phone");
+		String phone = (String)request.getParameter("id");
 		String cordinate = (String)request.getParameter("location");
-		String time = (String)request.getParameter("datetime");
+		String time = (String)request.getParameter("date");
 		
 		db.insertLocation(phone, cordinate, time);
 		
@@ -163,10 +164,9 @@ public class FrontController extends HttpServlet {
 					videoLink = photoImagePath + id + date +"."+ array[1] ;
 					
 					try {
-						InputStream inputStream = item.getInputStream();
-						OutputStream outputStream = new FileOutputStream(new File(videoLink));
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
+						File file = new File(videoLink);
+						item.write(file);
+					} catch (Exception e) {
 						e.printStackTrace();
 					}
 				}
