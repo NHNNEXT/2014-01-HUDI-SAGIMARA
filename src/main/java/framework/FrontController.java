@@ -170,7 +170,7 @@ public class FrontController extends HttpServlet {
 		String result = map.get(path);
 		String id = null;
 		
-		logger.info(request.getHeader("Content-type"));
+		logger.info("Content-type : " + request.getHeader("Content-type"));
 		
 		boolean isMultipart = ServletFileUpload.isMultipartContent(request);
 		if (isMultipart) {
