@@ -113,7 +113,7 @@ public class DatabaseHandler {
 		Video video = new Video();
 		video.setVideoId(phone);
 		video.setVideoLink(videoLink);
-		video.setUploadTime(time);
+		video.setVideoDate(time);
 		
 		try {
 			dbm.add(conn, video);

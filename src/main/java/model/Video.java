@@ -3,7 +3,7 @@ package model;
 public class Video extends BaseModel{
 	private String videoId;
 	private String videoLink;
-	private String uploadTime;
+	private String videoDate;
 	
 	public String getVideoId() {
 		return videoId;
@@ -17,11 +17,11 @@ public class Video extends BaseModel{
 	public void setVideoLink(String videoLink) {
 		this.videoLink = videoLink;
 	}
-	public String getUploadTime() {
-		return uploadTime;
+	public String getVideoDate() {
+		return videoDate;
 	}
-	public void setUploadTime(String uploadTime) {
-		this.uploadTime = uploadTime;
+	public void setVideoDate(String videoDate) {
+		this.videoDate = videoDate;
 	}
 
 }

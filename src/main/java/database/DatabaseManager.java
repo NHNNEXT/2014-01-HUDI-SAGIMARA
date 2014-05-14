@@ -10,7 +10,9 @@ import java.util.ArrayList;
 import logger.SagimaraLogger;
 import model.BaseModel;
 import model.Inquiry;
+import model.Location;
 import model.User;
+import model.Video;
 
 import org.apache.log4j.Logger;
 
@@ -98,6 +100,48 @@ public class DatabaseManager {
 			pstmt.setString(1, inquiry.getInquiryId());
 			pstmt.setString(2, inquiry.getInquiryTime());
 
+		}
+		
+		if(tableName.equals("LOCATION")) {
+			Location location = (Location) model;
+			
+			String sql = "INSERT INTO " + tableName + " VALUES (?, ?, ?)";
+			logger.info("[DatabaseManager] Location :"
+					+ location.getLocationId() + " : "
+					+ location.getLocationTime() + " : " 
+					+ location.getLocationCoordinate()); 
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, location.getLocationId());
+			pstmt.setString(2, location.getLocationTime());
+			pstmt.setString(3, location.getLocationCoordinate());
+		}
+		
+		if(tableName.equals("LOCATION")) {
+			Location location = (Location) model;
+			
+			String sql = "INSERT INTO " + tableName + " VALUES (?, ?, ?)";
+			logger.info("[DatabaseManager] Location :"
+					+ location.getLocationId() + " : "
+					+ location.getLocationTime() + " : " 
+					+ location.getLocationCoordinate()); 
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, location.getLocationId());
+			pstmt.setString(2, location.getLocationTime());
+			pstmt.setString(3, location.getLocationCoordinate());
+		}
+		
+		if(tableName.equals("VIDEO")) {
+			Video video = (Video) model;
+			
+			String sql = "INSERT INTO " + tableName + " VALUES (?, ?, ?)";
+			logger.info("[DatabaseManager] Video :"
+					+ video.getVideoId() + " : "
+					+ video.getVideoLink() + " : "
+					+ video.getVideoDate()); 
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, video.getVideoId());
+			pstmt.setString(2, video.getVideoLink());
+			pstmt.setString(3, video.getVideoDate());
 		}
 
 		try {
