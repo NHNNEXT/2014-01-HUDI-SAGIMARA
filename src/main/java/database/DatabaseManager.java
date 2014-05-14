@@ -174,7 +174,5 @@ public class DatabaseManager {
 		}
 
 		return columns;
-
 	}
-
 }

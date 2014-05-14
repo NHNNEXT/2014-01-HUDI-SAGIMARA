@@ -69,12 +69,16 @@ public class FrontController extends HttpServlet {
 					.getRequestDispatcher(result);
 			dispather.forward(request, response);
 		} else {
-			request.setAttribute("error", "존재하지 않는 주소입니다");
-			RequestDispatcher dispather = getServletContext()
-					.getRequestDispatcher("/error.jsp");
-			dispather.forward(request, response);
+			requestPathError(request, response);
 		}
 
+	}
+
+	private void requestPathError(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setAttribute("error", "존재하지 않는 주소입니다");
+		RequestDispatcher dispather = getServletContext()
+				.getRequestDispatcher("/error.jsp");
+		dispather.forward(request, response);
 	}
 
 	@Override
@@ -83,44 +87,91 @@ public class FrontController extends HttpServlet {
 		String path = request.getServletPath();
 		
 		
+		//"/tesst" 유저 정보 가져오
 		if (path.equals("/test")) {
 			test(request, response);
+			
+		//"/insertPhoto" 유저 사진 전송
+		}else if(path.equals("/insertPhoto")){
+			insertPhoto(request, response);
+			
+		//"/insertLocation" 유저 위치정보 전송
+		}else if(path.equals("/insertLocation")){
+			insertLocation(request, response);
+			
+		}else{
+			requestPathError(request, response);
 		}
+		
 	}
+	
+	
+	private void insertLocation(HttpServletRequest request,
+			HttpServletResponse response) {
+		
+		String phone = (String)request.getParameter("phone");
+		String cordinate = (String)request.getParameter("location");
+		String time = (String)request.getParameter("datetime");
+		
+		db.insertLocation(phone, cordinate, time);
+		
+	}
+
+	private void insertPhoto(HttpServletRequest request,
+			HttpServletResponse response) {
+		
+		String phone = (String)request.getParameter("phone");
+		String videoLink = (String)request.getParameter("videoLink");
+		String time = (String)request.getParameter("datetime");
+		
+		db.insertPhoto(phone, videoLink, time);
+		
+	}
+
 	private void adminRegister(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String path, result, id, password;
 		path= request.getRequestURI();
 		result = map.get(path);
-		Map<String, String> resultMap = new HashMap<String, String>();
-		logger.info("[Admin Register] Register Start in : "+path + " : "+ result);
 		
-		resultMap.put("code", "OK");
-		resultMap.put("message", "Register Success");
+		if (result != null) {
+			String json = makeResultJSON(path, result);
+
+			id = (String) request.getParameter("id");
+			password = (String) request.getParameter("password");
+			logger.info("[Admin Register] id : "+id + " , password : " + password);
+
+			response.setCharacterEncoding("utf8");
+			request.setCharacterEncoding("utf8");		
+			request.setAttribute("json", json);
+
+			RequestDispatcher dispather = getServletContext()
+					.getRequestDispatcher(result);
+			dispather.forward(request, response);
+		}else{
+			requestPathError(request, response);
+		}
+	}
+
+	private String makeResultJSON(String path, String result) {
+		Map<String, String> resultMap = new HashMap<String, String>();
+		logger.info("[Requst] path : "+path + " result : "+ result);
+
+		resultMap.put("code", "200");
+		resultMap.put("message", "Request Success");
 
 		Gson gson = new GsonBuilder().create();
-		String json = gson.toJson(resultMap);
-		
-		id = (String) request.getParameter("id");
-		password = (String) request.getParameter("password");
-		logger.info("[Admin Register] id : "+id + " , password : " + password);
-		
-		response.setCharacterEncoding("utf8");
-		request.setCharacterEncoding("utf8");		
-		request.setAttribute("json", json);
-		
-		RequestDispatcher dispather = getServletContext()
-				.getRequestDispatcher(result);
-		dispather.forward(request, response);
+		return gson.toJson(resultMap);
 	}
+
 	private void test(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String path = request.getServletPath();
 		String result = map.get(path);
 		String id = null;
-	
+		
 		logger.info(request.getHeader("Content-type"));
-	
+		
 		boolean isMultipart = ServletFileUpload.isMultipartContent(request);
 		if (isMultipart) {
 			FileItemFactory factory = new DiskFileItemFactory();
@@ -166,7 +217,7 @@ public class FrontController extends HttpServlet {
 		} else {
 			logger.info("id is null");
 		}
-		
+
 		if (!result.isEmpty()) {
 			RequestDispatcher dispather = getServletContext()
 					.getRequestDispatcher(result);
