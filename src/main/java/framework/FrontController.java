@@ -1,6 +1,10 @@
 package framework;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -29,15 +33,14 @@ import database.DatabaseHandler;
 
 public class FrontController extends HttpServlet {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
+	String photoImagePath ="/home/dev/photo/";
 	
 	HashMap<String, String> map = new HashMap<String, String>();
 	DatabaseHandler db;
 	JsonBuilder jb;
 	Logger logger;
+	
 	
 	@Override
 	public void init() throws ServletException {
@@ -122,8 +125,10 @@ public class FrontController extends HttpServlet {
 
 	private void insertPhoto(HttpServletRequest request,
 			HttpServletResponse response) {
-		String id;
-
+		String id = null;
+		String videoLink = null;
+		String date = null;
+		
 		boolean isMultipart = ServletFileUpload.isMultipartContent(request);
 		if (isMultipart) {
 			FileItemFactory factory = new DiskFileItemFactory();
@@ -139,23 +144,38 @@ public class FrontController extends HttpServlet {
 			Iterator<FileItem> ir = items.iterator();
 			while (ir.hasNext()) {
 				FileItem item = (FileItem) ir.next();
-
-				if (!item.isFormField()) {
-					//Process uploaded file.
-					String fieldName = item.getFieldName();
-					String fileName = item.getName();
-					String contentType = item.getContentType();
-					boolean isInMemory = item.isInMemory();
-					long sizeInBytes = item.getSize();
+				if (item.isFormField()) {
+					// Process form field.
+					String name = item.getFieldName();
+					String value = item.getString();
+					
+					if(name.equals("id")){
+						id = value;
+					}
+					if(name.equals("date")){
+						date = value;
+					}
+					
+				} else {
+					// Process uploaded file.
+					String name = item.getContentType();
+					String[] array = name.split("/");
+					videoLink = photoImagePath + id + date +"."+ array[1] ;
+					
+					try {
+						InputStream inputStream = item.getInputStream();
+						OutputStream outputStream = new FileOutputStream(new File(videoLink));
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				
+				if(id!=null && videoLink!=null&&date!=null){
+					db.insertPhoto(id, videoLink, date);
 				}
 			}
 			
-
-			String phone = (String)request.getParameter("phone");
-			String videoLink = (String)request.getParameter("videoLink");
-			String time = (String)request.getParameter("datetime");
-
-			db.insertPhoto(phone, videoLink, time);
 		}
 	}
 
