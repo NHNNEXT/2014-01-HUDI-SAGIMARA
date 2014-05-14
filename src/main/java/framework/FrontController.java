@@ -46,7 +46,8 @@ public class FrontController extends HttpServlet {
 		map.put("/index", "/index.jsp");
 		map.put("/admin/register", "/admin_register.jsp");
 		map.put("/admin/login", "/admin_login.jsp");
-
+		map.put("/insert/Photo","/insertPhoto.jsp");
+		
 		db = new DatabaseHandler();
 		jb = new JsonBuilder();
 		logger = SagimaraLogger.logger;
@@ -84,19 +85,21 @@ public class FrontController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		String path = request.getServletPath();
-		
+		String path = request.getRequestURI();
 		
 		//"/tesst" 유저 정보 가져오
 		if (path.equals("/test")) {
+			logger.info("[DO POST] post Request URI : " + path);
 			test(request, response);
 			
 		//"/insertPhoto" 유저 사진 전송
-		}else if(path.equals("/insertPhoto")){
+		}else if(path.equals("/insert/PhotoData")){
+			logger.info("[DO POST] post Request URI : " + path);
 			insertPhoto(request, response);
 			
 		//"/insertLocation" 유저 위치정보 전송
 		}else if(path.equals("/insertLocation")){
+			logger.info("[DO POST] post Request URI : " + path);
 			insertLocation(request, response);
 			
 		}else{
@@ -119,13 +122,41 @@ public class FrontController extends HttpServlet {
 
 	private void insertPhoto(HttpServletRequest request,
 			HttpServletResponse response) {
-		
-		String phone = (String)request.getParameter("phone");
-		String videoLink = (String)request.getParameter("videoLink");
-		String time = (String)request.getParameter("datetime");
-		
-		db.insertPhoto(phone, videoLink, time);
-		
+		String id;
+
+		boolean isMultipart = ServletFileUpload.isMultipartContent(request);
+		if (isMultipart) {
+			FileItemFactory factory = new DiskFileItemFactory();
+			ServletFileUpload upload = new ServletFileUpload(factory);
+			List<FileItem> items = null;
+			try {
+				items = upload.parseRequest(request);
+			} catch (FileUploadException e) {
+				e.printStackTrace();
+			}
+
+
+			Iterator<FileItem> ir = items.iterator();
+			while (ir.hasNext()) {
+				FileItem item = (FileItem) ir.next();
+
+				if (!item.isFormField()) {
+					//Process uploaded file.
+					String fieldName = item.getFieldName();
+					String fileName = item.getName();
+					String contentType = item.getContentType();
+					boolean isInMemory = item.isInMemory();
+					long sizeInBytes = item.getSize();
+				}
+			}
+			
+
+			String phone = (String)request.getParameter("phone");
+			String videoLink = (String)request.getParameter("videoLink");
+			String time = (String)request.getParameter("datetime");
+
+			db.insertPhoto(phone, videoLink, time);
+		}
 	}
 
 	private void adminRegister(HttpServletRequest request, HttpServletResponse response)
