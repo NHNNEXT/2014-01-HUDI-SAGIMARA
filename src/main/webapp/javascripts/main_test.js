@@ -24,12 +24,26 @@ test("updateLocation_Test", function(){
 	var testdata = {
 		profileLocation : "경기도 성남시"
 	}
-	//When
-	updateManager.updateLocation(testdata);
-	//Then
 	var elLocationInfo = document.querySelector("#location-info");
 	var locationInfoNodeList = elLocationInfo.querySelectorAll("#map-canvas p");
 	var updatedLocationInfo = locationInfoNodeList[0];
+	//When
+	updateManager.updateLocation(testdata);
+	//Then
 	equal(updatedLocationInfo.innerText, testdata.profileLocation);
 	equal(elLocationInfo.style.webkitAnimationPlayState, "running");
 });	
+
+test("updateLocation_Test2", function(){
+	//Given
+	var expectedDiv ="<div id=\"location-info\" style=\"-webkit-animation-play-state: running;\"><div id=\"map-canvas\"><p>경기도 성남시</p></div></div>"
+	var testdata = {
+			profileLocation : "경기도 성남시"
+		}
+	var elLocationInfo = document.querySelector("#location-info");
+	//When
+	updateManager.updateLocation(testdata);
+	
+	//Then
+	equal(elLocationInfo.outerHTML, "");
+});

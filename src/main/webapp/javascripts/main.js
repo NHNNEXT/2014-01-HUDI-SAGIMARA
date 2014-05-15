@@ -123,10 +123,8 @@ var updateManager = {
 		// editor.updateInnerHTML(elProfileInfoDetail[0], join);
 		// editor.updateInnerHTML(elProfileInfoDetail[1], Verification);
 		// editor.updateInnerHTML(elProfileInfoDetail[2], Accept);
-		editor.setStyle(elProfileInfo, "-webkit-animation-play-state",
-				"running");
-		editor.setStyle(elProfileInfo, "-moz-animation-play-state", "running");
-		editor.setStyle(elProfileInfo, "animation-play-state", "running");
+		var type = editor.playStatusFeatureDetector();
+		editor.setStyle(elProfileInfo, type, "running");
 	},
 	updateStatus : function(userData) {
 		// user Status부분의 업데이트
@@ -135,32 +133,24 @@ var updateManager = {
 				.querySelector(".contents");
 		editor.setStyle(elProfileStatus, "height", "150px");
 		if (userData.profileStatus == userStatusInfo.safety.code) {
-			editor.setStyle(elProfileStatus, "background",
-					userStatusInfo.safety.color);
+			editor.setStyle(elProfileStatus, "background", userStatusInfo.safety.color);
 			editor.updateInnerHTML(elProfileStatusContents,
 					userStatusInfo.safety.contents)
 		} else if (userData.profileStatus == userStatusInfo.warning.code) {
-			editor.setStyle(elProfileStatus, "background",
-					userStatusInfo.warning.color);
-			editor.updateInnerHTML(elProfileStatusContents,
-					userStatusInfo.warning.contents)
+			editor.setStyle(elProfileStatus, "background", userStatusInfo.warning.color);
+			editor.updateInnerHTML(elProfileStatusContents, userStatusInfo.warning.contents)
 		} else {
-			editor.setStyle(elProfileStatus, "background",
-					userStatusInfo.danger.color);
-			editor.updateInnerHTML(elProfileStatusContents,
-					userStatusInfo.danger.contents)
+			editor.setStyle(elProfileStatus, "background", userStatusInfo.danger.color);
+			editor.updateInnerHTML(elProfileStatusContents, userStatusInfo.danger.contents)
 		}
 	},
 	updateVisit : function(userData) {
 		// 해당번호 검색(방문)한 수를 업데이트
 		var elVisitInfo = document.querySelector("#visited-info");
 		var elVisitInfoDetail = elVisitInfo.querySelector("#visited-graph");
-		// 한라인으로 처리
-		editor.setStyle(elVisitInfoDetail, "-webkit-animation-play-state",
-				"running");
-		editor.setStyle(elVisitInfoDetail, "-moz-animation-play-state",
-				"running");
-		editor.setStyle(elVisitInfoDetail, "animation-play-state", "running");
+		// 한라인으로 처리 feature detecting, browser detecting
+		var type = editor.playStatusFeatureDetector();
+		editor.setStyle(elVisitInfoDetail, type, "running");
 		// action의 의미
 		visitInfoBarManager.barAnimationController();
 	},
@@ -169,10 +159,8 @@ var updateManager = {
 		var elLocationInfo = document.querySelector("#location-info");
 		var elLocationInfoDetail = elLocationInfo
 				.querySelector("#map-canvas p");
-		editor.setStyle(elLocationInfo, "-webkit-animation-play-state",
-				"running");
-		editor.setStyle(elLocationInfo, "-moz-animation-play-state", "running");
-		editor.setStyle(elLocationInfo, "animation-play-state", "running");
+		var type = editor.playStatusFeatureDetector();
+		editor.setStyle(elLocationInfo, type, "running");
 		editor.updateInnerHTML(elLocationInfoDetail, userData.profileLocation);
 	},
 
@@ -180,34 +168,27 @@ var updateManager = {
 		// user를 지켜보고(등록) 있는 사람의 수를 업데이트
 		var elWatchInfo = document.querySelector("#watch-info");
 		var elWatchInfoDetail = elWatchInfo.querySelector("#watch-tool p");
-		editor.setStyle(elWatchInfo, "-webkit-animation-play-state", "running");
-		editor.setStyle(elWatchInfo, "-moz-animation-play-state", "running");
-		editor.setStyle(elWatchInfo, "animation-play-state", "running");
+		var type = editor.playStatusFeatureDetector();
+		editor.setStyle(elWatchInfo, type, "running");
 		editor.updateInnerHTML(elWatchInfoDetail, userData.profileWatch);
 
 	},
 	updateCaution : function(userData) {
 		// 경고나 신고가 들어온 수를 업데이트
 		var elCautionInfo = document.querySelector("#caution-info");
-		var elCautionInfoDetail = elCautionInfo
-				.querySelector("#caution-tool p");
-		editor.setStyle(elCautionInfo, "-webkit-animation-play-state",
-				"running");
-		editor.setStyle(elCautionInfo, "-moz-animation-play-state", "running");
-		editor.setStyle(elCautionInfo, "animation-play-state", "running");
+		var elCautionInfoDetail = elCautionInfo.querySelector("#caution-tool p");
+		var type = editor.playStatusFeatureDetector();
+		editor.setStyle(elCautionInfo, type, "running");
 		editor.updateInnerHTML(elCautionInfoDetail, userData.profileNotify);
 	},
 	setAnimation : function(state) {
 		// 페이지 에니메이션을 시작시키는 함수
 		var elContainer = document.querySelector("#container");
 		var elFooter = document.querySelector("footer");
-
-		editor.setStyle(elContainer, "-webkit-animation-play-state", state);
-		editor.setStyle(elContainer, "-moz-animation-play-state", state);
-		editor.setStyle(elContainer, "animation-play-state", state);
-		editor.setStyle(elFooter, "-webkit-animation-play-state", state);
-		editor.setStyle(elFooter, "-moz-animation-play-state", state);
-		editor.setStyle(elFooter, "animation-play-state", state);
+		
+		var type = editor.playStatusFeatureDetector();
+		editor.setStyle(elContainer, type, state);
+		editor.setStyle(elFooter, type, state);
 	}
 }
 
@@ -237,6 +218,23 @@ var editor = {
 		// 해당 element에 contents을 삽입하는 함수
 		var updateContents = contents;
 		element.innerHTML = contents;
+	},
+	playStatusFeatureDetector : function() {
+		var elForCheck = document.querySelector("body");
+		var playStatus = {
+			"-webkit-animation-play-state" : typeof elForCheck.style.webkitAnimationPlayState, 
+			"-moz-animation-play-state" : typeof elForCheck.style.mozAnimationPlayState,
+			"animation-play-state" :  typeof elForCheck.style.animationPlayState
+		}
+		var result;
+
+		for(var key in playStatus){
+			if(playStatus[key] !== "undefined"){
+				result = key;
+			}
+		}
+			
+		return result;
 	}
 }
 
@@ -246,7 +244,7 @@ var sagimaraMain = {
 		// 검색 아이콘에 검색 관련 통신 이벤트등록
 		// 로고에 리프래쉬 기능 이벤트 등록
 		// 4일전~오늘날짜를 계산에서 보관
-		oEventElements.elSubmit.addEventListener("click", sagimaraMain.requestSearchEvent, false);
+		oEventElements.elSubmit.addEventListener("click", this.requestSearchEvent, false);
 		oEventElements.elLogo.addEventListener("click", utility.refresh, false);
 		visitInfoBarManager.setDateSet()
 	},
