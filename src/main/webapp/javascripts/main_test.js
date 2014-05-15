@@ -21,9 +21,15 @@ test("setvisitNumberSet_Test", function(){
 
 test("updateLocation_Test", function(){
 	//Given
-	var testLocation = "경기도 성남시";
+	var testdata = {
+		profileLocation : "경기도 성남시"
+	}
 	//When
-	updateManager.updateLocation(testLocation);
+	updateManager.updateLocation(testdata);
 	//Then
-	equal(document.qu )
-});
+	var elLocationInfo = document.querySelector("#location-info");
+	var locationInfoNodeList = elLocationInfo.querySelectorAll("#map-canvas p");
+	var updatedLocationInfo = locationInfoNodeList[0];
+	equal(updatedLocationInfo.innerText, testdata.profileLocation);
+	equal(elLocationInfo.style.webkitAnimationPlayState, "running");
+});	

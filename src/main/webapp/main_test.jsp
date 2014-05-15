@@ -19,7 +19,11 @@
 <body>
 	<div id="qunit"></div>
 	<div id="quint-fixture">
-		<div id="location-info"></div>
+		<div id="location-info">
+			<div id ="map-canvas">
+				<p></p>
+			</div>
+		</div>
 	</div>
 
 
