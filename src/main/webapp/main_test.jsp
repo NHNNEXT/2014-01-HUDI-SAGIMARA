@@ -21,6 +21,8 @@
 	<div id="quint-fixture">
 		<div class="search-submit"></div>
 		<div class="logo"></div>
+		
+		<div id="location-info-fake"></div>
 		<div id="location-info">
 			<div id ="map-canvas">
 				<p></p>

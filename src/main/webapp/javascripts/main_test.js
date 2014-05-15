@@ -34,16 +34,24 @@ test("updateLocation_Test", function(){
 	equal(elLocationInfo.style.webkitAnimationPlayState, "running");
 });	
 
-test("updateLocation_Test2", function(){
+test("updateLocation_Test_Independed_browser", function(){
 	//Given
-	var expectedDiv ="<div id=\"location-info\" style=\"-webkit-animation-play-state: running;\"><div id=\"map-canvas\"><p>경기도 성남시</p></div></div>"
+	var expectedDivString ="<div id=\"location-info\" style=\"-webkit-animation-play-state: running;\"><div id=\"map-canvas\"><p>경기도 성남시</p></div></div>";
+	var expectedDiv = document.querySelector("#location-info-fake");
+	expectedDiv.innerHTML = expectedDivString;
+	
 	var testdata = {
 			profileLocation : "경기도 성남시"
 		}
-	var elLocationInfo = document.querySelector("#location-info");
 	//When
 	updateManager.updateLocation(testdata);
 	
 	//Then
-	equal(elLocationInfo.outerHTML, "");
+	var elLocationInfo = document.querySelector("#location-info");
+	var expectedDiv = document.querySelector("#location-info-fake");
+	equal(elLocationInfo.outerHTML, expectedDiv.firstChild.outerHTML);
+});
+
+test("test_case", function() {
+	equal("result", "expect");
 });

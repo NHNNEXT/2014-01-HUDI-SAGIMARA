@@ -220,6 +220,7 @@ var editor = {
 		element.innerHTML = contents;
 	},
 	playStatusFeatureDetector : function() {
+		//해당브라우져에서 동작가능한 playStatus를 찾아서 해당 타입을 return해준다.
 		var elForCheck = document.querySelector("body");
 		var playStatus = {
 			"-webkit-animation-play-state" : typeof elForCheck.style.webkitAnimationPlayState, 
