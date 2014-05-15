@@ -1,17 +1,17 @@
 var oEventElements = {
-	//EventListener를 위한 elements
+	// EventListener를 위한 elements
 	elSubmit : document.querySelector(".search-submit"),
 	elLogo : document.querySelector(".logo")
 };
 
 var visitInfoBarManager = {
-	//해당번호로 검색(방문)한 사람수 관련 정보
+	// 해당번호로 검색(방문)한 사람수 관련 정보
 	setBars : "",
 	count : 0,
 	visitNumberSet : [],
 	dateInfo : new Date(),
 	setDateSet : function() {
-		//최근 5일의 날짜 배열을 dateSet에 세팅한다.
+		// 최근 5일의 날짜 배열을 dateSet에 세팅한다.
 		this.dateSet = new Array();
 
 		this.today = this.dateInfo.getDate();
@@ -19,8 +19,9 @@ var visitInfoBarManager = {
 		this.year = this.dateInfo.getFullYear();
 
 		var datePool = 5;
-		for (var i = 0 ; i < datePool ; i++) {
-			this.dateInfo.setFullYear(this.year, this.month - 1, this.today - i);
+		for (var i = 0; i < datePool; i++) {
+			this.dateInfo
+					.setFullYear(this.year, this.month - 1, this.today - i);
 			var day = this.dateInfo.getDate();
 			var month = this.dateInfo.getMonth() + 1;
 			this.dateSet[i] = month + "." + day;
@@ -29,15 +30,16 @@ var visitInfoBarManager = {
 		this.dateSet.reverse();
 	},
 	setvisitNumberSet : function(profileInquiry) {
-		//방문(검색)수를 최근 5일의 정보를 가져와 visitNumberSet에 세팅한다.
+		// 방문(검색)수를 최근 5일의 정보를 가져와 visitNumberSet에 세팅한다.
 		this.visitNumberSet = profileInquiry;
 	},
 	barAnimationController : function() {
 		// 각각의 bar를 시간차를 두고 에니메이션해주는 함수 action
 		this.count = 0;
-		var setBars = setInterval((function () {
+		var setBars = setInterval((function() {
 			var elVisitedInfo = document.querySelector("#visited-info");
-			var elVisitedInfoBar = elVisitedInfo.querySelectorAll("#visited-graph .bar-section");
+			var elVisitedInfoBar = elVisitedInfo
+					.querySelectorAll("#visited-graph .bar-section");
 			var numberOfBar = elVisitedInfoBar.length - 1
 
 			if (this.count > numberOfBar) {
@@ -46,7 +48,7 @@ var visitInfoBarManager = {
 			}
 			var barArray = this.checkBarHeight();
 			var visit = barArray[this.count];
-			var visitPerHeight = 10; //방문자 1명당 10px의 높이로 설정 
+			var visitPerHeight = 10; // 방문자 1명당 10px의 높이로 설정
 			var newHeight = (visit * visitPerHeight) + "px";
 			var BarHeight = elVisitedInfoBar[this.count].querySelector(".bar");
 			var barValue = BarHeight.querySelector("p");
@@ -66,11 +68,11 @@ var visitInfoBarManager = {
 		var totalNumberOfBar = 5;
 		var max = Math.max.apply(null, this.visitNumberSet);
 		if (max > maxcount) {
-			for (var i = 0; i < totalNumberOfBar ; i++) {
+			for (var i = 0; i < totalNumberOfBar; i++) {
 				barArray[i] = this.visitNumberSet[i] * maxcount / max;
 			}
 		} else {
-			for (var i = 0; i < totalNumberOfBar ; i++) {
+			for (var i = 0; i < totalNumberOfBar; i++) {
 				barArray[i] = this.visitNumberSet[i];
 			}
 		}
@@ -80,27 +82,27 @@ var visitInfoBarManager = {
 };
 
 var userStatusInfo = {
-	//user Status관련 정보
+	// user Status관련 정보
 	safety : {
-		code : 0, 
-		color : "#28bf00", 
+		code : 0,
+		color : "#28bf00",
 		contents : "<h1>Safety</h1><p>인증된 회원이므로 거래 성사되길 바랍니다.</p><p>중고 물품 거래시 상품을 꼭 확인하세요.</p>"
 	},
 	warning : {
-		code: 1, 
-		color : "#ff9600", 
+		code : 1,
+		color : "#ff9600",
 		contents : "<h1>Warning</h1><p>인증되지 않은 회원이므로 거래시 주의 바랍니다.</p><p>중고 물품 거래시 상품을 꼭 확인하세요.</p>"
 	},
 	danger : {
-		code:2, 
-		color:"#BF322A", 
-		contents:"<h1>Danger</h1><p>신고된 회원이므로 거래시 주의 바랍니다.</p><p>중고 물품 거래시 상품을 꼭 확인하세요.</p>"
+		code : 2,
+		color : "#BF322A",
+		contents : "<h1>Danger</h1><p>신고된 회원이므로 거래시 주의 바랍니다.</p><p>중고 물품 거래시 상품을 꼭 확인하세요.</p>"
 	}
 }
 
 var updateManager = {
-	updatePage : function (result) {
-		//각요소 전부에게 새로운 정보를 주고 업데이트 시키는 함수
+	updatePage : function(result) {
+		// 각요소 전부에게 새로운 정보를 주고 업데이트 시키는 함수
 		visitInfoBarManager.setvisitNumberSet(result.profileInquiry);
 		this.updateProfile(result);
 		this.updateStatus(result);
@@ -110,59 +112,72 @@ var updateManager = {
 		this.updateCaution(result);
 	},
 	updateProfile : function(userData) {
-		//userProfile부분의 업데이트를 하는 함수
+		// userProfile부분의 업데이트를 하는 함수
 		var elProfileInfo = document.querySelector("#profile-detail-section");
 		var elProfileInfoDetail = elProfileInfo.querySelectorAll("p");
-		//update될 자료에 대한 확정 필요 - 우선 주석처리
-		//var join = "profilePhone : " + userData.profilePhone;
-		//var Verification = "profileStatus : " + userData.profileStatus;
-		//var Accept = "profileVerificatione : " + userData.profileVerificatione;
+		// update될 자료에 대한 확정 필요 - 우선 주석처리
+		// var join = "profilePhone : " + userData.profilePhone;
+		// var Verification = "profileStatus : " + userData.profileStatus;
+		// var Accept = "profileVerificatione : " +
+		// userData.profileVerificatione;
 		// editor.updateInnerHTML(elProfileInfoDetail[0], join);
 		// editor.updateInnerHTML(elProfileInfoDetail[1], Verification);
 		// editor.updateInnerHTML(elProfileInfoDetail[2], Accept);
-		editor.setStyle(elProfileInfo, "-webkit-animation-play-state", "running");
+		editor.setStyle(elProfileInfo, "-webkit-animation-play-state",
+				"running");
 		editor.setStyle(elProfileInfo, "-moz-animation-play-state", "running");
 		editor.setStyle(elProfileInfo, "animation-play-state", "running");
 	},
 	updateStatus : function(userData) {
-		//user Status부분의 업데이트
+		// user Status부분의 업데이트
 		var elProfileStatus = document.querySelector("#profile-status");
-		var elProfileStatusContents = elProfileStatus.querySelector(".contents");
+		var elProfileStatusContents = elProfileStatus
+				.querySelector(".contents");
 		editor.setStyle(elProfileStatus, "height", "150px");
 		if (userData.profileStatus == userStatusInfo.safety.code) {
-			editor.setStyle(elProfileStatus, "background", userStatusInfo.safety.color);
-			editor.updateInnerHTML(elProfileStatusContents, userStatusInfo.safety.contents)
+			editor.setStyle(elProfileStatus, "background",
+					userStatusInfo.safety.color);
+			editor.updateInnerHTML(elProfileStatusContents,
+					userStatusInfo.safety.contents)
 		} else if (userData.profileStatus == userStatusInfo.warning.code) {
-			editor.setStyle(elProfileStatus, "background", userStatusInfo.warning.color);
-			editor.updateInnerHTML(elProfileStatusContents, userStatusInfo.warning.contents)
+			editor.setStyle(elProfileStatus, "background",
+					userStatusInfo.warning.color);
+			editor.updateInnerHTML(elProfileStatusContents,
+					userStatusInfo.warning.contents)
 		} else {
-			editor.setStyle(elProfileStatus, "background", userStatusInfo.danger.color);
-			editor.updateInnerHTML(elProfileStatusContents, userStatusInfo.danger.contents)
+			editor.setStyle(elProfileStatus, "background",
+					userStatusInfo.danger.color);
+			editor.updateInnerHTML(elProfileStatusContents,
+					userStatusInfo.danger.contents)
 		}
 	},
-	updateVisit: function(userData) {
-		//해당번호 검색(방문)한 수를 업데이트
+	updateVisit : function(userData) {
+		// 해당번호 검색(방문)한 수를 업데이트
 		var elVisitInfo = document.querySelector("#visited-info");
 		var elVisitInfoDetail = elVisitInfo.querySelector("#visited-graph");
-		//한라인으로 처리
-		editor.setStyle(elVisitInfoDetail, "-webkit-animation-play-state", "running");
-		editor.setStyle(elVisitInfoDetail, "-moz-animation-play-state", "running");
+		// 한라인으로 처리
+		editor.setStyle(elVisitInfoDetail, "-webkit-animation-play-state",
+				"running");
+		editor.setStyle(elVisitInfoDetail, "-moz-animation-play-state",
+				"running");
 		editor.setStyle(elVisitInfoDetail, "animation-play-state", "running");
-		//action의 의미
+		// action의 의미
 		visitInfoBarManager.barAnimationController();
 	},
 	updateLocation : function(userData) {
-		//user의 위치정보를 업데이트
+		// user의 위치정보를 업데이트
 		var elLocationInfo = document.querySelector("#location-info");
-		var elLocationInfoDetail = elLocationInfo.querySelector("#map-canvas p");
-		editor.setStyle(elLocationInfo, "-webkit-animation-play-state", "running");
+		var elLocationInfoDetail = elLocationInfo
+				.querySelector("#map-canvas p");
+		editor.setStyle(elLocationInfo, "-webkit-animation-play-state",
+				"running");
 		editor.setStyle(elLocationInfo, "-moz-animation-play-state", "running");
 		editor.setStyle(elLocationInfo, "animation-play-state", "running");
 		editor.updateInnerHTML(elLocationInfoDetail, userData.profileLocation);
 	},
 
 	updateWatch : function(userData) {
-		//user를 지켜보고(등록) 있는 사람의 수를 업데이트
+		// user를 지켜보고(등록) 있는 사람의 수를 업데이트
 		var elWatchInfo = document.querySelector("#watch-info");
 		var elWatchInfoDetail = elWatchInfo.querySelector("#watch-tool p");
 		editor.setStyle(elWatchInfo, "-webkit-animation-play-state", "running");
@@ -171,20 +186,22 @@ var updateManager = {
 		editor.updateInnerHTML(elWatchInfoDetail, userData.profileWatch);
 
 	},
-	updateCaution: function(userData) {
-		//경고나 신고가 들어온 수를 업데이트
+	updateCaution : function(userData) {
+		// 경고나 신고가 들어온 수를 업데이트
 		var elCautionInfo = document.querySelector("#caution-info");
-		var elCautionInfoDetail = elCautionInfo.querySelector("#caution-tool p");
-		editor.setStyle(elCautionInfo, "-webkit-animation-play-state", "running");
+		var elCautionInfoDetail = elCautionInfo
+				.querySelector("#caution-tool p");
+		editor.setStyle(elCautionInfo, "-webkit-animation-play-state",
+				"running");
 		editor.setStyle(elCautionInfo, "-moz-animation-play-state", "running");
 		editor.setStyle(elCautionInfo, "animation-play-state", "running");
 		editor.updateInnerHTML(elCautionInfoDetail, userData.profileNotify);
 	},
 	setAnimation : function(state) {
-		//페이지 에니메이션을 시작시키는 함수
+		// 페이지 에니메이션을 시작시키는 함수
 		var elContainer = document.querySelector("#container");
 		var elFooter = document.querySelector("footer");
-		
+
 		editor.setStyle(elContainer, "-webkit-animation-play-state", state);
 		editor.setStyle(elContainer, "-moz-animation-play-state", state);
 		editor.setStyle(elContainer, "animation-play-state", state);
@@ -194,59 +211,56 @@ var updateManager = {
 	}
 }
 
-
 var utility = {
 	requestPreventEvent : function(e) {
-		//submit 이벤트를 막는 기능
+		// submit 이벤트를 막는 기능
 		e.preventDefault();
 	},
 	refresh : function(e) {
-		//화면 리프래쉬 함수
+		// 화면 리프래쉬 함수
 		window.location.reload(true);
 	},
 	JSONparse : function(raw) {
-		//json파일을 json객체로 변환
+		// json파일을 json객체로 변환
 		var jsonObj = JSON.parse(raw);
 		return jsonObj;
 	}
 }
 
-
 var editor = {
 	setStyle : function(element, type, value) {
-		//해당 element에 주어진 type의 스타일을 value값으로 변경
+		// 해당 element에 주어진 type의 스타일을 value값으로 변경
 		var targetStyle = element.style;
 		targetStyle.setProperty(type, value);
 	},
 	updateInnerHTML : function(element, contents) {
-		//해당 element에 contents을 삽입하는 함수
+		// 해당 element에 contents을 삽입하는 함수
 		var updateContents = contents;
 		element.innerHTML = contents;
-	}	
+	}
 }
-
 
 var sagimaraMain = {
 	init : function() {
-		//페이지 초기 세팅 관리 함수
-		//검색 아이콘에 검색 관련 통신 이벤트등록
-		//로고에 리프래쉬 기능 이벤트 등록
-		//4일전~오늘날짜를 계산에서 보관
-		oEventElements.elSubmit.addEventListener("click", this.requestSearchEvent, false);
+		// 페이지 초기 세팅 관리 함수
+		// 검색 아이콘에 검색 관련 통신 이벤트등록
+		// 로고에 리프래쉬 기능 이벤트 등록
+		// 4일전~오늘날짜를 계산에서 보관
+		oEventElements.elSubmit.addEventListener("click", sagimaraMain.requestSearchEvent, false);
 		oEventElements.elLogo.addEventListener("click", utility.refresh, false);
 		visitInfoBarManager.setDateSet()
 	},
 	requestSearchEvent : function(e) {
-		//검색 요청 처리 및 서버와 통신
+		// 검색 요청 처리 및 서버와 통신
 		utility.requestPreventEvent(e);
 		updateManager.setAnimation("paused");
-		
+
 		var id = e.target.parentElement[0].value;
 		var url = "/test";
 		var request = new XMLHttpRequest();
 		var formdata = new FormData();
 		var result;
-		
+
 		request.open("POST", url, true);
 		formdata.append("id", id);
 		request.send(formdata);
@@ -254,7 +268,8 @@ var sagimaraMain = {
 		request.onreadystatechange = function() {
 			if (request.readyState == 4 && request.status == 200) {
 				// json ajax 통신 부분
-				//통신이 성공하면 JSON 객체를 받아서 각요소에 보냄
+				// 통신이 성공하면 JSON 객체를 받아서 각요소에 보냄
+				console.log(request.response);
 				result = utility.JSONparse(request.response);
 				updateManager.updatePage(result);
 				updateManager.setAnimation("running");
