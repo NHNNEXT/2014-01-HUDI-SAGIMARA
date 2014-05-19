@@ -6,6 +6,10 @@ src/main/java/framework/_test/
 src/main/java/_test/
 bin/*
 
+*.jpeg
+*.jpg
+*.png
+
 #https://github.com/github/gitignore/blob/master/Maven.gitignore 참조함
 
 target/

@@ -48,6 +48,7 @@ public class FrontController extends HttpServlet {
 		map.put("/admin/login", "/admin_login.jsp");
 		map.put("/insert/Photo","/insertPhoto.jsp");
 		map.put("/insert/Location","/insertLocation.jsp");
+		map.put("/main_test","/main_test.jsp");
 		
 		db = new DatabaseHandler();
 		jb = new JsonBuilder();

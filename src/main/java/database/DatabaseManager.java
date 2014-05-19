@@ -23,7 +23,6 @@ public class DatabaseManager {
 		logger = SagimaraLogger.logger;
 	}
 
-
 	public ResultSet select(Connection conn, BaseModel model, String id)
 			throws SQLException {
 		String sql, tableName;
