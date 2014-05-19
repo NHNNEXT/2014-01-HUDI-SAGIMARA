@@ -1,10 +1,7 @@
 package framework;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -96,16 +93,21 @@ public class FrontController extends HttpServlet {
 			logger.info("[DO POST] post Request URI : " + path);
 			test(request, response);
 			
-		//"/insertPhoto" 유저 사진 전송
+		//"/insert/PhotoData" 유저 사진 전송
 		}else if(path.equals("/insert/PhotoData")){
 			logger.info("[DO POST] post Request URI : " + path);
 			insertPhoto(request, response);
 			
-		//"/insertLocation" 유저 위치정보 전송
+		//"/insert/Location" 유저 위치정보 전송
 		}else if(path.equals("/insert/Location")){
 			logger.info("[DO POST] post Request URI : " + path);
 			insertLocation(request, response);
 			
+		//"/insert/Request" 인증요청 데이터 베이스에 넣어놓기
+		}else if(path.equals("/insert/Request")){
+			logger.info("[DO POST] post Request URI : " + path);
+			insertRequest(request, response);
+
 		}else{
 			requestPathError(request, response);
 		}
@@ -113,14 +115,20 @@ public class FrontController extends HttpServlet {
 	}
 	
 	
+	private void insertRequest(HttpServletRequest request,
+			HttpServletResponse response) {
+		
+		
+	}
+
 	private void insertLocation(HttpServletRequest request,
 			HttpServletResponse response) {
 		
 		String phone = (String)request.getParameter("id");
-		String cordinate = (String)request.getParameter("location");
 		String time = (String)request.getParameter("date");
+		String cordinate = (String)request.getParameter("location");
 		
-		db.insertLocation(phone, cordinate, time);
+		db.insertLocation(phone, time,cordinate);
 		
 	}
 
