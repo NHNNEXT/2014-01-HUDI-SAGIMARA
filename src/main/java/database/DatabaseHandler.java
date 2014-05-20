@@ -92,9 +92,10 @@ public class DatabaseHandler {
 		return result;
 	}
 
-	public void insertLocation(String phone, String cordinate, String time) {
+	public void insertLocation(String phone, String time,  String cordinate) {
 		Connection conn = this.connect();
 		Location location = new Location();
+		
 		location.setLocationId(phone);
 		location.setLocationTime(time);
 		location.setLocationCoordinate(cordinate);

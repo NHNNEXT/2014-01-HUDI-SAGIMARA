@@ -112,7 +112,7 @@ public class DatabaseManager {
 		if(tableName.equals("VIDEO")) {
 			Video video = (Video) model;
 			
-			String sql = "INSERT INTO " + tableName + " VALUES (?, ?, ?)";
+			String sql = "INSERT INTO " + tableName + "(USER_user_phone,location_time,location_coordinate)" + " VALUES (?, ?, ?)";
 			logger.info("[DatabaseManager] Video :"
 					+ video.getVideoId() + " : "
 					+ video.getVideoLink() + " : "

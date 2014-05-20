@@ -14,7 +14,7 @@
 	</header>
 	
 	<div id="formArea">
-		<form action="/insert/Location" method="POST" enctype="multipart/form-data">
+		<form action="/insert/Location" method="POST" enctype="form-data">
 			<input type="text" name="id" size=50 > <br />
 			<input type="text" name="location" size=40 > <br />
 			<input type="text" name="date"/> <br /> 
