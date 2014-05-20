@@ -51,6 +51,7 @@ public class FrontController extends HttpServlet {
 		map.put("/admin/login", "/admin_login.jsp");
 		map.put("/insert/Photo","/insertPhoto.jsp");
 		map.put("/insert/Location","/insertLocation.jsp");
+		map.put("/insert/requestVerification", "/requestVerification");
 		map.put("/main_test","/main_test.jsp");
 		
 		db = new DatabaseHandler();
@@ -97,15 +98,18 @@ public class FrontController extends HttpServlet {
 			logger.info("[DO POST] post Request URI : " + path);
 			test(request, response);
 			
-		//"/insertPhoto" 유저 사진 전송
+		//"/insert/Photo" 유저 사진 전송
 		}else if(path.equals("/insert/PhotoData")){
 			logger.info("[DO POST] post Request URI : " + path);
 			insertPhoto(request, response);
 			
-		//"/insertLocation" 유저 위치정보 전송
+		//"/insert/Location" 유저 위치정보 전송
 		}else if(path.equals("/insert/Location")){
 			logger.info("[DO POST] post Request URI : " + path);
 			insertLocation(request, response);
+		
+		//"/insert/requestVerification" 인증요청 DB저장
+		}else if(path.equals("/insert/requestVerification")){
 			
 		}else{
 			requestPathError(request, response);
