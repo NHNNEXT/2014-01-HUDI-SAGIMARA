@@ -82,5 +82,6 @@ public class FrontController extends HttpServlet {
 		RequestDispatcher dispather = getServletContext()
 				.getRequestDispatcher("/error.jsp");
 		dispather.forward(request, response);
+
 	}
 }

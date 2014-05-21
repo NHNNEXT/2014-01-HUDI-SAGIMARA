@@ -10,7 +10,7 @@
 
 <div id="wrap">
 	<header>
-	<h1>upload User Photo</h1>
+	<h1>upload User Location</h1>
 	</header>
 	
 	<div id="formArea">
