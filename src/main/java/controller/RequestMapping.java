@@ -9,12 +9,13 @@ public class RequestMapping {
 		put("/test", new UserViewController("/test.jsp"));
 		put("/insert/photoData", new InsertPhotoDataController());
 		put("/insert/Request", new InsertRequestDataController());
-		put("/admin/register", new AdminRegisterController("/admin_register.jsp"));
 		put("/insert/locationData", new InsertLocationDataController());
+		put("/admin/register", new AdminRegisterController("/admin_register.jsp"));
 		
+		put("/", new ForwardController("/index.jsp"));
+		put("/index", new ForwardController("/index.jsp"));
 		put("/insert/photo",new ForwardController("/insertPhoto.jsp"));
 		put("/insert/location", new ForwardController("/insertLocation.jsp"));
-		put("/index", new ForwardController("/index.jsp"));
 		put("/admin/login", new ForwardController("/admin_login.jsp"));
 		put("/main_test", new ForwardController("/main_test.jsp"));
 	}};
