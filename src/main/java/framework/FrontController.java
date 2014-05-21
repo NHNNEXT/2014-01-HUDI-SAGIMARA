@@ -78,6 +78,7 @@ public class FrontController extends HttpServlet {
 	}
 	
 	private void requestPathError(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		logger.info("URLPath is error");
 		request.setAttribute("error", "존재하지 않는 주소입니다");
 		RequestDispatcher dispather = getServletContext()
 				.getRequestDispatcher("/error.jsp");
