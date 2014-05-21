@@ -26,17 +26,20 @@ public class InsertPhotoDataController implements Controller {
 	DatabaseHandler db;
 	JsonBuilder jb;
 	String photoImagePath;
+	String forwardPath;
 	
-	public InsertPhotoDataController() {
+	public InsertPhotoDataController(String forwardPath) {
 		super();
 		this.logger = SagimaraLogger.logger;
 		this.db = new DatabaseHandler();
 		this.jb = new JsonBuilder();
 		this.photoImagePath ="/Users/astomusic/Desktop";
 		//this.photoImagePath ="/home/dev/photo/";
+		this.forwardPath = forwardPath;
+		
 	}
 	
-	public void run(HttpServletRequest request,
+	public String run(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException{
 		String id = null;
 		String videoLink = null;
@@ -89,5 +92,10 @@ public class InsertPhotoDataController implements Controller {
 			}
 			
 		}
+		
+		String json = jb.requestSuccessJSON();
+		request.setAttribute("json", json);
+		
+		return forwardPath;
 	}
 }

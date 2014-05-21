@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,7 +19,6 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.log4j.Logger;
 
 import database.DatabaseHandler;
-import framework.FrontController;
 import framework.JsonBuilder;
 
 public class UserViewController implements Controller{
@@ -39,7 +37,7 @@ public class UserViewController implements Controller{
 
 	}
 	
-	public void run(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+	public String run(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		String id = null;
 		
 		logger.info("Content-type : " + request.getHeader("Content-type"));
@@ -81,7 +79,7 @@ public class UserViewController implements Controller{
 		logger.info(id);
 		if (!id.isEmpty()) {
 			UserProfile dut = db.readUserProfile(id);
-			String json = jb.javaToJson(dut);
+			String json = jb.objectToJson(dut);
 			logger.info(json);
 			response.setCharacterEncoding("utf8");
 			request.setCharacterEncoding("utf8");
@@ -90,12 +88,6 @@ public class UserViewController implements Controller{
 			logger.info("id is null");
 		}
 
-		if (!forwardPath.isEmpty()) {
-			RequestDispatcher dispather = request.getServletContext()
-					.getRequestDispatcher(forwardPath);
-			dispather.forward(request, response);
-		} else {
-			logger.info("forwardPath is null");
-		}
+		return forwardPath;
 	}
 }

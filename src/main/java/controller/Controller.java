@@ -8,6 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 
 public interface Controller {
 
-	public abstract void run(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException;
+	public abstract String run(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException;
 
 }

@@ -17,12 +17,14 @@ public class InsertLocationDataController implements Controller {
 	Logger logger;
 	DatabaseHandler db;
 	JsonBuilder jb;
+	String forwardPath;
 
-	public InsertLocationDataController() {
+	public InsertLocationDataController(String forwardPath) {
 		super();
 		this.logger = SagimaraLogger.logger;
 		this.db = new DatabaseHandler();
 		this.jb = new JsonBuilder();
+		this.forwardPath = forwardPath;
 
 	}
 
@@ -30,13 +32,18 @@ public class InsertLocationDataController implements Controller {
 	 * @see controller.Controller#run()
 	 */
 	@Override
-	public void run(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public String run(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		String phone = (String) request.getParameter("id");
 		String time = (String) request.getParameter("date");
 		String cordinate = (String) request.getParameter("location");
 
 		db.insertLocation(phone, time, cordinate);
+		
+		String json = jb.requestSuccessJSON();
+		request.setAttribute("json", json);
+		
+		return forwardPath;
 
 	}
 }

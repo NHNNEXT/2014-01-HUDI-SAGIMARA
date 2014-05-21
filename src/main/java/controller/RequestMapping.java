@@ -6,11 +6,11 @@ public class RequestMapping {
 	static public HashMap<String, Controller> map = new HashMap<String, Controller>()  {
 		private static final long serialVersionUID = -3286315173722334990L;
 	{
-		put("/test", new UserViewController("/test.jsp"));
-		put("/insert/photoData", new InsertPhotoDataController());
-		put("/insert/Request", new InsertRequestDataController());
-		put("/insert/locationData", new InsertLocationDataController());
-		put("/admin/register", new AdminRegisterController("/admin_register.jsp"));
+		put("/test", new UserViewController("/json.jsp"));
+		put("/insert/photoData", new InsertPhotoDataController("/json.jsp"));
+		put("/insert/Request", new InsertRequestDataController("/json.jsp"));
+		put("/insert/locationData", new InsertLocationDataController("/json.jsp"));
+		put("/admin/register", new AdminRegisterController("/json.jsp"));
 		
 		put("/", new ForwardController("/index.jsp"));
 		put("/index", new ForwardController("/index.jsp"));

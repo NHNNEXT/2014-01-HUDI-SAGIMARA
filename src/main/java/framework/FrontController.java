@@ -1,8 +1,6 @@
 package framework;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,15 +12,7 @@ import logger.SagimaraLogger;
 
 import org.apache.log4j.Logger;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
-import controller.ForwardController;
-import controller.InsertLocationDataController;
-import controller.InsertPhotoDataController;
-import controller.InsertRequestDataController;
 import controller.RequestMapping;
-import controller.UserViewController;
 import database.DatabaseHandler;
 
 public class FrontController extends HttpServlet {
@@ -45,12 +35,21 @@ public class FrontController extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String path = request.getRequestURI();
+		String forwardPath = null;
 	
 		if(rm.isContain(path)){
 			logger.info("[DO GET] get Request URI : " + path);
-			rm.requestController(path).run(request, response);
+			forwardPath = rm.requestController(path).run(request, response);
 		} else {
 			requestPathError(request, response);
+		}
+		
+		if (!forwardPath.isEmpty()) {
+			RequestDispatcher dispather = request.getServletContext()
+					.getRequestDispatcher(forwardPath);
+			dispather.forward(request, response);
+		} else {
+			logger.info("forwardPath is null");
 		}
 	}
 
@@ -58,13 +57,22 @@ public class FrontController extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		String path = request.getRequestURI();	
+		String forwardPath = null;
 		RequestMapping rm = new RequestMapping();
 		
 		if(rm.isContain(path)){
 			logger.info("[DO POST] post Request URI : " + path);
-			rm.requestController(path).run(request, response);
+			forwardPath = rm.requestController(path).run(request, response);
 		} else {
 			requestPathError(request, response);
+		}
+		
+		if (!forwardPath.isEmpty()) {
+			RequestDispatcher dispather = request.getServletContext()
+					.getRequestDispatcher(forwardPath);
+			dispather.forward(request, response);
+		} else {
+			logger.info("forwardPath is null");
 		}
 		
 	}
