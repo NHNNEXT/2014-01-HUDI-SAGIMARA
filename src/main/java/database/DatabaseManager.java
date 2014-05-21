@@ -8,9 +8,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import logger.SagimaraLogger;
+import model.Admin;
 import model.BaseModel;
 import model.Inquiry;
 import model.Location;
+import model.Request;
 import model.User;
 import model.Video;
 
@@ -18,7 +20,7 @@ import org.apache.log4j.Logger;
 
 public class DatabaseManager {
 	Logger logger;
-	
+
 	public DatabaseManager() {
 		logger = SagimaraLogger.logger;
 	}
@@ -35,17 +37,17 @@ public class DatabaseManager {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
-			
+
 			return rs;
 		} else if (tableName.equals("INQUIRY")) {
 			sql = "select * from " + "USER_INQUIRY" + " where phone_number = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
-			
+
 			return rs;
 		}
-		
+
 		return null;
 	}
 
@@ -65,9 +67,8 @@ public class DatabaseManager {
 			pstmt.setString(2, user.getUserVerification());
 			pstmt.setString(3, user.getUserStatus());
 			pstmt.setString(4, user.getUserLocation());
-		} 
-
-		if (tableName.equals("INQUIRY")) {
+			
+		}else if (tableName.equals("INQUIRY")) {
 			Inquiry inquiry = (Inquiry) model;
 
 			String sql = "INSERT INTO " + tableName
@@ -79,48 +80,63 @@ public class DatabaseManager {
 			pstmt.setString(1, inquiry.getInquiryId());
 			pstmt.setString(2, inquiry.getInquiryTime());
 
-		}
-		
-		if(tableName.equals("LOCATION")) {
+		}else if (tableName.equals("LOCATION")) {
 			Location location = (Location) model;
+			String sql = "INSERT INTO "
+					+ tableName
+					+ " (`USER_user_phone`,`location_time`,`location_coordinate`) VALUES (?, ?, ?)";
 			
-			String sql = "INSERT INTO " + tableName + " VALUES (?, ?, ?)";
 			logger.info("[DatabaseManager] Location :"
 					+ location.getLocationId() + " : "
-					+ location.getLocationTime() + " : " 
-					+ location.getLocationCoordinate()); 
+					+ location.getLocationTime() + " : "
+					+ location.getLocationCoordinate());
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, location.getLocationId());
 			pstmt.setString(2, location.getLocationTime());
 			pstmt.setString(3, location.getLocationCoordinate());
-		}
-		
-		if(tableName.equals("LOCATION")) {
-			Location location = (Location) model;
 			
+		}else if (tableName.equals("REQUEST")) {
+			Request request = (Request) model;
+
 			String sql = "INSERT INTO " + tableName + " VALUES (?, ?, ?)";
-			logger.info("[DatabaseManager] Location :"
-					+ location.getLocationId() + " : "
-					+ location.getLocationTime() + " : " 
-					+ location.getLocationCoordinate()); 
+			logger.info("[DatabaseManager] Request :"
+					+ request.getRequestFrom() + " : " + request.getRequestTo()
+					+ " : " + request.getRequestDate());
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, location.getLocationId());
-			pstmt.setString(2, location.getLocationTime());
-			pstmt.setString(3, location.getLocationCoordinate());
-		}
-		
-		if(tableName.equals("VIDEO")) {
+			pstmt.setString(1, request.getRequestFrom());
+			pstmt.setString(2, request.getRequestTo());
+			pstmt.setString(3, request.getRequestDate());
+			
+		}else if (tableName.equals("VIDEO")) {
 			Video video = (Video) model;
-			
-			String sql = "INSERT INTO " + tableName + "(USER_user_phone,location_time,location_coordinate)" + " VALUES (?, ?, ?)";
-			logger.info("[DatabaseManager] Video :"
-					+ video.getVideoId() + " : "
-					+ video.getVideoLink() + " : "
-					+ video.getVideoDate()); 
+
+			String sql = "INSERT INTO " + tableName
+					+ "(USER_user_phone,location_time,location_coordinate)"
+					+ " VALUES (?, ?, ?)";
+			logger.info("[DatabaseManager] Video :" + video.getVideoId()
+					+ " : " + video.getVideoLink() + " : "
+					+ video.getVideoDate());
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, video.getVideoId());
 			pstmt.setString(2, video.getVideoLink());
 			pstmt.setString(3, video.getVideoDate());
+			
+		}else if (tableName.equals("ADMIN")) {
+			Admin admin = (Admin) model;
+
+			String sql = "INSERT INTO " + tableName + " VALUES (?, ?, ?, ?, ?, ?)";
+			logger.info("[DatabaseManager] Video :" 
+					+ admin.getAdminId() + " : " 
+					+ admin.getAdminPassword() + " : "
+					+ admin.getAdminName() + " : "
+					+ admin.getAdminEmail() + " : "
+					+ admin.getAdminStatus()) ;
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, admin.getAdminId());
+			pstmt.setString(2, admin.getAdminPassword());
+			pstmt.setString(3, admin.getAdminName());
+			pstmt.setString(4, admin.getAdminEmail());
+			pstmt.setString(5, admin.getAdminStatus());
 		}
 
 		try {
@@ -150,10 +166,10 @@ public class DatabaseManager {
 			while (rs.next()) {
 				columns.add(rs.getString(1));
 			}
-			
+
 			stmt.close();
 			rs.close();
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
