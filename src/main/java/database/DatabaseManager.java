@@ -65,7 +65,7 @@ public class DatabaseManager {
 			pstmt.setString(2, user.getUserVerification());
 			pstmt.setString(3, user.getUserStatus());
 			pstmt.setString(4, user.getUserLocation());
-		}
+		} 
 
 		if (tableName.equals("INQUIRY")) {
 			Inquiry inquiry = (Inquiry) model;

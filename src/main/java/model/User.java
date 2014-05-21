@@ -6,7 +6,8 @@ public class User extends BaseModel{
 	private String userStatus;
 	private String userLocation;
 	
-	User(){}
+	public User(){
+	}
 	
 	public User(String userPhone, String userVerification, String userStatus, String userLocation){
 		this.userPhone = userPhone;

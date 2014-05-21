@@ -1,10 +1,7 @@
 package framework;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
@@ -14,29 +11,26 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import logger.SagimaraLogger;
-import model.UserProfile;
 
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileItemFactory;
-import org.apache.commons.fileupload.FileUploadException;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.log4j.Logger;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import controller.InsertLocationDataController;
+import controller.RequestMapping;
 import database.DatabaseHandler;
 
 public class FrontController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	String photoImagePath ="/home/dev/photo/";
 	
-	HashMap<String, String> map = new HashMap<String, String>();
+	
+	static public HashMap<String, String> map = new HashMap<String, String>();
 	DatabaseHandler db;
 	JsonBuilder jb;
 	Logger logger;
+	RequestMapping rm;
 	
 	
 	@Override
@@ -51,6 +45,7 @@ public class FrontController extends HttpServlet {
 		map.put("/insert/requestVerification", "/requestVerification");
 		map.put("/main_test","/main_test.jsp");
 		
+		rm = new RequestMapping();
 		db = new DatabaseHandler();
 		jb = new JsonBuilder();
 		logger = SagimaraLogger.logger;
@@ -88,108 +83,16 @@ public class FrontController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		String path = request.getRequestURI();
+		String path = request.getRequestURI();	
+		RequestMapping rm = new RequestMapping();
 		
-		//"/tesst" 유저 정보 가져오
-		if (path.equals("/test")) {
+		if(!path.isEmpty()){
 			logger.info("[DO POST] post Request URI : " + path);
-			test(request, response);
-			
-		//"/insert/Photo" 유저 사진 전송
-		}else if(path.equals("/insert/PhotoData")){
-			logger.info("[DO POST] post Request URI : " + path);
-			insertPhoto(request, response);
-			
-		//"/insert/Location" 유저 위치정보 전송
-		}else if(path.equals("/insert/Location")){
-			logger.info("[DO POST] post Request URI : " + path);
-			insertLocation(request, response);
-		
-		//"/insert/requestVerification" 인증요청 DB저장
-		}else if(path.equals("/insert/requestVerification")){
-			
-		//"/insert/Request" 인증요청 데이터 베이스에 넣어놓기
-		}else if(path.equals("/insert/Request")){
-			logger.info("[DO POST] post Request URI : " + path);
-			insertRequest(request, response);
-
-		}else{
+			rm.requestController(path).run(request, response);
+		} else {
 			requestPathError(request, response);
 		}
 		
-	}
-	
-	
-	private void insertRequest(HttpServletRequest request,
-			HttpServletResponse response) {
-		
-		
-	}
-
-	private void insertLocation(HttpServletRequest request,
-			HttpServletResponse response) {
-		
-		String phone = (String)request.getParameter("id");
-		String time = (String)request.getParameter("date");
-		String cordinate = (String)request.getParameter("location");
-		
-		db.insertLocation(phone, time,cordinate);
-		
-	}
-
-	private void insertPhoto(HttpServletRequest request,
-			HttpServletResponse response) {
-		String id = null;
-		String videoLink = null;
-		String date = null;
-		
-		boolean isMultipart = ServletFileUpload.isMultipartContent(request);
-		if (isMultipart) {
-			FileItemFactory factory = new DiskFileItemFactory();
-			ServletFileUpload upload = new ServletFileUpload(factory);
-			List<FileItem> items = null;
-			try {
-				items = upload.parseRequest(request);
-			} catch (FileUploadException e) {
-				e.printStackTrace();
-			}
-
-
-			Iterator<FileItem> ir = items.iterator();
-			while (ir.hasNext()) {
-				FileItem item = (FileItem) ir.next();
-				if (item.isFormField()) {
-					// Process form field.
-					String name = item.getFieldName();
-					String value = item.getString();
-					
-					if(name.equals("id")){
-						id = value;
-					}
-					if(name.equals("date")){
-						date = value;
-					}
-					
-				} else {
-					// Process uploaded file.
-					String name = item.getContentType();
-					String[] array = name.split("/");
-					videoLink = photoImagePath + id + date +"."+ array[1] ;
-					
-					try {
-						File file = new File(videoLink);
-						item.write(file);
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				}
-				
-				if(id!=null && videoLink!=null&&date!=null){
-					db.insertPhoto(id, videoLink, date);
-				}
-			}
-			
-		}
 	}
 
 	private void adminRegister(HttpServletRequest request, HttpServletResponse response)
@@ -226,70 +129,5 @@ public class FrontController extends HttpServlet {
 
 		Gson gson = new GsonBuilder().create();
 		return gson.toJson(resultMap);
-	}
-
-	private void test(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		String path = request.getServletPath();
-		String result = map.get(path);
-		String id = null;
-		
-		logger.info("Content-type : " + request.getHeader("Content-type"));
-		
-		boolean isMultipart = ServletFileUpload.isMultipartContent(request);
-		if (isMultipart) {
-			FileItemFactory factory = new DiskFileItemFactory();
-			ServletFileUpload upload = new ServletFileUpload(factory);
-			List<FileItem> items = null;
-			try {
-				items = upload.parseRequest(request);
-			} catch (FileUploadException e) {
-				e.printStackTrace();
-			}
-			Iterator<FileItem> ir = items.iterator();
-			while (ir.hasNext()) {
-				FileItem item = (FileItem) ir.next();
-
-				if (item.isFormField()) {
-					// Process form field.
-					String name = item.getFieldName();
-					String value = item.getString();
-					id = value;
-					logger.info(name +" : "+ value);
-				} else {
-					// Process uploaded file.
-					// String fieldName = item.getFieldName();
-					// String fileName = item.getName();
-					// String contentType = item.getContentType();
-					// boolean isInMemory = item.isInMemory();
-					// long sizeInBytes = item.getSize();
-				}
-			}
-
-		} else {
-			id = (String) request.getParameter("id");
-		}
-
-		logger.info(id);
-		if (!id.isEmpty()) {
-			UserProfile dut = db.readUserProfile(id);
-			String json = jb.javaToJson(dut);
-			logger.info(json);
-			response.setCharacterEncoding("utf8");
-			request.setCharacterEncoding("utf8");
-			request.setAttribute("json", json);
-		} else {
-			logger.info("id is null");
-		}
-
-		if (!result.isEmpty()) {
-			RequestDispatcher dispather = getServletContext()
-					.getRequestDispatcher(result);
-			dispather.forward(request, response);
-		} else {
-			logger.info("path error");
-			logger.info(path);
-			logger.info(result);
-		}
 	}
 }
