@@ -14,7 +14,7 @@
 	</header>
 	
 	<div id="formArea">
-		<form action="/insert/PhotoData" method="POST" enctype="multipart/form-data">
+		<form action="/insert/photoData" method="POST" enctype="multipart/form-data">
 			<input type="text" name="id" size=50 > <br />
 			<input type="text" name="date" size=40 > <br />
 			<input type="file" name="file"/> <br /> 

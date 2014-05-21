@@ -28,18 +28,18 @@ public class UserViewController implements Controller{
 	Logger logger;
 	DatabaseHandler db;
 	JsonBuilder jb;
+	String forwardPath;
 	
-	public UserViewController() {
+	public UserViewController(String forwardPath) {
 		super();
 		this.logger = SagimaraLogger.logger;
 		this.db = new DatabaseHandler();
 		this.jb = new JsonBuilder();
+		this.forwardPath = forwardPath;
 
 	}
 	
 	public void run(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-		String path = request.getServletPath();
-		String result = FrontController.map.get(path);
 		String id = null;
 		
 		logger.info("Content-type : " + request.getHeader("Content-type"));
@@ -90,14 +90,12 @@ public class UserViewController implements Controller{
 			logger.info("id is null");
 		}
 
-		if (!result.isEmpty()) {
+		if (!forwardPath.isEmpty()) {
 			RequestDispatcher dispather = request.getServletContext()
-					.getRequestDispatcher(result);
+					.getRequestDispatcher(forwardPath);
 			dispather.forward(request, response);
 		} else {
-			logger.info("path error");
-			logger.info(path);
-			logger.info(result);
+			logger.info("forwardPath is null");
 		}
 	}
 }
