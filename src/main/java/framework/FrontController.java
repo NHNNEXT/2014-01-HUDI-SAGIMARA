@@ -48,7 +48,6 @@ public class FrontController extends HttpServlet {
 		map.put("/admin/login", "/admin_login.jsp");
 		map.put("/insert/Photo","/insertPhoto.jsp");
 		map.put("/insert/Location","/insertLocation.jsp");
-		map.put("/main_test","/main_test.jsp");
 		
 		db = new DatabaseHandler();
 		jb = new JsonBuilder();
@@ -116,11 +115,6 @@ public class FrontController extends HttpServlet {
 	}
 	
 	
-	private void insertRequest(HttpServletRequest request,
-			HttpServletResponse response) {
-		
-		
-	}
 
 	private void insertLocation(HttpServletRequest request,
 			HttpServletResponse response) {
@@ -188,6 +182,12 @@ public class FrontController extends HttpServlet {
 		}
 	}
 
+	private void insertRequest(HttpServletRequest request,
+			HttpServletResponse response) {
+		
+		
+	}
+	
 	private void adminRegister(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String path, result, id, password;
