@@ -38,7 +38,6 @@ public class DatabaseHandler {
 		
 		Connection conn = this.connect();
 		
-		
 		UserProfile result = new UserProfile();
 
 		try {

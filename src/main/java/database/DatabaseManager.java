@@ -35,12 +35,14 @@ public class DatabaseManager {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
+			
 			return rs;
 		} else if (tableName.equals("INQUIRY")) {
 			sql = "select * from " + "USER_INQUIRY" + " where phone_number = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
+			
 			return rs;
 		}
 		
@@ -63,7 +65,7 @@ public class DatabaseManager {
 			pstmt.setString(2, user.getUserVerification());
 			pstmt.setString(3, user.getUserStatus());
 			pstmt.setString(4, user.getUserLocation());
-		}
+		} 
 
 		if (tableName.equals("INQUIRY")) {
 			Inquiry inquiry = (Inquiry) model;
@@ -148,6 +150,10 @@ public class DatabaseManager {
 			while (rs.next()) {
 				columns.add(rs.getString(1));
 			}
+			
+			stmt.close();
+			rs.close();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

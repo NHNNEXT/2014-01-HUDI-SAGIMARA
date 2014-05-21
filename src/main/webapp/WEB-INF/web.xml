@@ -32,7 +32,7 @@
 		<servlet-name>insertData</servlet-name>
 		<servlet-class>framework.FrontController</servlet-class>
 	</servlet>
-		<servlet>
+	<servlet>
 		<servlet-name>unitTest</servlet-name>
 		<servlet-class>framework.FrontController</servlet-class>
 	</servlet>
@@ -53,8 +53,9 @@
 		<servlet-name>insertData</servlet-name>
 		<url-pattern>/insert/*</url-pattern>
 	</servlet-mapping>
-		<servlet-mapping>
+	<servlet-mapping>
 		<servlet-name>unitTest</servlet-name>
 		<url-pattern>/main_test</url-pattern>
 	</servlet-mapping>
+
 </web-app>
