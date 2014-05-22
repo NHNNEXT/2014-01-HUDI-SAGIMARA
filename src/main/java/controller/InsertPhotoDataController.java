@@ -44,6 +44,7 @@ public class InsertPhotoDataController implements Controller {
 		String id = null;
 		String videoLink = null;
 		String date = null;
+		String json = null;
 		
 		boolean isMultipart = ServletFileUpload.isMultipartContent(request);
 		if (isMultipart) {
@@ -87,15 +88,19 @@ public class InsertPhotoDataController implements Controller {
 				}
 				
 				if(id!=null && videoLink!=null&&date!=null){
-					db.insertPhoto(id, videoLink, date);
+					if(db.insertPhoto(id, videoLink, date)){
+						json = jb.requestSuccessJSON();
+					}else{
+						json = jb.requestFailedJSON();
+					}
 				}
 			}
 			
 		}
 		
-		String json = jb.requestSuccessJSON();
+
 		request.setAttribute("json", json);
-		
+				
 		return forwardPath;
 	}
 }

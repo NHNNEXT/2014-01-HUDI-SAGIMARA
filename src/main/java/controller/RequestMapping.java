@@ -8,13 +8,14 @@ public class RequestMapping {
 	{
 		put("/test", new UserViewController("/json.jsp"));
 		put("/insert/photoData", new InsertPhotoDataController("/json.jsp"));
-		put("/insert/Request", new InsertRequestDataController("/json.jsp"));
+		put("/insert/RequestData", new InsertRequestDataController("/json.jsp"));
 		put("/insert/locationData", new InsertLocationDataController("/json.jsp"));
 		put("/admin/register", new AdminRegisterController("/json.jsp"));
 		
 		put("/", new ForwardController("/index.jsp"));
 		put("/index", new ForwardController("/index.jsp"));
 		put("/insert/photo",new ForwardController("/insertPhoto.jsp"));
+		put("/insert/request",new ForwardController("/insertRequest.jsp"));
 		put("/insert/location", new ForwardController("/insertLocation.jsp"));
 		put("/admin/login", new ForwardController("/admin_login.jsp"));
 		put("/main_test", new ForwardController("/main_test.jsp"));
