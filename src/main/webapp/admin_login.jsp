@@ -10,7 +10,7 @@
 <body>
 
 	<div id=loginBox class="border-radius">
-		<form id="adminLoginForm" action="/login" method="POST">
+		<form id="adminLoginForm" action="/admin/test" method="POST" enctype="form-data">
 		<fieldset>
 		<table>
               <tbody>

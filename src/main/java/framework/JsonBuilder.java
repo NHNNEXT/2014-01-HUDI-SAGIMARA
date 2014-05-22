@@ -32,6 +32,14 @@ public class JsonBuilder {
 
 		resultMap.put("code", "400");
 		resultMap.put("message", "Request Failed");
-		return null;
+		return objectToJson(resultMap);
+	}
+
+	public String requstErrorJSON() {
+		Map<String, String> resultMap = new HashMap<String, String>();
+
+		resultMap.put("code", "204");
+		resultMap.put("message", "Request Failed");
+		return objectToJson(resultMap);
 	}
 }
