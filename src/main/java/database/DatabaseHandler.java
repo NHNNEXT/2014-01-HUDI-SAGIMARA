@@ -3,8 +3,11 @@ package database;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import logger.SagimaraLogger;
+
 import org.apache.log4j.Logger;
+
 import dto.Admin;
 import dto.Inquiry;
 import dto.Location;
@@ -16,35 +19,34 @@ import dto.Video;
 public class DatabaseHandler {
 	Logger logger;
 	DatabaseManager dbm;
-	
+
 	public DatabaseHandler() {
 		logger = SagimaraLogger.logger;
 		dbm = new DatabaseManager();
 	}
-	
-	private Connection connect(){
+
+	private Connection connect() {
 		DatabaseConnector connector = new DatabaseConnector();
-		
+
 		Connection conn = connector.getMysqlConnection();
-		
-		if(conn==null){
+
+		if (conn == null) {
 			logger.error("Database Connection Error");
 		}
 		return conn;
 	}
-	
-	
+
 	public UserProfile readUserProfile(String id) {
-		
+
 		Connection conn = this.connect();
-		
+
 		UserProfile result = new UserProfile();
 
 		try {
 			ResultSet rsProfile = dbm.select(conn, new UserProfile(), id);
 			ResultSet rsInquiry = dbm.select(conn, new Inquiry(), id);
-			
-			if (rsProfile.next()&&rsInquiry.next()) {
+
+			if (rsProfile.next() && rsInquiry.next()) {
 				logger.info("[readUserProfile] User[" + id + "] 정보 있음 ");
 				Inquiry inquiry = new Inquiry();
 				inquiry.setInquiryId(id);
@@ -53,13 +55,16 @@ public class DatabaseHandler {
 
 				result.setProfilePhone(rsProfile.getString("phone_number"));
 				result.setProfileStatus(rsProfile.getString("status"));
-				result.setProfileVerification(rsProfile.getString("verification"));
+				result.setProfileVerification(rsProfile
+						.getString("verification"));
 				result.setProfileLocation(rsProfile.getString("location"));
 				result.setProfileWatch(rsProfile.getString("watch"));
 				result.setProfileNotify(rsProfile.getString("notify"));
 				String[] inquiryList = { rsInquiry.getString("4day ago"),
-						rsInquiry.getString("3day ago"), rsInquiry.getString("2day ago"),
-						rsInquiry.getString("1day ago"), rsInquiry.getString("today") };
+						rsInquiry.getString("3day ago"),
+						rsInquiry.getString("2day ago"),
+						rsInquiry.getString("1day ago"),
+						rsInquiry.getString("today") };
 				result.setProfileInquiry(inquiryList);
 			} else {
 				logger.info("[readUserProfile] User[" + id + "] 정보 없음 ");
@@ -82,23 +87,23 @@ public class DatabaseHandler {
 			rsInquiry.close();
 			logger.info("[database] Connection is closed.");
 			conn.close();
-			
+
 		} catch (SQLException e) {
 			logger.info("[database] Connection is closed.");
 			e.printStackTrace();
 		}
-		
+
 		return result;
 	}
 
-	public boolean insertLocation(String phone, String time,  String cordinate) {
+	public boolean insertLocation(String phone, String time, String cordinate) {
 		Connection conn = this.connect();
 		Location location = new Location();
-		
+
 		location.setLocationId(phone);
 		location.setLocationTime(time);
 		location.setLocationCoordinate(cordinate);
-		
+
 		try {
 			dbm.add(conn, location);
 			conn.close();
@@ -115,7 +120,7 @@ public class DatabaseHandler {
 		video.setVideoId(phone);
 		video.setVideoLink(videoLink);
 		video.setVideoDate(time);
-		
+
 		try {
 			dbm.add(conn, video);
 			conn.close();
@@ -123,17 +128,17 @@ public class DatabaseHandler {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		return false;
 	}
 
 	public boolean insertRequest(String from, String to, String date) {
-		Connection conn = this.connect();		
+		Connection conn = this.connect();
 		Request request = new Request();
 		request.setRequestFrom(from);
 		request.setRequestTo(to);
 		request.setRequestDate(date);
-		
+
 		try {
 			dbm.add(conn, request);
 			conn.close();
@@ -145,18 +150,17 @@ public class DatabaseHandler {
 	}
 
 	public int CheckForadminLogin(String id, String password) {
-		Connection conn = this.connect();		
+		Connection conn = this.connect();
 		Admin admin = new Admin();
 		admin.setAdminId(id);
 		admin.setAdminPassword(password);
-		
-		
+
 		try {
 			ResultSet result = dbm.check(conn, admin);
 			String dbPassword;
-			if(result.next()){
+			if (result.next()) {
 				dbPassword = result.getString("admin_password");
-				if(dbPassword.equals(password)){
+				if (dbPassword.equals(password)) {
 					conn.close();
 					return 0;
 				}
@@ -165,7 +169,7 @@ public class DatabaseHandler {
 			}
 			conn.close();
 			return 2;
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
