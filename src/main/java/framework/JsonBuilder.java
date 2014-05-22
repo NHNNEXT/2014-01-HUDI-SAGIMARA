@@ -26,4 +26,12 @@ public class JsonBuilder {
 
 		return objectToJson(resultMap);
 	}
+
+	public String requestFailedJSON() {
+		Map<String, String> resultMap = new HashMap<String, String>();
+
+		resultMap.put("code", "400");
+		resultMap.put("message", "Request Failed");
+		return null;
+	}
 }

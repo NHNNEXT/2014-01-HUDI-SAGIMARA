@@ -37,12 +37,15 @@ public class InsertLocationDataController implements Controller {
 		String phone = (String) request.getParameter("id");
 		String time = (String) request.getParameter("date");
 		String cordinate = (String) request.getParameter("location");
-
-		db.insertLocation(phone, time, cordinate);
+		String json;
 		
-		String json = jb.requestSuccessJSON();
+		if(db.insertLocation(phone, time, cordinate)){
+			json = jb.requestSuccessJSON();
+		}else{
+			json = jb.requestFailedJSON();
+		}
+		
 		request.setAttribute("json", json);
-		
 		return forwardPath;
 
 	}

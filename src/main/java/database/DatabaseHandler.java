@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import logger.SagimaraLogger;
 import model.Inquiry;
 import model.Location;
+import model.Request;
 import model.User;
 import model.UserProfile;
 import model.Video;
@@ -91,7 +92,7 @@ public class DatabaseHandler {
 		return result;
 	}
 
-	public void insertLocation(String phone, String time,  String cordinate) {
+	public boolean insertLocation(String phone, String time,  String cordinate) {
 		Connection conn = this.connect();
 		Location location = new Location();
 		
@@ -102,13 +103,14 @@ public class DatabaseHandler {
 		try {
 			dbm.add(conn, location);
 			conn.close();
+			return true;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return false;
 	}
 
-	public void insertPhoto(String phone, String videoLink, String time) {
+	public boolean insertPhoto(String phone, String videoLink, String time) {
 		Connection conn = this.connect();
 		Video video = new Video();
 		video.setVideoId(phone);
@@ -118,11 +120,28 @@ public class DatabaseHandler {
 		try {
 			dbm.add(conn, video);
 			conn.close();
+			return true;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return false;
+	}
+
+	public boolean insertRequest(String from, String to, String date) {
+		Connection conn = this.connect();		
+		Request request = new Request();
+		request.setRequestFrom(from);
+		request.setRequestTo(to);
+		request.setRequestDate(date);
 		
+		try {
+			dbm.add(conn, request);
+			conn.close();
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 
 }

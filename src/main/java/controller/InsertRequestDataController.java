@@ -31,7 +31,18 @@ public class InsertRequestDataController implements Controller {
 			HttpServletResponse response) throws ServletException, IOException{
 		logger.info("Content-type : " + request.getHeader("Content-type"));
 		
-		String json = jb.requestSuccessJSON();
+		String from = (String) request.getParameter("from");
+		String to = (String) request.getParameter("to");
+		String date = (String) request.getParameter("date");
+		
+		String json;
+		if(db.insertRequest(from,to,date)){
+			json = jb.requestSuccessJSON();
+		}else{
+			json = jb.requestFailedJSON();
+		}
+
+		
 		request.setAttribute("json", json);
 		
 		return forwardPath;
