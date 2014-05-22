@@ -4,6 +4,7 @@ public class UserProfile extends BaseModel{
 	private String profilePhone;
 	private String profileStatus;
 	private String profileVerification;
+	private String profileVideo;
 	private String profileLocation;
 	private String profileWatch;
 	private String profileNotify;
@@ -19,7 +20,7 @@ public class UserProfile extends BaseModel{
 		this.profilePhone = profilePhone;
 		this.profileStatus = profileStatus;
 		this.profileVerification = profileVerification;
-		this.profileLocation = profileVideo;
+		this.profileVideo = profileVideo;
 		this.profileLocation = profileLocation;
 		this.profileWatch = profileInquiry;
 		this.profileNotify = profileNotify;
@@ -42,6 +43,12 @@ public class UserProfile extends BaseModel{
 	}
 	public void setProfileVerification(String profileVerification) {
 		this.profileVerification = profileVerification;
+	}
+	public String getProfileVideo() {
+		return profileVideo;
+	}
+	public void setProfileVideo(String profileVideo) {
+		this.profileVideo = profileVideo;
 	}
 	public String getProfileLocation() {
 		return profileLocation;
