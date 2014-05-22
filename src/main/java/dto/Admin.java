@@ -1,4 +1,4 @@
-package model;
+package dto;
 
 public class Admin extends BaseModel{
 	private String adminId;

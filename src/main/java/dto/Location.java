@@ -1,4 +1,4 @@
-package model;
+package dto;
 
 public class Location extends BaseModel{
 	private String locationId;

@@ -8,15 +8,15 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import logger.SagimaraLogger;
-import model.Admin;
-import model.BaseModel;
-import model.Inquiry;
-import model.Location;
-import model.Request;
-import model.User;
-import model.Video;
-
 import org.apache.log4j.Logger;
+
+import dto.Admin;
+import dto.BaseModel;
+import dto.Inquiry;
+import dto.Location;
+import dto.Request;
+import dto.User;
+import dto.Video;
 
 public class DatabaseManager {
 	Logger logger;

@@ -1,4 +1,4 @@
-package model;
+package dto;
 
 public class Request extends BaseModel{
 	private String requestFrom;

@@ -3,17 +3,15 @@ package database;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import logger.SagimaraLogger;
-import model.Admin;
-import model.Inquiry;
-import model.Location;
-import model.Request;
-import model.User;
-import model.UserProfile;
-import model.Video;
-
 import org.apache.log4j.Logger;
+import dto.Admin;
+import dto.Inquiry;
+import dto.Location;
+import dto.Request;
+import dto.User;
+import dto.UserProfile;
+import dto.Video;
 
 public class DatabaseHandler {
 	Logger logger;
