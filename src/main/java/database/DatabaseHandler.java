@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import logger.SagimaraLogger;
+import model.Admin;
 import model.Inquiry;
 import model.Location;
 import model.Request;
@@ -124,6 +125,7 @@ public class DatabaseHandler {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
 		return false;
 	}
 
@@ -142,6 +144,34 @@ public class DatabaseHandler {
 			e.printStackTrace();
 		}
 		return false;
+	}
+
+	public int CheckForadminLogin(String id, String password) {
+		Connection conn = this.connect();		
+		Admin admin = new Admin();
+		admin.setAdminId(id);
+		admin.setAdminPassword(password);
+		
+		
+		try {
+			ResultSet result = dbm.check(conn, admin);
+			String dbPassword;
+			if(result.next()){
+				dbPassword = result.getString("admin_password");
+				if(dbPassword.equals(password)){
+					conn.close();
+					return 0;
+				}
+				conn.close();
+				return 1;
+			}
+			conn.close();
+			return 2;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return -1;
 	}
 
 }
