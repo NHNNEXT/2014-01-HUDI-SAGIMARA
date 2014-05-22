@@ -31,6 +31,7 @@
 	</div>
 
 
+<!-- unit test 코드를 위한 별도 디렉토리를 만들고 html확장자로 보관해서 사용하는 게 좀더 좋을 듯. 지금 궂이 jsp서비스코드와 같은 디렉토리에 섞여 있는 모습이 혼란스러움-->
 	<script src="/javascripts/qunit-1.14.0.js"></script>
 	<script src="/javascripts/main.js"></script>
 	<script src="/javascripts/main_test.js"></script>

@@ -16,6 +16,7 @@
 
 </head>
 <body>
+<!-- 이 페이지의 HTML은 semantic태그도 잘 사용했고, 클래스나 id이름도 일관됨 컨벤션을 잘 지켰고, 전반적으로 깔끔하고 잘 구현됐음 -->
 	<div id="wrap">
 		<header>
 			<div class="column">

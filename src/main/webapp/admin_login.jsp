@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- HTML5 버전의 doctype을 사용하기.(최신버전)
+ --><!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -13,7 +14,8 @@
 	<div id=loginBox class="border-radius">
 		<form id="adminLoginForm" action="/login" method="POST">
 		<fieldset>
-		<table>
+<!--     Table태그는 가로/세로 기반의 데이터를 담는 것이 아니면 사용하지 않는 추세. 이유는 몇 가지 있는데 대표적으로 HTML구조가 복잡해지는 것.따라서 그냥 div로 이를 다시 표현하는 것이 좋음.
+ -->		<table>
               <tbody>
               	<tr colspan=3>
               		<h2>Sagimara Admin</h2>
