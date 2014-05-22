@@ -29,9 +29,14 @@ var visitInfoBarManager = {
 		this.dateInfo.setFullYear(this.year, this.month - 1, this.today);
 		this.dateSet.reverse();
 	},
-	setvisitNumberSet : function(profileInquiry) {
+	setVisitNumberSet : function(profileInquiry) {
 		// 방문(검색)수를 최근 5일의 정보를 가져와 visitNumberSet에 세팅한다.
-		this.visitNumberSet = profileInquiry;
+		this.visitNumberSet.length = 0;
+		for(var key in profileInquiry) {
+			if(key != "phoneNumber") {
+				this.visitNumberSet.push(profileInquiry[key]);
+			}
+		}
 	},
 	barAnimationController : function() {
 		// 각각의 bar를 시간차를 두고 에니메이션해주는 함수 action
@@ -103,7 +108,7 @@ var userStatusInfo = {
 var updateManager = {
 	updatePage : function(result) {
 		// 각요소 전부에게 새로운 정보를 주고 업데이트 시키는 함수
-		visitInfoBarManager.setvisitNumberSet(result.profileInquiry);
+		visitInfoBarManager.setVisitNumberSet(result.profileInquiry);
 		this.updateProfile(result);
 		this.updateStatus(result);
 		this.updateVisit(result);

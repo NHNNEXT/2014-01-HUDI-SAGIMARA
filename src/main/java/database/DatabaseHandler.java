@@ -40,32 +40,17 @@ public class DatabaseHandler {
 
 		Connection conn = this.connect();
 
+		UserProfileDAO UserProfileDAO = new UserProfileDAO(conn); 
 		UserProfile result = new UserProfile();
-
-		try {
-			ResultSet rsProfile = dbm.select(conn, new UserProfile(), id);
-			ResultSet rsInquiry = dbm.select(conn, new Inquiry(), id);
-
-			if (rsProfile.next() && rsInquiry.next()) {
+		try {		
+			result = UserProfileDAO.selectById(id);
+			
+			if(result != null) {
 				logger.info("[readUserProfile] User[" + id + "] 정보 있음 ");
 				Inquiry inquiry = new Inquiry();
 				inquiry.setInquiryId(id);
-
+				
 				dbm.add(conn, inquiry);
-
-				result.setProfilePhone(rsProfile.getString("phone_number"));
-				result.setProfileStatus(rsProfile.getString("status"));
-				result.setProfileVerification(rsProfile
-						.getString("verification"));
-				result.setProfileLocation(rsProfile.getString("location"));
-				result.setProfileWatch(rsProfile.getString("watch"));
-				result.setProfileNotify(rsProfile.getString("notify"));
-				String[] inquiryList = { rsInquiry.getString("4day ago"),
-						rsInquiry.getString("3day ago"),
-						rsInquiry.getString("2day ago"),
-						rsInquiry.getString("1day ago"),
-						rsInquiry.getString("today") };
-				result.setProfileInquiry(inquiryList);
 			} else {
 				logger.info("[readUserProfile] User[" + id + "] 정보 없음 ");
 				User user = new User(id, "false", "1", "위치정보 없음");
@@ -73,23 +58,15 @@ public class DatabaseHandler {
 
 				dbm.add(conn, user);
 				dbm.add(conn, inquiry);
-
-				result.setProfilePhone(user.getUserPhone());
-				result.setProfileStatus("1");
-				result.setProfileVerification("false");
-				result.setProfileLocation("위치정보 없음");
-				result.setProfileWatch("0");
-				result.setProfileNotify("0");
-				String[] inquiryList = { "0", "0", "0", "0", "0" };
-				result.setProfileInquiry(inquiryList);
+				
+				result = UserProfileDAO.selectById(id);
 			}
-			rsProfile.close();
-			rsInquiry.close();
+						
 			logger.info("[database] Connection is closed.");
 			conn.close();
-
+			
 		} catch (SQLException e) {
-			logger.info("[database] Connection is closed.");
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

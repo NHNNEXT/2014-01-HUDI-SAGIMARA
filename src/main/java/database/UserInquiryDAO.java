@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import dto.Inquiry;
 import dto.UserInquiry;
 
 public class UserInquiryDAO {
@@ -24,7 +23,7 @@ public class UserInquiryDAO {
 		rs = pstmt.executeQuery();
 		UserInquiry userInquiry = null;
 		if(rs.next()) {
-			//userInquiry = new UserInquiry(rs.getString("4day ago"),rs.getString("3day ago"), rs.getString("2day ago"),rs.getString("1day ago"), rs.getString("today"));
+			userInquiry = new UserInquiry(rs.getString("phone_number"), rs.getString("4day ago"),rs.getString("3day ago"), rs.getString("2day ago"),rs.getString("1day ago"), rs.getString("today"));
 		}
 		return userInquiry;
 	}

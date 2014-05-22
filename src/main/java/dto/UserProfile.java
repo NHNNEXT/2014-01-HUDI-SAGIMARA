@@ -4,26 +4,22 @@ public class UserProfile extends BaseModel{
 	private String profilePhone;
 	private String profileStatus;
 	private String profileVerification;
-	private String profileVideo;
 	private String profileLocation;
 	private String profileWatch;
 	private String profileNotify;
-	private String[] profileInquiry;
+	private UserInquiry profileInquiry;
 	
 	public UserProfile() {
 	}
 	
-	public UserProfile(String profilePhone, String profileStatus,
-			String profileVerification, String profileVideo,
-			String profileLocation, String profileInquiry, String profileNotify) {
-		super();
+	public UserProfile(String profilePhone, String profileStatus, String profileVerification, String profileLocation, String profileWatch, String profileNotify, UserInquiry profileInquiry) {
 		this.profilePhone = profilePhone;
 		this.profileStatus = profileStatus;
 		this.profileVerification = profileVerification;
-		this.profileVideo = profileVideo;
 		this.profileLocation = profileLocation;
-		this.profileWatch = profileInquiry;
+		this.profileWatch = profileWatch;
 		this.profileNotify = profileNotify;
+		this.profileInquiry = profileInquiry;
 	}
 	
 	public String getProfilePhone() {
@@ -44,12 +40,6 @@ public class UserProfile extends BaseModel{
 	public void setProfileVerification(String profileVerification) {
 		this.profileVerification = profileVerification;
 	}
-	public String getProfileVideo() {
-		return profileVideo;
-	}
-	public void setProfileVideo(String profileVideo) {
-		this.profileVideo = profileVideo;
-	}
 	public String getProfileLocation() {
 		return profileLocation;
 	}
@@ -68,11 +58,7 @@ public class UserProfile extends BaseModel{
 	public void setProfileNotify(String profileNotify) {
 		this.profileNotify = profileNotify;
 	}
-	public String[] getProfileInquiry() {
+	public UserInquiry getProfileInquiry() {
 		return profileInquiry;
-	}
-	public void setProfileInquiry(String[] profileInquiry) {
-		this.profileInquiry = profileInquiry;
-	}
-	
+	}	
 }

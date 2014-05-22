@@ -1,10 +1,11 @@
 package database;
 
-import java.sql.PreparedStatement;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import dto.UserInquiry;
 import dto.UserProfile;
 
 public class UserProfileDAO {
@@ -21,10 +22,21 @@ public class UserProfileDAO {
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, id);
 		rs = pstmt.executeQuery();
+		
 		UserProfile userProfile = null;
+		UserInquiry userInquiry = null;
+		
+		UserInquiryDAO userInquiryDAO = new UserInquiryDAO(conn);
+		userInquiry = userInquiryDAO.selectById(id);
+		
 		if(rs.next()) {
-			userProfile = new UserProfile(rs.getString("phone_number"), rs.getString("status"), rs.getString("verification"), rs.getString("video"), rs.getString("location"), rs.getString("watch"), rs.getString("notify"));
+			userProfile = new UserProfile(rs.getString("phone_number"), rs.getString("status"), rs.getString("verification"), rs.getString("location"), rs.getString("watch"), rs.getString("notify"), userInquiry);
 		}
 		return userProfile;
+	}
+	
+	public UserProfile setDefault(String id) {
+		return null;
+		
 	}
 }

@@ -25,32 +25,6 @@ public class DatabaseManager {
 		logger = SagimaraLogger.logger;
 	}
 
-	public ResultSet select(Connection conn, BaseModel model, String id)
-			throws SQLException {
-		String sql, tableName;
-		PreparedStatement pstmt;
-		ResultSet rs;
-		tableName = model.getTableName();
-		logger.info("[DatabaseManager-Select] Table NAME : " + tableName);
-		if (tableName.equals("USERPROFILE")) {
-			sql = "select * from " + "USER_PROFILE" + " where phone_number = ?";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, id);
-			rs = pstmt.executeQuery();
-
-			return rs;
-		} else if (tableName.equals("INQUIRY")) {
-			sql = "select * from " + "USER_INQUIRY" + " where phone_number = ?";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, id);
-			rs = pstmt.executeQuery();
-
-			return rs;
-		}
-
-		return null;
-	}
-
 	public int add(Connection conn, BaseModel model) throws SQLException {
 		String tableName = model.getTableName();
 
