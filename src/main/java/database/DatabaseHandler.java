@@ -5,13 +5,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import logger.SagimaraLogger;
-import model.Inquiry;
-import model.Location;
-import model.User;
-import model.UserProfile;
-import model.Video;
 
 import org.apache.log4j.Logger;
+
+import dto.Inquiry;
+import dto.Location;
+import dto.User;
+import dto.UserProfile;
+import dto.Video;
 
 public class DatabaseHandler {
 	Logger logger;

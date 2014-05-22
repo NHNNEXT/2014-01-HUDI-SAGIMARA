@@ -1,4 +1,4 @@
-package model;
+package dto;
 
 public class Video extends BaseModel{
 	private String videoId;

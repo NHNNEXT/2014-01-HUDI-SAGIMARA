@@ -1,4 +1,4 @@
-package model;
+package dto;
 
 public class User extends BaseModel{
 	private String userPhone;

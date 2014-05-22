@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import logger.SagimaraLogger;
-import model.UserProfile;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemFactory;
@@ -19,6 +18,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.log4j.Logger;
 
 import database.DatabaseHandler;
+import dto.UserProfile;
 import framework.JsonBuilder;
 
 public class UserViewController implements Controller{

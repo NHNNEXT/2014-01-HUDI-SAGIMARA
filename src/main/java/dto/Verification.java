@@ -1,4 +1,4 @@
-package model;
+package dto;
 
 public class Verification extends BaseModel{
 	private String verificationId;
