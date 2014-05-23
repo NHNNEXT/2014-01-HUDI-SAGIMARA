@@ -37,6 +37,7 @@ var visitInfoBarManager = {
 				this.visitNumberSet.push(profileInquiry[key]);
 			}
 		}
+		this.visitNumberSet.reverse();
 	},
 	barAnimationController : function() {
 		// 각각의 bar를 시간차를 두고 에니메이션해주는 함수 action
