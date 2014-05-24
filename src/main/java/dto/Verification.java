@@ -4,6 +4,11 @@ public class Verification extends BaseModel{
 	private String verificationId;
 	private String verificationTime;
 	
+	public Verification(String verificationId, String verificationTime){
+		this.verificationId = verificationId;
+		this.verificationTime = verificationTime;
+	}
+	
 	public String getVerificationId() {
 		return verificationId;
 	}
