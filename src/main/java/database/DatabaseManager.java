@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import logger.SagimaraLogger;
+
 import org.apache.log4j.Logger;
 
 import dto.Admin;
@@ -16,6 +17,7 @@ import dto.Inquiry;
 import dto.Location;
 import dto.Request;
 import dto.User;
+import dto.Verification;
 import dto.Video;
 
 public class DatabaseManager {
@@ -111,6 +113,18 @@ public class DatabaseManager {
 			pstmt.setString(3, admin.getAdminName());
 			pstmt.setString(4, admin.getAdminEmail());
 			pstmt.setString(5, admin.getAdminStatus());
+		}
+		// ADMIN Page에서 인증 확인을 하면 사용할 로직 
+		else if (tableName.equals("VERIFICATION")) {
+			Verification verification = (Verification) model;
+			
+			String sql = "INSERT INTO " + tableName + " VALUES (?, ?)";
+			logger.info("[DatabaseManager] Verification :" 
+					+ verification.getVerificationId() + " : " 
+					+ verification.getVerificationTime() + " : ");
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, verification.getVerificationId());
+			pstmt.setString(2, verification.getVerificationTime());
 		}
 
 		try {
