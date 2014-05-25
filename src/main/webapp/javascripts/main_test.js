@@ -6,17 +6,19 @@ test("dateSet_Test", function(){
 	var testResult = month + "." + today;	
 	//When
 	visitInfoBarManager.setDateSet();
-	//Then
+	//Then 날짜가 오늘 날짜로 맞게 들어가는지 확인
 	equal(visitInfoBarManager.dateSet[4], testResult);
 });
 
 test("setvisitNumberSet_Test", function(){
 	//Given
-	var testArray = [1,2,3,4,5];
+	var testInquery = {"phoneNumber":"0000","today":"1","oneDayAgo":"2","twoDayAgo":"3","threeDayAgo":"4","fourDayAgo":"5"};
+	var expectedValue = ["5","4","3","2","1"];
 	//When
-	visitInfoBarManager.setvisitNumberSet(testArray);
-	//Then
-	equal(visitInfoBarManager.visitNumberSet, testArray);
+	visitInfoBarManager.setVisitNumberSet(testInquery);
+	var resultValue = visitInfoBarManager.visitNumberSet;
+	//Then 방문자 수가 입력값과 결과과 값이 같은지 확인(today)
+	equal(resultValue[4], expectedValue[4]);
 });
 
 test("updateLocation_Test", function(){
@@ -29,7 +31,7 @@ test("updateLocation_Test", function(){
 	var updatedLocationInfo = locationInfoNodeList[0];
 	//When
 	updateManager.updateLocation(testdata);
-	//Then
+	//Then 위치정보가 요청한 자료대로 들어가는지 확인
 	equal(updatedLocationInfo.innerText, testdata.profileLocation);
 	equal(elLocationInfo.style.webkitAnimationPlayState, "running");
 });	
@@ -45,10 +47,10 @@ test("updateLocation_Test_Independed_browser", function(){
 		}
 	//When
 	updateManager.updateLocation(testdata);
-	
-	//Then
 	var elLocationInfo = document.querySelector("#location-info");
 	var expectedDiv = document.querySelector("#location-info-fake");
+	
+	//Then 위치정보가 요청한 자료대로 들어가는지 확인 (fake div를 만들어서 확인)
 	equal(elLocationInfo.outerHTML, expectedDiv.firstChild.outerHTML);
 });
 

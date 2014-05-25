@@ -17,17 +17,19 @@ public class VerificationDAO {
 	public Verification selectById(String userPhone) throws SQLException {
 		String sql = "select * from " + "VERIFICATION"
 				+ " where USER_user_phone = ?";
-		PreparedStatement pstmt;
-		ResultSet rs;
-		pstmt = conn.prepareStatement(sql);
+		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, userPhone);
-		rs = pstmt.executeQuery();
+		ResultSet rs = pstmt.executeQuery();
 
 		Verification verification = null;
 		if (rs.next()) {
 			verification = new Verification(rs.getString("USER_user_phone"),
 					rs.getString("verification_time"));
 		}
+		
+		pstmt.close();
+		rs.close();
+		
 		return verification;
 	}
 }

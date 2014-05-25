@@ -34,70 +34,7 @@ public class DatabaseManager {
 		int result;
 		logger.info("[DatabaseManager-add] Table NAME : " + tableName);
 
-		if (tableName.equals("USER")) {
-			User user = (User) model;
-			String sql = "INSERT INTO " + tableName + " VALUES (?, ?, ?, ?)";
-
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, user.getUserPhone());
-			pstmt.setString(2, user.getUserVerification());
-			pstmt.setString(3, user.getUserStatus());
-			pstmt.setString(4, user.getUserLocation());
-			
-		}else if (tableName.equals("INQUIRY")) {
-			Inquiry inquiry = (Inquiry) model;
-
-			String sql = "INSERT INTO " + tableName
-					+ " (`USER_user_phone`,`inquiry_time`) VALUES (?, ?)";
-			logger.info("[DatabaseManager] Inquiry :"
-					+ inquiry.getInquiryTime() + " : "
-					+ inquiry.getInquiryTime());
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, inquiry.getInquiryId());
-			pstmt.setString(2, inquiry.getInquiryTime());
-
-		}else if (tableName.equals("LOCATION")) {
-			Location location = (Location) model;
-			String sql = "INSERT INTO "
-					+ tableName
-					+ " (`USER_user_phone`,`location_time`,`location_coordinate`) VALUES (?, ?, ?)";
-			
-			logger.info("[DatabaseManager] Location :"
-					+ location.getLocationId() + " : "
-					+ location.getLocationTime() + " : "
-					+ location.getLocationCoordinate());
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, location.getLocationId());
-			pstmt.setString(2, location.getLocationTime());
-			pstmt.setString(3, location.getLocationCoordinate());
-			
-		}else if (tableName.equals("REQUEST")) {
-			Request request = (Request) model;
-
-			String sql = "INSERT INTO " + tableName + " VALUES (?, ?, ?)";
-			logger.info("[DatabaseManager] Request :"
-					+ request.getRequestFrom() + " : " + request.getRequestTo()
-					+ " : " + request.getRequestDate());
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, request.getRequestFrom());
-			pstmt.setString(2, request.getRequestTo());
-			pstmt.setString(3, request.getRequestDate());
-			
-		}else if (tableName.equals("VIDEO")) {
-			Video video = (Video) model;
-
-			String sql = "INSERT INTO " + tableName
-					+ "(USER_user_phone,location_time,location_coordinate)"
-					+ " VALUES (?, ?, ?)";
-			logger.info("[DatabaseManager] Video :" + video.getVideoId()
-					+ " : " + video.getVideoLink() + " : "
-					+ video.getVideoDate());
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, video.getVideoId());
-			pstmt.setString(2, video.getVideoLink());
-			pstmt.setString(3, video.getVideoDate());
-			
-		}else if (tableName.equals("ADMIN")) {
+		if (tableName.equals("ADMIN")) {
 			Admin admin = (Admin) model;
 
 			String sql = "INSERT INTO " + tableName + " VALUES (?, ?, ?, ?, ?, ?)";

@@ -70,52 +70,57 @@ public class DatabaseHandler {
 
 		Connection conn = this.connect();
 
-		UserProfileDAO UserProfileDAO = new UserProfileDAO(conn); 
-		UserProfile result = new UserProfile();
+		UserProfileDAO userProfileDAO = new UserProfileDAO(conn); 
+		UserDAO userDAO = new UserDAO(conn);
+		InquiryDAO inquiryDAO = new InquiryDAO(conn); 
+		UserProfile userProfile = new UserProfile();
 		try {		
-			result = UserProfileDAO.selectById(id);
+			userProfile = userProfileDAO.selectById(id);
 			
-			if(result != null) {
+			if(userProfile != null) {
 				logger.info("[readUserProfile] User[" + id + "] 정보 있음 ");
 				Inquiry inquiry = new Inquiry();
 				inquiry.setInquiryId(id);
 				
-				dbm.add(conn, inquiry);
+				inquiryDAO.add(inquiry);
+				
 			} else {
 				logger.info("[readUserProfile] User[" + id + "] 정보 없음 ");
 				User user = new User(id, "false", "1", "위치정보 없음");
 				Inquiry inquiry = new Inquiry(user);
 
-				dbm.add(conn, user);
-				dbm.add(conn, inquiry);
+				userDAO.add(user);
+				inquiryDAO.add(inquiry);
 				
-				result = UserProfileDAO.selectById(id);
+				userProfile = userProfileDAO.selectById(id);
 			}
 						
 			logger.info("[database] Connection is closed.");
 			conn.close();
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			logger.info("readUserProfile Fail");
 			e.printStackTrace();
 		}
 
-		return result;
+		return userProfile;
 	}
 
 	public boolean insertLocation(String phone, String time, String cordinate) {
 		Connection conn = this.connect();
 		Location location = new Location();
+		LocationDAO locationDAO = new LocationDAO(conn); 
 
 		location.setLocationId(phone);
 		location.setLocationTime(time);
 		location.setLocationCoordinate(cordinate);
 
 		try {
-			dbm.add(conn, location);
+			locationDAO.add(location);
 			conn.close();
 			return true;
 		} catch (SQLException e) {
+			logger.info("insertLocation Fail");
 			e.printStackTrace();
 		}
 		return false;
@@ -124,15 +129,18 @@ public class DatabaseHandler {
 	public boolean insertPhoto(String phone, String videoLink, String time) {
 		Connection conn = this.connect();
 		Video video = new Video();
+		VideoDAO videoDAO = new VideoDAO(conn);
+		
 		video.setVideoId(phone);
 		video.setVideoLink(videoLink);
 		video.setVideoDate(time);
 
 		try {
-			dbm.add(conn, video);
+			videoDAO.add(video);
 			conn.close();
 			return true;
 		} catch (SQLException e) {
+			logger.info("insertPhoto Fail");
 			e.printStackTrace();
 		}
 
@@ -142,15 +150,18 @@ public class DatabaseHandler {
 	public boolean insertRequest(String from, String to, String date) {
 		Connection conn = this.connect();
 		Request request = new Request();
+		RequestDAO requestDAO = new RequestDAO(conn);
+		
 		request.setRequestFrom(from);
 		request.setRequestTo(to);
 		request.setRequestDate(date);
 
 		try {
-			dbm.add(conn, request);
+			requestDAO.add(request);
 			conn.close();
 			return true;
 		} catch (SQLException e) {
+			logger.info("insertRequest Fail");
 			e.printStackTrace();
 		}
 		return false;
