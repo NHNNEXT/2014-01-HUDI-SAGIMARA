@@ -12,23 +12,24 @@ var visitInfoBarManager = {
 	dateInfo : new Date(),
 	setDateSet : function() {
 		// 최근 5일의 날짜 배열을 dateSet에 세팅한다.
-		this.dateSet = new Array();
+		this.dateSet = [];
 
-		this.today = this.dateInfo.getDate();
-		this.month = this.dateInfo.getMonth() + 1;
-		this.year = this.dateInfo.getFullYear();
+		var today = this.dateInfo.getDate();
+		var month = this.dateInfo.getMonth() + 1;
+		var year = this.dateInfo.getFullYear();
 
 		var datePool = 5;
 		for (var i = 0; i < datePool; i++) {
 			this.dateInfo
-					.setFullYear(this.year, this.month - 1, this.today - i);
+					.setFullYear(year, month - 1, today - i);
 			var day = this.dateInfo.getDate();
 			var month = this.dateInfo.getMonth() + 1;
 			this.dateSet[i] = month + "." + day;
 		}
-		this.dateInfo.setFullYear(this.year, this.month - 1, this.today);
+		this.dateInfo.setFullYear(year, month - 1, today);
 		this.dateSet.reverse();
 	},
+	
 	setVisitNumberSet : function(profileInquiry) {
 		// 방문(검색)수를 최근 5일의 정보를 가져와 visitNumberSet에 세팅한다.
 		this.visitNumberSet.length = 0;
@@ -39,6 +40,7 @@ var visitInfoBarManager = {
 		}
 		this.visitNumberSet.reverse();
 	},
+	
 	barAnimationController : function() {
 		// 각각의 bar를 시간차를 두고 에니메이션해주는 함수 action
 		this.count = 0;
@@ -67,6 +69,7 @@ var visitInfoBarManager = {
 			this.count++;
 		}).bind(this), 300);
 	},
+	
 	checkBarHeight : function() {
 		// bar 높이가 특정 높이 이상으로 높아지는 것을 막고 비율에 맞추어 분배해주는 함수
 		var barArray = [];
@@ -94,11 +97,13 @@ var userStatusInfo = {
 		color : "#28bf00",
 		contents : "<h1>Safety</h1><p>인증된 회원이므로 거래 성사되길 바랍니다.</p><p>중고 물품 거래시 상품을 꼭 확인하세요.</p>"
 	},
+	
 	warning : {
 		code : 1,
 		color : "#ff9600",
 		contents : "<h1>Warning</h1><p>인증되지 않은 회원이므로 거래시 주의 바랍니다.</p><p>중고 물품 거래시 상품을 꼭 확인하세요.</p>"
 	},
+	
 	danger : {
 		code : 2,
 		color : "#BF322A",
@@ -117,6 +122,7 @@ var updateManager = {
 		this.updateWatch(result);
 		this.updateCaution(result);
 	},
+	
 	updateProfile : function(userData) {
 		// userProfile부분의 업데이트를 하는 함수
 		var elProfileInfo = document.querySelector("#profile-detail-section");
@@ -132,6 +138,7 @@ var updateManager = {
 		var type = editor.playStatusFeatureDetector();
 		editor.setStyle(elProfileInfo, type, "running");
 	},
+	
 	updateStatus : function(userData) {
 		// user Status부분의 업데이트
 		var elProfileStatus = document.querySelector("#profile-status");
@@ -150,6 +157,7 @@ var updateManager = {
 			editor.updateInnerHTML(elProfileStatusContents, userStatusInfo.danger.contents)
 		}
 	},
+	
 	updateVisit : function(userData) {
 		// 해당번호 검색(방문)한 수를 업데이트
 		var elVisitInfo = document.querySelector("#visited-info");
@@ -160,6 +168,7 @@ var updateManager = {
 		// action의 의미
 		visitInfoBarManager.barAnimationController();
 	},
+	
 	updateLocation : function(userData) {
 		// user의 위치정보를 업데이트
 		var elLocationInfo = document.querySelector("#location-info");
@@ -179,6 +188,7 @@ var updateManager = {
 		editor.updateInnerHTML(elWatchInfoDetail, userData.profileWatch);
 
 	},
+	
 	updateCaution : function(userData) {
 		// 경고나 신고가 들어온 수를 업데이트
 		var elCautionInfo = document.querySelector("#caution-info");
@@ -187,6 +197,7 @@ var updateManager = {
 		editor.setStyle(elCautionInfo, type, "running");
 		editor.updateInnerHTML(elCautionInfoDetail, userData.profileNotify);
 	},
+	
 	setAnimation : function(state) {
 		// 페이지 에니메이션을 시작시키는 함수
 		var elContainer = document.querySelector("#container");
@@ -203,10 +214,12 @@ var utility = {
 		// submit 이벤트를 막는 기능
 		e.preventDefault();
 	},
+	
 	refresh : function(e) {
 		// 화면 리프래쉬 함수
 		window.location.reload(true);
 	},
+	
 	JSONparse : function(raw) {
 		// json파일을 json객체로 변환
 		var jsonObj = JSON.parse(raw);
@@ -220,11 +233,13 @@ var editor = {
 		var targetStyle = element.style;
 		targetStyle.setProperty(type, value);
 	},
+	
 	updateInnerHTML : function(element, contents) {
 		// 해당 element에 contents을 삽입하는 함수
 		var updateContents = contents;
 		element.innerHTML = contents;
 	},
+	
 	playStatusFeatureDetector : function() {
 		//해당브라우져에서 동작가능한 playStatus를 찾아서 해당 타입을 return해준다.
 		var elForCheck = document.querySelector("body");
@@ -255,6 +270,7 @@ var sagimaraMain = {
 		oEventElements.elLogo.addEventListener("click", utility.refresh, false);
 		visitInfoBarManager.setDateSet()
 	},
+	
 	requestSearchEvent : function(e) {
 		// 검색 요청 처리 및 서버와 통신
 		utility.requestPreventEvent(e);

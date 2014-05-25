@@ -36,6 +36,7 @@ public class LocationDAO {
 		} else {
 			logger.info("Add Fail " + tableName);
 		}
-
+		
+		pstmt.close();
 	}
 }

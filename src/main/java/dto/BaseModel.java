@@ -16,6 +16,5 @@ public class BaseModel {
 	public void setTableName(String tableName) {
 		this.tableName = tableName;
 	}
-	
-	
+
 }
