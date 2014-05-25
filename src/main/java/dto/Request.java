@@ -5,6 +5,15 @@ public class Request extends BaseModel{
 	private String requestTo;
 	private String requestDate;
 	
+	public Request(String requestFrom, String requestTo, String requestDate) {
+		super();
+		this.requestFrom = requestFrom;
+		this.requestTo = requestTo;
+		this.requestDate = requestDate;
+	}
+	public Request() {
+		// TODO Auto-generated constructor stub
+	}
 	public String getRequestFrom() {
 		return requestFrom;
 	}

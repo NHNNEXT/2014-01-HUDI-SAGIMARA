@@ -23,7 +23,7 @@ public class JsonBuilder {
 
 		resultMap.put("code", "200");
 		resultMap.put("message", "Request Success");
-
+		
 		return objectToJson(resultMap);
 	}
 

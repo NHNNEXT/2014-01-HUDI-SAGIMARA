@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -10,8 +11,10 @@ import logger.SagimaraLogger;
 
 import org.apache.log4j.Logger;
 
+import com.google.gson.Gson;
+
 import database.DatabaseHandler;
-import database.VerificationDAO;
+import dto.Request;
 import framework.JsonBuilder;
 
 public class PushAlarmController implements Controller {
@@ -32,23 +35,19 @@ public class PushAlarmController implements Controller {
 	public String run(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String userPhone = (String) request.getParameter("userPhone");
-		// String dateTime = (String) request.getParameter("time");
-
-		//DatabaseManager에 아래의 로직 추가
-		//1.번호를 받아서.
+		Gson gson = new Gson();
 		logger.info("[PushAlarmController Register] userPhone : " + userPhone);
+		ArrayList<Request> resultList;
 		
-		  
-		//2. Verification의 가장 마지막 시간을 구하고
-		/*
-		 * 구현해야할것이 많음
-		 */
+		resultList = db.getRequestsWithVerificationTime(userPhone);
 		
-		//3. Request 리스트를 리턴해줌
-		String json;
-		json = jb.requestSuccessJSON();
-
+		for(Request r : resultList){
+			logger.info("HI : " +r.getRequestTo() + " : " + r.getRequestFrom() + " : " + r.getRequestDate());
+		}
+		
+		String json = gson.toJson(resultList);
 		request.setAttribute("json", json);
+		
 		return forwardPath;
 	}
 

@@ -36,7 +36,11 @@
 		<servlet-name>unitTest</servlet-name>
 		<servlet-class>framework.FrontController</servlet-class>
 	</servlet>
-
+	<servlet>
+		<servlet-name>pushService</servlet-name>
+		<servlet-class>framework.FrontController</servlet-class>
+	</servlet>
+	
 	<servlet-mapping>
 		<servlet-name>index</servlet-name>
 		<url-pattern>/index</url-pattern>
@@ -56,6 +60,10 @@
 	<servlet-mapping>
 		<servlet-name>unitTest</servlet-name>
 		<url-pattern>/main_test</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>pushService</servlet-name>
+		<url-pattern>/push/*</url-pattern>
 	</servlet-mapping>
 
 </web-app>
