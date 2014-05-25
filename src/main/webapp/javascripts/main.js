@@ -1,7 +1,60 @@
+var editor = {
+	get : function(selector, elements) {
+		//해당 element에 대한 querySelector element가 없을시 document에서 select
+		if(typeof elements == "undefined") {
+			elements = document;
+		}
+		var result = elements.querySelector(selector);
+		return result;
+	},
+	
+	getAll : function(selector, elements) {
+		//해당 element에 대한 querySelectorAll element가 없을시 document에서 select
+		if(typeof elements == "undefined") {
+			elements = document;
+		}
+		var result = elements.querySelectorAll(selector);
+		return result;
+	},
+		
+	setStyle : function(element, type, value) {
+		// 해당 element에 주어진 type의 스타일을 value값으로 변경
+		var targetStyle = element.style;
+		targetStyle.setProperty(type, value);
+	},
+	
+	updateInnerHTML : function(element, contents) {
+		// 해당 element에 contents을 삽입하는 함수
+		var updateContents = contents;
+		element.innerHTML = contents;
+	},
+	
+	resultFeatureDetector : "",
+	
+	playStatusFeatureDetector : function() {
+		//해당브라우져에서 동작가능한 playStatus를 찾아서 해당 타입을 resultFeatureDetector에 저장 해준다.
+		var result;
+		var elForCheck = editor.get("body");
+		var playStatus = {
+			"-webkit-animation-play-state" : typeof elForCheck.style.webkitAnimationPlayState, 
+			"-moz-animation-play-state" : typeof elForCheck.style.mozAnimationPlayState,
+			"animation-play-state" :  typeof elForCheck.style.animationPlayState
+		}
+
+		for(var key in playStatus){
+			if(playStatus[key] !== "undefined"){
+				result = key;
+			}
+		}
+		
+		this.resultFeatureDetector = result;
+	}
+}
+
 var oEventElements = {
 	// EventListener를 위한 elements
-	elSubmit : document.querySelector(".search-submit"),
-	elLogo : document.querySelector(".logo")
+	elSubmit : editor.get(".search-submit"),
+	elLogo : editor.get(".logo")
 };
 
 var visitInfoBarManager = {
@@ -45,9 +98,8 @@ var visitInfoBarManager = {
 		// 각각의 bar를 시간차를 두고 에니메이션해주는 함수 action
 		this.count = 0;
 		var setBars = setInterval((function() {
-			var elVisitedInfo = document.querySelector("#visited-info");
-			var elVisitedInfoBar = elVisitedInfo
-					.querySelectorAll("#visited-graph .bar-section");
+			var elVisitedInfo = editor.get("#visited-info");
+			var elVisitedInfoBar = editor.getAll("#visited-graph .bar-section", elVisitedInfo);
 			var numberOfBar = elVisitedInfoBar.length - 1
 
 			if (this.count > numberOfBar) {
@@ -58,9 +110,9 @@ var visitInfoBarManager = {
 			var visit = barArray[this.count];
 			var visitPerHeight = 10; // 방문자 1명당 10px의 높이로 설정
 			var newHeight = (visit * visitPerHeight) + "px";
-			var BarHeight = elVisitedInfoBar[this.count].querySelector(".bar");
-			var barValue = BarHeight.querySelector("p");
-			var barDate = elVisitedInfoBar[this.count].querySelector("p");
+			var BarHeight = editor.get(".bar", elVisitedInfoBar[this.count]);
+			var barValue = editor.get("p", BarHeight);
+			var barDate = editor.get("p", elVisitedInfoBar[this.count]);
 
 			editor.setStyle(BarHeight, "height", newHeight);
 
@@ -122,8 +174,8 @@ var updateManager = {
 	
 	updateProfile : function(userData) {
 		// userProfile부분의 업데이트를 하는 함수
-		var elProfileInfo = document.querySelector("#profile-detail-section");
-		var elProfileInfoDetail = elProfileInfo.querySelectorAll("p");
+		var elProfileInfo = editor.get("#profile-detail-section");
+		var elProfileInfoDetail = editor.getAll("p", elProfileInfo);
 		// update될 자료에 대한 확정 필요 - 우선 주석처리
 		// var join = "profilePhone : " + userData.profilePhone;
 		// var Verification = "profileStatus : " + userData.profileStatus;
@@ -138,9 +190,8 @@ var updateManager = {
 	
 	updateStatus : function(userData) {
 		// user Status부분의 업데이트
-		var elProfileStatus = document.querySelector("#profile-status");
-		var elProfileStatusContents = elProfileStatus
-				.querySelector(".contents");
+		var elProfileStatus = editor.get("#profile-status");
+		var elProfileStatusContents = editor.get(".contents", elProfileStatus);
 		editor.setStyle(elProfileStatus, "height", "150px");
 		
 		if (userData.profileStatus == userStatusInfo.safety.code) {
@@ -160,12 +211,12 @@ var updateManager = {
 			editor.updateInnerHTML(elProfileStatusContents, userStatusInfo.danger.contents)
 		
 		}
-	},
+	},	
 	
 	updateVisit : function(userData) {
 		// 해당번호 검색(방문)한 수를 업데이트
-		var elVisitInfo = document.querySelector("#visited-info");
-		var elVisitInfoDetail = elVisitInfo.querySelector("#visited-graph");
+		var elVisitInfo = editor.get("#visited-info");
+		var elVisitInfoDetail = editor.get("#visited-graph", elVisitInfo);
 		// 한라인으로 처리 feature detecting, browser detecting
 		var type = editor.resultFeatureDetector;
 		editor.setStyle(elVisitInfoDetail, type, "running");
@@ -175,9 +226,8 @@ var updateManager = {
 	
 	updateLocation : function(userData) {
 		// user의 위치정보를 업데이트
-		var elLocationInfo = document.querySelector("#location-info");
-		var elLocationInfoDetail = elLocationInfo
-				.querySelector("#map-canvas p");
+		var elLocationInfo = editor.get("#location-info");
+		var elLocationInfoDetail = editor.get("#map-canvas p", elLocationInfo);
 		var type = editor.resultFeatureDetector;
 		editor.setStyle(elLocationInfo, type, "running");
 		editor.updateInnerHTML(elLocationInfoDetail, userData.profileLocation);
@@ -185,8 +235,8 @@ var updateManager = {
 
 	updateWatch : function(userData) {
 		// user를 지켜보고(등록) 있는 사람의 수를 업데이트
-		var elWatchInfo = document.querySelector("#watch-info");
-		var elWatchInfoDetail = elWatchInfo.querySelector("#watch-tool p");
+		var elWatchInfo = editor.get("#watch-info");
+		var elWatchInfoDetail = editor.get("#watch-tool p", elWatchInfo);
 		var type = editor.resultFeatureDetector;
 		editor.setStyle(elWatchInfo, type, "running");
 		editor.updateInnerHTML(elWatchInfoDetail, userData.profileWatch);
@@ -195,8 +245,8 @@ var updateManager = {
 	
 	updateCaution : function(userData) {
 		// 경고나 신고가 들어온 수를 업데이트
-		var elCautionInfo = document.querySelector("#caution-info");
-		var elCautionInfoDetail = elCautionInfo.querySelector("#caution-tool p");
+		var elCautionInfo = editor.get("#caution-info");
+		var elCautionInfoDetail = editor.get("#caution-tool p", elCautionInfo);
 		var type = editor.resultFeatureDetector;
 		editor.setStyle(elCautionInfo, type, "running");
 		editor.updateInnerHTML(elCautionInfoDetail, userData.profileNotify);
@@ -204,8 +254,8 @@ var updateManager = {
 	
 	setAnimation : function(state) {
 		// 페이지 에니메이션을 시작시키는 함수
-		var elContainer = document.querySelector("#container");
-		var elFooter = document.querySelector("footer");
+		var elContainer = editor.get("#container");
+		var elFooter = editor.get("footer");
 		
 		var type = editor.resultFeatureDetector;
 		editor.setStyle(elContainer, type, state);
@@ -228,41 +278,6 @@ var utility = {
 		// json파일을 json객체로 변환
 		var jsonObj = JSON.parse(raw);
 		return jsonObj;
-	}
-}
-
-var editor = {
-	setStyle : function(element, type, value) {
-		// 해당 element에 주어진 type의 스타일을 value값으로 변경
-		var targetStyle = element.style;
-		targetStyle.setProperty(type, value);
-	},
-	
-	updateInnerHTML : function(element, contents) {
-		// 해당 element에 contents을 삽입하는 함수
-		var updateContents = contents;
-		element.innerHTML = contents;
-	},
-	
-	resultFeatureDetector : "",
-	
-	playStatusFeatureDetector : function() {
-		//해당브라우져에서 동작가능한 playStatus를 찾아서 해당 타입을 return해준다.
-		var result;
-		var elForCheck = document.querySelector("body");
-		var playStatus = {
-			"-webkit-animation-play-state" : typeof elForCheck.style.webkitAnimationPlayState, 
-			"-moz-animation-play-state" : typeof elForCheck.style.mozAnimationPlayState,
-			"animation-play-state" :  typeof elForCheck.style.animationPlayState
-		}
-
-		for(var key in playStatus){
-			if(playStatus[key] !== "undefined"){
-				result = key;
-			}
-		}
-		
-		this.resultFeatureDetector = result;
 	}
 }
 
