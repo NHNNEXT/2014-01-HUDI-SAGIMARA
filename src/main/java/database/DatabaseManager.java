@@ -101,32 +101,4 @@ public class DatabaseManager {
 
 		return columns;
 	}
-
-	public ResultSet check(Connection conn, BaseModel model) {
-		String tableName = model.getTableName();
-		PreparedStatement pstmt = null;
-		int result;
-		logger.info("[DatabaseManager-check] Table NAME : " + tableName);
-		ResultSet rs = null;
-		
-		if (tableName.equals("ADMIN")) {
-			Admin admin = (Admin) model;
-			
-			String sql = "SELECT admin_password from " + tableName + " where admin_id = (?)";
-			
-			String requestPassword = admin.getAdminPassword();
-			try {
-				pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, admin.getAdminId());
-				rs = pstmt.executeQuery();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			
-		}
-		
-		return rs;
-	}
 }

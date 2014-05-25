@@ -7,6 +7,18 @@ public class Admin extends BaseModel{
 	private String adminEmail;
 	private String adminStatus;
 	
+	public Admin(){
+	}
+	
+	public Admin(String adminId, String adminPassword, String adminName, String adminEmail, String adminStatus) {
+		super();
+		this.adminId = adminId;
+		this.adminPassword = adminPassword;
+		this.adminName = adminName;
+		this.adminEmail = adminEmail;
+		this.adminStatus = adminStatus;
+	}
+	
 	public String getAdminId() {
 		return adminId;
 	}

@@ -170,23 +170,25 @@ public class DatabaseHandler {
 	public int CheckForadminLogin(String id, String password) {
 		Connection conn = this.connect();
 		Admin admin = new Admin();
+		Admin admin2 = new Admin();
+		AdminDAO adminDAO = new AdminDAO(conn);
+
 		admin.setAdminId(id);
 		admin.setAdminPassword(password);
 
 		try {
-			ResultSet result = dbm.check(conn, admin);
-			String dbPassword;
-			if (result.next()) {
-				dbPassword = result.getString("admin_password");
-				if (dbPassword.equals(password)) {
-					conn.close();
-					return 0;
-				}
+			admin2 = adminDAO.selectById(id);
+			
+			if(admin2 == null){
+				conn.close();
+				return 2;
+			} else if (admin2.getAdminPassword().equals(password)) {
+				conn.close();
+				return 0;
+			} else {
 				conn.close();
 				return 1;
 			}
-			conn.close();
-			return 2;
 
 		} catch (SQLException e) {
 			e.printStackTrace();
