@@ -94,21 +94,38 @@ var visitInfoBarManager = {
 		this.visitNumberSet.reverse();
 	},
 	
-	barAnimationController : function() {
+	executeBarAnimation : function() {
 		// 각각의 bar를 시간차를 두고 에니메이션해주는 함수 action
 		this.count = 0;
-		var setBars = setInterval((function() {
-			var elVisitedInfo = editor.get("#visited-info");
-			var elVisitedInfoBar = editor.getAll("#visited-graph .bar-section", elVisitedInfo);
-			var numberOfBar = elVisitedInfoBar.length - 1
+		var elVisitedInfo = editor.get("#visited-info");
+		var elVisitedInfoBar = editor.getAll("#visited-graph .bar-section", elVisitedInfo);
+		var numberOfBar = elVisitedInfoBar.length - 1;
+		
+		var barArray = this.checkBarHeight();
+		var visitPerHeight = 10; // 방문자 1명당 10px의 높이로 설정
 
-			if (this.count > numberOfBar) {
-				clearInterval(this.setBars);
-				return;
-			}
-			var barArray = this.checkBarHeight();
-			var visit = barArray[this.count];
-			var visitPerHeight = 10; // 방문자 1명당 10px의 높이로 설정
+//		var setBars = setInterval((function() {
+//			if (this.count > numberOfBar) {
+//				clearInterval(this.setBars);
+//				return;
+//			}
+//			
+//			var visit = barArray[this.count];	
+//			var newHeight = (visit * visitPerHeight) + "px";
+//			var BarHeight = editor.get(".bar", elVisitedInfoBar[this.count]);
+//			var barValue = editor.get("p", BarHeight);
+//			var barDate = editor.get("p", elVisitedInfoBar[this.count]);
+//
+//			editor.setStyle(BarHeight, "height", newHeight);
+//
+//			editor.updateInnerHTML(barDate, this.dateSet[this.count]);
+//			editor.updateInnerHTML(barValue, this.visitNumberSet[this.count]);
+//			
+//			this.count++;
+//		}).bind(this), 300);
+		
+		var setBar2 = (function() {
+			var visit = barArray[this.count];	
 			var newHeight = (visit * visitPerHeight) + "px";
 			var BarHeight = editor.get(".bar", elVisitedInfoBar[this.count]);
 			var barValue = editor.get("p", BarHeight);
@@ -118,9 +135,16 @@ var visitInfoBarManager = {
 
 			editor.updateInnerHTML(barDate, this.dateSet[this.count]);
 			editor.updateInnerHTML(barValue, this.visitNumberSet[this.count]);
+			
 			this.count++;
-		}).bind(this), 300);
-	},
+			
+			if (this.count <= numberOfBar) {
+				setTimeout(setBar2, 300);
+			}
+		}).bind(this);
+			
+		setBar2();
+	},	
 	
 	checkBarHeight : function() {
 		// bar 높이가 특정 높이 이상으로 높아지는 것을 막고 비율에 맞추어 분배해주는 함수
@@ -217,11 +241,9 @@ var updateManager = {
 		// 해당번호 검색(방문)한 수를 업데이트
 		var elVisitInfo = editor.get("#visited-info");
 		var elVisitInfoDetail = editor.get("#visited-graph", elVisitInfo);
-		// 한라인으로 처리 feature detecting, browser detecting
 		var type = editor.resultFeatureDetector;
 		editor.setStyle(elVisitInfoDetail, type, "running");
-		// action의 의미
-		visitInfoBarManager.barAnimationController();
+		visitInfoBarManager.executeBarAnimation();
 	},
 	
 	updateLocation : function(userData) {
