@@ -17,7 +17,7 @@ public class VideoDAO {
 	public VideoDAO(Connection conn) {
 		this.conn = conn;
 	}
-	
+
 	public void add(Video video) throws SQLException {
 		String tableName = video.getTableName();
 		String sql = "INSERT INTO " + tableName
@@ -28,15 +28,17 @@ public class VideoDAO {
 		pstmt.setString(1, video.getVideoId());
 		pstmt.setString(2, video.getVideoLink());
 		pstmt.setString(3, video.getVideoDate());
-		
+
 		int result = pstmt.executeUpdate();
-		
+
 		if (result == 1) {
-			logger.info("Add Complete " + tableName + " : " + video.getVideoId() + "," + video.getVideoLink() + "," + video.getVideoDate());
+			logger.info("Add Complete " + tableName + " : "
+					+ video.getVideoId() + "," + video.getVideoLink() + ","
+					+ video.getVideoDate());
 		} else {
 			logger.info("Add Fail " + tableName);
 		}
-		
+
 		pstmt.close();
 	}
 }

@@ -51,7 +51,7 @@ public class RequestDAO {
 		int result = pstmt.executeUpdate();
 
 		if (result == 1) {
-			logger.info("Add Complete " + tableName + " : "
+			logger.info("Add Complete " + tableName + ","
 					+ request.getRequestFrom() + "," + request.getRequestTo()
 					+ "," + request.getRequestDate());
 		} else {

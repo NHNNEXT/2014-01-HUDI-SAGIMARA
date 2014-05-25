@@ -5,10 +5,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import logger.SagimaraLogger;
+
+import org.apache.log4j.Logger;
+
 import dto.Verification;
 
 public class VerificationDAO {
 	private Connection conn;
+	Logger logger = SagimaraLogger.logger;
 
 	public VerificationDAO(Connection conn) {
 		this.conn = conn;
@@ -26,10 +31,32 @@ public class VerificationDAO {
 			verification = new Verification(rs.getString("USER_user_phone"),
 					rs.getString("verification_time"));
 		}
-		
+
 		pstmt.close();
 		rs.close();
-		
+
 		return verification;
+	}
+
+	public void add(Verification verification) throws SQLException {
+		String tableName = verification.getTableName();
+
+		String sql = "INSERT INTO " + tableName + " VALUES (?, ?)";
+
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, verification.getVerificationId());
+		pstmt.setString(2, verification.getVerificationTime());
+
+		int result = pstmt.executeUpdate();
+
+		if (result == 1) {
+			logger.info("Add Complete " + tableName + " : "
+					+ verification.getVerificationId() + ","
+					+ verification.getVerificationTime());
+		} else {
+			logger.info("Add Fail " + tableName);
+		}
+
+		pstmt.close();
 	}
 }

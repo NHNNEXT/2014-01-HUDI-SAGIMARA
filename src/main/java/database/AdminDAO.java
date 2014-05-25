@@ -5,11 +5,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import logger.SagimaraLogger;
+
+import org.apache.log4j.Logger;
+
 import dto.Admin;
-import dto.UserInquiry;
 
 public class AdminDAO {
 	private Connection conn;
+	Logger logger = SagimaraLogger.logger;
 
 	public AdminDAO(Connection conn) {
 		this.conn = conn;
@@ -33,5 +37,31 @@ public class AdminDAO {
 		rs.close();
 
 		return admin;
+	}
+
+	public void add(Admin admin) throws SQLException {
+		String tableName = admin.getTableName();
+
+		String sql = "INSERT INTO " + tableName + " VALUES (?, ?, ?, ?, ?, ?)";
+
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, admin.getAdminId());
+		pstmt.setString(2, admin.getAdminPassword());
+		pstmt.setString(3, admin.getAdminName());
+		pstmt.setString(4, admin.getAdminEmail());
+		pstmt.setString(5, admin.getAdminStatus());
+
+		int result = pstmt.executeUpdate();
+
+		if (result == 1) {
+			logger.info("Add Complete " + tableName + "," + admin.getAdminId()
+					+ "," + admin.getAdminPassword() + ","
+					+ admin.getAdminName() + "," + admin.getAdminEmail() + ","
+					+ admin.getAdminStatus());
+		} else {
+			logger.info("Add Fail " + tableName);
+		}
+
+		pstmt.close();
 	}
 }

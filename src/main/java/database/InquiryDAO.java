@@ -17,25 +17,26 @@ public class InquiryDAO {
 	public InquiryDAO(Connection conn) {
 		this.conn = conn;
 	}
-	
+
 	public void add(Inquiry inquiry) throws SQLException {
 		String tableName = inquiry.getTableName();
 
 		String sql = "INSERT INTO " + tableName
 				+ " (`USER_user_phone`,`inquiry_time`) VALUES (?, ?)";
-		
+
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, inquiry.getInquiryId());
 		pstmt.setString(2, inquiry.getInquiryTime());
 
 		int result = pstmt.executeUpdate();
-		
+
 		if (result == 1) {
-			logger.info("Add Complete " + tableName + " : " + inquiry.getInquiryId() + "," + inquiry.getInquiryTime());
+			logger.info("Add Complete " + tableName + " : "
+					+ inquiry.getInquiryId() + "," + inquiry.getInquiryTime());
 		} else {
 			logger.info("Add Fail " + tableName);
 		}
-		
+
 		pstmt.close();
 	}
 }

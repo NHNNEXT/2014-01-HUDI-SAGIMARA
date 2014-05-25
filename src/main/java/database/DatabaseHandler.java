@@ -1,7 +1,6 @@
 package database;
 
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -20,11 +19,9 @@ import dto.Video;
 
 public class DatabaseHandler {
 	Logger logger;
-	DatabaseManager dbm;
 
 	public DatabaseHandler() {
 		logger = SagimaraLogger.logger;
-		dbm = new DatabaseManager();
 	}
 
 	private Connection connect() {
@@ -38,52 +35,56 @@ public class DatabaseHandler {
 		return conn;
 	}
 
-	public ArrayList<Request> getRequestsWithVerificationTime(String phoneNumber){
+	public ArrayList<Request> getRequestsWithVerificationTime(String phoneNumber) {
 		Connection conn = this.connect();
 		//
 		VerificationDAO verificationDAO = new VerificationDAO(conn);
-		Verification verification; 
+		Verification verification;
 		String verificationLatestTime;
 		ArrayList<Request> resultList;
 		try {
 			verification = verificationDAO.selectById(phoneNumber);
-			
-			if(verification != null){
+
+			if (verification != null) {
 				verificationLatestTime = verification.getVerificationTime();
-				resultList = new RequestDAO(conn).selectByToPhoneNumberAndLatestDate(phoneNumber, verificationLatestTime);
+				resultList = new RequestDAO(conn)
+						.selectByToPhoneNumberAndLatestDate(phoneNumber,
+								verificationLatestTime);
 				return resultList;
-			}else{
-				//2014가 의미하는 것은 verification이 없을 경우에 모든 Request의 목록을 구해와야 하기 때문
+			} else {
+				// 2014가 의미하는 것은 verification이 없을 경우에 모든 Request의 목록을 구해와야 하기 때문
 				verificationLatestTime = "2014";
-				resultList = new RequestDAO(conn).selectByToPhoneNumberAndLatestDate(phoneNumber, verificationLatestTime);
+				resultList = new RequestDAO(conn)
+						.selectByToPhoneNumberAndLatestDate(phoneNumber,
+								verificationLatestTime);
 				return resultList;
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		return null;
 	}
-	
+
 	public UserProfile readUserProfile(String id) {
 
 		Connection conn = this.connect();
 
-		UserProfileDAO userProfileDAO = new UserProfileDAO(conn); 
+		UserProfileDAO userProfileDAO = new UserProfileDAO(conn);
 		UserDAO userDAO = new UserDAO(conn);
-		InquiryDAO inquiryDAO = new InquiryDAO(conn); 
+		InquiryDAO inquiryDAO = new InquiryDAO(conn);
 		UserProfile userProfile = new UserProfile();
-		try {		
+		try {
 			userProfile = userProfileDAO.selectById(id);
-			
-			if(userProfile != null) {
+
+			if (userProfile != null) {
 				logger.info("[readUserProfile] User[" + id + "] 정보 있음 ");
 				Inquiry inquiry = new Inquiry();
 				inquiry.setInquiryId(id);
-				
+
 				inquiryDAO.add(inquiry);
-				
+
 			} else {
 				logger.info("[readUserProfile] User[" + id + "] 정보 없음 ");
 				User user = new User(id, "false", "1", "위치정보 없음");
@@ -91,13 +92,13 @@ public class DatabaseHandler {
 
 				userDAO.add(user);
 				inquiryDAO.add(inquiry);
-				
+
 				userProfile = userProfileDAO.selectById(id);
 			}
-						
+
 			logger.info("[database] Connection is closed.");
 			conn.close();
-			
+
 		} catch (SQLException e) {
 			logger.info("readUserProfile Fail");
 			e.printStackTrace();
@@ -109,7 +110,7 @@ public class DatabaseHandler {
 	public boolean insertLocation(String phone, String time, String cordinate) {
 		Connection conn = this.connect();
 		Location location = new Location();
-		LocationDAO locationDAO = new LocationDAO(conn); 
+		LocationDAO locationDAO = new LocationDAO(conn);
 
 		location.setLocationId(phone);
 		location.setLocationTime(time);
@@ -130,7 +131,7 @@ public class DatabaseHandler {
 		Connection conn = this.connect();
 		Video video = new Video();
 		VideoDAO videoDAO = new VideoDAO(conn);
-		
+
 		video.setVideoId(phone);
 		video.setVideoLink(videoLink);
 		video.setVideoDate(time);
@@ -151,7 +152,7 @@ public class DatabaseHandler {
 		Connection conn = this.connect();
 		Request request = new Request();
 		RequestDAO requestDAO = new RequestDAO(conn);
-		
+
 		request.setRequestFrom(from);
 		request.setRequestTo(to);
 		request.setRequestDate(date);
@@ -178,8 +179,8 @@ public class DatabaseHandler {
 
 		try {
 			admin2 = adminDAO.selectById(id);
-			
-			if(admin2 == null){
+
+			if (admin2 == null) {
 				conn.close();
 				return 2;
 			} else if (admin2.getAdminPassword().equals(password)) {
