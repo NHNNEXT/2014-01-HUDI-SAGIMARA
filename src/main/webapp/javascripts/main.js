@@ -149,7 +149,10 @@ var visitInfoBarManager = {
 	checkBarHeight : function() {
 		// bar 높이가 특정 높이 이상으로 높아지는 것을 막고 비율에 맞추어 분배해주는 함수
 		var barArray = [];
-		var maxcount = 23;
+		var visitPerHeight = 10; // 방문자 1명당 10px의 높이로 설정
+		var maxHeight = editor.get("#visited-graph").offsetHeight * 0.70; // 그래프창 높이의 70%를 max height로 설정
+		var maxcount = maxHeight/visitPerHeight; // 방문자수의 최대 숫자를 산정
+		
 		var totalNumberOfBar = 5;
 		var max = Math.max.apply(null, this.visitNumberSet);
 		
