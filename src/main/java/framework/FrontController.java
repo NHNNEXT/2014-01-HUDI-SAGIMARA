@@ -17,8 +17,6 @@ import database.DatabaseHandler;
 
 public class FrontController extends HttpServlet {
 	private static final long serialVersionUID = 176019470968814358L;
-	DatabaseHandler db;
-	JsonBuilder jb;
 	Logger logger;
 	RequestMapping rm;
 	
@@ -27,8 +25,6 @@ public class FrontController extends HttpServlet {
 	public void init() throws ServletException {
 		super.init();	
 		rm = new RequestMapping();
-		db = new DatabaseHandler();
-		jb = new JsonBuilder();
 		logger = SagimaraLogger.logger;
 	}
 

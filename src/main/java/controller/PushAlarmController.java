@@ -11,11 +11,12 @@ import logger.SagimaraLogger;
 
 import org.apache.log4j.Logger;
 
+import utility.JsonBuilder;
+
 import com.google.gson.Gson;
 
 import database.DatabaseHandler;
 import dto.Request;
-import framework.JsonBuilder;
 
 public class PushAlarmController implements Controller {
 	Logger logger;

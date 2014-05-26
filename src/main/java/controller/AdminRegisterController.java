@@ -10,8 +10,8 @@ import logger.SagimaraLogger;
 
 import org.apache.log4j.Logger;
 
+import utility.JsonBuilder;
 import database.DatabaseHandler;
-import framework.JsonBuilder;
 
 public class AdminRegisterController implements Controller {
 	Logger logger;

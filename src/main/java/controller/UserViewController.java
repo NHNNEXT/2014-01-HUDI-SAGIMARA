@@ -17,9 +17,9 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.log4j.Logger;
 
+import utility.JsonBuilder;
 import database.DatabaseHandler;
 import dto.UserProfile;
-import framework.JsonBuilder;
 
 public class UserViewController implements Controller{
 
@@ -81,8 +81,6 @@ public class UserViewController implements Controller{
 			UserProfile dut = db.readUserProfile(id);
 			String json = jb.objectToJson(dut);
 			logger.info(json);
-			response.setCharacterEncoding("utf8");
-			request.setCharacterEncoding("utf8");
 			request.setAttribute("json", json);
 		} else {
 			logger.info("id is null");
