@@ -11,7 +11,7 @@ public class RequestMapping {
 		put("/insert/RequestData", new InsertRequestDataController("/json.jsp"));
 		put("/insert/locationData", new InsertLocationDataController("/json.jsp"));
 		put("/admin/register", new AdminRegisterController("/json.jsp"));
-		put("/admin/test", new AdminLoginController("/json.jsp"));
+		put("/admin/login_submit", new AdminLoginController("/json.jsp"));
 		put("/push/alarm", new PushAlarmController("/json.jsp"));
 		
 		put("/", new ForwardController("/index.jsp"));
@@ -21,7 +21,7 @@ public class RequestMapping {
 		put("/insert/location", new ForwardController("/insertLocation.jsp"));
 		put("/admin/login", new ForwardController("/admin_login.jsp"));
 		put("/main_test", new ForwardController("/main_test.jsp"));
-		
+		put("/admin/index",new AdminIndexPageController("/admin_index.jsp"));
 		
 	}};
 	

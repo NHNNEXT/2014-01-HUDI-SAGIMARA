@@ -21,7 +21,9 @@
 		<div class="register_button"><input class="register-submit border-radius" type="submit" value="register"></div>
 		</fieldset>	
 		</form>
+		<div id=msgBox>messege!</div>
 	</div>
+	
 	<script src="/javascripts/admin_login.js"></script>
 </body>
 </html>

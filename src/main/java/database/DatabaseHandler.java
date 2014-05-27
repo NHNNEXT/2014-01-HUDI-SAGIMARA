@@ -171,19 +171,19 @@ public class DatabaseHandler {
 	public int CheckForadminLogin(String id, String password) {
 		Connection conn = this.connect();
 		Admin admin = new Admin();
-		Admin admin2 = new Admin();
+		Admin dbAdmin = new Admin();
 		AdminDAO adminDAO = new AdminDAO(conn);
 
 		admin.setAdminId(id);
 		admin.setAdminPassword(password);
 
 		try {
-			admin2 = adminDAO.selectById(id);
-
-			if (admin2 == null) {
+			dbAdmin = adminDAO.selectById(id);
+			
+			if (dbAdmin == null) {
 				conn.close();
 				return 2;
-			} else if (admin2.getAdminPassword().equals(password)) {
+			} else if (dbAdmin.getAdminPassword().equals(password)) {
 				conn.close();
 				return 0;
 			} else {

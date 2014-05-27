@@ -22,7 +22,7 @@ public class JsonBuilder {
 		Map<String, String> resultMap = new HashMap<String, String>();
 
 		resultMap.put("code", "200");
-		resultMap.put("message", "Request Success");
+		resultMap.put("message", "Success");
 		
 		return objectToJson(resultMap);
 	}
@@ -31,7 +31,7 @@ public class JsonBuilder {
 		Map<String, String> resultMap = new HashMap<String, String>();
 
 		resultMap.put("code", "400");
-		resultMap.put("message", "Request Failed");
+		resultMap.put("message", "Failed");
 		return objectToJson(resultMap);
 	}
 
@@ -39,7 +39,7 @@ public class JsonBuilder {
 		Map<String, String> resultMap = new HashMap<String, String>();
 
 		resultMap.put("code", "204");
-		resultMap.put("message", "Request Failed");
+		resultMap.put("message", "No Content");
 		return objectToJson(resultMap);
 	}
 }

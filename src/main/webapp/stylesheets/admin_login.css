@@ -100,4 +100,12 @@ input {
 	top: 150px;
 	left: 290px;
 }
+#msgBox{
+	position: relative;
+	background-color: #F3C51A;
+	top: -125px;
+	padding: 15px;
+	text-align: center;
+	display: none;
+}
 
