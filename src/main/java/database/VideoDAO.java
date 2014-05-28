@@ -21,7 +21,7 @@ public class VideoDAO {
 	public void add(Video video) throws SQLException {
 		String tableName = video.getTableName();
 		String sql = "INSERT INTO " + tableName
-				+ "(USER_user_phone,location_time,location_coordinate)"
+				+ "(USER_user_phone, video_link, video_date)"
 				+ " VALUES (?, ?, ?)";
 
 		PreparedStatement pstmt = conn.prepareStatement(sql);
