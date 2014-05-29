@@ -12,6 +12,7 @@ import logger.SagimaraLogger;
 
 import org.apache.log4j.Logger;
 
+import controller.Controller;
 import controller.RequestMapping;
 
 public class FrontController extends HttpServlet {
@@ -36,23 +37,19 @@ public class FrontController extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		String path = request.getRequestURI();	
-		String forwardPath = null;
 		logger.info(String.format("[DO %s] Request URI : %s", request.getMethod(), path));
 
-		if(rm.isContain(path)){
-			forwardPath = rm.requestController(path).run(request, response);
-		} else {
-			requestPathError(request, response);
-		}
-		
-		if (!forwardPath.isEmpty()) {
-			RequestDispatcher dispather = request.getServletContext()
-					.getRequestDispatcher(forwardPath);
-			dispather.forward(request, response);
-		} else {
-			logger.info("forwardPath is null");
-		}
-		
+		Controller controller = rm.requestController(path);
+	    if (controller == null) {
+	        requestPathError(request, response);
+	    }
+
+	    String forwardPath = controller.run(request, response);
+	    if (forwardPath != null) {
+	        RequestDispatcher dispather = request.getServletContext()
+	                .getRequestDispatcher(forwardPath);
+	        dispather.forward(request, response);
+	    }
 	}
 	
 	private void requestPathError(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
