@@ -30,9 +30,9 @@ public class UserDAO {
 		int result = pstmt.executeUpdate();
 
 		if (result == 1) {
-			logger.info("Add Complete " + tableName + " : "
-					+ user.getUserPhone() + "," + user.getUserVerification()
-					+ "," + user.getUserStatus() + "," + user.getUserLocation());
+			logger.info(String.format("Add Complete %s : %s, %s, %s, %s",
+					tableName, user.getUserPhone(), user.getUserVerification(),
+					user.getUserStatus(), user.getUserLocation()));
 		} else {
 			logger.info("Add Fail " + tableName);
 		}

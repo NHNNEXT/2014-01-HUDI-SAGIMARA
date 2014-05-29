@@ -32,9 +32,10 @@ public class VideoDAO {
 		int result = pstmt.executeUpdate();
 
 		if (result == 1) {
-			logger.info("Add Complete " + tableName + " : "
-					+ video.getVideoId() + "," + video.getVideoLink() + ","
-					+ video.getVideoDate());
+			logger.info(String.format("Add Complete %s : %s, %s, %s",
+					tableName, video.getVideoId(),
+					video.getVideoLink(),
+					video.getVideoDate()));
 		} else {
 			logger.info("Add Fail " + tableName);
 		}

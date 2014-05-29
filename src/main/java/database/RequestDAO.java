@@ -51,9 +51,9 @@ public class RequestDAO {
 		int result = pstmt.executeUpdate();
 
 		if (result == 1) {
-			logger.info("Add Complete " + tableName + ","
-					+ request.getRequestFrom() + "," + request.getRequestTo()
-					+ "," + request.getRequestDate());
+			logger.info(String.format("Add Complete %s : %s, %s, %s",
+					tableName, request.getRequestFrom(), request.getRequestTo(),
+					request.getRequestDate()));
 		} else {
 			logger.info("Add Fail " + tableName);
 		}

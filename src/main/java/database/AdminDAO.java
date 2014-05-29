@@ -54,10 +54,10 @@ public class AdminDAO {
 		int result = pstmt.executeUpdate();
 
 		if (result == 1) {
-			logger.info("Add Complete " + tableName + "," + admin.getAdminId()
-					+ "," + admin.getAdminPassword() + ","
-					+ admin.getAdminName() + "," + admin.getAdminEmail() + ","
-					+ admin.getAdminStatus());
+			logger.info(String.format("Add Complete %s : %s, %s, %s, %s, %s",
+					tableName, admin.getAdminId(), admin.getAdminPassword(),
+					admin.getAdminName(), admin.getAdminEmail(),
+					admin.getAdminStatus()));
 		} else {
 			logger.info("Add Fail " + tableName);
 		}
