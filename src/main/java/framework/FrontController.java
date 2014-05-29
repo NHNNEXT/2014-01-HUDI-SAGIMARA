@@ -29,8 +29,6 @@ public class FrontController extends HttpServlet {
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String path = request.getRequestURI();
-		logger.info("[DO GET] get Request URI : " + path);
 		doPost(request, response);
 	}
 
@@ -39,9 +37,9 @@ public class FrontController extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		String path = request.getRequestURI();	
 		String forwardPath = null;
-		
+		logger.info(String.format("[DO %s] Request URI : %s", request.getMethod(), path));
+
 		if(rm.isContain(path)){
-			logger.info("[DO POST] post Request URI : " + path);
 			forwardPath = rm.requestController(path).run(request, response);
 		} else {
 			requestPathError(request, response);
