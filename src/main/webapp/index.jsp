@@ -24,7 +24,7 @@
 			<div class="column">
 				<form name="finder" method="post" action="/test">
 					<input class="search-input"
-						placeholder="Enter phone-numer for search..." type="text"
+						placeholder="Enter Phone Number" type="text"
 						name="id"> <input class="search-submit" type="submit"
 						value=""> <span class="search-icon"> </span>
 				</form>
@@ -42,8 +42,8 @@
 					<section id="profile-detail-section" class="float-right">
 						<p>인증기록</p>
 						<p>2014년 3월 15일 가입요청</p>
-						<p>2014년 3월 18일 얼굴영상 처리</p>
-						<p>2014년 3월 18일 재인증요청</p>
+						<p>2014년 3월 18일 인증완료</p>
+						<p>2014년 3월 22일 재인증요청</p>
 						<section id="profile-button-section">
 							<button type="button" class="button button-red">재인증 요청</button>
 						</section>
