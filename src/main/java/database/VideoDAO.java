@@ -12,7 +12,7 @@ import dto.Video;
 
 public class VideoDAO {
 	private Connection conn;
-	Logger logger = SagimaraLogger.logger;
+	private Logger logger = SagimaraLogger.logger;
 
 	public VideoDAO(Connection conn) {
 		this.conn = conn;

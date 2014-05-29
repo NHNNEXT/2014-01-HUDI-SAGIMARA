@@ -16,8 +16,8 @@ import controller.RequestMapping;
 
 public class FrontController extends HttpServlet {
 	private static final long serialVersionUID = 176019470968814358L;
-	Logger logger;
-	RequestMapping rm;
+	private Logger logger;
+	private RequestMapping rm;
 	
 	
 	@Override

@@ -14,7 +14,7 @@ import dto.Request;
 
 public class RequestDAO {
 	private Connection conn;
-	Logger logger = SagimaraLogger.logger;
+	private Logger logger = SagimaraLogger.logger;
 
 	public RequestDAO(Connection conn) {
 		this.conn = conn;

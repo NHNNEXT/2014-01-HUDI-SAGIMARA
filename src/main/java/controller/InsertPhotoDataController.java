@@ -22,11 +22,11 @@ import utility.JsonBuilder;
 import database.DatabaseHandler;
 
 public class InsertPhotoDataController implements Controller {
-	Logger logger;
-	DatabaseHandler db;
-	JsonBuilder jb;
-	String photoImagePath;
-	String forwardPath;
+	private Logger logger;
+	private DatabaseHandler db;
+	private JsonBuilder jb;
+	private String photoImagePath;
+	private String forwardPath;
 	
 	public InsertPhotoDataController(String forwardPath) {
 		super();

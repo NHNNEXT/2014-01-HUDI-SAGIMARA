@@ -11,7 +11,7 @@ import dto.User;
 
 public class UserDAO {
 	private Connection conn;
-	Logger logger = SagimaraLogger.logger;
+	private Logger logger = SagimaraLogger.logger;
 
 	public UserDAO(Connection conn) {
 		this.conn = conn;

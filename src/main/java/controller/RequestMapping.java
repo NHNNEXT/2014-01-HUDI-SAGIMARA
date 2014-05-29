@@ -6,6 +6,7 @@ public class RequestMapping {
 	static public HashMap<String, Controller> map = new HashMap<String, Controller>()  {
 		private static final long serialVersionUID = -3286315173722334990L;
 	{
+		//POST
 		put("/test", new UserViewController("/json.jsp"));
 		put("/insert/photoData", new InsertPhotoDataController("/json.jsp"));
 		put("/insert/RequestData", new InsertRequestDataController("/json.jsp"));
@@ -14,6 +15,7 @@ public class RequestMapping {
 		put("/admin/login_submit", new AdminLoginController("/json.jsp"));
 		put("/push/alarm", new PushAlarmController("/json.jsp"));
 		
+		//GET
 		put("/", new ForwardController("/index.jsp"));
 		put("/index", new ForwardController("/index.jsp"));
 		put("/insert/photo",new ForwardController("/insertPhoto.jsp"));
@@ -21,7 +23,7 @@ public class RequestMapping {
 		put("/insert/location", new ForwardController("/insertLocation.jsp"));
 		put("/admin/login", new ForwardController("/admin_login.jsp"));
 		put("/main_test", new ForwardController("/main_test.jsp"));
-		//put("/admin/index",new AdminIndexPageController("/admin_index.jsp"));
+		put("/admin/index",new AdminIndexPageController("/admin_index.jsp"));
 		
 	}};
 	

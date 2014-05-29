@@ -11,18 +11,15 @@ import logger.SagimaraLogger;
 import org.apache.log4j.Logger;
 
 import utility.JsonBuilder;
-import database.DatabaseHandler;
 
 public class AdminRegisterController implements Controller {
-	Logger logger;
-	DatabaseHandler db;
-	JsonBuilder jb;
-	String forwardPath;
+	private Logger logger;
+	private JsonBuilder jb;
+	private String forwardPath;
 
 	public AdminRegisterController(String forwardPath) {
 		super();
 		this.logger = SagimaraLogger.logger;
-		this.db = new DatabaseHandler();
 		this.jb = new JsonBuilder();
 		this.forwardPath = forwardPath;
 	}

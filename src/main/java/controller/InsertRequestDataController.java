@@ -14,10 +14,10 @@ import utility.JsonBuilder;
 import database.DatabaseHandler;
 
 public class InsertRequestDataController implements Controller {
-	Logger logger;
-	DatabaseHandler db;
-	JsonBuilder jb;
-	String forwardPath;
+	private Logger logger;
+	private DatabaseHandler db;
+	private JsonBuilder jb;
+	private String forwardPath;
 	
 	public InsertRequestDataController(String forwardPath) {
 		super();

@@ -12,7 +12,7 @@ import dto.Location;
 
 public class LocationDAO {
 	private Connection conn;
-	Logger logger = SagimaraLogger.logger;
+	private Logger logger = SagimaraLogger.logger;
 
 	public LocationDAO(Connection conn) {
 		this.conn = conn;

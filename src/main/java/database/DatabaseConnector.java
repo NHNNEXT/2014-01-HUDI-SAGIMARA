@@ -8,7 +8,7 @@ import logger.SagimaraLogger;
 import org.apache.log4j.Logger;
 
 public class DatabaseConnector {
-	Logger logger;
+	private Logger logger;
 	
 	public DatabaseConnector() {
 		logger = SagimaraLogger.logger;

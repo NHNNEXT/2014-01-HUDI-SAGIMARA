@@ -23,10 +23,10 @@ import dto.UserProfile;
 
 public class UserViewController implements Controller{
 
-	Logger logger;
-	DatabaseHandler db;
-	JsonBuilder jb;
-	String forwardPath;
+	private Logger logger;
+	private DatabaseHandler db;
+	private JsonBuilder jb;
+	private String forwardPath;
 	
 	public UserViewController(String forwardPath) {
 		super();

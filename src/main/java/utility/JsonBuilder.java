@@ -3,15 +3,10 @@ package utility;
 import java.util.HashMap;
 import java.util.Map;
 
-import logger.SagimaraLogger;
-
-import org.apache.log4j.Logger;
-
 import com.google.gson.Gson;
 
 public class JsonBuilder {
-	Gson gson = new Gson();
-	Logger logger = SagimaraLogger.logger;
+	private Gson gson = new Gson();
 	
 	public String objectToJson(Object o) {
 		String result = gson.toJson(o);

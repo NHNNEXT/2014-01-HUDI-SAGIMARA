@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class ForwardController implements Controller{
-	String forwardPath;
+	private String forwardPath;
 	
 	public ForwardController(String forwardPath) {
 		this.forwardPath = forwardPath;

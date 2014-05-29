@@ -12,7 +12,7 @@ import dto.Inquiry;
 
 public class InquiryDAO {
 	private Connection conn;
-	Logger logger = SagimaraLogger.logger;
+	private Logger logger = SagimaraLogger.logger;
 
 	public InquiryDAO(Connection conn) {
 		this.conn = conn;

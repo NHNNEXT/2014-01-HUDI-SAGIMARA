@@ -13,7 +13,7 @@ import dto.Admin;
 
 public class AdminDAO {
 	private Connection conn;
-	Logger logger = SagimaraLogger.logger;
+	private Logger logger = SagimaraLogger.logger;
 
 	public AdminDAO(Connection conn) {
 		this.conn = conn;

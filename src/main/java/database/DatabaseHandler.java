@@ -18,7 +18,7 @@ import dto.Verification;
 import dto.Video;
 
 public class DatabaseHandler {
-	Logger logger;
+	private Logger logger;
 
 	public DatabaseHandler() {
 		logger = SagimaraLogger.logger;
