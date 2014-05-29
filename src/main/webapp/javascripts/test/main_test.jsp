@@ -13,7 +13,7 @@
 	<link rel="stylesheet" type="text/css" media="screen"
 		href="/stylesheets/main.css">
 	<link rel="stylesheet" type="text/css" media="screen"
-		href="/stylesheets/qunit-1.14.0.css">
+		href="/stylesheets/lib/qunit-1.14.0.css">
 
 </head>
 <body>
@@ -31,8 +31,8 @@
 	</div>
 
 
-	<script src="/javascripts/qunit-1.14.0.js"></script>
+	<script src="/javascripts/lib/qunit-1.14.0.js"></script>
 	<script src="/javascripts/main.js"></script>
-	<script src="/javascripts/main_test.js"></script>
+	<script src="/javascripts/test/main_test.js"></script>
 </body>
 </html>
