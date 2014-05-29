@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -33,8 +34,6 @@ public class InsertPhotoDataController implements Controller {
 		this.logger = SagimaraLogger.logger;
 		this.db = new DatabaseHandler();
 		this.jb = new JsonBuilder();
-		this.photoImagePath ="/Users/josunghwan/Desktop/";
-		//this.photoImagePath ="/home/dev/photo/";
 		this.forwardPath = forwardPath;
 		
 	}
@@ -45,6 +44,12 @@ public class InsertPhotoDataController implements Controller {
 		String videoLink = null;
 		String date = null;
 		String json = null;
+		
+		ServletContext context = request.getServletContext();
+		String fullPath = context.getRealPath("/updatedImages/");
+		photoImagePath = fullPath;
+		logger.info(fullPath);
+		
 		logger.info("InsertPhoto in");
 		boolean isMultipart = ServletFileUpload.isMultipartContent(request);
 		if (isMultipart) {
@@ -78,7 +83,6 @@ public class InsertPhotoDataController implements Controller {
 					// Process uploaded file.
 					String name = item.getContentType();
 					String[] array = name.split("/");
-					//videoLink = photoImagePath + id + date +"."+ array[1] ;
 					videoLink = photoImagePath + id +"."+ array[1] ;
 					try {
 						File file = new File(videoLink);
@@ -88,7 +92,7 @@ public class InsertPhotoDataController implements Controller {
 					}
 				}
 				
-				if(id!=null && videoLink!=null&&date!=null){
+				if(id!=null && videoLink!=null && date!=null){
 					if(db.insertPhoto(id, videoLink, date)){
 						json = jb.requestSuccessJSON();
 					}else{
