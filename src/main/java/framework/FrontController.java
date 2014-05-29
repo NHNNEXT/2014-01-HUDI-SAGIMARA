@@ -51,20 +51,24 @@ public class FrontController extends HttpServlet {
 				logger.info(String.format("REDIRECT : %s", forwardPath));
 				response.sendRedirect(forwardPath);
 			}
-			RequestDispatcher dispather = request.getServletContext()
-					.getRequestDispatcher(forwardPath);
+			
 			logger.info(String.format("FORWARD : %s", forwardPath));
-			dispather.forward(request, response);
+			forward(request, response, forwardPath);		
 		}
 	}
 
+	private void forward(HttpServletRequest request, HttpServletResponse response, String forwardPath)
+	        throws ServletException, IOException {
+	    RequestDispatcher dispather = request.getServletContext()
+	            .getRequestDispatcher(forwardPath);
+	    dispather.forward(request, response);
+	}
+	
 	private void requestPathError(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		logger.info("URLPath is error");
 		request.setAttribute("error", "존재하지 않는 주소입니다");
-		RequestDispatcher dispather = getServletContext().getRequestDispatcher(
-				"/error.jsp");
-		dispather.forward(request, response);
+		forward(request, response, "/error.jsp");
 
 	}
 }
