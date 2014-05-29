@@ -13,7 +13,6 @@ import logger.SagimaraLogger;
 import org.apache.log4j.Logger;
 
 import controller.RequestMapping;
-import database.DatabaseHandler;
 
 public class FrontController extends HttpServlet {
 	private static final long serialVersionUID = 176019470968814358L;
@@ -31,22 +30,8 @@ public class FrontController extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String path = request.getRequestURI();
-		String forwardPath = null;
-	
-		if(rm.isContain(path)){
-			logger.info("[DO GET] get Request URI : " + path);
-			forwardPath = rm.requestController(path).run(request, response);
-		} else {
-			requestPathError(request, response);
-		}
-		
-		if (!forwardPath.isEmpty()) {
-			RequestDispatcher dispather = request.getServletContext()
-					.getRequestDispatcher(forwardPath);
-			dispather.forward(request, response);
-		} else {
-			logger.info("forwardPath is null");
-		}
+		logger.info("[DO GET] get Request URI : " + path);
+		doPost(request, response);
 	}
 
 	@Override
@@ -54,7 +39,6 @@ public class FrontController extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		String path = request.getRequestURI();	
 		String forwardPath = null;
-		RequestMapping rm = new RequestMapping();
 		
 		if(rm.isContain(path)){
 			logger.info("[DO POST] post Request URI : " + path);
