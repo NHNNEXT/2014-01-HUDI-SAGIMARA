@@ -15,15 +15,15 @@ import database.DatabaseHandler;
 
 public class InsertRequestDataController implements Controller {
 	private Logger logger;
-	private DatabaseHandler db;
+	private DatabaseHandler dbh;
 	private JsonBuilder jb;
 	private String forwardPath;
 	
 	public InsertRequestDataController(String forwardPath) {
 		super();
 		this.logger = SagimaraLogger.logger;
-		this.db = new DatabaseHandler();
-		this.jb = new JsonBuilder();
+		this.dbh = DatabaseHandler.getDatabaseHandler();
+		this.jb = JsonBuilder.getJsonBuilder();
 		this.forwardPath = forwardPath;
 	}
 	
@@ -36,7 +36,7 @@ public class InsertRequestDataController implements Controller {
 		String date = (String) request.getParameter("date");
 		
 		String json;
-		if(db.insertRequest(from,to,date)){
+		if(dbh.insertRequest(from,to,date)){
 			json = jb.requestSuccessJSON();
 		}else{
 			json = jb.requestFailedJSON();

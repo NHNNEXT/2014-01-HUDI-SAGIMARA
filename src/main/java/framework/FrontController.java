@@ -51,7 +51,6 @@ public class FrontController extends HttpServlet {
 				logger.info(String.format("REDIRECT : %s", forwardPath));
 				response.sendRedirect(forwardPath);
 			}
-			
 			logger.info(String.format("FORWARD : %s", forwardPath));
 			forward(request, response, forwardPath);		
 		}

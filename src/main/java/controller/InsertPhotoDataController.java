@@ -24,7 +24,7 @@ import database.DatabaseHandler;
 
 public class InsertPhotoDataController implements Controller {
 	private Logger logger;
-	private DatabaseHandler db;
+	private DatabaseHandler dbh;
 	private JsonBuilder jb;
 	private String photoImagePath;
 	private String forwardPath;
@@ -32,8 +32,8 @@ public class InsertPhotoDataController implements Controller {
 	public InsertPhotoDataController(String forwardPath) {
 		super();
 		this.logger = SagimaraLogger.logger;
-		this.db = new DatabaseHandler();
-		this.jb = new JsonBuilder();
+		this.dbh = DatabaseHandler.getDatabaseHandler();
+		this.jb = JsonBuilder.getJsonBuilder();
 		this.forwardPath = forwardPath;
 		
 	}
@@ -93,7 +93,7 @@ public class InsertPhotoDataController implements Controller {
 				}
 				
 				if(id!=null && videoLink!=null && date!=null){
-					if(db.insertPhoto(id, videoLink, date)){
+					if(dbh.insertPhoto(id, videoLink, date)){
 						json = jb.requestSuccessJSON();
 					}else{
 						json = jb.requestFailedJSON();
