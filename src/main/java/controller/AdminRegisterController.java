@@ -32,7 +32,9 @@ public class AdminRegisterController implements Controller {
 		id = (String) request.getParameter("id");
 		password = (String) request.getParameter("password");
 		logger.info("[Admin Register] id : "+id + " , password : " + password);
-		
+		/*
+		 * ADMIN DTO로 부터 값 가져오기
+		 */
 		String json = jb.requestSuccessJSON();
 		request.setAttribute("json", json);
 
