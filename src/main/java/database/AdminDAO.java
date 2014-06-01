@@ -42,7 +42,7 @@ public class AdminDAO {
 	public void add(Admin admin) throws SQLException {
 		String tableName = admin.getTableName();
 
-		String sql = "INSERT INTO " + tableName + " VALUES (?, ?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO " + tableName + " VALUES (?, ?, ?, ?, ?)";
 
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, admin.getAdminId());

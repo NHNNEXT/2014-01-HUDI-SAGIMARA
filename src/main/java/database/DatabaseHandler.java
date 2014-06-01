@@ -201,4 +201,36 @@ public class DatabaseHandler {
 		return -1;
 	}
 
+	public int CheckForAdminRegister(String id, String password, String email, String name) {
+		Connection conn = this.connect();
+		Admin admin = new Admin();
+		Admin dbAdmin = new Admin();
+		AdminDAO adminDAO = new AdminDAO(conn);
+
+		logger.info(String.format("CheckForAdminRegister %s, %s, %s, %s",
+				id, password, email,
+				name));
+		admin.setAdminId(id);
+		admin.setAdminPassword(password);
+		admin.setAdminName(name);
+		admin.setAdminEmail(email);
+		admin.setAdminStatus("1");
+
+		try {
+			dbAdmin = adminDAO.selectById(id);
+			
+			if (dbAdmin == null) {
+				adminDAO.add(admin);
+				conn.close();
+				return 0;
+			}  else {
+				conn.close();
+				return 1;
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}	
 }

@@ -79,7 +79,7 @@
 
 				</fieldset>
 			</form>
-
+			<div class="msgBox">messege!</div>
 		</section>
 	</div>
 	<script src="/javascripts/admin.js"></script>

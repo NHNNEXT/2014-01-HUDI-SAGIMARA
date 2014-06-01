@@ -215,6 +215,15 @@ input {
 	color:0f0f0f;
 	float:right;
 }
+#registerPopUp .msgBox {
+	position: relative;
+	background-color: #F3C51A;
+	top: -485px;
+	padding: 15px;
+	text-align: center;
+	display: none;
+}
+
 
 .exit-button:hover{
 	color:#f8454a;;

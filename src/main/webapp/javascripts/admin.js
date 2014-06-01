@@ -14,9 +14,11 @@ var oEventElements = {
 	// EventListener를 위한 elements
 	elLogin : editor.get("#loginBox .login_button"),
 	elRegister : editor.get("#loginBox .register_button"),
-
+	
+	elRequestRegister : editor.get("#registerPopUp .login_button"),
 	//
-	elMsgBox : editor.get("#loginBox .msgBox"),
+	elLoginMsgBox : editor.get("#loginBox .msgBox"),
+	elRegisterMsgBox : editor.get("#registerPopUp .msgBox"),
 
 	// Register와 관련한 Element
 	elRegisterPopUp : editor.get("#registerPopUp"),
@@ -59,19 +61,35 @@ var sagimaraAdmin = {
 				buttonEvent.register, false);
 		oEventElements.elRegisterCloseButton.addEventListener("click",
 				buttonEvent.registerClose, false);
+		
+		oEventElements.elRequestRegister.addEventListener("click",
+				buttonEvent.requestRegister, false);
+		
 	}
 };
 
 var loginError = {
 	success : function(msg) {
-		oEventElements.elMsgBox.style.display = "inline-block";
-		oEventElements.elMsgBox.textContent = msg;
+		oEventElements.elLoginMsgBox.style.display = "inline-block";
+		oEventElements.elLoginMsgBox.textContent = msg;
 	},
 	failed : function(msg) {
-		oEventElements.elMsgBox.style.display = "block";
-		oEventElements.elMsgBox.textContent = msg;
+		oEventElements.elLoginMsgBox.style.display = "block";
+		oEventElements.elLoginMsgBox.textContent = msg;
 	}
 }
+
+var registerError = {
+		success : function(msg) {
+			oEventElements.elRegisterMsgBox.style.display = "inline-block";
+			oEventElements.elRegisterMsgBox.textContent = msg;
+		},
+		failed : function(msg) {
+			oEventElements.elRegisterMsgBox.style.display = "block";
+			oEventElements.elRegisterMsgBox.textContent = msg;
+		}
+	}
+
 
 var buttonEvent = {
 	login : function(e) {
@@ -111,6 +129,42 @@ var buttonEvent = {
 	registerClose : function(e){
 		e.preventDefault();
 		registerLayer.closePopUp();
+	},
+	requestRegister : function(e){
+		e.preventDefault();
+		
+		var id = e.target.parentNode.parentNode.children[1].children[0].value;
+		var password = e.target.parentNode.parentNode.children[3].children[0].value;
+		var passwordCheck = e.target.parentNode.parentNode.children[5].children[0].value;
+		var name = e.target.parentNode.parentNode.children[7].children[0].value;
+		var email = e.target.parentNode.parentNode.children[9].children[0].value;
+		var url = "/admin/register";
+		var request = new XMLHttpRequest();
+		var formdata = new FormData();
+		var result;
+		
+		console.log(id, password, name, email);
+		
+		request.open("POST", url, true);
+		formdata.append("admin_id", id);
+		formdata.append("admin_pw", password);
+		formdata.append("admin_name", name);
+		formdata.append("admin_email", email);
+		request.send(formdata);
+
+		request.onreadystatechange = function() {
+			if (request.readyState == 4 && request.status == 200) {
+				result = JSON.parse(request.response);
+				console.log(result.code);
+				if (result.code === "200") {
+					registerError.success("회원가입 성공!!");
+				} else if (result.code === "400") {
+					registerError.failed("잘못된 아이디나 패스워드 입니다.");
+				} else if (result.code === "204") {
+					registerError.failed("회원가입에 실패하셨습니다..");
+				}
+			}
+		}		
 	}
 };
 
@@ -119,7 +173,6 @@ var registerLayer = {
 		//registerPopUp에 display 옵션을 block으로 설정해서 보이게함.(default: none)
 		var registerPopUp = oEventElements.elRegisterPopUp;
 		registerPopUp.style.display = "block";
-		console.log(registerPopUp);
 		// 
 		var deemedLayer = document.createElement("div");
 		deemedLayer.setAttribute("id", "deemed");
