@@ -8,6 +8,7 @@ import logger.SagimaraLogger;
 
 import org.apache.log4j.Logger;
 
+import utility.JsonBuilder;
 import dto.Admin;
 import dto.Inquiry;
 import dto.Location;
@@ -18,10 +19,13 @@ import dto.Verification;
 import dto.Video;
 
 public class DatabaseHandler {
-	private Logger logger;
+	private Logger logger = SagimaraLogger.logger;
+	private static DatabaseHandler instance = new DatabaseHandler();
 
-	public DatabaseHandler() {
-		logger = SagimaraLogger.logger;
+	private DatabaseHandler() {}
+	
+	public static DatabaseHandler getDatabaseHandler() {
+		return instance;
 	}
 
 	private Connection connect() {

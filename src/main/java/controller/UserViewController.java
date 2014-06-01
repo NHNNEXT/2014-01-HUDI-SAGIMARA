@@ -24,15 +24,15 @@ import dto.UserProfile;
 public class UserViewController implements Controller{
 
 	private Logger logger;
-	private DatabaseHandler db;
+	private DatabaseHandler dbh;
 	private JsonBuilder jb;
 	private String forwardPath;
 	
 	public UserViewController(String forwardPath) {
 		super();
 		this.logger = SagimaraLogger.logger;
-		this.db = new DatabaseHandler();
-		this.jb = new JsonBuilder();
+		this.dbh = DatabaseHandler.getDatabaseHandler();
+		this.jb = JsonBuilder.getJsonBuilder();
 		this.forwardPath = forwardPath;
 
 	}
@@ -78,7 +78,7 @@ public class UserViewController implements Controller{
 
 		logger.info(id);
 		if (!id.isEmpty()) {
-			UserProfile dut = db.readUserProfile(id);
+			UserProfile dut = dbh.readUserProfile(id);
 			String json = jb.objectToJson(dut);
 			logger.info(json);
 			request.setAttribute("json", json);

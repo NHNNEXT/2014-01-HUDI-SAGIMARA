@@ -20,7 +20,7 @@ public class AdminRegisterController implements Controller {
 	public AdminRegisterController(String forwardPath) {
 		super();
 		this.logger = SagimaraLogger.logger;
-		this.jb = new JsonBuilder();
+		this.jb = JsonBuilder.getJsonBuilder();
 		this.forwardPath = forwardPath;
 	}
 	

@@ -21,14 +21,14 @@ import utility.JsonBuilder;
 import database.DatabaseHandler;
 
 public class AdminLoginController implements Controller {
-	private DatabaseHandler db;
+	private DatabaseHandler dbh;
 	private JsonBuilder jb;
 	private String forwardPath;
 
 	public AdminLoginController(String forwardPath) {
 		super();
-		this.db = new DatabaseHandler();
-		this.jb = new JsonBuilder();
+		this.dbh = DatabaseHandler.getDatabaseHandler();
+		this.jb = JsonBuilder.getJsonBuilder();
 		this.forwardPath = forwardPath;
 	}
 	
@@ -43,7 +43,7 @@ public class AdminLoginController implements Controller {
 		id = requestMap.get("admin_id");
 		password =  requestMap.get("admin_pw");
 
-		switch (db.CheckForadminLogin(id,password)) {
+		switch (dbh.CheckForadminLogin(id,password)) {
 		case 0:
 			json = jb.requestSuccessJSON();
 			HttpSession session = null;
