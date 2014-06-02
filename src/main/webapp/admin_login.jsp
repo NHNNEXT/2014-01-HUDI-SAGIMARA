@@ -33,7 +33,7 @@
 					</div>
 					<div class="register_button">
 						<input class="register-submit border-radius" type="submit"
-							value="register">
+							value="Register">
 					</div>
 				</fieldset>
 			</form>
