@@ -12,7 +12,7 @@ import dto.Video;
 
 public class VideoDAO {
 	private Connection conn;
-	Logger logger = SagimaraLogger.logger;
+	private Logger logger = SagimaraLogger.logger;
 
 	public VideoDAO(Connection conn) {
 		this.conn = conn;
@@ -21,7 +21,7 @@ public class VideoDAO {
 	public void add(Video video) throws SQLException {
 		String tableName = video.getTableName();
 		String sql = "INSERT INTO " + tableName
-				+ "(USER_user_phone,location_time,location_coordinate)"
+				+ "(USER_user_phone, video_link, video_date)"
 				+ " VALUES (?, ?, ?)";
 
 		PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -32,9 +32,10 @@ public class VideoDAO {
 		int result = pstmt.executeUpdate();
 
 		if (result == 1) {
-			logger.info("Add Complete " + tableName + " : "
-					+ video.getVideoId() + "," + video.getVideoLink() + ","
-					+ video.getVideoDate());
+			logger.info(String.format("Add Complete %s : %s, %s, %s",
+					tableName, video.getVideoId(),
+					video.getVideoLink(),
+					video.getVideoDate()));
 		} else {
 			logger.info("Add Fail " + tableName);
 		}

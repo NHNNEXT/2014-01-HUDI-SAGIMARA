@@ -17,53 +17,39 @@
 	</resource-ref>
 
 	<servlet>
-		<servlet-name>index</servlet-name>
+		<servlet-name>FrontController</servlet-name>
 		<servlet-class>framework.FrontController</servlet-class>
 	</servlet>
-	<servlet>
-		<servlet-name>test</servlet-name>
-		<servlet-class>framework.FrontController</servlet-class>
-	</servlet>
-	<servlet>
-		<servlet-name>admin</servlet-name>
-		<servlet-class>framework.FrontController</servlet-class>
-	</servlet>
-	<servlet>
-		<servlet-name>insertData</servlet-name>
-		<servlet-class>framework.FrontController</servlet-class>
-	</servlet>
-	<servlet>
-		<servlet-name>unitTest</servlet-name>
-		<servlet-class>framework.FrontController</servlet-class>
-	</servlet>
-	<servlet>
-		<servlet-name>pushService</servlet-name>
-		<servlet-class>framework.FrontController</servlet-class>
-	</servlet>
-	
+
 	<servlet-mapping>
-		<servlet-name>index</servlet-name>
-		<url-pattern>/index</url-pattern>
+		<servlet-name>FrontController</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.css</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-		<servlet-name>test</servlet-name>
-		<url-pattern>/test</url-pattern>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.js</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-		<servlet-name>admin</servlet-name>
-		<url-pattern>/admin/*</url-pattern>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.gif</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-		<servlet-name>insertData</servlet-name>
-		<url-pattern>/insert/*</url-pattern>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.png</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-		<servlet-name>unitTest</servlet-name>
-		<url-pattern>/main_test</url-pattern>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.ico</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-		<servlet-name>pushService</servlet-name>
-		<url-pattern>/push/*</url-pattern>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.svg</url-pattern>
 	</servlet-mapping>
+
 
 </web-app>

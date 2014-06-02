@@ -14,7 +14,7 @@ import dto.Request;
 
 public class RequestDAO {
 	private Connection conn;
-	Logger logger = SagimaraLogger.logger;
+	private Logger logger = SagimaraLogger.logger;
 
 	public RequestDAO(Connection conn) {
 		this.conn = conn;
@@ -51,9 +51,9 @@ public class RequestDAO {
 		int result = pstmt.executeUpdate();
 
 		if (result == 1) {
-			logger.info("Add Complete " + tableName + ","
-					+ request.getRequestFrom() + "," + request.getRequestTo()
-					+ "," + request.getRequestDate());
+			logger.info(String.format("Add Complete %s : %s, %s, %s",
+					tableName, request.getRequestFrom(), request.getRequestTo(),
+					request.getRequestDate()));
 		} else {
 			logger.info("Add Fail " + tableName);
 		}

@@ -12,7 +12,7 @@ import dto.Inquiry;
 
 public class InquiryDAO {
 	private Connection conn;
-	Logger logger = SagimaraLogger.logger;
+	private Logger logger = SagimaraLogger.logger;
 
 	public InquiryDAO(Connection conn) {
 		this.conn = conn;
@@ -31,8 +31,8 @@ public class InquiryDAO {
 		int result = pstmt.executeUpdate();
 
 		if (result == 1) {
-			logger.info("Add Complete " + tableName + " : "
-					+ inquiry.getInquiryId() + "," + inquiry.getInquiryTime());
+			logger.info(String.format("Add Complete %s : %s, %s",
+					tableName, inquiry.getInquiryId(), inquiry.getInquiryTime()));
 		} else {
 			logger.info("Add Fail " + tableName);
 		}

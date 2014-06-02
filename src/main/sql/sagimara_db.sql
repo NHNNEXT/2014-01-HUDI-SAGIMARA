@@ -39,7 +39,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `sagimara`.`VIDEO` (
   `USER_user_phone` VARCHAR(20) NOT NULL,
-  `video_link` VARCHAR(100) NULL,
+  `video_link` VARCHAR(255) NULL,
   `video_date` DATETIME NULL,
   UNIQUE INDEX `videolink_UNIQUE` (`video_link` ASC),
   INDEX `fk_VIDEO_USER1_idx` (`USER_user_phone` ASC),

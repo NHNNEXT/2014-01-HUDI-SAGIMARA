@@ -11,24 +11,20 @@ import logger.SagimaraLogger;
 
 import org.apache.log4j.Logger;
 
-import utility.JsonBuilder;
-
 import com.google.gson.Gson;
 
 import database.DatabaseHandler;
 import dto.Request;
 
 public class PushAlarmController implements Controller {
-	Logger logger;
-	DatabaseHandler db;
-	JsonBuilder jb;
-	String forwardPath;
+	private Logger logger;
+	private DatabaseHandler dbh;
+	private String forwardPath;
 
 	public PushAlarmController(String forwardPath) {
 		super();
 		this.logger = SagimaraLogger.logger;
-		this.db = new DatabaseHandler();
-		this.jb = new JsonBuilder();
+		this.dbh = DatabaseHandler.getDatabaseHandler();;
 		this.forwardPath = forwardPath;
 	}
 
@@ -40,7 +36,7 @@ public class PushAlarmController implements Controller {
 		logger.info("[PushAlarmController Register] userPhone : " + userPhone);
 		ArrayList<Request> resultList;
 		
-		resultList = db.getRequestsWithVerificationTime(userPhone);
+		resultList = dbh.getRequestsWithVerificationTime(userPhone);
 		
 		for(Request r : resultList){
 			logger.info("HI : " +r.getRequestTo() + " : " + r.getRequestFrom() + " : " + r.getRequestDate());

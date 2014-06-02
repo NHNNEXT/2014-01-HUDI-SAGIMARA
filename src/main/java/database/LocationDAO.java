@@ -12,7 +12,7 @@ import dto.Location;
 
 public class LocationDAO {
 	private Connection conn;
-	Logger logger = SagimaraLogger.logger;
+	private Logger logger = SagimaraLogger.logger;
 
 	public LocationDAO(Connection conn) {
 		this.conn = conn;
@@ -32,10 +32,10 @@ public class LocationDAO {
 		int result = pstmt.executeUpdate();
 
 		if (result == 1) {
-			logger.info("Add Complete " + tableName + " : "
-					+ location.getLocationId() + ","
-					+ location.getLocationTime() + ","
-					+ location.getLocationCoordinate());
+			logger.info(String.format("Add Complete %s : %s, %s, %s",
+					tableName, location.getLocationId(),
+					location.getLocationTime(),
+					location.getLocationCoordinate()));
 		} else {
 			logger.info("Add Fail " + tableName);
 		}

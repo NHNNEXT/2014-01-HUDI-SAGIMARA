@@ -13,7 +13,7 @@ import dto.Admin;
 
 public class AdminDAO {
 	private Connection conn;
-	Logger logger = SagimaraLogger.logger;
+	private Logger logger = SagimaraLogger.logger;
 
 	public AdminDAO(Connection conn) {
 		this.conn = conn;
@@ -42,7 +42,7 @@ public class AdminDAO {
 	public void add(Admin admin) throws SQLException {
 		String tableName = admin.getTableName();
 
-		String sql = "INSERT INTO " + tableName + " VALUES (?, ?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO " + tableName + " VALUES (?, ?, ?, ?, ?)";
 
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, admin.getAdminId());
@@ -54,10 +54,10 @@ public class AdminDAO {
 		int result = pstmt.executeUpdate();
 
 		if (result == 1) {
-			logger.info("Add Complete " + tableName + "," + admin.getAdminId()
-					+ "," + admin.getAdminPassword() + ","
-					+ admin.getAdminName() + "," + admin.getAdminEmail() + ","
-					+ admin.getAdminStatus());
+			logger.info(String.format("Add Complete %s : %s, %s, %s, %s, %s",
+					tableName, admin.getAdminId(), admin.getAdminPassword(),
+					admin.getAdminName(), admin.getAdminEmail(),
+					admin.getAdminStatus()));
 		} else {
 			logger.info("Add Fail " + tableName);
 		}

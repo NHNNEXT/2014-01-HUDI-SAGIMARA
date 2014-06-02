@@ -13,7 +13,7 @@ import dto.Verification;
 
 public class VerificationDAO {
 	private Connection conn;
-	Logger logger = SagimaraLogger.logger;
+	private Logger logger = SagimaraLogger.logger;
 
 	public VerificationDAO(Connection conn) {
 		this.conn = conn;
@@ -50,9 +50,9 @@ public class VerificationDAO {
 		int result = pstmt.executeUpdate();
 
 		if (result == 1) {
-			logger.info("Add Complete " + tableName + " : "
-					+ verification.getVerificationId() + ","
-					+ verification.getVerificationTime());
+			logger.info(String.format("Add Complete %s : %s, %s", tableName,
+					verification.getVerificationId(),
+					verification.getVerificationTime()));
 		} else {
 			logger.info("Add Fail " + tableName);
 		}

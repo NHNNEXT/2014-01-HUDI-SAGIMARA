@@ -103,7 +103,7 @@ var visitInfoBarManager = {
 		
 		var barArray = this.checkBarHeight();
 		var visitPerHeight = 10; // 방문자 1명당 10px의 높이로 설정
-
+//		setBar2에 setTimeout방식으로 구현
 //		var setBars = setInterval((function() {
 //			if (this.count > numberOfBar) {
 //				clearInterval(this.setBars);
@@ -303,6 +303,30 @@ var utility = {
 		// json파일을 json객체로 변환
 		var jsonObj = JSON.parse(raw);
 		return jsonObj;
+	},
+	
+	phoneValid : function(input)
+	{
+		//입력된 전화번호의 유효성 판단
+		// 010-1234-5678, 010 1234 5678과 같이 하이픈이나 공백으로 구분되는 입력
+		var input = input.replace("-","");
+		input = input.replace(" ","");
+		
+		var inputLength = input.length;
+		
+		var midThreeDigitNumber = 10; //중간 3자리 핸드폰 번호 길이 
+		var midFourDigitNumber = 11; //중간 4자리 핸드폰 번호 길이
+		var forTest = 4; //test를 위한 길이 추후삭제요
+
+		if(inputLength == midThreeDigitNumber || inputLength == midFourDigitNumber || inputLength == forTest) {
+			return input;// 휴대폰 형식에 맞는 String
+		} else {
+			return false;// 휴대폰 형식이 아닌 경우
+		}
+		/* 추가 기능
+		- 앞자리 세자리에 대한 예외적용(010 부분)
+		- 국제 번호 형식에 대한 처리(+82 1012345678 등)
+		*/
 	}
 }
 
@@ -329,9 +353,17 @@ var sagimaraMain = {
 		var request = new XMLHttpRequest();
 		var formdata = new FormData();
 		var result;
+		
+		var input = utility.phoneValid(id);
 
 		request.open("POST", url, true);
-		formdata.append("id", id);
+		if(input) {
+			formdata.append("id", input);
+		} else {
+			alert("잘못된 번호입력");
+			utility.refresh();
+		}
+		
 		request.send(formdata);
 
 		request.onreadystatechange = function() {

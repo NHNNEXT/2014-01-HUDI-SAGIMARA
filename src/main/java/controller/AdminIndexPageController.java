@@ -7,24 +7,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import logger.SagimaraLogger;
-
-import org.apache.log4j.Logger;
-
-import utility.JsonBuilder;
-import database.DatabaseHandler;
-
 public class AdminIndexPageController implements Controller {
-	Logger logger;
-	DatabaseHandler db;
-	JsonBuilder jb;
-	String forwardPath;
+	private String forwardPath;
 	
 	public AdminIndexPageController(String forwardPath) {
 		super();
-		this.logger = SagimaraLogger.logger;
-		this.db = new DatabaseHandler();
-		this.jb = new JsonBuilder();
 		this.forwardPath = forwardPath;
 
 	}
