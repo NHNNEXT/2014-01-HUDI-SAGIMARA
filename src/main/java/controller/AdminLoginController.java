@@ -56,7 +56,6 @@ public class AdminLoginController implements Controller {
 			HttpSession session = null;
 			session = request.getSession(true);
 			session.setAttribute("admin_id", id);
-			//리다이렉트!!
 			break;
 		case 1:
 			json = jb.requstErrorJSON();
