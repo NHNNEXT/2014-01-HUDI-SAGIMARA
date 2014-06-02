@@ -10,7 +10,7 @@
 <body>
 
 	<div id=loginBox class="border-radius">
-		<form id="adminLoginForm" action="#" method="POST" enctype="form-data">
+		<form id="adminLoginForm" action="#" method="POST" enctype="text/plain">
 		<fieldset>
 		<div class="logo"><h2>Sagimara Admin</h2></div>
 		<div class="id_title">아이디</div> 
