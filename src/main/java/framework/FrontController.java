@@ -62,8 +62,9 @@ public class FrontController extends HttpServlet {
 		} else {
 			requestPathError(request, response);
 		}
-		
-		if (!forwardPath.isEmpty()) {
+		if (forwardPath==null){
+			return;
+		}else if (!forwardPath.isEmpty()) {
 			RequestDispatcher dispather = request.getServletContext()
 					.getRequestDispatcher(forwardPath);
 			dispather.forward(request, response);
