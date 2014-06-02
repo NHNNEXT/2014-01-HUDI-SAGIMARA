@@ -33,7 +33,7 @@
 					</div>
 					<div class="register_button">
 						<input class="register-submit border-radius" type="submit"
-							value="register">
+							value="Register">
 					</div>
 				</fieldset>
 			</form>
@@ -58,8 +58,9 @@
 					</div>
 					<div class="pw_check_title">비밀번호 확인</div>
 					<div class="pw_check_input">
-						<input class="admin_pw border-radius" placeholder="password-checker"
-							type="password" name="admin_pw_check">
+						<input class="admin_pw border-radius"
+							placeholder="password-checker" type="password"
+							name="admin_pw_check">
 					</div>
 					<div class="name_title">이름</div>
 					<div class="name_input">

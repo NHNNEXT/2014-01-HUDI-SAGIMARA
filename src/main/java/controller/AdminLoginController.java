@@ -11,22 +11,27 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import logger.SagimaraLogger;
+
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.log4j.Logger;
 
 import utility.JsonBuilder;
 import database.DatabaseHandler;
 
 public class AdminLoginController implements Controller {
+	private Logger logger;
 	private DatabaseHandler dbh;
 	private JsonBuilder jb;
 	private String forwardPath;
 
 	public AdminLoginController(String forwardPath) {
 		super();
+		this.logger = SagimaraLogger.logger;
 		this.dbh = DatabaseHandler.getDatabaseHandler();
 		this.jb = JsonBuilder.getJsonBuilder();
 		this.forwardPath = forwardPath;
@@ -42,7 +47,9 @@ public class AdminLoginController implements Controller {
 		requestMap = makeParameterMap(request);
 		id = requestMap.get("admin_id");
 		password =  requestMap.get("admin_pw");
-
+		
+		logger.info(id + password);
+		
 		switch (dbh.CheckForadminLogin(id,password)) {
 		case 0:
 			json = jb.requestSuccessJSON();
