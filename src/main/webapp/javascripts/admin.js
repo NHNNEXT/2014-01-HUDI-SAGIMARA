@@ -75,6 +75,7 @@ var loginError = {
 	},
 	failed : function(msg) {
 		oEventElements.elLoginMsgBox.style.display = "block";
+		oEventElements.elLoginMsgBox.style.setProperty("-webkit-animation-play-state", "running");
 		oEventElements.elLoginMsgBox.textContent = msg;
 	}
 }

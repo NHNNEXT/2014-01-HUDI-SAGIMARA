@@ -6,6 +6,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Sagimara Admin Page</title>
 <link rel="stylesheet" type="text/css" media="screen"
+	href="/stylesheets/base.css">
+<link rel="stylesheet" type="text/css" media="screen"
 	href="/stylesheets/admin.css">
 </head>
 <body>
