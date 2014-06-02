@@ -1,0 +1,100 @@
+
+.clearfix:after {
+	content: ".";
+	visibility: hidden;
+	display: block;
+	height: 0;
+	clear: both;
+}
+
+.nav {
+	position: absolute;
+	bottom: 60px;
+	top: 0px;
+	background-color: #F5F5F5;
+	width: 200px;
+	height: 100%;
+	float: left;
+	min-height: 1px;
+}
+
+.nav li {
+	color: #f8454a;
+	padding-right: 20px;
+	padding-left: 20px;
+}
+
+.nav>ul>li>a {
+	padding: 10px 15px;
+	position: relative;
+	display: block;
+}
+
+.nav .active {
+	color: #ffffff;
+	background-color: #f8454a;
+}
+
+.nav>ul>li:hover {
+	background-color: #e0e0e0;
+	color: #f8454a;
+}
+
+.contents {
+	position: absolute;
+	background-color: #FFFFFF;
+	height: 100%;
+	margin-left: 200px;
+	color: #000000;
+	padding: 20px 40px;
+	overflow:auto;
+}
+
+.contents>h1 {
+	font-size: 2.5em;
+	color: #637176;
+	text-align: left;
+}
+
+.contents section {
+	padding:30px 20px;
+}
+
+.contents article {
+	padding:30px 10px;
+	border:1px dashed #637176; 
+}
+
+.contents section h1{
+	position:relative;
+	top:10px;
+	display:inline-block;
+	font-size:1.5em;
+	background-color:white;
+	color:#f8454a;
+}
+
+.daily-visitor-graph {
+	width:50%;
+	float:left;
+	
+}
+
+.daily-report-graph {
+	width:50%;
+	float:left;
+	
+}
+
+.verification-status {
+	clear:both;
+	
+}
+
+.verification-request-list {
+	clear:both;
+}
+
+.recently-report-list {
+	clear:both;
+}

@@ -179,7 +179,6 @@ var registerLayer = {
 		
 		var wrapper = oEventElements.elWrapper;
 		wrapper.appendChild(deemedLayer);
-
 	},
 	closePopUp : function() {
 		var registerPopUp = oEventElements.elRegisterPopUp;
@@ -188,7 +187,6 @@ var registerLayer = {
 		var wrapper = oEventElements.elWrapper;
 		var deemedLayer = document.getElementById("deemed");
 		wrapper.removeChild(deemedLayer);
-
 	}
 
 }

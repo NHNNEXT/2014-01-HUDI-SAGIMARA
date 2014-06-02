@@ -52,11 +52,12 @@ header {
 }
 
 footer {
-	padding: 0 32px;
+	clear:both;
 	min-height: 60px;
 	position: relative;
 	z-index: 10;
    	bottom: 0px;
+   	margin-top:-0em;
    	width: 100%;
 	background: #303135;
 	-webkit-animation:fade-in 1s;
@@ -74,6 +75,14 @@ img,fieldset{
   border:0
 }
 
+.clearfix:after {
+	content: ".";
+	visibility: hidden;
+	display: block;
+	height: 0;
+	clear: both;
+}
+
 /*
 	Animation CSS
 */
@@ -88,4 +97,3 @@ img,fieldset{
 @keyframes fade-in{
 	from{opacity:0;}
 	to{opacity:1;}
-}

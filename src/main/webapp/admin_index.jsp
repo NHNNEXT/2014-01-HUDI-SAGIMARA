@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,35 +9,58 @@
 <link rel="stylesheet" type="text/css" media="screen"
 	href="/stylesheets/base.css">
 <link rel="stylesheet" type="text/css" media="screen"
-	href="/stylesheets/admin.css">
+	href="/stylesheets/admin_index.css">
 </head>
 <body>
-<div class="container">
-	<nav>
-		<ul>
-			<li>menu 1 </li>
-			<li>menu 2 </li>
-			<li>menu 3 </li>
-		</ul>
-	</nav>
-	
 	<div id="wrap">
-		<header>
-			<div class="column">
-				<div class="logo">SAGIMARA Admin</div>
-			</div>
-		</header>
-		<div class="contents">
-			<h1>내용내용내용</h1>
+		<header> </header>
+
+		<div id="container">
+			<nav class="nav">
+				<ul>
+					<li class="active"><a>회원목록</a></li>
+					<li><a>인증요청관리</a></li>
+					<li><a>몰라</a></li>
+				</ul>
+			</nav>
+			<section class="contents">
+				<h1>Sagimara Admin</h1>
+				<hr>
+				<section class="daily-visitor-graph ">
+					<h1>일간 방문자 그래프</h1>
+					<article>
+						그래프입니다
+					</article>
+				</section>
+				<section class="daily-report-graph">
+					<h1>일간 신고건수 그래프</h1>
+					<article>
+						그래프 입니다
+					</article>
+				</section>
+				<section class="verification-status">
+					<h1>인증 처리 현황</h1>
+					<article>
+						현황이죠 후훗
+					</article>
+				</section>
+				<section class="verification-request-list">
+					<h1>최근 인증 요청 목록</h1>
+					<article>
+						목록이죠 후후 
+					</article>
+				</section>
+				<section class="recently-report-list">
+					<h1>최근 신고 목록</h1>
+					<article>
+						신고 목록 입니다 하핫
+					</article>
+				</section>
+			</section>
 		</div>
-	
+		<div class="clearfix"></div>
+
 	</div>
-	<footer>
-		<div class="logo">logo</div>
-	</footer>
-
-</div>
-
 
 	<script src="/javascripts/admin_index.js"></script>
 </body>
