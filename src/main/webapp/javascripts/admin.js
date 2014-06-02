@@ -110,9 +110,8 @@ var buttonEvent = {
 		request.onreadystatechange = function() {
 			if (request.readyState == 4 && request.status == 200) {
 				result = JSON.parse(request.response);
-				console.log(result.code);
 				if (result.code === "200") {
-					loginError.success("로그인 성공!!");
+					window.location.replace("/admin/index");
 				} else if (result.code === "400") {
 					loginError.failed("잘못된 아이디나 패스워드 입니다.");
 				} else if (result.code === "204") {

@@ -24,7 +24,6 @@ public class AdminIndexPageController implements Controller {
 		String id = (String)session.getAttribute("admin_id");  // request에서 id 파라미터를 가져온다
 
 		if(id==null||id.equals("")){                     // id가 Null 이거나 없을 경우
-			logger.info("rerererererer");
 			response.sendRedirect("/admin/login");    // 로그인 페이지로 리다이렉트 한다.
 			return null;
 		}

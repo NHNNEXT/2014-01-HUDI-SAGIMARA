@@ -58,9 +58,10 @@ public class AdminRegisterController implements Controller {
 			json = jb.requstErrorJSON();
 			break;
 		case 2:
-			
+			json = jb.requestFailedJSON();
 			break;
 		case -1:
+			json = jb.requestFailedJSON();
 			break;
 		default:
 			json = jb.requestFailedJSON();
