@@ -178,6 +178,7 @@ var registerCheck = {
 			name : "",
 			email : ""
 		},
+		
 		init : function(id,password,passwordCheck,name,email) {
 			this.data.id = id;
 			this.data.password = password;
@@ -185,6 +186,7 @@ var registerCheck = {
 			this.data.name = name;
 			this.data.email = email;
 		},
+		
 		all : function(){
 			if(!this.id()){
 				return false;
@@ -222,6 +224,7 @@ var registerCheck = {
 			
 			return true;
 		},
+		
 		password : function(){
 			if(this.data.password===""){
 				registerError.failed("비밀번호를 입력해주세요");
@@ -234,6 +237,7 @@ var registerCheck = {
 			}
 			return true;
 		},
+		
 		passwordCheck : function(){
 			if(this.data.passwordCheck===""){
 				registerError.failed("비밀번호를 확인 해주세요");
@@ -245,6 +249,7 @@ var registerCheck = {
 			}
 			return true;
 		},
+		
 		name : function(){
 			if(this.data.name===""){
 				registerError.failed("이름을 입력해주세요");
@@ -252,6 +257,7 @@ var registerCheck = {
 			}
 			return true;
 		},
+		
 		email : function(){
 			if(this.data.email===""){
 				registerError.failed("이메일을 입력해주세요");
