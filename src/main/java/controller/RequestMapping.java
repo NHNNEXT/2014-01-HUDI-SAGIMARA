@@ -22,9 +22,11 @@ public class RequestMapping {
 		put("/insert/request",new ForwardController("/insertRequest.jsp"));
 		put("/insert/location", new ForwardController("/insertLocation.jsp"));
 		put("/admin/login", new ForwardController("/admin_login.jsp"));
-		put("/main_test", new ForwardController("/main_test.jsp"));
 		put("/admin/index",new AdminIndexPageController("/admin_index.jsp"));
 		
+		//TEST
+		put("/main_test", new ForwardController("/javascripts/test/main_test.jsp"));
+		put("/register_test", new ForwardController("/javascripts/test/register_test.jsp"));
 	}};
 	
 	public Controller requestController(String path) {
