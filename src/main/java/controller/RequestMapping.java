@@ -26,7 +26,6 @@ public class RequestMapping {
 		
 		//TEST
 		put("/main_test", new ForwardController("/javascripts/test/main_test.jsp"));
-		put("/register_test", new ForwardController("/javascripts/test/register_test.jsp"));
 	}};
 	
 	public Controller requestController(String path) {

@@ -6,7 +6,7 @@ var editor = {
 		}
 		var result = elements.querySelector(selector);
 		return result;
-	},
+	}
 
 };
 

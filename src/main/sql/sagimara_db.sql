@@ -17,6 +17,7 @@ CREATE TABLE IF NOT EXISTS `sagimara`.`USER` (
   PRIMARY KEY (`user_phone`))
 ENGINE = InnoDB;
 
+
 -- -----------------------------------------------------
 -- Table `sagimara`.`LOCATION`
 -- -----------------------------------------------------
@@ -39,7 +40,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `sagimara`.`VIDEO` (
   `USER_user_phone` VARCHAR(20) NOT NULL,
-  `video_link` VARCHAR(255) NULL,
+  `video_link` VARCHAR(100) NULL,
   `video_date` DATETIME NULL,
   UNIQUE INDEX `videolink_UNIQUE` (`video_link` ASC),
   INDEX `fk_VIDEO_USER1_idx` (`USER_user_phone` ASC),
@@ -162,10 +163,12 @@ ENGINE = InnoDB;
 -- Table `sagimara`.`VERIFICATION`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `sagimara`.`VERIFICATION` (
+  `num` INT NOT NULL AUTO_INCREMENT,
   `USER_user_phone` VARCHAR(20) NOT NULL,
+  `user_status` TINYINT NULL,
   `verification_time` DATETIME NULL,
   INDEX `fk_VERIFICATION_USER1_idx` (`USER_user_phone` ASC),
-  PRIMARY KEY (`USER_user_phone`),
+  PRIMARY KEY (`num`),
   CONSTRAINT `fk_VERIFICATION_USER1`
     FOREIGN KEY (`USER_user_phone`)
     REFERENCES `sagimara`.`USER` (`user_phone`)
