@@ -26,7 +26,6 @@ var oEventElements = {
 	elWrapper : editor.get("#wrapper")
 };
 // 로그인 폼 위치 중앙정렬함수
-// 즉시실행함수로 실행
 var loginFormRelocation = function loginFormLocation() {
 
 	var loginForm = document.querySelector("#loginBox");
@@ -138,35 +137,141 @@ var buttonEvent = {
 		var passwordCheck = e.target.parentNode.parentNode.children[5].children[0].value;
 		var name = e.target.parentNode.parentNode.children[7].children[0].value;
 		var email = e.target.parentNode.parentNode.children[9].children[0].value;
-		var url = "/admin/register";
-		var request = new XMLHttpRequest();
-		var formdata = new FormData();
-		var result;
 		
-		console.log(id, password, name, email);
+		registerCheck.init(id,password,passwordCheck,name,email);
+		if(registerCheck.all()){
 		
-		request.open("POST", url, true);
-		formdata.append("admin_id", id);
-		formdata.append("admin_pw", password);
-		formdata.append("admin_name", name);
-		formdata.append("admin_email", email);
-		request.send(formdata);
+			var url = "/admin/register";
+			var request = new XMLHttpRequest();
+			var formdata = new FormData();
+			var result;
+			
+			request.open("POST", url, true);
+			formdata.append("admin_id", id);
+			formdata.append("admin_pw", password);
+			formdata.append("admin_name", name);
+			formdata.append("admin_email", email);
+			request.send(formdata);
 
-		request.onreadystatechange = function() {
-			if (request.readyState == 4 && request.status == 200) {
-				result = JSON.parse(request.response);
-				console.log(result.code);
-				if (result.code === "200") {
-					registerError.success("회원가입 성공!!");
-				} else if (result.code === "400") {
-					registerError.failed("잘못된 아이디나 패스워드 입니다.");
-				} else if (result.code === "204") {
-					registerError.failed("회원가입에 실패하셨습니다..");
+			request.onreadystatechange = function() {
+				if (request.readyState == 4 && request.status == 200) {
+					result = JSON.parse(request.response);
+					console.log(result.code);
+					if (result.code === "200") {
+						registerError.success("회원가입 성공!!");
+					} else if (result.code === "400") {
+						registerError.failed("잘못된 아이디나 패스워드 입니다.");
+					} else if (result.code === "204") {
+						registerError.failed("회원가입에 실패하셨습니다..");
+					}
 				}
 			}
-		}		
+		}
 	}
 };
+
+var registerCheck = {
+		data : {
+			id : "",
+			password : "",
+			passwordCheck : "",
+			name : "",
+			email : ""
+		},
+		
+		init : function(id,password,passwordCheck,name,email) {
+			this.data.id = id;
+			this.data.password = password;
+			this.data.passwordCheck = passwordCheck;
+			this.data.name = name;
+			this.data.email = email;
+		},
+		
+		all : function(){
+			if(!this.id()){
+				return false;
+			}
+			if(!this.password()){
+				return false;
+			}
+			if(!this.passwordCheck()){
+				return false;
+			}
+			if(!this.name()){
+				return false;
+			}
+			if(!this.email()){
+				return false;
+			}
+			return true;
+		},
+		
+		id : function(){
+			if(this.data.id===""){
+				registerError.failed("아이디를 입력해주세요");
+				return false;
+			}
+			
+			for (i=0; i<this.data.id.length ;i++ )
+			{
+			  ch=this.data.id.charAt(i)
+			  if (!(ch>='0' && ch<='9') && !(ch>='a' && ch<='z'))
+			  {
+				  registerError.failed("아이디는 영어 소문자, 숫자만 가능합니다.");
+				  return false;
+			  }
+			}
+			
+			return true;
+		},
+		
+		password : function(){
+			if(this.data.password===""){
+				registerError.failed("비밀번호를 입력해주세요");
+				return false;
+			}
+			if (this.data.password.length<6 || this.data.password.length>16)
+			{
+				registerError.failed("비밀번호는 6자 이상 16자 이하이여야합니다.");
+				return false;
+			}
+			return true;
+		},
+		
+		passwordCheck : function(){
+			if(this.data.passwordCheck===""){
+				registerError.failed("비밀번호를 확인 해주세요");
+				return false;
+			}
+			if(this.data.passwordCheck!==this.data.password){
+				registerError.failed("비밀번호 확인이 틀렸습니다.");
+				return false;
+			}
+			return true;
+		},
+		
+		name : function(){
+			if(this.data.name===""){
+				registerError.failed("이름을 입력해주세요");
+				return false;
+			}
+			return true;
+		},
+		
+		email : function(){
+			if(this.data.email===""){
+				registerError.failed("이메일을 입력해주세요");
+				return false;
+			}
+			var eCheck=/^[_a-zA-Z0-9]+([-+.][_a-zA-Z0-9]+)*@([0-9a-zA-Z_-]+)(\.[a-zA-Z]+){1,2}$/i;
+			var mail_check = eCheck.test(this.data.email);
+			if(mail_check!=true){
+				registerError.failed("이메일을 형식이 잘못되었습니다.");
+				return false;
+			}
+			return true;
+		}
+}
 
 var registerLayer = {
 	openPopUp : function() {
@@ -188,7 +293,6 @@ var registerLayer = {
 		var deemedLayer = document.getElementById("deemed");
 		wrapper.removeChild(deemedLayer);
 	}
-
 }
 
 window.onresize = function() {
