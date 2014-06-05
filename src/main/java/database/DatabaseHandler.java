@@ -124,59 +124,6 @@ public class DatabaseHandler {
 		return userProfile;
 	}
 
-	public boolean insertLocation(String phone, String time, String cordinate) {
-		Connection conn = this.connect();
-		Location location = new Location();
-		LocationDAO locationDAO = new LocationDAO(conn);
-
-		location.setLocationId(phone);
-		location.setLocationTime(time);
-		location.setLocationCoordinate(cordinate);
-
-		try {
-			locationDAO.add(location);
-			return true;
-		} catch (SQLException e) {
-			logger.info("insertLocation Fail");
-			e.printStackTrace();
-		} finally {
-			try {
-				conn.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		return false;
-	}
-
-	public boolean insertPhoto(String phone, String videoLink, String time) {
-		Connection conn = this.connect();
-		Video video = new Video();
-		VideoDAO videoDAO = new VideoDAO(conn);
-
-		video.setVideoId(phone);
-		video.setVideoLink(videoLink);
-		video.setVideoDate(time);
-
-		try {
-			videoDAO.add(video);
-			return true;
-		} catch (SQLException e) {
-			logger.info("insertPhoto Fail");
-			e.printStackTrace();
-		} finally {
-			try {
-				conn.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-
-		return false;
-	}
-
 	public boolean insertRequest(String from, String to, String date) {
 		Connection conn = this.connect();
 		Request request = new Request();

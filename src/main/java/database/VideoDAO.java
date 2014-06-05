@@ -12,13 +12,18 @@ import dto.Video;
 
 public class VideoDAO {
 	private Connection conn;
+	private DatabaseConnector connector;
 	private Logger logger = SagimaraLogger.logger;
-
+	
+	public VideoDAO() {
+		this.connector = new DatabaseConnector();
+		this.conn = connector.getMysqlConnection();
+	}
 	public VideoDAO(Connection conn) {
 		this.conn = conn;
 	}
 
-	public void add(Video video) throws SQLException {
+	public boolean add(Video video) throws SQLException {
 		String tableName = video.getTableName();
 		String sql = "INSERT INTO " + tableName
 				+ "(USER_user_phone, video_link, video_date)"
@@ -38,8 +43,13 @@ public class VideoDAO {
 					video.getVideoDate()));
 		} else {
 			logger.info("Add Fail " + tableName);
+			pstmt.close();
+			conn.close();
+			return false;
 		}
 
 		pstmt.close();
+		conn.close();
+		return true;
 	}
 }

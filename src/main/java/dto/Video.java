@@ -5,6 +5,15 @@ public class Video extends BaseModel{
 	private String videoLink;
 	private String videoDate;
 	
+	public Video() {
+	}
+	
+	public Video(String videoId, String videoLink, String videoDate) {
+		this.videoId = videoId;
+		this.videoLink = videoLink;
+		this.videoDate = videoDate;
+	}
+	
 	public String getVideoId() {
 		return videoId;
 	}
