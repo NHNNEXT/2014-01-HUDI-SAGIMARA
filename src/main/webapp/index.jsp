@@ -94,7 +94,7 @@
 			<section id="info-wrapper">
 				<section id="detail-info" class="clearfix">
 					<section id="location-info" class="detail-info-item float-left">
-						<p>최근 위치 정보</p>
+						<p>최근<br>위치정보</p>
 						<figure>
 							<div id="map-canvas">
 								<p></p>
@@ -102,7 +102,7 @@
 						</figure>
 					</section>
 					<section id="watch-info" class="detail-info-item float-left">
-						<p>지켜보는 사람의 수</p>
+						<p>지켜보는<br>사람의 수</p>
 						<figure>
 							<div id="watch-tool">
 								<p></p>
@@ -110,7 +110,7 @@
 						</figure>
 					</section>
 					<section id="caution-info" class="detail-info-item float-right">
-						<p>신고/주의 현황</p>
+						<p>신고/주의<br>현황</p>
 						<figure>
 							<div id="caution-tool">
 								<p></p>

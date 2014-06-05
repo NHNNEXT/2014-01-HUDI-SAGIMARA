@@ -419,6 +419,12 @@ div, section, section {
 	background: rgba(255, 255, 255, 0.7);
 }
 
+@media screen and (max-width: 520px) {
+	#map-canvas {
+		font-size: 15px;
+	} 
+}
+
 /*
 	Detail Info Section - watch-info
 */
