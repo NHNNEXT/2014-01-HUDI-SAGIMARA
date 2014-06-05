@@ -14,10 +14,12 @@ import dto.UserInquiry;
 
 public class NotificationDAO {
 	private Connection conn;
+	private DatabaseConnector connector;
 	private Logger logger = SagimaraLogger.logger;
 
-	public NotificationDAO(Connection conn) {
-		this.conn = conn;
+	public NotificationDAO() {
+		this.connector = new DatabaseConnector();
+		this.conn = connector.getMysqlConnection();
 	}
 
 	public void add(dto.Notification notification) throws SQLException {

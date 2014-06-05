@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -10,7 +11,6 @@ import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import logger.SagimaraLogger;
 
@@ -22,23 +22,22 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.log4j.Logger;
 
 import utility.JsonBuilder;
-import database.DatabaseHandler;
-import dto.Inquiry;
+import database.InquiryDAO;
+import database.NotificationDAO;
+import database.RequestDAO;
+import database.VerificationDAO;
 import dto.Request;
 import dto.UserInquiry;
-import dto.UserProfile;
 import dto.Verification;
 
 public class AdminAjaxController implements Controller {
 	private String forwardPath;
 	private Logger logger;
-	private DatabaseHandler dbh;
 	private JsonBuilder jb;
 	
 	public AdminAjaxController(String forwardPath) {
 		super();
 		this.logger = SagimaraLogger.logger;
-		this.dbh = DatabaseHandler.getDatabaseHandler();
 		this.jb = JsonBuilder.getJsonBuilder();
 		this.forwardPath = forwardPath;
 	}
@@ -62,25 +61,25 @@ public class AdminAjaxController implements Controller {
 		String json;
 		
 		if(requestMap.get("request").equals("visits")){
-			UserInquiry visits = dbh.getVisiterDataAtToday();
+			UserInquiry visits = getVisiterDataAtToday();
 			json = jb.objectToJson(visits);
 			logger.info(json);
 			request.setAttribute("visits", json);	
 		}
 		else if (requestMap.get("request").equals("notify")){
-			UserInquiry noti = dbh.getNotificationAtToday();
+			UserInquiry noti = getNotificationAtToday();
 			json = jb.objectToJson(noti);
 			logger.info(json);
 			request.setAttribute("notify", json);	
 		}
 		else if (requestMap.get("request").equals("verification")){
-			ArrayList<Verification> veriList = dbh.getVerifivationList(Integer.parseInt(requestMap.get("count")));
+			ArrayList<Verification> veriList = getVerifivationList(Integer.parseInt(requestMap.get("count")));
 			json = jb.objectToJson(veriList);
 			logger.info(json);
 			request.setAttribute("verification", json);
 		}
 		else if (requestMap.get("request").equals("request")){
-			ArrayList<Request> requestList = dbh.getRequestList(Integer.parseInt(requestMap.get("count")));
+			ArrayList<Request> requestList = getRequestList(Integer.parseInt(requestMap.get("count")));
 			json = jb.objectToJson(requestList);
 			logger.info(json);
 			request.setAttribute("request", json);	
@@ -111,5 +110,54 @@ public class AdminAjaxController implements Controller {
 			} 
 		} 
 		return map;
+	}
+	
+	public UserInquiry getVisiterDataAtToday() {
+
+		InquiryDAO inquiryDAO = new InquiryDAO();
+		
+		try {
+			return inquiryDAO.selectForGraph();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			logger.info("Inquiry select Fail");
+		}
+		return null;
+	}
+
+	public UserInquiry getNotificationAtToday() {
+		NotificationDAO notiDao = new NotificationDAO();
+		
+		try {
+			return notiDao.selectForGraph();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			logger.info("Notify select Fail");
+		} 
+		return null;
+	}
+
+	public ArrayList<Verification> getVerifivationList(int count) {
+		VerificationDAO veriDao = new VerificationDAO();
+		
+		try {
+			return veriDao.getList(count);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			logger.info("Verifivation select Fail");
+		} 
+		return null;
+	}
+
+	public ArrayList<Request> getRequestList(int count) {
+		RequestDAO reqDao = new RequestDAO();
+		
+		try {
+			return reqDao.getList(count);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			logger.info("Request select Fail");
+		}
+		return null;
 	}
 }

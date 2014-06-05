@@ -14,8 +14,10 @@ import logger.SagimaraLogger;
 import org.apache.log4j.Logger;
 
 import utility.JsonBuilder;
-import database.DatabaseHandler;
 import database.InquiryDAO;
+import database.NotificationDAO;
+import database.RequestDAO;
+import database.VerificationDAO;
 import dto.Request;
 import dto.UserInquiry;
 import dto.Verification;
@@ -25,12 +27,10 @@ public class AdminIndexPageController implements Controller {
 	private String forwardPath;
 	private Logger logger;
 	private JsonBuilder jb;
-	private DatabaseHandler dbh;
 	
 	public AdminIndexPageController(String forwardPath) {
 		super();
 		this.logger = SagimaraLogger.logger;
-		this.dbh = DatabaseHandler.getDatabaseHandler();
 		this.jb = JsonBuilder.getJsonBuilder();
 		this.forwardPath = forwardPath;
 	}
@@ -49,22 +49,22 @@ public class AdminIndexPageController implements Controller {
 		}
 		
 
-		UserInquiry visits = dbh.getVisiterDataAtToday();
+		UserInquiry visits = getVisiterDataAtToday();
 		String json = jb.objectToJson(visits);
 		logger.info(json);
 		request.setAttribute("visits", json);
 		
-		UserInquiry noti = dbh.getNotificationAtToday();
+		UserInquiry noti = getNotificationAtToday();
 		json = jb.objectToJson(noti);
 		logger.info(json);
 		request.setAttribute("notify", json);
 		
-		ArrayList<Verification> veriList = dbh.getVerifivationList(5);
+		ArrayList<Verification> veriList = getVerifivationList(5);
 		json = jb.objectToJson(veriList);
 		logger.info(json);
 		request.setAttribute("verification", json);
 		
-		ArrayList<Request> requestList = dbh.getRequestList(5);
+		ArrayList<Request> requestList = getRequestList(5);
 		json = jb.objectToJson(requestList);
 		logger.info(json);
 		request.setAttribute("request", json);
@@ -72,7 +72,9 @@ public class AdminIndexPageController implements Controller {
 		return forwardPath;
 	}
 	
+
 	public UserInquiry getVisiterDataAtToday() {
+
 		InquiryDAO inquiryDAO = new InquiryDAO();
 		
 		try {
@@ -80,8 +82,43 @@ public class AdminIndexPageController implements Controller {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			logger.info("Inquiry select Fail");
-		} 
+		}
+		return null;
+	}
+
+	public UserInquiry getNotificationAtToday() {
+		NotificationDAO notiDao = new NotificationDAO();
 		
+		try {
+			return notiDao.selectForGraph();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			logger.info("Notify select Fail");
+		} 
+		return null;
+	}
+
+	public ArrayList<Verification> getVerifivationList(int count) {
+		VerificationDAO veriDao = new VerificationDAO();
+		
+		try {
+			return veriDao.getList(count);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			logger.info("Verifivation select Fail");
+		} 
+		return null;
+	}
+
+	public ArrayList<Request> getRequestList(int count) {
+		RequestDAO reqDao = new RequestDAO();
+		
+		try {
+			return reqDao.getList(count);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			logger.info("Request select Fail");
+		}
 		return null;
 	}
 
