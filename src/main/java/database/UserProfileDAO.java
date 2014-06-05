@@ -15,7 +15,6 @@ import dto.UserProfile;
 public class UserProfileDAO {
 	private Connection conn;
 	private DatabaseConnector connector;
-	private Logger logger = SagimaraLogger.logger;
 	
 	public UserProfileDAO() {
 		this.connector = new DatabaseConnector();
@@ -31,7 +30,7 @@ public class UserProfileDAO {
 
 		UserProfile userProfile = null;
 
-		UserInquiryDAO userInquiryDAO = new UserInquiryDAO(conn);
+		UserInquiryDAO userInquiryDAO = new UserInquiryDAO();
 		UserInquiry userInquiry = userInquiryDAO.selectById(id);
 
 		if (rs.next()) {

@@ -23,10 +23,6 @@ public class RequestDAO {
 		this.conn = connector.getMysqlConnection();
 	}
 
-	public RequestDAO(Connection conn) {
-		this.conn = conn;
-	}
-
 	public ArrayList<Request> selectByToPhoneNumberAndLatestDate(
 			String userPhone, String latestDate) throws SQLException {
 		String sql = "SELECT * FROM " + "REQUEST"
