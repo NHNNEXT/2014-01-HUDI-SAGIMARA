@@ -6,7 +6,7 @@ var editor = {
 		}
 		var result = elements.querySelector(selector);
 		return result;
-	},
+	}
 
 };
 
@@ -63,7 +63,6 @@ var sagimaraAdmin = {
 		
 		oEventElements.elRequestRegister.addEventListener("click",
 				buttonEvent.requestRegister, false);
-		
 	}
 };
 

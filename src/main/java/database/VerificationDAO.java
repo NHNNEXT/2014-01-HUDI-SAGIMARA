@@ -29,7 +29,8 @@ public class VerificationDAO {
 		Verification verification = null;
 		if (rs.next()) {
 			verification = new Verification(rs.getString("USER_user_phone"),
-					rs.getString("verification_time"));
+											rs.getString("verification_time"),
+											rs.getString("user_status"));
 		}
 
 		pstmt.close();
@@ -41,17 +42,19 @@ public class VerificationDAO {
 	public void add(Verification verification) throws SQLException {
 		String tableName = verification.getTableName();
 
-		String sql = "INSERT INTO " + tableName + " VALUES (?, ?)";
+		String sql = "INSERT INTO " + tableName + " (USER_user_phone,user_status,verification_time) VALUES (?, ?, ?)";
 
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, verification.getVerificationId());
-		pstmt.setString(2, verification.getVerificationTime());
-
+		pstmt.setString(2, verification.getVerificationStatus());
+		pstmt.setString(3, verification.getVerificationTime());
+		
 		int result = pstmt.executeUpdate();
 
 		if (result == 1) {
-			logger.info(String.format("Add Complete %s : %s, %s", tableName,
+			logger.info(String.format("Add Complete %s : %s, %s, %s", tableName,
 					verification.getVerificationId(),
+					verification.getVerificationStatus(),
 					verification.getVerificationTime()));
 		} else {
 			logger.info("Add Fail " + tableName);
