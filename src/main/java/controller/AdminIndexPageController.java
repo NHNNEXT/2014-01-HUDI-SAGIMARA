@@ -13,6 +13,8 @@ import org.apache.log4j.Logger;
 
 import utility.JsonBuilder;
 import database.DatabaseHandler;
+import dto.Inquiry;
+import dto.UserInquiry;
 import dto.UserProfile;
 
 public class AdminIndexPageController implements Controller {
@@ -42,10 +44,11 @@ public class AdminIndexPageController implements Controller {
 			return null;
 		}
 		
-		UserProfile dut = dbh.readUserProfile(id);
-		String json = jb.objectToJson(dut);
+		UserInquiry inquiry = dbh.getVisiterDataAtToday();
+		String json = jb.objectToJson(inquiry);
 		logger.info(json);
-		request.setAttribute("json", json);
+		request.setAttribute("inquiry data", json);
+		
 		
 		
 		return forwardPath;
