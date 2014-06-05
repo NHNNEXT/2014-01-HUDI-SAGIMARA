@@ -124,7 +124,8 @@
 			<div class="footer-logo">SAGIMARA</div>
 		</footer>
 	</div>
-
+	
+	<script src="/javascripts/barManager.js"></script>
 	<script src="/javascripts/main.js"></script>
 </body>
 </html>
