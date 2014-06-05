@@ -1,10 +1,9 @@
 var visitInfoBarManager = {
 	// 해당번호로 검색(방문)한 사람수 관련 정보
-	// 사용법
-	// setDataSet을 실행하여 오늘 날짜로 업데이트
-	// setVisitNumberSet에게 넣을 데이터 Set을 넘겨준다.
-	// 에니메이션이 나타나야할 시점에 executeBarAnimation을 실행한다. 
-	// 인자로는 해당 .bar-section의 node list를 넘겨준다.
+	// <<사용법>>
+	// 1.setDataSet을 실행하여 오늘 날짜로 업데이트
+	// 2.setVisitNumberSet에게 넣을 데이터 Set을 넘겨준다.
+	// 3.에니메이션이 나타나야할 시점에 executeBarAnimation을 실행한다. 인자로는 해당 .bar-section의 node list를 넘겨준다.
 	setBars : "",
 	count : 0,
 	visitNumberSet : [],
