@@ -63,7 +63,6 @@ var sagimaraAdmin = {
 		
 		oEventElements.elRequestRegister.addEventListener("click",
 				buttonEvent.requestRegister, false);
-		
 	}
 };
 

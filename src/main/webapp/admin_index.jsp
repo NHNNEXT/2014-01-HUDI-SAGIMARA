@@ -29,7 +29,41 @@
 				<section class="daily-visitor-graph ">
 					<h1>일간 방문자 그래프</h1>
 					<article>
-						그래프입니다
+						<figure>
+						<ul id="visited-graph">
+							<p>최근 5일간 접속자 수</p>
+							<li class="bar-section">
+								<p></p>
+								<ul>
+									<li class="bar"><p></p></li>
+								</ul>
+							</li>
+							<li class="bar-section">
+								<p></p>
+								<ul>
+									<li class="bar"><p></p></li>
+								</ul>
+							</li>
+							<li class="bar-section">
+								<p></p>
+								<ul>
+									<li class="bar"><p></p></li>
+								</ul>
+							</li>
+							<li class="bar-section">
+								<p></p>
+								<ul>
+									<li class="bar"><p></p></li>
+								</ul>
+							</li>
+							<li class="bar-section">
+								<p></p>
+								<ul>
+									<li class="bar"><p></p></li>
+								</ul>
+							</li>
+						</ul>
+					</figure>
 					</article>
 				</section>
 				<section class="daily-report-graph">

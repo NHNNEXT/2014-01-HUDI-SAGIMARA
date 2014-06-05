@@ -83,12 +83,12 @@ var visitInfoBarManager = {
 		this.dateSet.reverse();
 	},
 	
-	setVisitNumberSet : function(profileInquiry) {
+	setVisitNumberSet : function(data) {
 		// 방문(검색)수를 최근 5일의 정보를 가져와 visitNumberSet에 세팅한다.
 		this.visitNumberSet.length = 0;
-		for(var key in profileInquiry) {
+		for(var key in data) {
 			if(key != "phoneNumber") {
-				this.visitNumberSet.push(profileInquiry[key]);
+				this.visitNumberSet.push(data[key]);
 			}
 		}
 		this.visitNumberSet.reverse();

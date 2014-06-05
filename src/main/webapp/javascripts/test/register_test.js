@@ -1,11 +1,19 @@
-test("dateSet_Test", function(){
+test("requestRegister_Test", function(){
 	//Given
+
 	var box = document.querySelector("admin_id");
-	var date = 1;
+	var button = document.getElementById("#registerPopUp .login_button");
+	button.addEventListener("click", buttonEvent.requestRegister, false);
 	
 	//When
-	var toto = 1;
+	fireEvent(button,"click");
 	
 	//Then 
 	equal(box, undefined);
+});
+
+test("requestRegister_Test", function(){
+	var registerForm = document.getElementById("#registerPopUp");
+	
+	equal(registerForm, undefined);
 });

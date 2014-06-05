@@ -22,17 +22,13 @@
 		<div class="search-submit"></div>
 		<div class="logo"></div>
 		
-		<div id="location-info-fake"></div>
-		<div id="location-info">
-			<div id ="map-canvas">
-				<p></p>
-			</div>
-		</div>
+
 	</div>
 
 
 	<script src="/javascripts/lib/qunit-1.14.0.js"></script>
 	<script src="/javascripts/admin.js"></script>
+	<script src="/javascripts/lib/fireEvent.js"></script>
 	<script src="/javascripts/test/register_test.js"></script>
 </body>
 </html>
