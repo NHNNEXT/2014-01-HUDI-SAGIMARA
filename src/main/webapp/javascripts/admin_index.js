@@ -1,5 +1,4 @@
 
-
 var editor = {
 	get : function(selector, elements) {
 		// 해당 element에 대한 querySelector element가 없을시 document에서 select
@@ -9,6 +8,14 @@ var editor = {
 		var result = elements.querySelector(selector);
 		return result;
 	},
+};
+
+var oVerificationStatus = {
+	elTableBody : editor.get(".table>tbody"),
+	
+	getVerificationStatus : function(){
+		
+	}
 };
 
 var oNavigationElements = {
