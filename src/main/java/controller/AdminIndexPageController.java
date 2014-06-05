@@ -1,7 +1,6 @@
 package controller;
 
 import java.io.IOException;
-import java.sql.Connection;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
@@ -14,20 +13,17 @@ import logger.SagimaraLogger;
 import org.apache.log4j.Logger;
 
 import utility.JsonBuilder;
-import database.DatabaseHandler;
 import database.InquiryDAO;
 import dto.UserInquiry;
 
 public class AdminIndexPageController implements Controller {
 	private String forwardPath;
 	private Logger logger;
-	private DatabaseHandler dbh;
 	private JsonBuilder jb;
 	
 	public AdminIndexPageController(String forwardPath) {
 		super();
 		this.logger = SagimaraLogger.logger;
-		this.dbh = DatabaseHandler.getDatabaseHandler();
 		this.jb = JsonBuilder.getJsonBuilder();
 		this.forwardPath = forwardPath;
 	}
