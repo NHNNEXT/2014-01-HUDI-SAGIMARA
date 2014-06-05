@@ -8,7 +8,6 @@ import logger.SagimaraLogger;
 
 import org.apache.log4j.Logger;
 
-import utility.JsonBuilder;
 import dto.Admin;
 import dto.Inquiry;
 import dto.Location;
@@ -66,6 +65,13 @@ public class DatabaseHandler {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 		return null;
@@ -101,11 +107,18 @@ public class DatabaseHandler {
 			}
 
 			logger.info("[database] Connection is closed.");
-			conn.close();
+			
 
 		} catch (SQLException e) {
 			logger.info("readUserProfile Fail");
 			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 		return userProfile;
@@ -122,11 +135,17 @@ public class DatabaseHandler {
 
 		try {
 			locationDAO.add(location);
-			conn.close();
 			return true;
 		} catch (SQLException e) {
 			logger.info("insertLocation Fail");
 			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return false;
 	}
@@ -142,11 +161,17 @@ public class DatabaseHandler {
 
 		try {
 			videoDAO.add(video);
-			conn.close();
 			return true;
 		} catch (SQLException e) {
 			logger.info("insertPhoto Fail");
 			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 		return false;
@@ -163,11 +188,17 @@ public class DatabaseHandler {
 
 		try {
 			requestDAO.add(request);
-			conn.close();
 			return true;
 		} catch (SQLException e) {
 			logger.info("insertRequest Fail");
 			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return false;
 	}
@@ -197,6 +228,13 @@ public class DatabaseHandler {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return -1;
 	}
@@ -230,6 +268,13 @@ public class DatabaseHandler {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return -1;
 	}	
