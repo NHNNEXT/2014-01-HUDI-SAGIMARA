@@ -13,6 +13,7 @@ import dto.Inquiry;
 import dto.Location;
 import dto.Request;
 import dto.User;
+import dto.UserInquiry;
 import dto.UserProfile;
 import dto.Verification;
 import dto.Video;
@@ -224,6 +225,25 @@ public class DatabaseHandler {
 			}
 		}
 		return -1;
+	}
+
+	public UserInquiry getVisiterDataAtToday() {
+		Connection conn = this.connect();
+		InquiryDAO inquiryDAO = new InquiryDAO(conn);
+		
+		try {
+			return inquiryDAO.select();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			logger.info("Inquiry select Fail");
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return null;
 	}
 
 }
