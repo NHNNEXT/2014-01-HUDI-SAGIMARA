@@ -285,10 +285,67 @@ public class DatabaseHandler {
 		InquiryDAO inquiryDAO = new InquiryDAO(conn);
 		
 		try {
-			return inquiryDAO.select();
+			return inquiryDAO.selectForGraph();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			logger.info("Inquiry select Fail");
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return null;
+	}
+
+	public UserInquiry getNotificationAtToday() {
+		Connection conn = this.connect();
+		NotificationDAO notiDao = new NotificationDAO(conn);
+		
+		try {
+			return notiDao.selectForGraph();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			logger.info("Notify select Fail");
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return null;
+	}
+
+	public ArrayList<Verification> getVerifivationList(int count) {
+		Connection conn = this.connect();
+		VerificationDAO veriDao = new VerificationDAO(conn);
+		
+		try {
+			return veriDao.getList(count);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			logger.info("Verifivation select Fail");
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return null;
+	}
+
+	public ArrayList<Request> getRequestList(int count) {
+		Connection conn = this.connect();
+		RequestDAO reqDao = new RequestDAO(conn);
+		
+		try {
+			return reqDao.getList(count);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			logger.info("Request select Fail");
 		} finally {
 			try {
 				conn.close();

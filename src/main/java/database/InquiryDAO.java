@@ -43,7 +43,7 @@ public class InquiryDAO {
 	}
 
 
-	public UserInquiry select() throws SQLException{
+	public UserInquiry selectForGraph() throws SQLException{
 		
 		String sql = "select "
 				+ "count(if(inquiry_time=(CURRENT_DATE()-INTERVAL 6 DAY),inquiry_time,null))  AS '6day ago',"

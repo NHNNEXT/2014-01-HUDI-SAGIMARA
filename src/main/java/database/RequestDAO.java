@@ -11,6 +11,7 @@ import logger.SagimaraLogger;
 import org.apache.log4j.Logger;
 
 import dto.Request;
+import dto.Verification;
 
 public class RequestDAO {
 	private Connection conn;
@@ -59,5 +60,29 @@ public class RequestDAO {
 		}
 
 		pstmt.close();
+	}
+
+	public ArrayList<Request> getList(int count) throws SQLException {
+		
+		String sql = "select request_to, request_date, count(request_to) as count from REQUEST group by request_to order by request_date desc Limit ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, count);
+		ResultSet rs = pstmt.executeQuery();
+
+		ArrayList<Request> requestList = new ArrayList<Request>() ;
+		
+		
+		while (rs.next()) {
+			Request req = new Request(rs.getString("request_to"),
+									  rs.getString("request_date"),
+									  rs.getString("count"));
+			requestList.add(req);
+		}
+
+		pstmt.close();
+		rs.close();
+		
+		
+		return requestList;
 	}
 }

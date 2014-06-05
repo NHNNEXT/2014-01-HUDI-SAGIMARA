@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -14,8 +15,10 @@ import org.apache.log4j.Logger;
 import utility.JsonBuilder;
 import database.DatabaseHandler;
 import dto.Inquiry;
+import dto.Request;
 import dto.UserInquiry;
 import dto.UserProfile;
+import dto.Verification;
 
 public class AdminIndexPageController implements Controller {
 	private String forwardPath;
@@ -44,12 +47,25 @@ public class AdminIndexPageController implements Controller {
 			return null;
 		}
 		
-		UserInquiry inquiry = dbh.getVisiterDataAtToday();
-		String json = jb.objectToJson(inquiry);
+		UserInquiry visits = dbh.getVisiterDataAtToday();
+		String json = jb.objectToJson(visits);
 		logger.info(json);
-		request.setAttribute("inquiry data", json);
+		request.setAttribute("visits", json);
 		
+		UserInquiry noti = dbh.getNotificationAtToday();
+		json = jb.objectToJson(noti);
+		logger.info(json);
+		request.setAttribute("notify", json);
 		
+		ArrayList<Verification> veriList = dbh.getVerifivationList(5);
+		json = jb.objectToJson(veriList);
+		logger.info(json);
+		request.setAttribute("verification", json);
+		
+		ArrayList<Request> requestList = dbh.getRequestList(5);
+		json = jb.objectToJson(requestList);
+		logger.info(json);
+		request.setAttribute("request", json);
 		
 		return forwardPath;
 	}
