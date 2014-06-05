@@ -23,12 +23,17 @@ import org.apache.log4j.Logger;
 
 import utility.JsonBuilder;
 import database.InquiryDAO;
+import database.LocationDAO;
 import database.NotificationDAO;
 import database.RequestDAO;
 import database.VerificationDAO;
+import database.VideoDAO;
+import dto.Location;
 import dto.Request;
 import dto.UserInquiry;
 import dto.Verification;
+import dto.VerifivationList;
+import dto.Video;
 
 public class AdminAjaxController implements Controller {
 	private String forwardPath;
@@ -73,8 +78,8 @@ public class AdminAjaxController implements Controller {
 			request.setAttribute("notify", json);	
 		}
 		else if (requestMap.get("request").equals("verification")){
-			ArrayList<Verification> veriList = getVerifivationList(Integer.parseInt(requestMap.get("count")));
-			json = jb.objectToJson(veriList);
+			ArrayList<VerifivationList> VerificationResult = makeVerificationData(5);
+			json = jb.objectToJson(VerificationResult);
 			logger.info(json);
 			request.setAttribute("verification", json);
 		}
@@ -112,10 +117,80 @@ public class AdminAjaxController implements Controller {
 		return map;
 	}
 	
+
+	private ArrayList<VerifivationList> makeVerificationData(int count) {
+		ArrayList<Verification> veriList = selectVerifivationList(count);
+
+		ArrayList<VerifivationList> result = new ArrayList<VerifivationList>();
+
+		for (int i=0; i<veriList.size(); i++){
+			Verification veri = veriList.get(i);
+			String phoneNum = veri.getVerificationId();
+			Video video = getVideoById(phoneNum);
+			Location location = getLocationById(phoneNum);
+
+			if(video!=null&&location!=null){
+				VerifivationList list = new VerifivationList(phoneNum,
+						veri.getVerificationTime(),
+						veri.getVerificationStatus(),
+						video.getVideoLink(),
+						video.getVideoDate(),
+						location.getLocationCoordinate(),
+						location.getLocationTime());
+				result.add(list);
+			}else{
+				VerifivationList list = new VerifivationList(phoneNum,
+						veri.getVerificationTime(),
+						veri.getVerificationStatus());
+				if(video!=null){
+					list.setVideoLink(video.getVideoLink());
+					list.setVideoDate(video.getVideoDate());
+				}else{
+					list.setVideoLink("");
+					list.setVideoDate("");
+				}
+				if(location!=null){
+					list.setLocationCoordinate(location.getLocationCoordinate());
+					list.setLocationTime(location.getLocationTime());
+				}else{
+					list.setVideoLink("");
+					list.setVideoDate("");
+				}
+				result.add(list);
+			}
+		}
+
+		return result;
+	}
+
+	private Location getLocationById(String phoneNum) {
+		LocationDAO locationDAO = new LocationDAO();
+
+		try {
+			return locationDAO.selectById(phoneNum);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			logger.info("Inquiry select Fail");
+		}
+		return null;
+	}
+
+	private Video getVideoById(String phoneNum) {
+		VideoDAO videoDAO = new VideoDAO();
+
+		try {
+			return videoDAO.selectById(phoneNum);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			logger.info("Inquiry select Fail");
+		}
+		return null;
+	}
+
 	public UserInquiry getVisiterDataAtToday() {
 
 		InquiryDAO inquiryDAO = new InquiryDAO();
-		
+
 		try {
 			return inquiryDAO.selectForGraph();
 		} catch (SQLException e) {
@@ -127,7 +202,7 @@ public class AdminAjaxController implements Controller {
 
 	public UserInquiry getNotificationAtToday() {
 		NotificationDAO notiDao = new NotificationDAO();
-		
+
 		try {
 			return notiDao.selectForGraph();
 		} catch (SQLException e) {
@@ -137,9 +212,9 @@ public class AdminAjaxController implements Controller {
 		return null;
 	}
 
-	public ArrayList<Verification> getVerifivationList(int count) {
+	public ArrayList<Verification> selectVerifivationList(int count) {
 		VerificationDAO veriDao = new VerificationDAO();
-		
+
 		try {
 			return veriDao.getList(count);
 		} catch (SQLException e) {
@@ -151,7 +226,7 @@ public class AdminAjaxController implements Controller {
 
 	public ArrayList<Request> getRequestList(int count) {
 		RequestDAO reqDao = new RequestDAO();
-		
+
 		try {
 			return reqDao.getList(count);
 		} catch (SQLException e) {
