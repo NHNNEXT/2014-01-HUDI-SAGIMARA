@@ -11,10 +11,12 @@ import dto.User;
 
 public class UserDAO {
 	private Connection conn;
+	private DatabaseConnector connector;
 	private Logger logger = SagimaraLogger.logger;
-
-	public UserDAO(Connection conn) {
-		this.conn = conn;
+	
+	public UserDAO() {
+		this.connector = new DatabaseConnector();
+		this.conn = connector.getMysqlConnection();
 	}
 
 	public void add(User user) throws SQLException {

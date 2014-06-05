@@ -1,22 +1,22 @@
 package controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import utility.JsonBuilder;
-import database.DatabaseHandler;
+import database.LocationDAO;
+import dto.Location;
 
 public class InsertLocationDataController implements Controller {
-	private DatabaseHandler dbh;
 	private JsonBuilder jb;
 	private String forwardPath;
 
 	public InsertLocationDataController(String forwardPath) {
 		super();
-		this.dbh = DatabaseHandler.getDatabaseHandler();
 		this.jb = JsonBuilder.getJsonBuilder();
 		this.forwardPath = forwardPath;
 
@@ -28,15 +28,19 @@ public class InsertLocationDataController implements Controller {
 	@Override
 	public String run(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		String phone = (String) request.getParameter("id");
-		String time = (String) request.getParameter("date");
-		String cordinate = (String) request.getParameter("location");
-		String json;
+		LocationDAO locationDAO = new LocationDAO();
+		Location location = new Location((String) request.getParameter("id"), (String) request.getParameter("date"), (String) request.getParameter("location"));
+		String json = null;
 		
-		if(dbh.insertLocation(phone, time, cordinate)){
-			json = jb.requestSuccessJSON();
-		}else{
-			json = jb.requestFailedJSON();
+		try {
+			if(locationDAO.add(location)){
+				json = jb.requestSuccessJSON();
+			}else{
+				json = jb.requestFailedJSON();
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 		request.setAttribute("json", json);

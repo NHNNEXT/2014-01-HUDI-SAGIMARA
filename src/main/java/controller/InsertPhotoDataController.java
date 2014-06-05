@@ -2,6 +2,7 @@ package controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.List;
 
@@ -20,11 +21,11 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.log4j.Logger;
 
 import utility.JsonBuilder;
-import database.DatabaseHandler;
+import database.VideoDAO;
+import dto.Video;
 
 public class InsertPhotoDataController implements Controller {
 	private Logger logger;
-	private DatabaseHandler dbh;
 	private JsonBuilder jb;
 	private String photoImagePath;
 	private String forwardPath;
@@ -32,7 +33,6 @@ public class InsertPhotoDataController implements Controller {
 	public InsertPhotoDataController(String forwardPath) {
 		super();
 		this.logger = SagimaraLogger.logger;
-		this.dbh = DatabaseHandler.getDatabaseHandler();
 		this.jb = JsonBuilder.getJsonBuilder();
 		this.forwardPath = forwardPath;
 		
@@ -88,14 +88,20 @@ public class InsertPhotoDataController implements Controller {
 						e.printStackTrace();
 					}
 				}
-				
-				if(id!=null && videoLink!=null && date!=null){
-					if(dbh.insertPhoto(id, videoLink, date)){
-						json = jb.requestSuccessJSON();
-					}else{
-						json = jb.requestFailedJSON();
-					}
+			}
+			
+			Video video = new Video(id, videoLink, date);
+			VideoDAO videoDAO = new VideoDAO();
+			
+			try {
+				if(videoDAO.add(video)){
+					json = jb.requestSuccessJSON();
+				}else{
+					json = jb.requestFailedJSON();
 				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 			
 		}

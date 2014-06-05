@@ -2,6 +2,7 @@ package database;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import logger.SagimaraLogger;
@@ -9,16 +10,19 @@ import logger.SagimaraLogger;
 import org.apache.log4j.Logger;
 
 import dto.Location;
+import dto.Video;
 
 public class LocationDAO {
 	private Connection conn;
+	private DatabaseConnector connector;
 	private Logger logger = SagimaraLogger.logger;
-
-	public LocationDAO(Connection conn) {
-		this.conn = conn;
+	
+	public LocationDAO() {
+		this.connector = new DatabaseConnector();
+		this.conn = connector.getMysqlConnection();
 	}
 
-	public void add(Location location) throws SQLException {
+	public boolean add(Location location) throws SQLException {
 		String tableName = location.getTableName();
 		String sql = "INSERT INTO "
 				+ tableName
@@ -38,8 +42,34 @@ public class LocationDAO {
 					location.getLocationCoordinate()));
 		} else {
 			logger.info("Add Fail " + tableName);
+			pstmt.close();
+			conn.close();
+			return false;
 		}
 
 		pstmt.close();
+		conn.close();
+		return true;
+	}
+
+	public Location selectById(String phoneNum) throws SQLException {
+		String sql = "select * from Location where USER_user_phone = ? order by location_time desc";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, phoneNum);
+		ResultSet rs = pstmt.executeQuery();
+
+		if (rs.next()) {
+			Location location = new Location(rs.getString("USER_user_phone"),
+									rs.getString("location_time"),
+									rs.getString("location_coordinate"));
+			pstmt.close();
+			rs.close();
+			return location;
+		}
+
+		pstmt.close();
+		rs.close();
+		return null;
+
 	}
 }

@@ -13,10 +13,12 @@ import dto.Admin;
 
 public class AdminDAO {
 	private Connection conn;
+	private DatabaseConnector connector;
 	private Logger logger = SagimaraLogger.logger;
-
-	public AdminDAO(Connection conn) {
-		this.conn = conn;
+	
+	public AdminDAO() {
+		this.connector = new DatabaseConnector();
+		this.conn = connector.getMysqlConnection();
 	}
 
 	public Admin selectById(String id) throws SQLException {
@@ -32,9 +34,10 @@ public class AdminDAO {
 					rs.getString("admin_password"), rs.getString("admin_name"),
 					rs.getString("admin_email"), rs.getString("admin_status"));
 		}
-
-		pstmt.close();
+		
 		rs.close();
+		pstmt.close();
+		conn.close();
 
 		return admin;
 	}
@@ -45,14 +48,16 @@ public class AdminDAO {
 		String sql = "INSERT INTO " + tableName + " VALUES (?, ?, ?, ?, ?)";
 
 		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, admin.getAdminId());
-		pstmt.setString(2, admin.getAdminPassword());
-		pstmt.setString(3, admin.getAdminName());
-		pstmt.setString(4, admin.getAdminEmail());
-		pstmt.setString(5, admin.getAdminStatus());
+		setValuesForAdd(admin, pstmt);
 
 		int result = pstmt.executeUpdate();
 
+		resultLog(admin, tableName, result);
+
+		pstmt.close();
+	}
+
+	private void resultLog(Admin admin, String tableName, int result) {
 		if (result == 1) {
 			logger.info(String.format("Add Complete %s : %s, %s, %s, %s, %s",
 					tableName, admin.getAdminId(), admin.getAdminPassword(),
@@ -61,7 +66,14 @@ public class AdminDAO {
 		} else {
 			logger.info("Add Fail " + tableName);
 		}
+	}
 
-		pstmt.close();
+	private void setValuesForAdd(Admin admin, PreparedStatement pstmt)
+			throws SQLException {
+		pstmt.setString(1, admin.getAdminId());
+		pstmt.setString(2, admin.getAdminPassword());
+		pstmt.setString(3, admin.getAdminName());
+		pstmt.setString(4, admin.getAdminEmail());
+		pstmt.setString(5, admin.getAdminStatus());
 	}
 }

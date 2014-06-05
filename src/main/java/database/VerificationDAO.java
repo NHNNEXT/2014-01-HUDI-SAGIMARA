@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 import logger.SagimaraLogger;
 
@@ -13,10 +15,12 @@ import dto.Verification;
 
 public class VerificationDAO {
 	private Connection conn;
+	private DatabaseConnector connector;
 	private Logger logger = SagimaraLogger.logger;
-
-	public VerificationDAO(Connection conn) {
-		this.conn = conn;
+	
+	public VerificationDAO() {
+		this.connector = new DatabaseConnector();
+		this.conn = connector.getMysqlConnection();
 	}
 
 	public Verification selectById(String userPhone) throws SQLException {
@@ -61,5 +65,31 @@ public class VerificationDAO {
 		}
 
 		pstmt.close();
+	}
+
+	public ArrayList<Verification> getList(int count) throws SQLException{
+
+		String sql = "select USER_user_phone,user_status,verification_time from VERIFICATION order by verification_time desc Limit ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, count);
+		ResultSet rs = pstmt.executeQuery();
+
+		ArrayList<Verification> verification = new ArrayList<Verification>() ;
+		
+		
+		while (rs.next()) {
+			Verification verifi = new Verification(rs.getString("USER_user_phone"),
+													rs.getString("verification_time"),
+													rs.getString("user_status"));
+			verification.add(verifi);
+		}
+
+		pstmt.close();
+		rs.close();
+
+
+		
+		
+		return verification;
 	}
 }

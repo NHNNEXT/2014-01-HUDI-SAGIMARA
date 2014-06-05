@@ -5,14 +5,20 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import logger.SagimaraLogger;
+
+import org.apache.log4j.Logger;
+
 import dto.UserInquiry;
 import dto.UserProfile;
 
 public class UserProfileDAO {
 	private Connection conn;
-
-	public UserProfileDAO(Connection conn) {
-		this.conn = conn;
+	private DatabaseConnector connector;
+	
+	public UserProfileDAO() {
+		this.connector = new DatabaseConnector();
+		this.conn = connector.getMysqlConnection();
 	}
 
 	public UserProfile selectById(String id) throws SQLException {
@@ -24,7 +30,7 @@ public class UserProfileDAO {
 
 		UserProfile userProfile = null;
 
-		UserInquiryDAO userInquiryDAO = new UserInquiryDAO(conn);
+		UserInquiryDAO userInquiryDAO = new UserInquiryDAO();
 		UserInquiry userInquiry = userInquiryDAO.selectById(id);
 
 		if (rs.next()) {

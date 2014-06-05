@@ -11,13 +11,16 @@ import logger.SagimaraLogger;
 import org.apache.log4j.Logger;
 
 import dto.Request;
+import dto.Verification;
 
 public class RequestDAO {
 	private Connection conn;
+	private DatabaseConnector connector;
 	private Logger logger = SagimaraLogger.logger;
-
-	public RequestDAO(Connection conn) {
-		this.conn = conn;
+	
+	public RequestDAO() {
+		this.connector = new DatabaseConnector();
+		this.conn = connector.getMysqlConnection();
 	}
 
 	public ArrayList<Request> selectByToPhoneNumberAndLatestDate(
@@ -39,7 +42,7 @@ public class RequestDAO {
 		return resultList;
 	}
 
-	public void add(Request request) throws SQLException {
+	public boolean add(Request request) throws SQLException {
 		String tableName = request.getTableName();
 		String sql = "INSERT INTO " + tableName + " VALUES (?, ?, ?)";
 
@@ -56,8 +59,35 @@ public class RequestDAO {
 					request.getRequestDate()));
 		} else {
 			logger.info("Add Fail " + tableName);
+			return false;
 		}
 
 		pstmt.close();
+		
+		return true;
+	}
+
+	public ArrayList<Request> getList(int count) throws SQLException {
+		
+		String sql = "select request_to, request_date, count(request_to) as count from REQUEST group by request_to order by request_date desc Limit ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, count);
+		ResultSet rs = pstmt.executeQuery();
+
+		ArrayList<Request> requestList = new ArrayList<Request>() ;
+		
+		
+		while (rs.next()) {
+			Request req = new Request(rs.getString("request_to"),
+									  rs.getString("request_date"),
+									  rs.getString("count"));
+			requestList.add(req);
+		}
+
+		pstmt.close();
+		rs.close();
+		
+		
+		return requestList;
 	}
 }

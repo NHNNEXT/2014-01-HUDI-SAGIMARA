@@ -3,14 +3,22 @@ package controller;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import logger.SagimaraLogger;
 
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileItemFactory;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.log4j.Logger;
 
 import utility.JsonBuilder;
@@ -27,13 +35,12 @@ import dto.Verification;
 import dto.VerifivationList;
 import dto.Video;
 
-
-public class AdminIndexPageController implements Controller {
+public class AdminAjaxController implements Controller {
 	private String forwardPath;
 	private Logger logger;
 	private JsonBuilder jb;
-
-	public AdminIndexPageController(String forwardPath) {
+	
+	public AdminAjaxController(String forwardPath) {
 		super();
 		this.logger = SagimaraLogger.logger;
 		this.jb = JsonBuilder.getJsonBuilder();
@@ -43,39 +50,73 @@ public class AdminIndexPageController implements Controller {
 	@Override
 	public String run(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		HttpSession session =  request.getSession();
-
-		String id = (String)session.getAttribute("admin_id");  // request에서 id 파라미터를 가져온다
-
-		if(id==null||id.equals("")){                     // id가 Null 이거나 없을 경우
-			response.sendRedirect("/admin/login");    // 로그인 페이지로 리다이렉트 한다.
-			return null;
+		
+//		HttpSession session =  request.getSession();
+//
+//		String id = (String)session.getAttribute("admin_id");  // request에서 id 파라미터를 가져온다
+//
+//		if(id==null||id.equals("")){                     // id가 Null 이거나 없을 경우
+//			response.sendRedirect("/admin/login");    // 로그인 페이지로 리다이렉트 한다.
+//			return null;
+//		}
+		
+		Map<String, String> requestMap;
+		
+		requestMap = makeParameterMap(request);
+		String json;
+		
+		if(requestMap.get("request").equals("visits")){
+			UserInquiry visits = getVisiterDataAtToday();
+			json = jb.objectToJson(visits);
+			logger.info(json);
+			request.setAttribute("visits", json);	
 		}
-
-		UserInquiry visits = getVisiterDataAtToday();
-		String json = jb.objectToJson(visits);
-		logger.info(json);
-		request.setAttribute("visits", json);
-
-		UserInquiry noti = getNotificationAtToday();
-		json = jb.objectToJson(noti);
-		logger.info(json);
-		request.setAttribute("notify", json);
-
-		ArrayList<VerifivationList> VerificationResult = makeVerificationData(5);
-		json = jb.objectToJson(VerificationResult);
-		logger.info(json);
-		request.setAttribute("verification", json);
-
-		ArrayList<Request> requestList = getRequestList(5);
-		json = jb.objectToJson(requestList);
-		logger.info(json);
-		request.setAttribute("request", json);
-
+		else if (requestMap.get("request").equals("notify")){
+			UserInquiry noti = getNotificationAtToday();
+			json = jb.objectToJson(noti);
+			logger.info(json);
+			request.setAttribute("notify", json);	
+		}
+		else if (requestMap.get("request").equals("verification")){
+			ArrayList<VerifivationList> VerificationResult = makeVerificationData(5);
+			json = jb.objectToJson(VerificationResult);
+			logger.info(json);
+			request.setAttribute("verification", json);
+		}
+		else if (requestMap.get("request").equals("request")){
+			ArrayList<Request> requestList = getRequestList(Integer.parseInt(requestMap.get("count")));
+			json = jb.objectToJson(requestList);
+			logger.info(json);
+			request.setAttribute("request", json);	
+		}
 		return forwardPath;
 	}
 
+	
+	private Map<String, String> makeParameterMap(HttpServletRequest request) throws IOException {
+		FileItemFactory factory = new DiskFileItemFactory();
+		ServletFileUpload upload = new ServletFileUpload(factory);
+		List<FileItem> items = null;
+		Map<String, String> map = new HashMap<String, String>();
+		try {
+			items = upload.parseRequest(request);
+		} catch (FileUploadException e) {
+			e.printStackTrace();
+		}
+		Iterator<FileItem> ir = items.iterator();
+		while (ir.hasNext()) {
+			FileItem item = (FileItem) ir.next();
+
+			if (item.isFormField()) {
+				// Process form field.
+				String name = item.getFieldName();
+				String value = item.getString();
+				map.put(name, value);
+			} 
+		} 
+		return map;
+	}
+	
 
 	private ArrayList<VerifivationList> makeVerificationData(int count) {
 		ArrayList<Verification> veriList = selectVerifivationList(count);
@@ -194,5 +235,4 @@ public class AdminIndexPageController implements Controller {
 		}
 		return null;
 	}
-
 }
