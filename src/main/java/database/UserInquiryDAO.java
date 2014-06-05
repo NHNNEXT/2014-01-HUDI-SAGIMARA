@@ -9,9 +9,11 @@ import dto.UserInquiry;
 
 public class UserInquiryDAO {
 	private Connection conn;
-
-	public UserInquiryDAO(Connection conn) {
-		this.conn = conn;
+	private DatabaseConnector connector;
+	
+	public UserInquiryDAO() {
+		this.connector = new DatabaseConnector();
+		this.conn = connector.getMysqlConnection();
 	}
 
 	public UserInquiry selectById(String id) throws SQLException {

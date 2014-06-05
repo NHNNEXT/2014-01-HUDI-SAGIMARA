@@ -22,10 +22,6 @@ public class InquiryDAO {
 		this.conn = connector.getMysqlConnection();
 	}
 
-	public InquiryDAO(Connection conn) {
-		this.conn = conn;
-	}
-
 	public void add(Inquiry inquiry) throws SQLException {
 		String tableName = inquiry.getTableName();
 

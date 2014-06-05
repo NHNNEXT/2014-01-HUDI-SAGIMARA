@@ -21,10 +21,6 @@ public class VerificationDAO {
 		this.conn = connector.getMysqlConnection();
 	}
 
-	public VerificationDAO(Connection conn) {
-		this.conn = conn;
-	}
-
 	public Verification selectById(String userPhone) throws SQLException {
 		String sql = "select * from " + "VERIFICATION"
 				+ " where USER_user_phone = ?";

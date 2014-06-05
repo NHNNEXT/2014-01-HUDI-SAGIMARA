@@ -18,9 +18,6 @@ public class UserDAO {
 		this.connector = new DatabaseConnector();
 		this.conn = connector.getMysqlConnection();
 	}
-	public UserDAO(Connection conn) {
-		this.conn = conn;
-	}
 
 	public void add(User user) throws SQLException {
 		String tableName = user.getTableName();
