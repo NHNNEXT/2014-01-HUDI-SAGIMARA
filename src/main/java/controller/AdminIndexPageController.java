@@ -1,6 +1,8 @@
 package controller;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -13,9 +15,8 @@ import org.apache.log4j.Logger;
 
 import utility.JsonBuilder;
 import database.DatabaseHandler;
-import dto.Inquiry;
+import database.InquiryDAO;
 import dto.UserInquiry;
-import dto.UserProfile;
 
 public class AdminIndexPageController implements Controller {
 	private String forwardPath;
@@ -44,7 +45,7 @@ public class AdminIndexPageController implements Controller {
 			return null;
 		}
 		
-		UserInquiry inquiry = dbh.getVisiterDataAtToday();
+		UserInquiry inquiry = getVisiterDataAtToday();
 		String json = jb.objectToJson(inquiry);
 		logger.info(json);
 		request.setAttribute("inquiry data", json);
@@ -52,6 +53,19 @@ public class AdminIndexPageController implements Controller {
 		
 		
 		return forwardPath;
+	}
+	
+	public UserInquiry getVisiterDataAtToday() {
+		InquiryDAO inquiryDAO = new InquiryDAO();
+		
+		try {
+			return inquiryDAO.select();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			logger.info("Inquiry select Fail");
+		} 
+		
+		return null;
 	}
 
 }

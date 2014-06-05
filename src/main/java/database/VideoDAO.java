@@ -19,9 +19,6 @@ public class VideoDAO {
 		this.connector = new DatabaseConnector();
 		this.conn = connector.getMysqlConnection();
 	}
-	public VideoDAO(Connection conn) {
-		this.conn = conn;
-	}
 
 	public boolean add(Video video) throws SQLException {
 		String tableName = video.getTableName();

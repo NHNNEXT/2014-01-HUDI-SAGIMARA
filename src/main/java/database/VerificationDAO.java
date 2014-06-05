@@ -13,7 +13,13 @@ import dto.Verification;
 
 public class VerificationDAO {
 	private Connection conn;
+	private DatabaseConnector connector;
 	private Logger logger = SagimaraLogger.logger;
+	
+	public VerificationDAO() {
+		this.connector = new DatabaseConnector();
+		this.conn = connector.getMysqlConnection();
+	}
 
 	public VerificationDAO(Connection conn) {
 		this.conn = conn;

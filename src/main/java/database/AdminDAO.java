@@ -13,7 +13,13 @@ import dto.Admin;
 
 public class AdminDAO {
 	private Connection conn;
+	private DatabaseConnector connector;
 	private Logger logger = SagimaraLogger.logger;
+	
+	public AdminDAO() {
+		this.connector = new DatabaseConnector();
+		this.conn = connector.getMysqlConnection();
+	}
 
 	public AdminDAO(Connection conn) {
 		this.conn = conn;
