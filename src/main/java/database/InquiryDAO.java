@@ -14,7 +14,13 @@ import dto.UserInquiry;
 
 public class InquiryDAO {
 	private Connection conn;
+	private DatabaseConnector connector;
 	private Logger logger = SagimaraLogger.logger;
+	
+	public InquiryDAO() {
+		this.connector = new DatabaseConnector();
+		this.conn = connector.getMysqlConnection();
+	}
 
 	public InquiryDAO(Connection conn) {
 		this.conn = conn;
@@ -72,4 +78,6 @@ public class InquiryDAO {
 
 		return userInquiry;
 	}
+
+
 }

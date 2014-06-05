@@ -15,7 +15,13 @@ import dto.Verification;
 
 public class RequestDAO {
 	private Connection conn;
+	private DatabaseConnector connector;
 	private Logger logger = SagimaraLogger.logger;
+	
+	public RequestDAO() {
+		this.connector = new DatabaseConnector();
+		this.conn = connector.getMysqlConnection();
+	}
 
 	public RequestDAO(Connection conn) {
 		this.conn = conn;
@@ -40,7 +46,7 @@ public class RequestDAO {
 		return resultList;
 	}
 
-	public void add(Request request) throws SQLException {
+	public boolean add(Request request) throws SQLException {
 		String tableName = request.getTableName();
 		String sql = "INSERT INTO " + tableName + " VALUES (?, ?, ?)";
 
@@ -57,9 +63,12 @@ public class RequestDAO {
 					request.getRequestDate()));
 		} else {
 			logger.info("Add Fail " + tableName);
+			return false;
 		}
 
 		pstmt.close();
+		
+		return true;
 	}
 
 	public ArrayList<Request> getList(int count) throws SQLException {

@@ -384,8 +384,9 @@ div, section, section {
 	font-family: inherit;
 	height: 20px;
 	line-height: 20px;
-	font-size: 13px;	
-	text-align:center;	
+	font-size: 13px;
+	font-color: black;	
+	text-align:center;
 	margin: 0 auto;
 	max-width : 280px;
 }
@@ -417,6 +418,12 @@ div, section, section {
 	font-size: 24px;
 	font-family: inherit;
 	background: rgba(255, 255, 255, 0.7);
+}
+
+@media screen and (max-width: 520px) {
+	#map-canvas p{
+		font-size: 15px;
+	} 
 }
 
 /*

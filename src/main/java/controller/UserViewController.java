@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.List;
 
@@ -18,20 +19,22 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.log4j.Logger;
 
 import utility.JsonBuilder;
-import database.DatabaseHandler;
+import database.InquiryDAO;
+import database.UserDAO;
+import database.UserProfileDAO;
+import dto.Inquiry;
+import dto.User;
 import dto.UserProfile;
 
 public class UserViewController implements Controller{
 
 	private Logger logger;
-	private DatabaseHandler dbh;
 	private JsonBuilder jb;
 	private String forwardPath;
 	
 	public UserViewController(String forwardPath) {
 		super();
 		this.logger = SagimaraLogger.logger;
-		this.dbh = DatabaseHandler.getDatabaseHandler();
 		this.jb = JsonBuilder.getJsonBuilder();
 		this.forwardPath = forwardPath;
 
@@ -78,8 +81,8 @@ public class UserViewController implements Controller{
 
 		logger.info(id);
 		if (!id.isEmpty()) {
-			UserProfile dut = dbh.readUserProfile(id);
-			String json = jb.objectToJson(dut);
+			UserProfile userProfile = readUserProfile(id);
+			String json = jb.objectToJson(userProfile);
 			logger.info(json);
 			request.setAttribute("json", json);
 		} else {
@@ -87,5 +90,43 @@ public class UserViewController implements Controller{
 		}
 
 		return forwardPath;
+	}
+	
+	public UserProfile readUserProfile(String id) {
+
+		UserProfileDAO userProfileDAO = new UserProfileDAO();
+		UserDAO userDAO = new UserDAO();
+		InquiryDAO inquiryDAO = new InquiryDAO();
+		UserProfile userProfile = new UserProfile();
+		try {
+			userProfile = userProfileDAO.selectById(id);
+
+			if (userProfile != null) {
+				logger.info("[readUserProfile] User[" + id + "] 정보 있음 ");
+				Inquiry inquiry = new Inquiry();
+				inquiry.setInquiryId(id);
+
+				inquiryDAO.add(inquiry);
+
+			} else {
+				logger.info("[readUserProfile] User[" + id + "] 정보 없음 ");
+				User user = new User(id, "false", "1", "위치정보 없음");
+				Inquiry inquiry = new Inquiry(user);
+
+				userDAO.add(user);
+				inquiryDAO.add(inquiry);
+
+				userProfile = userProfileDAO.selectById(id);
+			}
+
+			logger.info("[database] Connection is closed.");
+			
+
+		} catch (SQLException e) {
+			logger.info("readUserProfile Fail");
+			e.printStackTrace();
+		} 
+
+		return userProfile;
 	}
 }

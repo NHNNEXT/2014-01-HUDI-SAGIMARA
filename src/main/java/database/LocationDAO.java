@@ -12,13 +12,15 @@ import dto.Location;
 
 public class LocationDAO {
 	private Connection conn;
+	private DatabaseConnector connector;
 	private Logger logger = SagimaraLogger.logger;
-
-	public LocationDAO(Connection conn) {
-		this.conn = conn;
+	
+	public LocationDAO() {
+		this.connector = new DatabaseConnector();
+		this.conn = connector.getMysqlConnection();
 	}
 
-	public void add(Location location) throws SQLException {
+	public boolean add(Location location) throws SQLException {
 		String tableName = location.getTableName();
 		String sql = "INSERT INTO "
 				+ tableName
@@ -38,8 +40,13 @@ public class LocationDAO {
 					location.getLocationCoordinate()));
 		} else {
 			logger.info("Add Fail " + tableName);
+			pstmt.close();
+			conn.close();
+			return false;
 		}
 
 		pstmt.close();
+		conn.close();
+		return true;
 	}
 }
