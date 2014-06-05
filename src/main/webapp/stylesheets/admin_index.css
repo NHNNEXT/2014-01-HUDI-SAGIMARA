@@ -1,3 +1,10 @@
+#container {
+	-webkit-animation-play-state:running;
+	-moz-animation:running;
+ 	animation:running;
+}
+
+
 
 .clearfix:after {
 	content: ".";

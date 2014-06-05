@@ -43,10 +43,10 @@
 		</section>
 		<section id="registerPopUp" class="border-radius input-form">
 			<form action="#" class="custom-form" method="POST">
-				<header class="logo">
+				<h1 class="logo">
 					Registration form
 					<p class="exit-button">X</p>
-				</header>
+				</h1>
 				<fieldset>
 					<div class="id_title">아이디</div>
 					<div class="id_input">
