@@ -48,9 +48,7 @@ public class InsertPhotoDataController implements Controller {
 		ServletContext context = request.getServletContext();
 		String fullPath = context.getRealPath("/updatedImages/");
 		photoImagePath = fullPath;
-		logger.info(fullPath);
-		
-		logger.info("InsertPhoto in");
+		logger.info("Photo Image Full Path "+ fullPath);
 		boolean isMultipart = ServletFileUpload.isMultipartContent(request);
 		if (isMultipart) {
 			FileItemFactory factory = new DiskFileItemFactory();
@@ -64,7 +62,7 @@ public class InsertPhotoDataController implements Controller {
 
 
 			Iterator<FileItem> ir = items.iterator();
-			logger.info("InsertPhoto in in");
+			
 			while (ir.hasNext()) {
 				FileItem item = (FileItem) ir.next();
 				if (item.isFormField()) {
@@ -78,12 +76,11 @@ public class InsertPhotoDataController implements Controller {
 					if(name.equals("date")){
 						date = value;
 					}
-					logger.info("name : "+name);
+			
 				} else {
 					// Process uploaded file.
-					String name = item.getContentType();
-					String[] array = name.split("/");
-					videoLink = photoImagePath + id +"."+ array[1] ;
+					videoLink = photoImagePath +"/"+ id +"."+ "jpg" ;
+					logger.info("Photo Link :" + videoLink);
 					try {
 						File file = new File(videoLink);
 						item.write(file);
