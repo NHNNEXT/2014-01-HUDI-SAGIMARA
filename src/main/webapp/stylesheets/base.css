@@ -47,11 +47,9 @@ header {
  	-webkit-animation:fade-in 1s;
  	-moz-animation:fade-in 1s;
  	animation:fade-in 1s;
- 	/* 로드시 문제가 되는 코드
 	-webkit-animation-play-state:paused;
 	-moz-animation:paused;
  	animation:paused;
- 	*/
 }
 
 footer {
