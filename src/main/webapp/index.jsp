@@ -45,7 +45,12 @@
 						<p>2014년 3월 18일 인증완료</p>
 						<p>2014년 3월 22일 재인증요청</p>
 						<section id="profile-button-section">
-							<button type="button" class="button button-red">재인증 요청</button>
+							<form name="verification-form" action="/insert/RequestData">
+								<input name="from" type="hidden">
+								<input name="to" type="hidden">
+								<input name="date" type="hidden">
+								<button id="verification-button" type="button" class="button button-red">인증 요청</button>
+							</form>
 						</section>
 					</section>
 				</section>

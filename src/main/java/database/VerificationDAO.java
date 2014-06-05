@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import logger.SagimaraLogger;
 
@@ -39,6 +38,7 @@ public class VerificationDAO {
 
 		pstmt.close();
 		rs.close();
+		conn.close();
 
 		return verification;
 	}
@@ -62,9 +62,12 @@ public class VerificationDAO {
 					verification.getVerificationTime()));
 		} else {
 			logger.info("Add Fail " + tableName);
+			pstmt.close();
+			conn.close();
 		}
 
 		pstmt.close();
+		conn.close();
 	}
 
 	public ArrayList<Verification> getList(int count) throws SQLException{
@@ -84,12 +87,10 @@ public class VerificationDAO {
 			verification.add(verifi);
 		}
 
-		pstmt.close();
 		rs.close();
+		pstmt.close();
+		conn.close();
 
-
-		
-		
 		return verification;
 	}
 }

@@ -4,13 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 import logger.SagimaraLogger;
 
 import org.apache.log4j.Logger;
 
-import dto.Verification;
 import dto.Video;
 
 public class VideoDAO {
@@ -66,11 +64,13 @@ public class VideoDAO {
 									rs.getString("video_date"));
 			pstmt.close();
 			rs.close();
+			conn.close();
 			return video;
 		}
 
 		pstmt.close();
 		rs.close();
+		conn.close();
 		return null;
 	}
 }

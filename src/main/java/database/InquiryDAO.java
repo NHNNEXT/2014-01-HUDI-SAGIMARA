@@ -42,6 +42,7 @@ public class InquiryDAO {
 		}
 
 		pstmt.close();
+		conn.close();
 	}
 
 
@@ -71,6 +72,7 @@ public class InquiryDAO {
 
 		pstmt.close();
 		rs.close();
+		conn.close();
 
 		return userInquiry;
 	}

@@ -45,8 +45,9 @@ public class NotificationDAO {
 		} else {
 			logger.info("Add Fail " + tableName);
 		}
-
+		
 		pstmt.close();
+		conn.close();
 	}
 
 	public UserInquiry selectForGraph() throws SQLException {
@@ -75,6 +76,7 @@ public class NotificationDAO {
 
 		pstmt.close();
 		rs.close();
+		conn.close();
 
 		return userInquiry;
 		

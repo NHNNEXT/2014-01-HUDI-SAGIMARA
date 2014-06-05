@@ -54,7 +54,8 @@ var editor = {
 var oEventElements = {
 	// EventListener를 위한 elements
 	elSubmit : editor.get(".search-submit"),
-	elLogo : editor.get(".logo")
+	elLogo : editor.get(".logo"),
+	elVerification : editor.get("#verification-button")
 };
 
 var userStatusInfo = {
@@ -219,20 +220,46 @@ var utility = {
 		- 앞자리 세자리에 대한 예외적용(010 부분)
 		- 국제 번호 형식에 대한 처리(+82 1012345678 등)
 		*/
+	},
+	
+	getDateTime : function() {
+		var currentdate = new Date(); 
+		var datetime = currentdate.getFullYear()+ "-"
+		                + (currentdate.getMonth()+1)  + "-" 
+		                + currentdate.getDate() + " "  
+		                + currentdate.getHours() + ":"  
+		                + currentdate.getMinutes() + ":" 
+		                + currentdate.getSeconds();
+		return datetime;
 	}
 }
 
 var sagimaraMain = {
+	phoneNumber : "",
 	init : function() {
 		// 페이지 초기 세팅 관리 함수
 		// 검색 아이콘에 검색 관련 통신 이벤트등록
 		// 로고에 리프래쉬 기능 이벤트 등록
 		// 4일전~오늘날짜를 계산에서 보관
 		// FeatureDetector값을 찾아서 저장
-		oEventElements.elSubmit.addEventListener("click", this.requestSearchEvent, false);
+		oEventElements.elSubmit.addEventListener("click", this.requestSearchEvent.bind(this), false);
 		oEventElements.elLogo.addEventListener("click", utility.refresh, false);
+		oEventElements.elVerification.addEventListener("click", this.verificationRequestEvent.bind(this), false);
 		visitInfoBarManager.setDateSet()
 		editor.playStatusFeatureDetector();
+	},
+	
+	verificationRequestEvent : function(e) {
+		//인증요청에 대한 처리
+		utility.requestPreventEvent(e);
+		console.log(e.toElement.parentNode[0]);
+		var verification = e.toElement.parentNode
+
+		verification[0].value = "2222";
+		verification[1].value = this.phoneNumber;
+		verification[2].value = utility.getDateTime();
+		//verification.action += "/insert/RequestData?from=1111&to=2222&date=1999-01-01%2012:12:12";
+		verification.submit();
 	},
 	
 	requestSearchEvent : function(e) {
@@ -240,13 +267,13 @@ var sagimaraMain = {
 		utility.requestPreventEvent(e);
 		updateManager.setAnimation("paused");
 
-		var id = e.target.parentElement[0].value;
+		this.phoneNumber = e.target.parentElement[0].value;
 		var url = "/test";
 		var request = new XMLHttpRequest();
 		var formdata = new FormData();
 		var result;
 		
-		var input = utility.validPhone(id);
+		var input = utility.validPhone(this.phoneNumber);
 
 		request.open("POST", url, true);
 		if(input) {

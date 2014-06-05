@@ -40,5 +40,6 @@ public class UserDAO {
 		}
 
 		pstmt.close();
+		conn.close();
 	}
 }

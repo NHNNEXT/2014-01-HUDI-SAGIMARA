@@ -10,7 +10,6 @@ import logger.SagimaraLogger;
 import org.apache.log4j.Logger;
 
 import dto.Location;
-import dto.Video;
 
 public class LocationDAO {
 	private Connection conn;
@@ -64,11 +63,13 @@ public class LocationDAO {
 									rs.getString("location_coordinate"));
 			pstmt.close();
 			rs.close();
+			conn.close();
 			return location;
 		}
 
 		pstmt.close();
 		rs.close();
+		conn.close();
 		return null;
 
 	}

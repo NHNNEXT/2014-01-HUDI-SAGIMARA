@@ -11,7 +11,6 @@ import logger.SagimaraLogger;
 import org.apache.log4j.Logger;
 
 import dto.Request;
-import dto.Verification;
 
 public class RequestDAO {
 	private Connection conn;
@@ -39,6 +38,9 @@ public class RequestDAO {
 			resultList.add(new Request(rs.getString("request_from"), rs
 					.getString("request_to"), rs.getString("request_date")));
 		}
+		rs.close();
+		pstmt.close();
+		conn.close();
 		return resultList;
 	}
 
@@ -59,10 +61,13 @@ public class RequestDAO {
 					request.getRequestDate()));
 		} else {
 			logger.info("Add Fail " + tableName);
+			pstmt.close();
+			conn.close();
 			return false;
 		}
 
 		pstmt.close();
+		conn.close();
 		
 		return true;
 	}
@@ -86,7 +91,7 @@ public class RequestDAO {
 
 		pstmt.close();
 		rs.close();
-		
+		conn.close();
 		
 		return requestList;
 	}

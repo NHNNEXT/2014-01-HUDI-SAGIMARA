@@ -34,6 +34,7 @@ public class UserInquiryDAO {
 
 		pstmt.close();
 		rs.close();
+		conn.close();
 
 		return userInquiry;
 	}

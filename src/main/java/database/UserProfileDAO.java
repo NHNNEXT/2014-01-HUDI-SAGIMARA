@@ -5,10 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import logger.SagimaraLogger;
-
-import org.apache.log4j.Logger;
-
 import dto.UserInquiry;
 import dto.UserProfile;
 
@@ -42,6 +38,7 @@ public class UserProfileDAO {
 
 		pstmt.close();
 		rs.close();
+		conn.close();
 
 		return userProfile;
 	}

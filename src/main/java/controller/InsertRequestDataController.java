@@ -31,8 +31,6 @@ public class InsertRequestDataController implements Controller {
 			HttpServletResponse response) throws ServletException, IOException{
 		logger.info("Content-type : " + request.getHeader("Content-type"));
 		
-		
-		
 		String from = (String) request.getParameter("from");
 		String to = (String) request.getParameter("to");
 		String date = (String) request.getParameter("date");
