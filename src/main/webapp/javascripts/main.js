@@ -197,7 +197,7 @@ var utility = {
 		return jsonObj;
 	},
 	
-	phoneValid : function(input)
+	validPhone : function(input)
 	{
 		//입력된 전화번호의 유효성 판단
 		// 010-1234-5678, 010 1234 5678과 같이 하이픈이나 공백으로 구분되는 입력
@@ -210,7 +210,7 @@ var utility = {
 		var midFourDigitNumber = 11; //중간 4자리 핸드폰 번호 길이
 		var forTest = 4; //test를 위한 길이 추후삭제요
 
-		if(inputLength == midThreeDigitNumber || inputLength == midFourDigitNumber || inputLength == forTest) {
+		if(inputLength === midThreeDigitNumber || inputLength === midFourDigitNumber || inputLength === forTest) {
 			return input;// 휴대폰 형식에 맞는 String
 		} else {
 			return false;// 휴대폰 형식이 아닌 경우
@@ -246,7 +246,7 @@ var sagimaraMain = {
 		var formdata = new FormData();
 		var result;
 		
-		var input = utility.phoneValid(id);
+		var input = utility.validPhone(id);
 
 		request.open("POST", url, true);
 		if(input) {
