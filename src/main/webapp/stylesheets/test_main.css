@@ -392,7 +392,7 @@ div, section, section {
 }
 
 #location-info figure {
-	background: #fff url("/images/location.png") no-repeat;
+	background: #fff url("../images/location.png") no-repeat;
 	background-size:70%;
 	background-position:center;
 	margin: 0 auto;
@@ -446,7 +446,7 @@ div, section, section {
 }
 
 #watch-info figure {
-	background: #fff url("/images/eye.png") no-repeat;
+	background: #fff url("../images/eye.png") no-repeat;
 	background-size:70%;
 	background-position:center;
 	margin: 0 auto;
@@ -493,7 +493,7 @@ div, section, section {
 }
 
 #caution-info figure {
-	background: #fff url("/images/caution.png") no-repeat;
+	background: #fff url("../images/caution.png") no-repeat;
 	background-size:70%;
 	background-position:center;
 	margin: 0 auto;
