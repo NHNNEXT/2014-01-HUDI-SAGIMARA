@@ -69,25 +69,25 @@ public class AdminAjaxController implements Controller {
 			UserInquiry visits = getVisiterDataAtToday();
 			json = jb.objectToJson(visits);
 			logger.info(json);
-			request.setAttribute("visits", json);	
+			request.setAttribute("json", json);	
 		}
 		else if (requestMap.get("request").equals("notify")){
 			UserInquiry noti = getNotificationAtToday();
 			json = jb.objectToJson(noti);
 			logger.info(json);
-			request.setAttribute("notify", json);	
+			request.setAttribute("json", json);	
 		}
 		else if (requestMap.get("request").equals("verification")){
 			ArrayList<VerifivationList> VerificationResult = makeVerificationData(5);
 			json = jb.objectToJson(VerificationResult);
 			logger.info(json);
-			request.setAttribute("verification", json);
+			request.setAttribute("json", json);
 		}
 		else if (requestMap.get("request").equals("request")){
 			ArrayList<Request> requestList = getRequestList(Integer.parseInt(requestMap.get("count")));
 			json = jb.objectToJson(requestList);
 			logger.info(json);
-			request.setAttribute("request", json);	
+			request.setAttribute("json", json);	
 		}
 		return forwardPath;
 	}

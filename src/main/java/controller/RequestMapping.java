@@ -14,6 +14,7 @@ public class RequestMapping {
 		put("/admin/register", new AdminRegisterController("/json.jsp"));
 		put("/admin/login_submit", new AdminLoginController("/json.jsp"));
 		put("/push/alarm", new PushAlarmController("/json.jsp"));
+		put("/admin/data", new AdminAjaxController("/json.jsp"));
 		
 		//GET
 		put("/", new ForwardController("/index.jsp"));

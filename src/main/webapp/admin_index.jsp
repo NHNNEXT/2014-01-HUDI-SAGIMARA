@@ -28,7 +28,7 @@
 			<section class="contents">
 				<h1>Sagimara Admin</h1>
 				<hr>
-				<section class="daily-visitor-graph ">
+				<section class="daily-visitor-graph">
 					<h1>일간 방문자 그래프</h1>
 					<article>
 						<figure>
@@ -72,7 +72,7 @@
 					<h1>일간 신고건수 그래프</h1>
 					<article>
 						<figure>
-							<ul id="visited-graph">
+							<ul id="report-graph">
 								<p>최근 5일간 신고건수</p>
 								<li class="bar-section">
 									<p></p>
@@ -163,6 +163,7 @@
 
 	</div>
 
+	<script src="/javascripts/barManager.js"></script>
 	<script src="/javascripts/admin_index.js"></script>
 </body>
 </html>

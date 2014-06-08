@@ -1,18 +1,41 @@
 
-var editor = {
-	get : function(selector, elements) {
-		// 해당 element에 대한 querySelector element가 없을시 document에서 select
-		if (typeof elements == "undefined") {
-			elements = document;
-		}
-		var result = elements.querySelector(selector);
-		return result;
+
+var updateManager = {
+	updateVisit : function(data, sectionID) {
+		// 해당번호 검색(방문)한 수를 업데이트
+		visitInfoBarManager.setData(data);
+		var elVisitInfo = editor.get(sectionID);
+		var elVisitInfoDetail = editor.get("#visited-graph", elVisitInfo);
+		var elVisitedInfoBar = editor.getAll("#visited-graph .bar-section", elVisitInfo);
+		var type = editor.resultFeatureDetector;
+		editor.setStyle(elVisitInfoDetail, type, "running");
+		visitInfoBarManager.executeBarAnimation(elVisitedInfoBar);
 	},
-};
+	
+	updateReport : function(data, sectionID) {
+		// 해당번호 검색(방문)한 수를 업데이트
+		visitInfoBarManager.setData(data);
+		var elVisitInfo = editor.get(sectionID);
+		var elVisitInfoDetail = editor.get("#report-graph", elVisitInfo);
+		var elVisitedInfoBar = editor.getAll("#report-graph .bar-section", elVisitInfo);
+		var type = editor.resultFeatureDetector;
+		editor.setStyle(elVisitInfoDetail, type, "running");
+		visitInfoBarManager.executeBarAnimation(elVisitedInfoBar);
+	},
+	
+	setAnimation : function(state) {
+		// 페이지 에니메이션을 시작시키는 함수
+		var elContainer = editor.get("#container");
+		//var elFooter = editor.get("footer");
+		
+		var type = editor.resultFeatureDetector;
+		editor.setStyle(elContainer, type, state);
+		//editor.setStyle(elFooter, type, state);
+	}
+}
 
 var oVerificationStatus = {
 	elTableBody : editor.get(".table>tbody"),
-	
 	getVerificationStatus : function(){
 		
 	}
@@ -63,6 +86,37 @@ var sagimaraIndex = {
 			oNavigationElements.elIDonKnow.addEventListener("click",
 					oNavigationElements.iDonKnowClickEvent, false);
 			
+			visitInfoBarManager.setDateSet();
+			editor.playStatusFeatureDetector();
+			this.requestVisitsData("visits", ".daily-visitor-graph");
+			this.requestVisitsData("notify", ".daily-report-graph");
+			
+		},
+
+		requestVisitsData : function(requestType, sectionID) {
+			// 검색 요청 처리 및 서버와 통신
+			updateManager.setAnimation("paused");
+			
+			var url = "/admin/data";
+			var request = new XMLHttpRequest();
+			var formdata = new FormData();
+			var result;
+			
+			request.open("POST", url, true);			
+			formdata.append("request", requestType);
+			request.send(formdata);
+
+			request.onreadystatechange = function() {
+				if (request.readyState == 4 && request.status == 200) {
+					result = utility.JSONparse(request.response);
+					if(sectionID===".daily-visitor-graph"){
+						updateManager.updateVisit(result,sectionID);
+					}else if(sectionID===".daily-report-graph"){
+						updateManager.updateReport(result,sectionID);
+					}
+					updateManager.setAnimation("running");
+				}
+			}
 		}
 	};
 
