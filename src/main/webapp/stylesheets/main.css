@@ -15,10 +15,14 @@ div, section, section {
 	height: 50px;
 	float: left;
 	overflow: hidden;
+
 	-webkit-transition: width 0.3s;
 	-moz-transition: width 0.3s;
 	transition: width 0.3s;
+
 	-webkit-backface-visibility: hidden;
+	-moz-backface-visibility: hidden;
+	backface-visibility: hidden;
 }
 
 .logo {
@@ -219,7 +223,7 @@ div, section, section {
 	font-size: 30px;
 	line-height: 50px;
 	-webkit-transition: background 1s, height 0.5s, -webkit-transform 1s;
-	-moz-transition: background 1s, height 0.5s, -webkit-transform 1s;
+	-moz-transition: background 1s, height 0.5s, -moz-transform 1s;
 	transition: background 1s, height 0.5s, transform 1s;
 }
 
@@ -334,7 +338,7 @@ div, section, section {
 	color: #000;
 	height: 0px;
 	-webkit-transition: height 1s, -webkit-transform 1s;
-	-moz-transition: height 1s, -webkit-transform 1s;
+	-moz-transition: height 1s, -moz-transform 1s;
 	transition: height 1s, transform 1s;
 	left: 30%;
 	background: #37383c;
