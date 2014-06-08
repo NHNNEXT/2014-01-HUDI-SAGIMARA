@@ -33,6 +33,7 @@ import dto.Location;
 import dto.Notification;
 import dto.Request;
 import dto.RequestList;
+import dto.VerificationListForVerify;
 import dto.UserForAdmin;
 import dto.UserInquiry;
 import dto.Verification;
@@ -106,14 +107,26 @@ public class AdminAjaxController implements Controller {
 				condition = "'verification_time'";
 			}
 			
-			logger.info("maxNum= "+ maxRow +" pageNum= "+ pageNumber);
 			ArrayList<UserForAdmin> userList = readUserListForAdminPage(maxRow, pageNumber, condition);
 			json = jb.objectToJson(userList);
+			logger.info(json);
+			request.setAttribute("json", json);
+		} else if (requestMap.get("request").equals("verificationList")) {
+			int maxRow = Integer.parseInt(requestMap.get("max"));
+			int pageNumber = Integer.parseInt(requestMap.get("page"));
+			String condition = requestMap.get("orderBy");
+			if(condition.equals("")||condition==null){
+				condition = "'verification_time'";
+			}
+			ArrayList<VerificationListForVerify> requestList = selectRequestListForVerification(maxRow, pageNumber, condition);
+			json = jb.objectToJson(requestList);
 			logger.info(json);
 			request.setAttribute("json", json);
 		}
 		return forwardPath;
 	}
+
+
 
 
 	private Map<String, String> makeParameterMap(HttpServletRequest request) throws IOException {
@@ -281,6 +294,17 @@ public class AdminAjaxController implements Controller {
 			e.printStackTrace();
 		}
 
+		return null;
+	}
+	
+	private ArrayList<VerificationListForVerify> selectRequestListForVerification(
+			int maxRow, int pageNum, String condition) {
+		try {
+			VerificationDAO verificationDAO = new VerificationDAO();
+			return verificationDAO.selectForAdminOrderBy(maxRow, pageNum, condition);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 }

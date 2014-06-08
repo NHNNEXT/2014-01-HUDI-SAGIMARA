@@ -75,7 +75,7 @@ var sagimaraIndex = {
 			var result;
 			
 			request.open("POST", url, true);			
-			formdata.append("request", "userList");
+			formdata.append("request", "verificationList");
 			formdata.append("max", 20);
 			formdata.append("page", 0);
 			formdata.append("orderBy", "");
@@ -85,23 +85,21 @@ var sagimaraIndex = {
 				if (request.readyState == 4 && request.status == 200) {
 					result = utility.JSONparse(request.response);
 					var i;
-					var elSection = editor.get(".userList");
+					var elSection = editor.get(".verificationList");
 					var elTableBody = editor.get("tbody",elSection);
 					for (i=0;i<result.length;i++){
 						var newRow   = elTableBody.insertRow(elTableBody.rows.length);
 
 						tableEditor.insertRow(newRow,0,result[i]["userID"]);
-						tableEditor.insertRow(newRow,1,result[i]["userStatus"]);
-						tableEditor.insertRow(newRow,2,result[i]["userVerification"]);
-						tableEditor.insertRow(newRow,3,result[i]["VerificationStatus"]);
-						tableEditor.insertRow(newRow,4,result[i]["verificationTime"]);
+						tableEditor.insertRow(newRow,1,result[i]["verificationTime"]);
+						tableEditor.insertRow(newRow,2,result[i]["verificationStatus"]);
+						tableEditor.insertRow(newRow,3,result[i]["currentStatus"]);
+						tableEditor.insertRow(newRow,4,result[i]["verification"]);
 						tableEditor.insertRow(newRow,5,result[i]["location"]);
-						tableEditor.insertRow(newRow,6,result[i]["locationCoordinate"]);
-						tableEditor.insertRow(newRow,7,result[i]["locationTime"]);
+						tableEditor.insertRow(newRow,6,result[i]["location_coordinate"]);
+						tableEditor.insertRow(newRow,7,result[i]["location_time"]);
 						tableEditor.insertRow(newRow,8,result[i]["videoLink"]);
 						tableEditor.insertRow(newRow,9,result[i]["videoDate"]);
-						tableEditor.insertRow(newRow,10,result[i]["watch"]);
-						tableEditor.insertRow(newRow,11,result[i]["notify"]);
 						
 					}
 				}

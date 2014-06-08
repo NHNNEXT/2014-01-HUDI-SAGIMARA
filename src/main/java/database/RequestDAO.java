@@ -12,6 +12,8 @@ import org.apache.log4j.Logger;
 
 import dto.Request;
 import dto.RequestList;
+import dto.VerificationListForVerify;
+import dto.UserForAdmin;
 
 public class RequestDAO {
 	private Connection conn;
@@ -98,4 +100,6 @@ public class RequestDAO {
 		
 		return requestList;
 	}
+
+	
 }

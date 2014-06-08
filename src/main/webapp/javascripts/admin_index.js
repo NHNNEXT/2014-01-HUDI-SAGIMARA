@@ -54,7 +54,7 @@ var oNavigationElements = {
 	verificationManagerClickEvent : function(e){
 		oNavigationElements.removeActiveClass();
 		oNavigationElements.elVerificationManager.setAttribute("class", "active");
-		console.log(e.target);
+		document.location.href='./verificationList';
 	},
 	
 	iDonKnowClickEvent : function(e){

@@ -41,24 +41,11 @@ public class AdminUserListController implements Controller {
 			return null;
 		}
 		
-		ArrayList<UserForAdmin> userList = readUserListForAdminPage(10,0);
-		String json = jb.objectToJson(userList);
-		logger.info(json);
-		request.setAttribute("json", json);
+
 		
 		return forwardPath;
 	}
 	
-	private ArrayList<UserForAdmin> readUserListForAdminPage(int maxRow, int pageNum) {
-		
-		try {
-			UserDAO userDAO = new UserDAO();
-			return userDAO.selectForAdminOrderBy(maxRow, pageNum,"'verification_time'");
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
 
-		return null;
-	}
 
 }
