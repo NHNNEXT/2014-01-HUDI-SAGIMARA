@@ -112,7 +112,7 @@ var sagimaraIndex = {
 					if(sectionID===".daily-visitor-graph"){
 						updateManager.updateVisit(result,sectionID);
 					}else if(sectionID===".daily-report-graph"){
-						updateManager.updateReport(result,sectionID);
+						//updateManager.updateReport(result,sectionID);
 					}
 					updateManager.setAnimation("running");
 				}
