@@ -158,6 +158,14 @@
 				</section>
 			</section>
 		</div>
+		
+		<section id="requestPopUp">
+			<form class="requestPopUp-form" method="GET">
+				<div class="title">인증요청하시는 분의 연락처 입력</div>
+				<input class="request-input" placeholder="phoneNumber" type="text" name="admin_id">
+				<input class="request-button" id="verification-button-pop" type="submit" value="Submit">
+			</form>
+		</section>
 		<footer>
 			<div class="footer-logo">SAGIMARA</div>
 		</footer>
