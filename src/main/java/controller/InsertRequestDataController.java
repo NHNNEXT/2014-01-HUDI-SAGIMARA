@@ -13,7 +13,9 @@ import org.apache.log4j.Logger;
 
 import utility.JsonBuilder;
 import database.RequestDAO;
+import database.UserDAO;
 import dto.Request;
+import dto.User;
 
 public class InsertRequestDataController implements Controller {
 	private Logger logger;
@@ -34,6 +36,20 @@ public class InsertRequestDataController implements Controller {
 		String from = (String) request.getParameter("from");
 		String to = (String) request.getParameter("to");
 		String date = (String) request.getParameter("date");
+		
+		User user = new User();
+		UserDAO userDAO = new UserDAO();
+		try {
+			user = userDAO.selectById(from);
+			if(user == null) {
+				user = new User(from, "false", "1", "위치정보 없음");
+				userDAO.add(user);
+			}
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
 		
 		Request requestDTO = new Request(from,to,date);
 		RequestDAO requestDAO = new RequestDAO();

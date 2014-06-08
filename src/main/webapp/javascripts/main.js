@@ -181,6 +181,7 @@ var requestLayer = {
 				if (request.readyState == 4 && request.status == 200) {
 					// json ajax 통신 부분
 					console.log(request.response);
+					
 				}
 			}
 		}

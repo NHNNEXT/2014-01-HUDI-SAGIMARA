@@ -2,11 +2,13 @@ package database;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import logger.SagimaraLogger;
 
 import org.apache.log4j.Logger;
 
-import logger.SagimaraLogger;
 import dto.User;
 
 public class UserDAO {
@@ -16,10 +18,10 @@ public class UserDAO {
 	
 	public UserDAO() {
 		this.connector = new DatabaseConnector();
-		this.conn = connector.getMysqlConnection();
 	}
 
 	public void add(User user) throws SQLException {
+		conn = connector.getMysqlConnection();
 		String tableName = user.getTableName();
 		String sql = "INSERT INTO " + tableName + " VALUES (?, ?, ?, ?)";
 
@@ -41,5 +43,28 @@ public class UserDAO {
 
 		pstmt.close();
 		conn.close();
+	}
+	
+	public User selectById(String id) throws SQLException {
+		conn = connector.getMysqlConnection();
+		String sql = "select * from " + "USER"
+				+ " where user_phone = ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, id);
+		ResultSet rs = pstmt.executeQuery();
+
+		User user = null;
+		
+		if (rs.next()) {
+			user = new User(rs.getString("user_phone"),
+					rs.getString("user_verification"), rs.getString("user_status"),
+					rs.getString("user_area"));
+		}
+
+		pstmt.close();
+		rs.close();
+		conn.close();
+
+		return user;
 	}
 }
