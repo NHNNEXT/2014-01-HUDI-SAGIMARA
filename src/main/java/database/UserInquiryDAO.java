@@ -13,10 +13,11 @@ public class UserInquiryDAO {
 	
 	public UserInquiryDAO() {
 		this.connector = new DatabaseConnector();
-		this.conn = connector.getMysqlConnection();
 	}
 
 	public UserInquiry selectById(String id) throws SQLException {
+		conn = connector.getMysqlConnection();
+		
 		String sql = "select * from " + "USER_INQUIRY"
 				+ " where phone_number = ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);

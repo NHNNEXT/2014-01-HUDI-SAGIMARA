@@ -19,10 +19,10 @@ public class VerificationDAO {
 	
 	public VerificationDAO() {
 		this.connector = new DatabaseConnector();
-		this.conn = connector.getMysqlConnection();
 	}
 
 	public Verification selectById(String userPhone) throws SQLException {
+		conn = connector.getMysqlConnection();
 		String sql = "select * from " + "VERIFICATION"
 				+ " where USER_user_phone = ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);

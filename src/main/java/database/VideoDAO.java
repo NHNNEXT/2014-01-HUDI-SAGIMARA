@@ -19,10 +19,10 @@ public class VideoDAO {
 	
 	public VideoDAO() {
 		this.connector = new DatabaseConnector();
-		this.conn = connector.getMysqlConnection();
 	}
 
 	public boolean add(Video video) throws SQLException {
+		conn = connector.getMysqlConnection();
 		String tableName = video.getTableName();
 		String sql = "INSERT INTO " + tableName
 				+ "(USER_user_phone, video_link, video_date)"
@@ -53,6 +53,7 @@ public class VideoDAO {
 	}
 
 	public Video selectById(String phoneNum) throws SQLException {
+		conn = connector.getMysqlConnection();
 		
 		String sql = "select * from VIDEO where USER_user_phone = ? order by video_date desc";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
