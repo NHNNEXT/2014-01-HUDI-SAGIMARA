@@ -115,36 +115,14 @@
 							<thead>
 								<tr>
 									<th>판매자아이디</th>
-									<th>시간</th>
-									<th>위치정보</th>
+									<th>요청시간</th>
+									<th>현재 등급</th>
 									<th>사진</th>
+									<th>위치정보</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>01087662074</td>
-									<td>2014-06-05</td>
-									<td>Seoul</td>
-									<td><a href="#">show</a></td>
-								</tr>
-								<tr>
-									<td>01087662074</td>
-									<td>2014-06-05</td>
-									<td>Seoul</td>
-									<td>Image</td>
-								</tr>
-								<tr>
-									<td>01087662074</td>
-									<td>2014-06-05</td>
-									<td>Seoul</td>
-									<td>Image</td>
-								</tr>
-								<tr>
-									<td>01087662074</td>
-									<td>2014-06-05</td>
-									<td>Seoul</td>
-									<td>Image</td>
-								</tr>
+
 							</tbody>
 						</table>
 					</article>

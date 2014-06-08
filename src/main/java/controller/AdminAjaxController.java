@@ -78,7 +78,7 @@ public class AdminAjaxController implements Controller {
 			request.setAttribute("json", json);	
 		}
 		else if (requestMap.get("request").equals("verification")){
-			ArrayList<VerifivationList> VerificationResult = makeVerificationData(5);
+			ArrayList<VerifivationList> VerificationResult = makeVerificationData(Integer.parseInt(requestMap.get("count")));
 			json = jb.objectToJson(VerificationResult);
 			logger.info(json);
 			request.setAttribute("json", json);
@@ -153,8 +153,8 @@ public class AdminAjaxController implements Controller {
 					list.setLocationCoordinate(location.getLocationCoordinate());
 					list.setLocationTime(location.getLocationTime());
 				}else{
-					list.setVideoLink("");
-					list.setVideoDate("");
+					list.setLocationCoordinate("");
+					list.setLocationTime("");
 				}
 				result.add(list);
 			}

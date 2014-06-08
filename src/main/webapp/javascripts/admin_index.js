@@ -2,7 +2,7 @@
 
 var updateManager = {
 	updateVisit : function(data, sectionID) {
-		// 해당번호 검색(방문)한 수를 업데이트
+		// 최근 방문자 수 업데이트
 		visitInfoBarManager.setData(data);
 		var elVisitInfo = editor.get(sectionID);
 		var elVisitInfoDetail = editor.get("#visited-graph", elVisitInfo);
@@ -13,7 +13,7 @@ var updateManager = {
 	},
 	
 	updateReport : function(data, sectionID) {
-		// 해당번호 검색(방문)한 수를 업데이트
+		// 최근 신고 건수 업데이트
 		visitInfoBarManager.setData(data);
 		var elVisitInfo = editor.get(sectionID);
 		var elVisitInfoDetail = editor.get("#report-graph", elVisitInfo);
@@ -26,11 +26,9 @@ var updateManager = {
 	setAnimation : function(state) {
 		// 페이지 에니메이션을 시작시키는 함수
 		var elContainer = editor.get("#container");
-		//var elFooter = editor.get("footer");
 		
 		var type = editor.resultFeatureDetector;
 		editor.setStyle(elContainer, type, state);
-		//editor.setStyle(elFooter, type, state);
 	}
 }
 
@@ -90,7 +88,7 @@ var sagimaraIndex = {
 			editor.playStatusFeatureDetector();
 			this.requestVisitsData("visits", ".daily-visitor-graph");
 			this.requestVisitsData("notify", ".daily-report-graph");
-			
+			this.requestVerificationList("verification",".verification-status");
 		},
 
 		requestVisitsData : function(requestType, sectionID) {
@@ -117,7 +115,48 @@ var sagimaraIndex = {
 					updateManager.setAnimation("running");
 				}
 			}
+		},
+		
+		requestVerificationList : function(requestType, sectionID) {
+
+			var url = "/admin/data";
+			var request = new XMLHttpRequest();
+			var formdata = new FormData();
+			var result;
+			
+			request.open("POST", url, true);			
+			formdata.append("request", requestType);
+			formdata.append("count", 5);
+			request.send(formdata);
+
+			request.onreadystatechange = function() {
+				if (request.readyState == 4 && request.status == 200) {
+					result = utility.JSONparse(request.response);
+				
+					var i;
+					var elSection = editor.get(sectionID);
+					var elTableBody = editor.get("tbody",elSection);
+					for (i=0;i<result.length;i++){
+						var newRow   = elTableBody.insertRow(elTableBody.rows.length);
+
+						//판매자 아이디
+						tableEditor.insertRow(newRow,0,result[i]["phoneNum"])
+						//요청시간
+						tableEditor.insertRow(newRow,1,result[i]["verificationTime"])
+						//현재 등급
+						tableEditor.insertRow(newRow,2,result[i]["verificationStatus"])
+						//사진 링크
+						tableEditor.insertRow(newRow,3,result[i]["videoLink"])
+						//위치 정보
+						tableEditor.insertRow(newRow,4,result[i]["locationCoordinate"])
+						
+					}
+					console.log(elTableBody);
+					
+				}
+			}
 		}
+		
 	};
 
 var contentAreaResize = function(){

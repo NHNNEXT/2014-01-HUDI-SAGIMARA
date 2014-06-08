@@ -104,7 +104,13 @@ var utility = {
 		return datetime;
 	}
 }
-
+var tableEditor = {
+		insertRow : function(row,cellNum, text) {
+			var newCell  = row.insertCell(cellNum);
+			var newText  = document.createTextNode(text)
+			newCell.appendChild(newText);
+		},
+}
 var visitInfoBarManager = {
 	// 해당번호로 검색(방문)한 사람수 관련 정보
 	// <<사용법>>
