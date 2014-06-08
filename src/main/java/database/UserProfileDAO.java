@@ -10,12 +10,14 @@ import dto.UserProfile;
 
 public class UserProfileDAO {
 	private Connection conn;
-
-	public UserProfileDAO(Connection conn) {
-		this.conn = conn;
+	private DatabaseConnector connector;
+	
+	public UserProfileDAO() {
+		this.connector = new DatabaseConnector();
 	}
 
 	public UserProfile selectById(String id) throws SQLException {
+		conn = connector.getMysqlConnection();
 		String sql = "select * from " + "USER_PROFILE"
 				+ " where phone_number = ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -24,7 +26,7 @@ public class UserProfileDAO {
 
 		UserProfile userProfile = null;
 
-		UserInquiryDAO userInquiryDAO = new UserInquiryDAO(conn);
+		UserInquiryDAO userInquiryDAO = new UserInquiryDAO();
 		UserInquiry userInquiry = userInquiryDAO.selectById(id);
 
 		if (rs.next()) {
@@ -36,6 +38,7 @@ public class UserProfileDAO {
 
 		pstmt.close();
 		rs.close();
+		conn.close();
 
 		return userProfile;
 	}

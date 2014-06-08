@@ -9,12 +9,15 @@ import dto.UserInquiry;
 
 public class UserInquiryDAO {
 	private Connection conn;
-
-	public UserInquiryDAO(Connection conn) {
-		this.conn = conn;
+	private DatabaseConnector connector;
+	
+	public UserInquiryDAO() {
+		this.connector = new DatabaseConnector();
 	}
 
 	public UserInquiry selectById(String id) throws SQLException {
+		conn = connector.getMysqlConnection();
+		
 		String sql = "select * from " + "USER_INQUIRY"
 				+ " where phone_number = ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -32,6 +35,7 @@ public class UserInquiryDAO {
 
 		pstmt.close();
 		rs.close();
+		conn.close();
 
 		return userInquiry;
 	}

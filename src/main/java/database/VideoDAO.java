@@ -1,7 +1,9 @@
 package database;
 
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import logger.SagimaraLogger;
@@ -17,13 +19,10 @@ public class VideoDAO {
 	
 	public VideoDAO() {
 		this.connector = new DatabaseConnector();
-		this.conn = connector.getMysqlConnection();
-	}
-	public VideoDAO(Connection conn) {
-		this.conn = conn;
 	}
 
 	public boolean add(Video video) throws SQLException {
+		conn = connector.getMysqlConnection();
 		String tableName = video.getTableName();
 		String sql = "INSERT INTO " + tableName
 				+ "(USER_user_phone, video_link, video_date)"
@@ -51,5 +50,29 @@ public class VideoDAO {
 		pstmt.close();
 		conn.close();
 		return true;
+	}
+
+	public Video selectById(String phoneNum) throws SQLException {
+		conn = connector.getMysqlConnection();
+		
+		String sql = "select * from VIDEO where USER_user_phone = ? order by video_date desc";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, phoneNum);
+		ResultSet rs = pstmt.executeQuery();
+
+		if (rs.next()) {
+			Video video = new Video(rs.getString("USER_user_phone"),
+									rs.getString("video_link"),
+									rs.getString("video_date"));
+			pstmt.close();
+			rs.close();
+			conn.close();
+			return video;
+		}
+
+		pstmt.close();
+		rs.close();
+		conn.close();
+		return null;
 	}
 }

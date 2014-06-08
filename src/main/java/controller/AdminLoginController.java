@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -21,18 +22,17 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.log4j.Logger;
 
 import utility.JsonBuilder;
-import database.DatabaseHandler;
+import database.AdminDAO;
+import dto.Admin;
 
 public class AdminLoginController implements Controller {
 	private Logger logger;
-	private DatabaseHandler dbh;
 	private JsonBuilder jb;
 	private String forwardPath;
 
 	public AdminLoginController(String forwardPath) {
 		super();
 		this.logger = SagimaraLogger.logger;
-		this.dbh = DatabaseHandler.getDatabaseHandler();
 		this.jb = JsonBuilder.getJsonBuilder();
 		this.forwardPath = forwardPath;
 	}
@@ -50,7 +50,7 @@ public class AdminLoginController implements Controller {
 		
 		logger.info(id + password);
 		
-		switch (dbh.CheckForadminLogin(id,password)) {
+		switch (CheckForadminLogin(id,password)) {
 		case 0:
 			json = jb.requestSuccessJSON();
 			HttpSession session = null;
@@ -71,6 +71,33 @@ public class AdminLoginController implements Controller {
 		request.setAttribute("json", json);
 
 		return forwardPath;
+	}
+	
+	public int CheckForadminLogin(String id, String password) {
+
+		Admin admin = new Admin();
+		Admin dbAdmin = new Admin();
+		AdminDAO adminDAO = new AdminDAO();
+
+		admin.setAdminId(id);
+		admin.setAdminPassword(password);
+
+		try {
+			dbAdmin = adminDAO.selectById(id);
+			
+			if (dbAdmin == null) {
+				return 2;
+			} else if (dbAdmin.getAdminPassword().equals(password)) {
+				return 0;
+			} else {
+				return 1;
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+		
+		return -1;
 	}
 
 	private Map<String, String> makeParameterMap(HttpServletRequest request) throws IOException {

@@ -45,7 +45,12 @@
 						<p>2014년 3월 18일 인증완료</p>
 						<p>2014년 3월 22일 재인증요청</p>
 						<section id="profile-button-section">
-							<button type="button" class="button button-red">재인증 요청</button>
+							<form name="verification-form" action="/insert/RequestData">
+								<input name="from" type="hidden">
+								<input name="to" type="hidden">
+								<input name="date" type="hidden">
+								<button id="verification-button-top" type="button" class="button button-red">인증 요청</button>
+							</form>
 						</section>
 					</section>
 				</section>
@@ -88,35 +93,12 @@
 				</section>
 				<section id="profile-status" class="clearfix profile-status">
 					<div class="contents"></div>
-					<button type="button" class="button">인증 요청</button>
-				</section>
-			</section>
-			<section id="info-wrapper">
-				<section id="detail-info" class="clearfix">
-					<section id="location-info" class="detail-info-item float-left">
-						<p>최근<br>위치정보</p>
-						<figure>
-							<div id="map-canvas">
-								<p></p>
-							</div>
-						</figure>
-					</section>
-					<section id="watch-info" class="detail-info-item float-left">
-						<p>지켜보는<br>사람의 수</p>
-						<figure>
-							<div id="watch-tool">
-								<p></p>
-							</div>
-						</figure>
-					</section>
-					<section id="caution-info" class="detail-info-item float-right">
-						<p>신고/주의<br>현황</p>
-						<figure>
-							<div id="caution-tool">
-								<p></p>
-							</div>
-						</figure>
-					</section>
+					<form name="verification-form" action="/insert/RequestData">
+						<input name="from" type="hidden">
+						<input name="to" type="hidden">
+						<input name="date" type="hidden">
+						<button id="verification-button-mid" type="button" class="button">인증 요청</button>
+					</form>
 				</section>
 			</section>
 			<section id="info-wrapper">
@@ -148,6 +130,14 @@
 				</section>
 			</section>
 		</div>
+		
+		<section id="requestPopUp">
+			<form class="requestPopUp-form" method="GET">
+				<div class="title">인증요청하시는 분의 연락처 입력</div>
+				<input class="request-input" placeholder="phoneNumber" type="text" name="admin_id">
+				<input class="request-button" id="verification-button-pop" type="submit" value="Submit">
+			</form>
+		</section>
 		<footer>
 			<div class="footer-logo">SAGIMARA</div>
 		</footer>

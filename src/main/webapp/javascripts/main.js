@@ -1,60 +1,11 @@
-var editor = {
-	get : function(selector, elements) {
-		//해당 element에 대한 querySelector element가 없을시 document에서 select
-		if(typeof elements == "undefined") {
-			elements = document;
-		}
-		var result = elements.querySelector(selector);
-		return result;
-	},
-	
-	getAll : function(selector, elements) {
-		//해당 element에 대한 querySelectorAll element가 없을시 document에서 select
-		if(typeof elements == "undefined") {
-			elements = document;
-		}
-		var result = elements.querySelectorAll(selector);
-		return result;
-	},
-		
-	setStyle : function(element, type, value) {
-		// 해당 element에 주어진 type의 스타일을 value값으로 변경
-		var targetStyle = element.style;
-		targetStyle.setProperty(type, value);
-	},
-	
-	updateInnerHTML : function(element, contents) {
-		// 해당 element에 contents을 삽입하는 함수
-		var updateContents = contents;
-		element.innerHTML = contents;
-	},
-	
-	resultFeatureDetector : "",
-	
-	playStatusFeatureDetector : function() {
-		//해당브라우져에서 동작가능한 playStatus를 찾아서 해당 타입을 resultFeatureDetector에 저장 해준다.
-		var result;
-		var elForCheck = editor.get("body");
-		var playStatus = {
-			"-webkit-animation-play-state" : typeof elForCheck.style.webkitAnimationPlayState, 
-			"-moz-animation-play-state" : typeof elForCheck.style.mozAnimationPlayState,
-			"animation-play-state" :  typeof elForCheck.style.animationPlayState
-		}
-
-		for(var key in playStatus){
-			if(playStatus[key] !== "undefined"){
-				result = key;
-			}
-		}
-		
-		this.resultFeatureDetector = result;
-	}
-}
 
 var oEventElements = {
 	// EventListener를 위한 elements
 	elSubmit : editor.get(".search-submit"),
-	elLogo : editor.get(".logo")
+	elLogo : editor.get(".logo"),
+	elVerificationTop : editor.get("#verification-button-top"),
+	elVerificationMid : editor.get("#verification-button-mid"),
+	elVerificationPop : editor.get("#verification-button-pop")
 };
 
 var userStatusInfo = {
@@ -180,59 +131,84 @@ var updateManager = {
 	}
 }
 
-var utility = {
-	requestPreventEvent : function(e) {
-		// submit 이벤트를 막는 기능
-		e.preventDefault();
-	},
-	
-	refresh : function(e) {
-		// 화면 리프래쉬 함수
-		window.location.reload(true);
-	},
-	
-	JSONparse : function(raw) {
-		// json파일을 json객체로 변환
-		var jsonObj = JSON.parse(raw);
-		return jsonObj;
-	},
-	
-	validPhone : function(input)
-	{
-		//입력된 전화번호의 유효성 판단
-		// 010-1234-5678, 010 1234 5678과 같이 하이픈이나 공백으로 구분되는 입력
-		var input = input.replace("-","");
-		input = input.replace(" ","");
+var requestLayer = {
+		openPopUp : function() {
+			//registerPopUp에 display 옵션을 block으로 설정해서 보이게함.(default: none)
+			var registerPopUp = editor.get("#requestPopUp");
+			editor.setStyle(registerPopUp, "display", "block");
+			
+			var deemedLayer = document.createElement("div");
+			deemedLayer.setAttribute("id", "deemed");
+			
+			var wrapper = editor.get("#wrap");
+			var height = editor.getStyle(wrapper, "height")
+			wrapper.appendChild(deemedLayer);
+			editor.setStyle(deemedLayer, "height", height);
+		},
 		
-		var inputLength = input.length;
+		closePopUp : function() {
+			var registerPopUp = editor.get("#requestPopUp");
+			editor.setStyle(registerPopUp, "display", "none");
+			
+			var wrapper = editor.get("#wrap");
+			var deemedLayer = document.getElementById("deemed");
+			wrapper.removeChild(deemedLayer);
+		},
 		
-		var midThreeDigitNumber = 10; //중간 3자리 핸드폰 번호 길이 
-		var midFourDigitNumber = 11; //중간 4자리 핸드폰 번호 길이
-		var forTest = 4; //test를 위한 길이 추후삭제요
-
-		if(inputLength === midThreeDigitNumber || inputLength === midFourDigitNumber || inputLength === forTest) {
-			return input;// 휴대폰 형식에 맞는 String
-		} else {
-			return false;// 휴대폰 형식이 아닌 경우
+		requestPopupRelocation : function() {
+			var registerPopUp = editor.get("#requestPopUp");
+			var formHeight = (window.innerHeight - 410) / 2;
+			var formWidth = (window.innerWidth - 410) / 2;
+			
+			registerPopUp.style.position = "fixed";
+			registerPopUp.style.top = formHeight + "px";
+			registerPopUp.style.left = formWidth + "px";
+		},
+		
+		setReuqestor : function(e) {
+			utility.requestPreventEvent(e);
+			
+			var requestor = e.target.parentElement[0].value;
+			this.closePopUp();
+			
+			var request = new XMLHttpRequest();
+			var url = "/insert/RequestData?from=" + requestor +"&to=" + sagimaraMain.phoneNumber + "&date=" + utility.getDateTime();
+			request.open("GET", url, true);
+			
+			request.send(null);
+			
+			request.onreadystatechange = function() {
+				if (request.readyState == 4 && request.status == 200) {
+					// json ajax 통신 부분
+					console.log(request.response);
+					
+				}
+			}
 		}
-		/* 추가 기능
-		- 앞자리 세자리에 대한 예외적용(010 부분)
-		- 국제 번호 형식에 대한 처리(+82 1012345678 등)
-		*/
 	}
-}
 
 var sagimaraMain = {
+	phoneNumber : "",
 	init : function() {
 		// 페이지 초기 세팅 관리 함수
 		// 검색 아이콘에 검색 관련 통신 이벤트등록
 		// 로고에 리프래쉬 기능 이벤트 등록
 		// 4일전~오늘날짜를 계산에서 보관
 		// FeatureDetector값을 찾아서 저장
-		oEventElements.elSubmit.addEventListener("click", this.requestSearchEvent, false);
+		oEventElements.elSubmit.addEventListener("click", this.requestSearchEvent.bind(this), false);
 		oEventElements.elLogo.addEventListener("click", utility.refresh, false);
+		oEventElements.elVerificationTop.addEventListener("click", this.verificationRequestEvent.bind(this), false);
+		oEventElements.elVerificationMid.addEventListener("click", this.verificationRequestEvent.bind(this), false);
+		oEventElements.elVerificationPop.addEventListener("click", requestLayer.setReuqestor.bind(requestLayer), false);
 		visitInfoBarManager.setDateSet()
 		editor.playStatusFeatureDetector();
+	},
+	
+	verificationRequestEvent : function(e) {
+		//인증요청에 대한 처리
+		utility.requestPreventEvent(e);
+		requestLayer.requestPopupRelocation();
+		requestLayer.openPopUp();
 	},
 	
 	requestSearchEvent : function(e) {
@@ -240,13 +216,13 @@ var sagimaraMain = {
 		utility.requestPreventEvent(e);
 		updateManager.setAnimation("paused");
 
-		var id = e.target.parentElement[0].value;
+		this.phoneNumber = e.target.parentElement[0].value;
 		var url = "/test";
 		var request = new XMLHttpRequest();
 		var formdata = new FormData();
 		var result;
 		
-		var input = utility.validPhone(id);
+		var input = utility.validPhone(this.phoneNumber);
 
 		request.open("POST", url, true);
 		if(input) {
@@ -270,5 +246,9 @@ var sagimaraMain = {
 		}
 	}
 }
+
+window.onresize = function() {
+	requestLayer.requestPopupRelocation();
+};
 
 window.onload = sagimaraMain.init();

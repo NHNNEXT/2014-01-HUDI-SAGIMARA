@@ -14,13 +14,15 @@ import dto.UserInquiry;
 
 public class InquiryDAO {
 	private Connection conn;
+	private DatabaseConnector connector;
 	private Logger logger = SagimaraLogger.logger;
-
-	public InquiryDAO(Connection conn) {
-		this.conn = conn;
+	
+	public InquiryDAO() {
+		this.connector = new DatabaseConnector();
 	}
 
 	public void add(Inquiry inquiry) throws SQLException {
+		conn = connector.getMysqlConnection();
 		String tableName = inquiry.getTableName();
 
 		String sql = "INSERT INTO " + tableName
@@ -40,10 +42,12 @@ public class InquiryDAO {
 		}
 
 		pstmt.close();
+		conn.close();
 	}
 
 
-	public UserInquiry select() throws SQLException{
+	public UserInquiry selectForGraph() throws SQLException{
+		conn = connector.getMysqlConnection();
 		
 		String sql = "select "
 				+ "count(if(inquiry_time=(CURRENT_DATE()-INTERVAL 6 DAY),inquiry_time,null))  AS '6day ago',"
@@ -69,7 +73,10 @@ public class InquiryDAO {
 
 		pstmt.close();
 		rs.close();
+		conn.close();
 
 		return userInquiry;
 	}
+
+
 }

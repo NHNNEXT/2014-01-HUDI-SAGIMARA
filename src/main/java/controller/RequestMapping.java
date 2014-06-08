@@ -14,6 +14,7 @@ public class RequestMapping {
 		put("/admin/register", new AdminRegisterController("/json.jsp"));
 		put("/admin/login_submit", new AdminLoginController("/json.jsp"));
 		put("/push/alarm", new PushAlarmController("/json.jsp"));
+		put("/admin/data", new AdminAjaxController("/json.jsp"));
 		
 		//GET
 		put("/", new ForwardController("/index.jsp"));
@@ -23,6 +24,8 @@ public class RequestMapping {
 		put("/insert/location", new ForwardController("/insertLocation.jsp"));
 		put("/admin/login", new ForwardController("/admin_login.jsp"));
 		put("/admin/index",new AdminIndexPageController("/admin_index.jsp"));
+		put("/admin/userList", new AdminUserListController("/admin_userList.jsp"));
+		put("/admin/verificationList", new AdminUserListController("/admin_verificationList.jsp"));
 		
 		//TEST
 		put("/main_test", new ForwardController("/javascripts/test/main_test.jsp"));

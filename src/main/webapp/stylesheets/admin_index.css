@@ -1,10 +1,10 @@
-#container {
+/* #container {
 	-webkit-animation-play-state:running;
 	-moz-animation:running;
  	animation:running;
 }
 
-
+ */
 
 .clearfix:after {
 	content: ".";
@@ -105,3 +105,140 @@
 .recently-report-list {
 	clear:both;
 }
+
+/*Table*/
+
+.table {
+	font-size:14px;
+	width:100%;
+	margin-bottom:20px;
+}
+
+.table a {
+	text-decoration: none;
+	color:#f8454a;
+}
+
+.table>thead:first-child>tr:first-child>th {
+	border-top:0px;
+	font-size:15px;
+	font-weight:bold;
+	text-align:left;	
+}
+
+.table>thead>tr>th,
+.table>tbody>tr>td {
+	padding:8px;
+	line-height:1.5;
+	vertical-align:top;
+	border-top:1px solid rgba(248, 69, 74, 0.4);
+}
+
+.table-striped>tbody>tr:nth-child(odd)>td{
+	background-color:rgba(248, 69, 74, 0.25);
+}
+
+
+
+/*
+	Detail Info Section - daily-visitor-graph
+*/
+#daily-visitor-graph#daily-report-graph {
+	position: relative;
+	height: 100%;
+}
+
+#daily-visitor-graph p{
+	font-family: inherit;
+ 	font-size: 15px; 
+ 	height: 30px;
+ 	line-height: 30px;
+ 	text-align: center;
+	color: #000;
+}
+
+#daily-visitor-graph figure {
+	background: #fff;
+	background-size:50%;
+	background-position:center;
+}
+
+#visited-graph {
+	position: relative;
+	height: 300px;
+	margin: 0px 20% 0px 20%;
+	list-style: none;
+	background: #fff;
+	font-size: 13px;
+	font-family: inherit;
+	-webkit-animation:fade-in 3s;
+	-webkit-animation-play-state:paused;
+}
+
+#visited-graph ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+#visited-graph li {
+	position: absolute;
+	bottom: 0;
+	width: 30%;
+	z-index: 2;
+	margin: 0;
+	padding: 0;
+	text-align: center;
+	list-style: none;
+}
+
+#visited-graph li.bar-section {
+	height: 0px;
+	padding-top: 2px;
+	color: #AAA;
+} 
+
+#visited-graph li.bar {
+	width: 40%;
+	border: 1px solid;
+	border-bottom: none;
+	color: #000;
+	height: 0px;
+	-webkit-transition: height 1s, -webkit-transform 1s;
+	-moz-transition: height 1s, -webkit-transform 1s;
+	transition: height 1s, transform 1s;
+	left: 30%;
+	background: #37383c;
+	border-color: #37383c;
+}
+
+#visited-graph li.bar p {
+	margin: -25px 0 0;
+	padding: 0;
+}
+
+#visited-graph .bar-section:nth-of-type(1) {
+	left: 0;
+	bottom : 10%;
+}
+
+#visited-graph .bar-section:nth-of-type(2) {
+	left: 18%;
+	bottom : 10%;
+}
+
+#visited-graph .bar-section:nth-of-type(3) {
+	left: 36%;
+	bottom : 10%;
+}
+
+#visited-graph .bar-section:nth-of-type(4) {
+	left: 54%;
+	bottom : 10%;
+}
+
+#visited-graph .bar-section:nth-of-type(5) {
+	left: 72%;
+	bottom : 10%;
+}
+
