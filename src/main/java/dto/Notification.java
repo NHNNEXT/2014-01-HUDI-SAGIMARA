@@ -6,7 +6,7 @@ public class Notification extends BaseModel{
 	private String notificationDate;
 	private String notificationText;
 	
-	Notification(String from,String to,String date,String text){
+	public Notification(String from,String to,String date,String text){
 		this.notificationFrom = from;
 		this.notificationTo = to;
 		this.notificationDate = date;

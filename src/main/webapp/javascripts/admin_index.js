@@ -89,6 +89,9 @@ var sagimaraIndex = {
 			this.requestVisitsData("visits", ".daily-visitor-graph");
 			this.requestVisitsData("notify", ".daily-report-graph");
 			this.requestVerificationList("verification",".verification-status");
+			this.requestVerificationRequestList("request",".verification-request-list");
+			this.requestNotificationList("notification",".recently-report-list");
+			
 		},
 
 		requestVisitsData : function(requestType, sectionID) {
@@ -151,11 +154,81 @@ var sagimaraIndex = {
 						tableEditor.insertRow(newRow,4,result[i]["locationCoordinate"])
 						
 					}
-					console.log(elTableBody);
-					
+				}
+			}
+		},
+		
+		requestVerificationRequestList : function(requestType, sectionID) {
+
+			var url = "/admin/data";
+			var request = new XMLHttpRequest();
+			var formdata = new FormData();
+			var result;
+			
+			request.open("POST", url, true);			
+			formdata.append("request", requestType);
+			formdata.append("count", 5);
+			request.send(formdata);
+
+			request.onreadystatechange = function() {
+				if (request.readyState == 4 && request.status == 200) {
+					result = utility.JSONparse(request.response);
+				
+					var i;
+					var elSection = editor.get(sectionID);
+					var elTableBody = editor.get("tbody",elSection);
+					for (i=0;i<result.length;i++){
+						var newRow   = elTableBody.insertRow(elTableBody.rows.length);
+
+						//판매자 아이디
+						tableEditor.insertRow(newRow,0,result[i]["requestFrom"])
+						//마지막 요청시간
+						tableEditor.insertRow(newRow,1,result[i]["requestDate"])
+						//요청횟수
+						tableEditor.insertRow(newRow,2,result[i]["requestCount"])
+						
+					}
+				}
+			}
+		},
+		
+		requestNotificationList : function(requestType, sectionID) {
+
+			var url = "/admin/data";
+			var request = new XMLHttpRequest();
+			var formdata = new FormData();
+			var result;
+			
+			request.open("POST", url, true);			
+			formdata.append("request", requestType);
+			formdata.append("count", 5);
+			request.send(formdata);
+
+			request.onreadystatechange = function() {
+				if (request.readyState == 4 && request.status == 200) {
+					result = utility.JSONparse(request.response);
+				
+					var i;
+					var elSection = editor.get(sectionID);
+					var elTableBody = editor.get("tbody",elSection);
+					for (i=0;i<result.length;i++){
+						var newRow   = elTableBody.insertRow(elTableBody.rows.length);
+
+						//신고대상
+						tableEditor.insertRow(newRow,0,result[i]["notificationFrom"])
+						//신고자
+						tableEditor.insertRow(newRow,1,result[i]["notificationTo"])
+						//신고날짜
+						tableEditor.insertRow(newRow,2,result[i]["notificationDate"])
+						//신고내용
+						tableEditor.insertRow(newRow,3,result[i]["notificationText"])
+						
+					}
 				}
 			}
 		}
+		
+		
 		
 	};
 

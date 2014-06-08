@@ -29,7 +29,9 @@ import database.RequestDAO;
 import database.VerificationDAO;
 import database.VideoDAO;
 import dto.Location;
+import dto.Notification;
 import dto.Request;
+import dto.RequestList;
 import dto.UserInquiry;
 import dto.Verification;
 import dto.VerifivationList;
@@ -84,15 +86,20 @@ public class AdminAjaxController implements Controller {
 			request.setAttribute("json", json);
 		}
 		else if (requestMap.get("request").equals("request")){
-			ArrayList<Request> requestList = getRequestList(Integer.parseInt(requestMap.get("count")));
+			ArrayList<RequestList> requestList = getRequestList(Integer.parseInt(requestMap.get("count")));
 			json = jb.objectToJson(requestList);
+			logger.info(json);
+			request.setAttribute("json", json);	
+		}else if (requestMap.get("request").equals("notification")){
+			ArrayList<Notification> notiList = getNotificationList(Integer.parseInt(requestMap.get("count")));
+			json = jb.objectToJson(notiList);
 			logger.info(json);
 			request.setAttribute("json", json);	
 		}
 		return forwardPath;
 	}
 
-	
+
 	private Map<String, String> makeParameterMap(HttpServletRequest request) throws IOException {
 		FileItemFactory factory = new DiskFileItemFactory();
 		ServletFileUpload upload = new ServletFileUpload(factory);
@@ -224,7 +231,7 @@ public class AdminAjaxController implements Controller {
 		return null;
 	}
 
-	public ArrayList<Request> getRequestList(int count) {
+	public ArrayList<RequestList> getRequestList(int count) {
 		RequestDAO reqDao = new RequestDAO();
 
 		try {
@@ -232,6 +239,19 @@ public class AdminAjaxController implements Controller {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			logger.info("Request select Fail");
+		}
+		return null;
+	}
+	
+	
+	private ArrayList<Notification> getNotificationList(int count) {
+		NotificationDAO notiDAO = new NotificationDAO();
+		
+		try {
+			return notiDAO.getList(count);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			logger.info("Notification select Fail");
 		}
 		return null;
 	}

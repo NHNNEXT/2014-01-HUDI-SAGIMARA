@@ -110,7 +110,7 @@
 				</section>
 				<section class="verification-status">
 					<h1>판매자 인증 처리 현황</h1><span class="refresh">Refresh</span>
-					<article id="list">
+					<article>
 						<table class="table table-striped">
 							<thead>
 								<tr>
@@ -129,11 +129,38 @@
 				</section>
 				<section class="verification-request-list">
 					<h1>구매자 인증 요청 목록</h1>
-					<article>목록이죠 후후</article>
+					<article>
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th>요청대상</th>
+									<th>마지막 요청시간</th>
+									<th>요청횟수</th>
+								</tr>
+							</thead>
+							<tbody>
+
+							</tbody>
+						</table>
+					</article>
 				</section>
 				<section class="recently-report-list">
 					<h1>최근 신고 목록</h1>
-					<article>신고 목록 입니다 하핫</article>
+					<article>
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th>신고 대상</th>
+									<th>신고한 사람</th>
+									<th>신고 시간</th>
+									<th>신고 내용</th>
+								</tr>
+							</thead>
+							<tbody>
+
+							</tbody>
+						</table>
+					</article>
 				</section>
 			</section>
 		</div>

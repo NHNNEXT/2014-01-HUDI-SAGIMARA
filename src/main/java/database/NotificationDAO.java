@@ -4,11 +4,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import logger.SagimaraLogger;
 
 import org.apache.log4j.Logger;
 
+import dto.Notification;
+import dto.RequestList;
 import dto.UserInquiry;
 
 
@@ -80,5 +83,30 @@ public class NotificationDAO {
 
 		return userInquiry;
 		
+	}
+
+	public ArrayList<Notification> getList(int count) throws SQLException {
+		String sql = "select * from NOTIFICATION order by notify_time desc Limit ?";
+
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, count);
+		ResultSet rs = pstmt.executeQuery();
+
+		ArrayList<Notification> requestList = new ArrayList<Notification>() ;
+		
+		
+		while (rs.next()) {
+			Notification req = new Notification(rs.getString("notifty_from"),
+												rs.getString("notify_to"),
+												rs.getString("notify_time"),
+												rs.getString("notify_detail"));
+			requestList.add(req);
+		}
+
+		pstmt.close();
+		rs.close();
+		conn.close();
+		
+		return requestList;
 	}
 }
