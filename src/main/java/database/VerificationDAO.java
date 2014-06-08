@@ -44,8 +44,8 @@ public class VerificationDAO {
 	}
 
 	public void add(Verification verification) throws SQLException {
+		conn = connector.getMysqlConnection();
 		String tableName = verification.getTableName();
-
 		String sql = "INSERT INTO " + tableName + " (USER_user_phone,user_status,verification_time) VALUES (?, ?, ?)";
 
 		PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -71,7 +71,7 @@ public class VerificationDAO {
 	}
 
 	public ArrayList<Verification> getList(int count) throws SQLException{
-
+		conn = connector.getMysqlConnection();
 		String sql = "select USER_user_phone,user_status,verification_time from VERIFICATION order by verification_time desc Limit ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setInt(1, count);

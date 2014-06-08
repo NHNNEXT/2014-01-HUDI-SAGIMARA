@@ -48,7 +48,7 @@ public class UserDAO {
 	}
 	
 	public ArrayList<UserForAdmin> selectForAdminOrderBy(int maxRow, int pageNum, String orderBy) throws SQLException {
-		
+		conn = connector.getMysqlConnection();	
 		String sql = "select " +
 				"u.user_phone 			AS 'phone_number', " +
 		        "u.user_status 			AS 'status', " +
