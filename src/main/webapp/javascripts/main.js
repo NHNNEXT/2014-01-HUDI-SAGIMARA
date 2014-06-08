@@ -150,14 +150,20 @@ var sagimaraMain = {
 	verificationRequestEvent : function(e) {
 		//인증요청에 대한 처리
 		utility.requestPreventEvent(e);
-		console.log(e.toElement.parentNode[0]);
-		var verification = e.toElement.parentNode
-
-		verification[0].value = "2222";
-		verification[1].value = this.phoneNumber;
-		verification[2].value = utility.getDateTime();
-
-		verification.submit();	
+		
+		var request = new XMLHttpRequest();
+		var url = "/insert/RequestData?from=" + "2222" +"&to=" + this.phoneNumber + "&date=" + utility.getDateTime();
+		request.open("GET", url, true);
+		
+		request.send(null);
+		
+		request.onreadystatechange = function() {
+			if (request.readyState == 4 && request.status == 200) {
+				// json ajax 통신 부분
+				console.log(request.response);
+			}
+		}
+		
 	},
 	
 	requestSearchEvent : function(e) {
