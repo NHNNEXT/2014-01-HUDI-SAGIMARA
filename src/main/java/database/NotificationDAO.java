@@ -11,7 +11,6 @@ import logger.SagimaraLogger;
 import org.apache.log4j.Logger;
 
 import dto.Notification;
-import dto.RequestList;
 import dto.UserInquiry;
 
 

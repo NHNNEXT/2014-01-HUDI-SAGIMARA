@@ -3,7 +3,8 @@ var oEventElements = {
 	// EventListener를 위한 elements
 	elSubmit : editor.get(".search-submit"),
 	elLogo : editor.get(".logo"),
-	elVerification : editor.get("#verification-button")
+	elVerificationTop : editor.get("#verification-button-top"),
+	elVerificationMid : editor.get("#verification-button-mid")
 };
 
 var userStatusInfo = {
@@ -140,7 +141,8 @@ var sagimaraMain = {
 		// FeatureDetector값을 찾아서 저장
 		oEventElements.elSubmit.addEventListener("click", this.requestSearchEvent.bind(this), false);
 		oEventElements.elLogo.addEventListener("click", utility.refresh, false);
-		oEventElements.elVerification.addEventListener("click", this.verificationRequestEvent.bind(this), false);
+		oEventElements.elVerificationTop.addEventListener("click", this.verificationRequestEvent.bind(this), false);
+		oEventElements.elVerificationMid.addEventListener("click", this.verificationRequestEvent.bind(this), false);
 		visitInfoBarManager.setDateSet()
 		editor.playStatusFeatureDetector();
 	},
@@ -154,8 +156,8 @@ var sagimaraMain = {
 		verification[0].value = "2222";
 		verification[1].value = this.phoneNumber;
 		verification[2].value = utility.getDateTime();
-		//verification.action += "/insert/RequestData?from=1111&to=2222&date=1999-01-01%2012:12:12";
-		verification.submit();
+
+		verification.submit();	
 	},
 	
 	requestSearchEvent : function(e) {

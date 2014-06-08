@@ -14,10 +14,10 @@ public class UserProfileDAO {
 	
 	public UserProfileDAO() {
 		this.connector = new DatabaseConnector();
-		this.conn = connector.getMysqlConnection();
 	}
 
 	public UserProfile selectById(String id) throws SQLException {
+		conn = connector.getMysqlConnection();
 		String sql = "select * from " + "USER_PROFILE"
 				+ " where phone_number = ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);

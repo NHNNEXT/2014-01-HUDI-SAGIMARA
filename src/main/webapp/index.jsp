@@ -49,7 +49,7 @@
 								<input name="from" type="hidden">
 								<input name="to" type="hidden">
 								<input name="date" type="hidden">
-								<button id="verification-button" type="button" class="button button-red">인증 요청</button>
+								<button id="verification-button-top" type="button" class="button button-red">인증 요청</button>
 							</form>
 						</section>
 					</section>
@@ -93,7 +93,12 @@
 				</section>
 				<section id="profile-status" class="clearfix profile-status">
 					<div class="contents"></div>
-					<button type="button" class="button">인증 요청</button>
+					<form name="verification-form" action="/insert/RequestData">
+						<input name="from" type="hidden">
+						<input name="to" type="hidden">
+						<input name="date" type="hidden">
+						<button id="verification-button-mid" type="button" class="button">인증 요청</button>
+					</form>
 				</section>
 			</section>
 			<section id="info-wrapper">
