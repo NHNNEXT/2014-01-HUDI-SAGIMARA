@@ -20,11 +20,11 @@ public class RequestDAO {
 	
 	public RequestDAO() {
 		this.connector = new DatabaseConnector();
-		this.conn = connector.getMysqlConnection();
 	}
 
 	public ArrayList<Request> selectByToPhoneNumberAndLatestDate(
 			String userPhone, String latestDate) throws SQLException {
+		conn = connector.getMysqlConnection();
 		String sql = "SELECT * FROM " + "REQUEST"
 				+ " WHERE request_to = ? AND request_date > ?";
 		PreparedStatement pstmt;
@@ -46,6 +46,7 @@ public class RequestDAO {
 	}
 
 	public boolean add(Request request) throws SQLException {
+		conn = connector.getMysqlConnection();
 		String tableName = request.getTableName();
 		String sql = "INSERT INTO " + tableName + " VALUES (?, ?, ?)";
 
@@ -74,6 +75,7 @@ public class RequestDAO {
 	}
 
 	public ArrayList<RequestList> getList(int count) throws SQLException {
+		conn = connector.getMysqlConnection();
 		
 		String sql = "select request_to, request_date, count(request_to) as count from REQUEST group by request_to order by request_date desc Limit ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);

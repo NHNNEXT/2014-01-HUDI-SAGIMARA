@@ -19,10 +19,10 @@ public class InquiryDAO {
 	
 	public InquiryDAO() {
 		this.connector = new DatabaseConnector();
-		this.conn = connector.getMysqlConnection();
 	}
 
 	public void add(Inquiry inquiry) throws SQLException {
+		conn = connector.getMysqlConnection();
 		String tableName = inquiry.getTableName();
 
 		String sql = "INSERT INTO " + tableName
@@ -47,6 +47,7 @@ public class InquiryDAO {
 
 
 	public UserInquiry selectForGraph() throws SQLException{
+		conn = connector.getMysqlConnection();
 		
 		String sql = "select "
 				+ "count(if(inquiry_time=(CURRENT_DATE()-INTERVAL 6 DAY),inquiry_time,null))  AS '6day ago',"

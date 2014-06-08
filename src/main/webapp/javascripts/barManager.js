@@ -24,6 +24,14 @@ var editor = {
 		targetStyle.setProperty(type, value);
 	},
 	
+	getStyle : function(element, type) {
+		// 해당 element에 주어진 type의 스타일 value 리턴
+		var targetStyle = window.getComputedStyle(element);
+		
+		return targetStyle.getPropertyValue(type);
+
+	},
+	
 	updateInnerHTML : function(element, contents) {
 		// 해당 element에 contents을 삽입하는 함수
 		var updateContents = contents;

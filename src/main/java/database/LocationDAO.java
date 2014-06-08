@@ -18,10 +18,11 @@ public class LocationDAO {
 	
 	public LocationDAO() {
 		this.connector = new DatabaseConnector();
-		this.conn = connector.getMysqlConnection();
 	}
 
 	public boolean add(Location location) throws SQLException {
+		conn = connector.getMysqlConnection();
+		
 		String tableName = location.getTableName();
 		String sql = "INSERT INTO "
 				+ tableName
@@ -52,6 +53,8 @@ public class LocationDAO {
 	}
 
 	public Location selectById(String phoneNum) throws SQLException {
+		conn = connector.getMysqlConnection();
+		
 		String sql = "select * from Location where USER_user_phone = ? order by location_time desc";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, phoneNum);

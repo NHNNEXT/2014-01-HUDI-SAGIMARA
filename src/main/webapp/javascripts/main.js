@@ -4,7 +4,8 @@ var oEventElements = {
 	elSubmit : editor.get(".search-submit"),
 	elLogo : editor.get(".logo"),
 	elVerificationTop : editor.get("#verification-button-top"),
-	elVerificationMid : editor.get("#verification-button-mid")
+	elVerificationMid : editor.get("#verification-button-mid"),
+	elVerificationPop : editor.get("#verification-button-pop")
 };
 
 var userStatusInfo = {
@@ -130,6 +131,61 @@ var updateManager = {
 	}
 }
 
+var requestLayer = {
+		openPopUp : function() {
+			//registerPopUp에 display 옵션을 block으로 설정해서 보이게함.(default: none)
+			var registerPopUp = editor.get("#requestPopUp");
+			editor.setStyle(registerPopUp, "display", "block");
+			
+			var deemedLayer = document.createElement("div");
+			deemedLayer.setAttribute("id", "deemed");
+			
+			var wrapper = editor.get("#wrap");
+			var height = editor.getStyle(wrapper, "height")
+			wrapper.appendChild(deemedLayer);
+			editor.setStyle(deemedLayer, "height", height);
+		},
+		
+		closePopUp : function() {
+			var registerPopUp = editor.get("#requestPopUp");
+			editor.setStyle(registerPopUp, "display", "none");
+			
+			var wrapper = editor.get("#wrap");
+			var deemedLayer = document.getElementById("deemed");
+			wrapper.removeChild(deemedLayer);
+		},
+		
+		requestPopupRelocation : function() {
+			var registerPopUp = editor.get("#requestPopUp");
+			var formHeight = (window.innerHeight - 410) / 2;
+			var formWidth = (window.innerWidth - 410) / 2;
+			
+			registerPopUp.style.position = "fixed";
+			registerPopUp.style.top = formHeight + "px";
+			registerPopUp.style.left = formWidth + "px";
+		},
+		
+		setReuqestor : function(e) {
+			utility.requestPreventEvent(e);
+			
+			var requestor = e.target.parentElement[0].value;
+			this.closePopUp();
+			
+			var request = new XMLHttpRequest();
+			var url = "/insert/RequestData?from=" + requestor +"&to=" + sagimaraMain.phoneNumber + "&date=" + utility.getDateTime();
+			request.open("GET", url, true);
+			
+			request.send(null);
+			
+			request.onreadystatechange = function() {
+				if (request.readyState == 4 && request.status == 200) {
+					// json ajax 통신 부분
+					console.log(request.response);
+					
+				}
+			}
+		}
+	}
 
 var sagimaraMain = {
 	phoneNumber : "",
@@ -143,6 +199,7 @@ var sagimaraMain = {
 		oEventElements.elLogo.addEventListener("click", utility.refresh, false);
 		oEventElements.elVerificationTop.addEventListener("click", this.verificationRequestEvent.bind(this), false);
 		oEventElements.elVerificationMid.addEventListener("click", this.verificationRequestEvent.bind(this), false);
+		oEventElements.elVerificationPop.addEventListener("click", requestLayer.setReuqestor.bind(requestLayer), false);
 		visitInfoBarManager.setDateSet()
 		editor.playStatusFeatureDetector();
 	},
@@ -150,14 +207,8 @@ var sagimaraMain = {
 	verificationRequestEvent : function(e) {
 		//인증요청에 대한 처리
 		utility.requestPreventEvent(e);
-		console.log(e.toElement.parentNode[0]);
-		var verification = e.toElement.parentNode
-
-		verification[0].value = "2222";
-		verification[1].value = this.phoneNumber;
-		verification[2].value = utility.getDateTime();
-
-		verification.submit();	
+		requestLayer.requestPopupRelocation();
+		requestLayer.openPopUp();
 	},
 	
 	requestSearchEvent : function(e) {
@@ -195,5 +246,9 @@ var sagimaraMain = {
 		}
 	}
 }
+
+window.onresize = function() {
+	requestLayer.requestPopupRelocation();
+};
 
 window.onload = sagimaraMain.init();

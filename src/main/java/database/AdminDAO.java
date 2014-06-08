@@ -18,10 +18,10 @@ public class AdminDAO {
 	
 	public AdminDAO() {
 		this.connector = new DatabaseConnector();
-		this.conn = connector.getMysqlConnection();
 	}
 
 	public Admin selectById(String id) throws SQLException {
+		conn = connector.getMysqlConnection();
 		String sql = "select * from " + "ADMIN" + " where  admin_id = ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, id);
@@ -43,6 +43,7 @@ public class AdminDAO {
 	}
 
 	public void add(Admin admin) throws SQLException {
+		conn = connector.getMysqlConnection();
 		String tableName = admin.getTableName();
 
 		String sql = "INSERT INTO " + tableName + " VALUES (?, ?, ?, ?, ?)";
@@ -55,6 +56,7 @@ public class AdminDAO {
 		resultLog(admin, tableName, result);
 
 		pstmt.close();
+		conn.close();
 	}
 
 	private void resultLog(Admin admin, String tableName, int result) {

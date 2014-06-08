@@ -21,10 +21,10 @@ public class NotificationDAO {
 
 	public NotificationDAO() {
 		this.connector = new DatabaseConnector();
-		this.conn = connector.getMysqlConnection();
 	}
 
 	public void add(dto.Notification notification) throws SQLException {
+		conn = connector.getMysqlConnection();
 		String tableName = notification.getTableName();
 		String sql = "INSERT INTO "
 				+ tableName
@@ -53,6 +53,7 @@ public class NotificationDAO {
 	}
 
 	public UserInquiry selectForGraph() throws SQLException {
+		conn = connector.getMysqlConnection();
 		String sql = "select "
 				+ "count(if(notify_time=(CURRENT_DATE()-INTERVAL 6 DAY),notify_time,null))  AS '6day ago',"
 				+ "count(if(notify_time=(CURRENT_DATE()-INTERVAL 5 DAY),notify_time,null))  AS '5day ago',"
@@ -85,6 +86,7 @@ public class NotificationDAO {
 	}
 
 	public ArrayList<Notification> getList(int count) throws SQLException {
+		conn = connector.getMysqlConnection();
 		String sql = "select * from NOTIFICATION order by notify_time desc Limit ?";
 
 		PreparedStatement pstmt = conn.prepareStatement(sql);
