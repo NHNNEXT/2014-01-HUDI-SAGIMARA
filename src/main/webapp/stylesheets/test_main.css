@@ -7,6 +7,60 @@ div, section, section {
 	border:solid 1px red;
 }
 */
+
+/* temp
+@media screen and (max-width: 520px) {
+	body {
+		overflow-x: hidden;
+	}
+}
+*/
+
+/*
+temp
+@media screen and (max-width: 520px) {
+	#location-info {
+		position: absolute;
+		top: 100%;
+		height: 100%;
+		width: 100%;
+		left: 0%;
+	} 
+}
+*/
+
+/*
+temp
+@media screen and (max-width: 520px) {
+	#watch-info {
+		position: absolute;
+		top: 100%;
+		height: 100%;
+		width: 100%;
+		left: 100%;
+	} 
+}
+*/
+
+/*
+temp
+@media screen and (max-width: 520px) {
+	#caution-info {
+		position: absolute;
+		top: 100%;
+		height: 100%;
+		width: 100%;
+		left: 200%;
+	} 
+}
+*/
+
+@media screen and (max-width: 520px) {
+	body {
+		overflow-x: hidden;
+	} 
+}
+
 .column {
 	position: relative;
 	margin-top: 10px;
@@ -15,14 +69,10 @@ div, section, section {
 	height: 50px;
 	float: left;
 	overflow: hidden;
-
 	-webkit-transition: width 0.3s;
 	-moz-transition: width 0.3s;
 	transition: width 0.3s;
-
 	-webkit-backface-visibility: hidden;
-	-moz-backface-visibility: hidden;
-	backface-visibility: hidden;
 }
 
 .logo {
@@ -223,7 +273,7 @@ div, section, section {
 	font-size: 30px;
 	line-height: 50px;
 	-webkit-transition: background 1s, height 0.5s, -webkit-transform 1s;
-	-moz-transition: background 1s, height 0.5s, -moz-transform 1s;
+	-moz-transition: background 1s, height 0.5s, -webkit-transform 1s;
 	transition: background 1s, height 0.5s, transform 1s;
 }
 
@@ -338,7 +388,7 @@ div, section, section {
 	color: #000;
 	height: 0px;
 	-webkit-transition: height 1s, -webkit-transform 1s;
-	-moz-transition: height 1s, -moz-transform 1s;
+	-moz-transition: height 1s, -webkit-transform 1s;
 	transition: height 1s, transform 1s;
 	left: 30%;
 	background: #37383c;
@@ -396,7 +446,7 @@ div, section, section {
 }
 
 #location-info figure {
-	background: #fff url("/images/location.png") no-repeat;
+	background: #fff url("../images/location.png") no-repeat;
 	background-size:70%;
 	background-position:center;
 	margin: 0 auto;
@@ -406,6 +456,15 @@ div, section, section {
 	opacity : 0.2;
 }
 
+@media screen and (max-width: 520px) {
+	#location-info {
+		position: relative;
+		top: 0px;
+		height: 100%;
+		width: 100%;
+		left: 0%;
+	} 
+}
 
 #map-canvas {
 	position: relative;
@@ -450,13 +509,22 @@ div, section, section {
 }
 
 #watch-info figure {
-	background: #fff url("/images/eye.png") no-repeat;
+	background: #fff url("../images/eye.png") no-repeat;
 	background-size:70%;
-	background-position:center;
+	background-position: center;
 	margin: 0 auto;
 	max-width : 280px;
 }
 
+@media screen and (max-width: 520px) {
+	#watch-info {
+		position: relative;
+		top: -220px;
+		height: 100%;
+		width: 100%;
+		left: 100%;
+	} 
+}
 
 #watch-tool {
 	position: relative;
@@ -497,11 +565,21 @@ div, section, section {
 }
 
 #caution-info figure {
-	background: #fff url("/images/caution.png") no-repeat;
+	background: #fff url("../images/caution.png") no-repeat;
 	background-size:70%;
 	background-position:center;
 	margin: 0 auto;
 	max-width : 280px;
+}
+
+@media screen and (max-width: 520px) {
+	#caution-info {
+		position: relative;
+		top: -440px;
+		height: 100%;
+		width: 100%;
+		left: 200%;
+	} 
 }
 
 #caution-tool {
@@ -521,97 +599,7 @@ div, section, section {
 	font-family: inherit;
 	background: rgba(255, 255, 255, 0.7);
 }
-/*
-	Popup & deemed
-*/
-#deemed {
-	width:100%;
-	height:100%;
-	position:absolute;
-	top:0;
-	left:0;
-	opacity:0.68;
-	background:#000;
-	z-index:20;
-}
 
-#requestPopUp {
-	/* RegisterPopUp은 처음에 안보여야 하기 때문에 display:none*/
-	background:#000;
-	padding : 10px;
-	height:90px;
-	display: none;
-	color: #fff;
-	border: 1px solid;
-	z-index:22;
-
-	text-align: center;
-
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	border-radius: 3px;
-
-}
-
-#requestPopUp .title {
-	padding : 5px;
-}
-
-
-.request-input {
-	position: relative;
-	border: none;
-	outline: none;
-	background: #fff;
-	width: 50%;
-	height: 40px;
-	margin: 0;
-	z-index: 10;
-	padding: 0px 0px 0px 20px;
-	font-family: inherit;
-	font-size: 20px;
-	color: #2c3e50;
-	overflow: hidden;
-}
-
-@media screen and (max-width: 520px) {
-	.search-input {
-		padding: 0;
-		font-size: 10px;
-	} 
-}
-
-.request-input::-webkit-input-placeholder {
-	color: #efb480;
-}
-
-.request-input:-moz-placeholder {
-	color: #efb480;
-}
-
-.request-input::-moz-placeholder {
-	color: #efb480;
-}
-
-.request-input:-ms-input-placeholder {
-	color: #efb480;
-}
-
-.request-button {
-	font-family: inherit;
-	font-size: 12px;
-	color: #fff;
-	border: 1px solid;
-	-webkit-border-radius: 8px; 
-	-moz-border-radius: 8px;
-	border-radius: 8px;
-	padding: 8px 16px 8px 16px;
-	background-color: transparent;
-}
-
-.request-button:hover {
-	background: rgba(255, 255, 255, 0.2);
-}
 
 /*
 	Footer CSS
@@ -627,41 +615,4 @@ div, section, section {
 	font-family: inherit;
 	font-size: 20px;
 	color: #ffffff;
-}
-
-/* editing... */
-
-@media screen and (max-width: 520px) {
-	body {
-		overflow-x: hidden;
-	}
-}
-
-@media screen and (max-width: 520px) {
-	#location-info {
-		position: relative;
-		top: 0px;
-		height: 100%;
-		width: 100%;
-		left: 0%;
-	} 
-}
-
-@media screen and (max-width: 520px) {
-	#watch-info {
-		position: relative;
-		top: -220px;
-		height: 100%;
-		width: 100%;
-		left: 100%;
-	} 
-}
-@media screen and (max-width: 520px) {
-	#caution-info {
-		position: relative;
-		top: -440px;
-		height: 100%;
-		width: 100%;
-		left: 200%;
-	} 
 }

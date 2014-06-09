@@ -48,13 +48,13 @@ var oNavigationElements = {
 	userListClickEvent : function(e){
 		oNavigationElements.removeActiveClass();
 		oNavigationElements.elUserList.setAttribute("class", "active");
-		console.log(e.target);
+		document.location.href='./userList';
 	},
 	
 	verificationManagerClickEvent : function(e){
 		oNavigationElements.removeActiveClass();
 		oNavigationElements.elVerificationManager.setAttribute("class", "active");
-		console.log(e.target);
+		document.location.href='./verificationList';
 	},
 	
 	mainClickEvent : function(e){
@@ -143,15 +143,15 @@ var sagimaraIndex = {
 						var newRow   = elTableBody.insertRow(elTableBody.rows.length);
 
 						//판매자 아이디
-						tableEditor.insertRow(newRow,0,result[i]["phoneNum"])
+						tableEditor.insertRow(newRow,0,result[i]["phoneNum"]);
 						//요청시간
-						tableEditor.insertRow(newRow,1,result[i]["verificationTime"])
+						tableEditor.insertRow(newRow,1,result[i]["verificationTime"]);
 						//현재 등급
-						tableEditor.insertRow(newRow,2,result[i]["verificationStatus"])
+						tableEditor.insertRow(newRow,2,result[i]["verificationStatus"]);
 						//사진 링크
-						tableEditor.insertRow(newRow,3,result[i]["videoLink"])
+						tableEditor.insertRow(newRow,3,result[i]["videoLink"]);
 						//위치 정보
-						tableEditor.insertRow(newRow,4,result[i]["locationCoordinate"])
+						tableEditor.insertRow(newRow,4,result[i]["locationCoordinate"]);
 						
 					}
 				}
@@ -181,11 +181,11 @@ var sagimaraIndex = {
 						var newRow   = elTableBody.insertRow(elTableBody.rows.length);
 
 						//판매자 아이디
-						tableEditor.insertRow(newRow,0,result[i]["requestFrom"])
+						tableEditor.insertRow(newRow,0,result[i]["requestFrom"]);
 						//마지막 요청시간
-						tableEditor.insertRow(newRow,1,result[i]["requestDate"])
+						tableEditor.insertRow(newRow,1,result[i]["requestDate"]);
 						//요청횟수
-						tableEditor.insertRow(newRow,2,result[i]["requestCount"])
+						tableEditor.insertRow(newRow,2,result[i]["requestCount"]);
 						
 					}
 				}
@@ -215,13 +215,13 @@ var sagimaraIndex = {
 						var newRow   = elTableBody.insertRow(elTableBody.rows.length);
 
 						//신고대상
-						tableEditor.insertRow(newRow,0,result[i]["notificationFrom"])
+						tableEditor.insertRow(newRow,0,result[i]["notificationFrom"]);
 						//신고자
-						tableEditor.insertRow(newRow,1,result[i]["notificationTo"])
+						tableEditor.insertRow(newRow,1,result[i]["notificationTo"]);
 						//신고날짜
-						tableEditor.insertRow(newRow,2,result[i]["notificationDate"])
+						tableEditor.insertRow(newRow,2,result[i]["notificationDate"]);
 						//신고내용
-						tableEditor.insertRow(newRow,3,result[i]["notificationText"])
+						tableEditor.insertRow(newRow,3,result[i]["notificationText"]);
 						
 					}
 				}

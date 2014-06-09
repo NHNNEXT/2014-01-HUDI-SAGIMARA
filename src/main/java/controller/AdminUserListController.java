@@ -13,37 +13,25 @@ import logger.SagimaraLogger;
 
 import org.apache.log4j.Logger;
 
+import database.UserDAO;
+import dto.UserForAdmin;
+import dto.UserProfile;
 import utility.JsonBuilder;
-import database.InquiryDAO;
-import database.LocationDAO;
-import database.NotificationDAO;
-import database.RequestDAO;
-import database.VerificationDAO;
-import database.VideoDAO;
-import dto.Location;
-import dto.Request;
-import dto.UserInquiry;
-import dto.Verification;
-import dto.VerifivationList;
-import dto.Video;
 
-
-public class AdminIndexPageController implements Controller {
-	private String forwardPath;
+public class AdminUserListController implements Controller {
 	private Logger logger;
 	private JsonBuilder jb;
-
-	public AdminIndexPageController(String forwardPath) {
+	private String forwardPath;
+	
+	public AdminUserListController(String forwardPath) {
 		super();
 		this.logger = SagimaraLogger.logger;
 		this.jb = JsonBuilder.getJsonBuilder();
 		this.forwardPath = forwardPath;
 	}
-
 	@Override
 	public String run(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
 		HttpSession session =  request.getSession();
 
 		String id = (String)session.getAttribute("admin_id");  // request에서 id 파라미터를 가져온다
@@ -53,12 +41,11 @@ public class AdminIndexPageController implements Controller {
 			return null;
 		}
 		
+
 		
-
-
 		return forwardPath;
 	}
-
+	
 
 
 }

@@ -23,6 +23,7 @@
 					<li class="active"><a>메인</a></li>
 					<li><a>회원목록</a></li>
 					<li><a>인증요청관리</a></li>
+					<li><a>신고 처리</a></li>
 				</ul>
 			</nav>
 			<section class="contents">
