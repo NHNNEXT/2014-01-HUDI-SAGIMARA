@@ -145,5 +145,6 @@
 	
 	<script src="/javascripts/barManager.js"></script>
 	<script src="/javascripts/main.js"></script>
+	<script src="/javascripts/swipeManager.js"></script>
 </body>
 </html>

@@ -263,7 +263,7 @@ div, section, section {
 	Detail Info Section
 */
 #detail-info {
-
+	min-height: 200px;
 }
 
 .detail-info-item {
