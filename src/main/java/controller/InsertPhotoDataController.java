@@ -45,10 +45,10 @@ public class InsertPhotoDataController implements Controller {
 		String date = null;
 		String json = null;
 		
-		ServletContext context = request.getServletContext();
-		String fullPath = context.getRealPath("/updatedImages/");
-		photoImagePath = fullPath;
-		logger.info("Photo Image Full Path "+ fullPath);
+		//ServletContext context = request.getServletContext();
+		//String fullPath = context.getRealPath("/updatedImages/");
+		photoImagePath = "updatedImages";
+		//logger.info("Photo Image Full Path "+ fullPath);
 		boolean isMultipart = ServletFileUpload.isMultipartContent(request);
 		if (isMultipart) {
 			FileItemFactory factory = new DiskFileItemFactory();
