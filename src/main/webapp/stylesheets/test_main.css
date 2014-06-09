@@ -8,6 +8,53 @@ div, section, section {
 }
 */
 
+/* temp
+@media screen and (max-width: 520px) {
+	body {
+		overflow-x: hidden;
+	}
+}
+*/
+
+/*
+temp
+@media screen and (max-width: 520px) {
+	#location-info {
+		position: absolute;
+		top: 100%;
+		height: 100%;
+		width: 100%;
+		left: 0%;
+	} 
+}
+*/
+
+/*
+temp
+@media screen and (max-width: 520px) {
+	#watch-info {
+		position: absolute;
+		top: 100%;
+		height: 100%;
+		width: 100%;
+		left: 100%;
+	} 
+}
+*/
+
+/*
+temp
+@media screen and (max-width: 520px) {
+	#caution-info {
+		position: absolute;
+		top: 100%;
+		height: 100%;
+		width: 100%;
+		left: 200%;
+	} 
+}
+*/
+
 @media screen and (max-width: 520px) {
 	body {
 		overflow-x: hidden;
