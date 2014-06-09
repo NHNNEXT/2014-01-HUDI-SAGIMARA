@@ -98,7 +98,7 @@ var sagimaraIndex = {
 						tableEditor.insertRow(newRow,5,result[i]["location"]);
 						tableEditor.insertRow(newRow,6,result[i]["locationCoordinate"]);
 						tableEditor.insertRow(newRow,7,result[i]["locationTime"]);
-						tableEditor.insertRow(newRow,8,result[i]["videoLink"]);
+						tableEditor.insertLinkRow(newRow,8,result[i]["videoLink"]);
 						tableEditor.insertRow(newRow,9,result[i]["videoDate"]);
 						tableEditor.insertRow(newRow,10,result[i]["watch"]);
 						tableEditor.insertRow(newRow,11,result[i]["notify"]);

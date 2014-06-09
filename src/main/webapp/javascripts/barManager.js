@@ -118,6 +118,15 @@ var tableEditor = {
 			var newText  = document.createTextNode(text)
 			newCell.appendChild(newText);
 		},
+		
+		insertLinkRow : function(row,cellNum, text) {
+			var newCell  = row.insertCell(cellNum);
+			var newDiv = document.createElement("div");
+			if(text!==""){
+				newDiv.innerHTML = "<a href='../" + text +"'>img</a>";
+				newCell.appendChild(newDiv);
+			}
+		}
 }
 var visitInfoBarManager = {
 	// 해당번호로 검색(방문)한 사람수 관련 정보

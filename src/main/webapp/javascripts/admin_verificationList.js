@@ -54,7 +54,7 @@ var sagimaraIndex = {
 			contentAreaResize();
 			editor.playStatusFeatureDetector();
 			updateManager.setAnimation("running");
-			oNavigationElements.elUserList.setAttribute("class", "active");
+			oNavigationElements.elVerificationManager.setAttribute("class", "active");
 			
 			// Login, Register Button 리스너 장착
 			oNavigationElements.elUserList.addEventListener("click",
