@@ -458,7 +458,7 @@ temp
 
 @media screen and (max-width: 520px) {
 	#location-info {
-		position: absolute;
+		/*position: relative;*/
 		top: 0px;
 		height: 100%;
 		width: 100%;
@@ -518,7 +518,7 @@ temp
 
 @media screen and (max-width: 520px) {
 	#watch-info {
-		position: absolute;
+		/* position: absolute;*/
 		top: 0px;
 		height: 100%;
 		width: 100%;
@@ -574,7 +574,7 @@ temp
 
 @media screen and (max-width: 520px) {
 	#caution-info {
-		position: absolute;
+		/*position: absolute;*/
 		top: 0px;
 		height: 100%;
 		width: 100%;
