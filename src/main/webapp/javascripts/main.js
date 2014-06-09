@@ -8,6 +8,7 @@ var oEventElements = {
 	elVerificationPop : editor.get("#verification-button-pop")
 };
 
+//데이터와 로직의 분리의 좋은 사례
 var userStatusInfo = {
 	// user Status관련 정보
 	safety : {
@@ -82,6 +83,8 @@ var updateManager = {
 		}
 	},	
 	
+	//전에 한번 말했던것 같은데 ..update함수들은 상당히 비슷함. 중복이라고 볼 수 있는데..
+	//이걸 해결해보려는 노력이 필요할 듯.
 	updateVisit : function(userData) {
 		// 해당번호 검색(방문)한 수를 업데이트
 		var elVisitInfo = editor.get("#visited-info");
@@ -195,6 +198,14 @@ var sagimaraMain = {
 		// 로고에 리프래쉬 기능 이벤트 등록
 		// 4일전~오늘날짜를 계산에서 보관
 		// FeatureDetector값을 찾아서 저장
+
+		//init이 하는 일이 크게 3덩어리?? 그렇다면 코드라인도 3줄로 명확히 구분하는 게 가능할까?
+		//예를들어 addEventListener를 아래처럼 하나로 묶는 다던가..해서 
+
+		//attachsEvents();
+		//visitInfoBarManager.setDateSet()
+		//editor.playStatusFeatureDetector();
+
 		oEventElements.elSubmit.addEventListener("click", this.requestSearchEvent.bind(this), false);
 		oEventElements.elLogo.addEventListener("click", utility.refresh, false);
 		oEventElements.elVerificationTop.addEventListener("click", this.verificationRequestEvent.bind(this), false);

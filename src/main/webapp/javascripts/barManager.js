@@ -1,6 +1,7 @@
 var editor = {
 	get : function(selector, elements) {
 		//해당 element에 대한 querySelector element가 없을시 document에서 select
+		// == 대신 ===을 사용. 그 차이는 한번 공부해볼 필요 있음.
 		if(typeof elements == "undefined") {
 			elements = document;
 		}
@@ -24,6 +25,7 @@ var editor = {
 		targetStyle.setProperty(type, value);
 	},
 	
+	//유용할 듯.
 	getStyle : function(element, type) {
 		// 해당 element에 주어진 type의 스타일 value 리턴
 		var targetStyle = window.getComputedStyle(element);

@@ -16,6 +16,7 @@ var oVerificationStatus = {
 	}
 };
 
+// 같은 객체내의 속성에 접근할 때는 this를 사용하면 됨. 'oNavigationElements' 대신에..
 var oNavigationElements = {
 	elUlList : editor.get(".nav>ul"),
 	elUserList : editor.get(".nav>ul").children[0],
@@ -41,6 +42,8 @@ var oNavigationElements = {
 	},
 	removeActiveClass : function(){
 		var index;
+		//this.elUlList.childElementCount 이런것도 지역변수로 할당해두고 쓰는 것이 더 빠름. 
+		//var iCount = this.elUlList.childElementCount;
 		for(index=0; index<this.elUlList.childElementCount; index++){
 			this.elUlList.children[index].removeAttribute("class", "active");
 		}
@@ -90,6 +93,11 @@ var sagimaraIndex = {
 					for (i=0;i<result.length;i++){
 						var newRow   = elTableBody.insertRow(elTableBody.rows.length);
 
+						//대략 이런식으로 코딩해보기 바람.
+						// var aInfo = ["userId", "userStatus" , "userVerification",,,,,,];
+						// aInfo.forEach(function(v,i,o) {
+						// 	tableEditor.insertRow(newRow,i,result[i][v]);
+						// });
 						tableEditor.insertRow(newRow,0,result[i]["userID"]);
 						tableEditor.insertRow(newRow,1,result[i]["userStatus"]);
 						tableEditor.insertRow(newRow,2,result[i]["userVerification"]);
