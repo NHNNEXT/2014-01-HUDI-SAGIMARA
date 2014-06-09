@@ -41,23 +41,19 @@ var swipeManager = {
 				if(swipeManager.swipeCheck(touchX, startTouchX) > 0)
 				{
 					leftValue = Math.floor(leftValue/100)*100;
-					console.log("right");
 				}
 				else if(swipeManager.swipeCheck(touchX, startTouchX) < 0)
 				{
 					leftValue = Math.ceil(leftValue/100)*100;
-					console.log("left");
 				}
 				else
 				{
 					leftValue = Math.round(leftValue/100)*100;
-					console.log("not move");
 				}
 				//-webkit-transition: left 1s; -transition: left 1s;
 				swiperItem[i].style.Transition = 'left 0.5s';
 				swiperItem[i].style.WebkitTransition = 'left 0.5s';
 				swiperItem[i].style.left = leftValue + "%";
-	  			console.log("aft : "+swiperItem[i].style.left);
 	  		}
 			
 			//else
@@ -74,7 +70,6 @@ var swipeManager = {
 				swiperItem[i].style.WebkitTransition = 'left 0s';
 		  		swiperItem[i].style.left = (movePercent+i*100) + "%";
 		  	}
-		  	console.log(movePercent);
 		  }
 		  
 		});
