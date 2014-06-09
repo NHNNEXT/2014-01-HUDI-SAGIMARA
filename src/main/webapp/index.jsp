@@ -142,7 +142,7 @@
 			<div class="footer-logo">SAGIMARA</div>
 		</footer>
 	</div>
-	
+	<script src="/javascripts/library.js"></script>	
 	<script src="/javascripts/barManager.js"></script>
 	<script src="/javascripts/main.js"></script>
 	<script src="/javascripts/swipeManager.js"></script>

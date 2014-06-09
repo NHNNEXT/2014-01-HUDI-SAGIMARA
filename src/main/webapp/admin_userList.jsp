@@ -61,7 +61,7 @@
 		<div class="clearfix"></div>
 
 	</div>
-
+	<script src="/javascripts/library.js"></script>
 	<script src="/javascripts/barManager.js"></script>
 	<script src="/javascripts/admin_userList.js"></script>
 </body>

@@ -70,47 +70,55 @@ var sagimaraIndex = {
 		requestUserList : function() {
 
 			var url = "/admin/data";
-			var request = new XMLHttpRequest();
+
 			var formdata = new FormData();
 			var result;
 			
-			request.open("POST", url, true);			
 			formdata.append("request", "userList");
 			formdata.append("max", 20);
 			formdata.append("page", 0);
 			formdata.append("orderBy", "");
-			request.send(formdata);
 
-			request.onreadystatechange = function() {
-				if (request.readyState == 4 && request.status == 200) {
-					result = utility.JSONparse(request.response);
-					var i;
-					var elSection = editor.get(".userList");
-					var elTableBody = editor.get("tbody",elSection);
-					for (i=0;i<result.length;i++){
-						var newRow   = elTableBody.insertRow(elTableBody.rows.length);
+			ajax.request(url, formdata, indexAjax.userList);
+			
+			
+		}
+};
 
-						tableEditor.insertRow(newRow,0,result[i]["userID"]);
-						tableEditor.insertRow(newRow,1,result[i]["userStatus"]);
-						tableEditor.insertRow(newRow,2,result[i]["userVerification"]);
-						tableEditor.insertRow(newRow,3,result[i]["VerificationStatus"]);
-						tableEditor.insertRow(newRow,4,result[i]["verificationTime"]);
-						tableEditor.insertRow(newRow,5,result[i]["location"]);
-						tableEditor.insertRow(newRow,6,result[i]["locationCoordinate"]);
-						tableEditor.insertRow(newRow,7,result[i]["locationTime"]);
-						tableEditor.insertLinkRow(newRow,8,result[i]["videoLink"]);
-						tableEditor.insertRow(newRow,9,result[i]["videoDate"]);
-						tableEditor.insertRow(newRow,10,result[i]["watch"]);
-						tableEditor.insertRow(newRow,11,result[i]["notify"]);
-						
+var indexAjax = {
+	userList : function(request) {
+		var i;
+		var elSection = editor.get(".userList");
+		var elTableBody = editor.get("tbody", elSection);
+		var key = []
+		
+
+		if (request.readyState == 4 && request.status == 200) {
+			var result = utility.JSONparse(request.response); 
+			var length = result.length;
+			for (i = 0; i < length; i++) {
+				var newRow = elTableBody.insertRow(elTableBody.rows.length);
+				var userListKeyArr = htConstants.aUserListAllInfo;
+				var keyLength = htConstants.aUserListAllInfo.length;
+				for (var k =0; k<keyLength; k++ ){
+					if(userListKeyArr[k] !=="videoLink"){
+						tableEditor.insertRow(newRow, k, result[i][userListKeyArr[k]]);
+					}else{
+						tableEditor.insertLinkRow(newRow, k, result[i][userListKeyArr[k]]);
 					}
 				}
 			}
 		}
-		
-		
-		
-	};
+	}
+}
+
+var htConstants = {
+		aUserListAllInfo : ["userID" , "userStatus" , "userVerification","VerificationStatus",
+		                    "verificationTime","location","locationCoordinate","locationTime",
+		                    "videoLink","videoDate","watch","notify"]
+}
+
+
 
 var contentAreaResize = function(){
 	var width = (window.innerWidth || self.innerWidth || document.documentElement.clientWidth || document.body.clientWidth);
