@@ -32,6 +32,10 @@
 				document.getElementById("watch-info"),
 				document.getElementById("caution-info")
 			];
+
+			for(var i in swiperItem) {
+				swiperItem[i].style.left = 100*i+"%";
+			}
 			//timer = setInterval(update, 15);
 
 			swiper.addEventListener('touchend', function() {
@@ -54,8 +58,8 @@
 						console.log("not move");
 					}
 					//-webkit-transition: left 1s; -transition: left 1s;
-					swiperItem[i].style.Transition = 'left 1s';
-					swiperItem[i].style.WebkitTransition = 'left 1s';
+					swiperItem[i].style.Transition = 'left 0.5s';
+					swiperItem[i].style.WebkitTransition = 'left 0.5s';
 					swiperItem[i].style.left = leftValue + "%";
 		  			console.log("aft : "+swiperItem[i].style.left);
 		  		}
@@ -99,7 +103,7 @@
 	</head>
 <body onload="init()" style="overflow:hidden;">	
 	<section id="detail-info" class="clearfix">
-		<section id="location-info" style="position: absolute; top: 0px; height: 100%; width: 100%; left:0%;">
+		<section id="location-info">
 			<p>최근<br>위치정보</p>
 			<figure>
 				<div id="map-canvas">
@@ -107,7 +111,7 @@
 				</div>
 			</figure>
 		</section>
-		<section id="watch-info" style="position: absolute; top: 0px; height: 100%; width: 100%; left:100%;">
+		<section id="watch-info">
 			<p>지켜보는<br>사람의 수</p>
 			<figure>
 				<div id="watch-tool">
@@ -115,7 +119,7 @@
 				</div>
 			</figure>
 		</section>
-		<section id="caution-info" style="position: absolute; top: 0px; height: 100%; width: 100%; left:200%;">
+		<section id="caution-info">
 			<p>신고/주의<br>현황</p>
 			<figure>
 				<div id="caution-tool">
