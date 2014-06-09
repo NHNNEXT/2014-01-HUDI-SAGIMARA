@@ -458,7 +458,7 @@ temp
 
 @media screen and (max-width: 520px) {
 	#location-info {
-		/*position: relative;*/
+		position: relative;
 		top: 0px;
 		height: 100%;
 		width: 100%;
@@ -511,15 +511,15 @@ temp
 #watch-info figure {
 	background: #fff url("../images/eye.png") no-repeat;
 	background-size:70%;
-	background-position:center;
+	background-position: center;
 	margin: 0 auto;
 	max-width : 280px;
 }
 
 @media screen and (max-width: 520px) {
 	#watch-info {
-		/* position: absolute;*/
-		top: 0px;
+		position: relative;
+		top: -220px;
 		height: 100%;
 		width: 100%;
 		left: 100%;
@@ -574,8 +574,8 @@ temp
 
 @media screen and (max-width: 520px) {
 	#caution-info {
-		/*position: absolute;*/
-		top: 0px;
+		position: relative;
+		top: -440px;
 		height: 100%;
 		width: 100%;
 		left: 200%;

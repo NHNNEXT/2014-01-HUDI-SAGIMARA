@@ -639,8 +639,8 @@ div, section, section {
 
 @media screen and (max-width: 520px) {
 	#location-info {
-		position: absolute;
-		top: 100%;
+		position: relative;
+		top: 0px;
 		height: 100%;
 		width: 100%;
 		left: 0%;
@@ -649,8 +649,8 @@ div, section, section {
 
 @media screen and (max-width: 520px) {
 	#watch-info {
-		position: absolute;
-		top: 100%;
+		position: relative;
+		top: -220px;
 		height: 100%;
 		width: 100%;
 		left: 100%;
@@ -658,8 +658,8 @@ div, section, section {
 }
 @media screen and (max-width: 520px) {
 	#caution-info {
-		position: absolute;
-		top: 100%;
+		position: relative;
+		top: -440px;
 		height: 100%;
 		width: 100%;
 		left: 200%;
