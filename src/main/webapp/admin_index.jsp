@@ -20,9 +20,9 @@
 		<div id="container">
 			<nav class="nav">
 				<ul>
-					<li class="active"><a>회원목록</a></li>
+					<li class="active"><a>메인</a></li>
+					<li><a>회원목록</a></li>
 					<li><a>인증요청관리</a></li>
-					<li><a>몰라</a></li>
 				</ul>
 			</nav>
 			<section class="contents">

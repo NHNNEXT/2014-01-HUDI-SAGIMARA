@@ -41,9 +41,9 @@ var oVerificationStatus = {
 
 var oNavigationElements = {
 	elUlList : editor.get(".nav>ul"),
-	elUserList : editor.get(".nav>ul").children[0],
-	elVerificationManager : editor.get(".nav>ul").children[1],
-	elIDonKnow : editor.get(".nav>ul").children[2],
+	elMain : editor.get(".nav>ul").children[0],
+	elUserList : editor.get(".nav>ul").children[1],
+	elVerificationManager : editor.get(".nav>ul").children[2],
 	
 	userListClickEvent : function(e){
 		oNavigationElements.removeActiveClass();
@@ -57,9 +57,9 @@ var oNavigationElements = {
 		console.log(e.target);
 	},
 	
-	iDonKnowClickEvent : function(e){
+	mainClickEvent : function(e){
 		oNavigationElements.removeActiveClass();
-		oNavigationElements.elIDonKnow.setAttribute("class", "active");
+		oNavigationElements.elMain.setAttribute("class", "active");
 		console.log(e.target);
 	},
 	removeActiveClass : function(){
@@ -81,8 +81,8 @@ var sagimaraIndex = {
 					oNavigationElements.userListClickEvent, false);
 			oNavigationElements.elVerificationManager.addEventListener("click",
 					oNavigationElements.verificationManagerClickEvent, false);
-			oNavigationElements.elIDonKnow.addEventListener("click",
-					oNavigationElements.iDonKnowClickEvent, false);
+			oNavigationElements.elMain.addEventListener("click",
+					oNavigationElements.mainClickEvent, false);
 			
 			visitInfoBarManager.setDateSet();
 			editor.playStatusFeatureDetector();
