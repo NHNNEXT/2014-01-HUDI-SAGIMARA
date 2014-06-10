@@ -3,12 +3,9 @@ var swiperItem = [];
 var touchX;
 var startTouchX;
 var startPercent;
-var itemIndex = 0;
+var ItemX = [];
 var screenX = window.innerWidth;
 var validLength = screenX/5;
-
-var timer;
-var touches = [];
 
 var swipeManager = {
 	swipeCheck : function(touchPos, startPos) {
@@ -30,7 +27,8 @@ var swipeManager = {
 		];
 
 		for(var i in swiperItem) {
-			swiperItem[i].style.left = 100*i+"%";
+			//swiperItem[i].style.left = 100*i+"%";
+			ItemX[i] = 100*i;
 		}
 		//timer = setInterval(update, 15);
 
@@ -54,7 +52,20 @@ var swipeManager = {
 				swiperItem[i].style.Transition = 'left 0.5s';
 				swiperItem[i].style.WebkitTransition = 'left 0.5s';
 				swiperItem[i].style.left = leftValue + "%";
-	  		}
+				ItemX[i] = leftValue;
+				console.log("0.5s");
+				
+				setTimeout(function(){
+					for(var i in swiperItem) {
+						swiperItem[i].style.Transition = 'left 0s';
+						swiperItem[i].style.WebkitTransition = 'left 0s';
+						swiperItem[i].style.left = (ItemX[i] == 0 ? 0 : -100) + "%";
+						console.log("0s");
+			  		}}
+					,500);
+			}
+
+			
 			
 			//else
 		});
@@ -77,7 +88,8 @@ var swipeManager = {
 		swiper.addEventListener('touchstart', function(event) {
 		  event.preventDefault();
 		  startTouchX = event.touches[0].pageX;
-		  startPercent = parseInt(swiperItem[0].style.left);
+		  //startPercent = parseInt(swiperItem[0].style.left);
+		  startPercent = ItemX[0];
 		});
 	}
 }
