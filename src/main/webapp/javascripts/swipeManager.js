@@ -26,14 +26,14 @@ var swipeManager = {
 			document.getElementById("caution-info")
 		];
 
-		for(var i in swiperItem) {
+		for(i = 0 ; i < swiperItem.length ; i++) {
 			//swiperItem[i].style.left = 100*i+"%";
 			ItemX[i] = 100*i;
 		}
 		//timer = setInterval(update, 15);
 
 		swiper.addEventListener('touchend', function() {
-			for(var i in swiperItem) {
+			for(i = 0 ; i < swiperItem.length ; i++) {
 				console.log("bef : "+swiperItem[i].style.left);
 				var leftValue = parseFloat(swiperItem[i].style.left);
 				if(swipeManager.swipeCheck(touchX, startTouchX) > 0)
@@ -56,7 +56,7 @@ var swipeManager = {
 				console.log("0.5s");
 				
 				setTimeout(function(){
-					for(var i in swiperItem) {
+					for(i = 0 ; i < swiperItem.length ; i++) {
 						swiperItem[i].style.Transition = 'left 0s';
 						swiperItem[i].style.WebkitTransition = 'left 0s';
 						swiperItem[i].style.left = (ItemX[i] == 0 ? 0 : -100) + "%";
@@ -76,7 +76,7 @@ var swipeManager = {
 		  touchX = event.touches[0].pageX;
 		  var movePercent = (touchX-startTouchX)/screenX*100+startPercent;
 		  if(movePercent <= 0 && movePercent >= -100*(swiperItem.length-1)) {
-		  	for(var i in swiperItem) {
+		  	for(i = 0 ; i < swiperItem.length ; i++) {
 		  		swiperItem[i].style.Transition = 'left 0s';
 				swiperItem[i].style.WebkitTransition = 'left 0s';
 		  		swiperItem[i].style.left = (movePercent+i*100) + "%";
