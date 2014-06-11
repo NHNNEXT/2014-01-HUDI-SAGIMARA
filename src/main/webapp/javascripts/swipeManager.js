@@ -16,48 +16,46 @@ var swipeManager = {
 		swiperItem[index].style.MsTransition = styleContent;
 	},
 
-	swipeCheck : function(touchPos, startPos) {
+	swipeCheck : function(touchPos, startPos, value) {
 		if(touchPos-startPos > validLength) { // right swipe action
-			return -1;
+			return Math.ceil(value/100)*100;
 		}
 		else if(startPos-touchPos > validLength) { // left swipe action
-			return 1;
+			return Math.floor(value/100)*100;
 		}
-		else return 0;
+		else return Math.round(value/100)*100;;
 	},
 
-	init : function() {
-		swiper = document.getElementById('detail-info');
-		swiperItem = [
-			document.getElementById("location-info"),
-			document.getElementById("watch-info"),
-			document.getElementById("caution-info")
-		];
+	touchstartEvent : function() {
+		swiper.addEventListener('touchstart', function(event) {
+			event.preventDefault();
+		 	startTouchX = event.touches[0].pageX;
+		  	//startPercent = parseInt(swiperItem[0].style.left);
+		  	startPercent = ItemX[0];
+		});
+	}
 
-		for(i = 0 ; i < swiperItem.length ; i++) {
-			ItemX[i] = 100*i;
-		}
-		
-		var swipeCheck = this.swipeCheck;
-		var setTransition = this.setTransition;
+	touchmoveEvent : function(setTransition) {
+		swiper.addEventListener('touchmove', function(event) {
+			event.preventDefault();
+			touchX = event.touches[0].pageX;
+			var movePercent = (touchX-startTouchX)/screenX*100+startPercent;
+			if(movePercent <= 0 && movePercent >= -100*(swiperItem.length-1)) {
+				for(i = 0 ; i < swiperItem.length ; i++) {
+		  			setTransition(i,'left 0s');
+		  			swiperItem[i].style.left = (movePercent+i*100) + "%";
+		  		}
+		  	}
+		});
+	}
 
+	touchendEvent : function(swipeCheck, setTransition) {
 		swiper.addEventListener('touchend', function() {
 			for(i = 0 ; i < swiperItem.length ; i++) {
 				console.log("bef : "+swiperItem[i].style.left);
 				var leftValue = parseFloat(swiperItem[i].style.left);
-				if(swipeCheck(touchX, startTouchX) > 0)
-				{
-					leftValue = Math.floor(leftValue/100)*100;
-				}
-				else if(swipeCheck(touchX, startTouchX) < 0)
-				{
-					leftValue = Math.ceil(leftValue/100)*100;
-				}
-				else
-				{
-					leftValue = Math.round(leftValue/100)*100;
-				}
-				//-webkit-transition: left 1s; -transition: left 1s;
+				
+				leftValue = swipeCheck(touchX, startTouchX, leftValue);
 				setTransition(i,'left 0.5s');
 				
 				swiperItem[i].style.left = leftValue + "%";
@@ -74,27 +72,30 @@ var swipeManager = {
 		  		}
 		  	},500);
 		});
+	}
 
-		swiper.addEventListener('touchmove', function(event) {
+	eventRegister : function() {
+		var swipeCheck = this.swipeCheck;
+		var setTransition = this.setTransition;
 
-		  event.preventDefault();
-		  touchX = event.touches[0].pageX;
-		  var movePercent = (touchX-startTouchX)/screenX*100+startPercent;
-		  if(movePercent <= 0 && movePercent >= -100*(swiperItem.length-1)) {
-		  	for(i = 0 ; i < swiperItem.length ; i++) {
-		  		setTransition(i,'left 0s');
-		  		swiperItem[i].style.left = (movePercent+i*100) + "%";
-		  	}
-		  }
-		  
-		});
+		this.touchstartEvent();
+		this.touchmoveEvent(setTransition);
+		this.touchendEvent(swipeCheck, setTransition);	
+	},
 
-		swiper.addEventListener('touchstart', function(event) {
-		  event.preventDefault();
-		  startTouchX = event.touches[0].pageX;
-		  //startPercent = parseInt(swiperItem[0].style.left);
-		  startPercent = ItemX[0];
-		});
+	init : function() {
+		swiper = document.getElementById('detail-info');
+		swiperItem = [
+			document.getElementById("location-info"),
+			document.getElementById("watch-info"),
+			document.getElementById("caution-info")
+		];
+
+		for(i = 0 ; i < swiperItem.length ; i++) {
+			ItemX[i] = 100*i;
+		}
+
+		this.eventRegister();
 	}
 }
 
