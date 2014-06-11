@@ -64,19 +64,15 @@ var swipeManager = {
 				
 				ItemX[i] = leftValue;
 				console.log("0.5s");
-				
-				setTimeout(function(){
-					for(i = 0 ; i < swiperItem.length ; i++) {
-						setTransition(i,'left 0s');
-						swiperItem[i].style.left = (ItemX[i] == 0 ? 0 : -100) + "%";
-						console.log("0s");
-			  		}}
-					,500);
 			}
 
-			
-			
-			//else
+			setTimeout(function(){
+				for(i = 0 ; i < swiperItem.length ; i++) {
+					setTransition(i,'left 0s');
+					swiperItem[i].style.left = (ItemX[i] == 0 ? 0 : -100) + "%";
+					console.log("0s");
+		  		}
+		  	},500);
 		});
 
 		swiper.addEventListener('touchmove', function(event) {
