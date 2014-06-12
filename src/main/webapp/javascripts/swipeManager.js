@@ -10,7 +10,7 @@ var SWIPEMANAGER = {
 	},
 
 	Constants : {
-		percent : 100,
+		3figure : 100,
 		delayTime : 0.5,
 		delayMs : 0.5*1000,
 		delayZero : 0,
@@ -23,12 +23,12 @@ var SWIPEMANAGER = {
 			var validLength = SWIPEMANAGER.Event.Variables.screenX/5;
 
 			if(touchPos-startPos > validLength) { // right swipe action
-				return Math.ceil(value/100)*100;
+				return Math.ceil(value/3figure)*3figure;
 			}
 			else if(startPos-touchPos > validLength) { // left swipe action
-				return Math.floor(value/100)*100;
+				return Math.floor(value/3figure)*3figure;
 			}
-			else return Math.round(value/100)*100;
+			else return Math.round(value/3figure)*3figure;
 		}
 	},
 
@@ -56,7 +56,7 @@ var SWIPEMANAGER = {
 			ItemX : [],
 			init : function() {
 				for(var i = 0 ; i < SWIPEMANAGER.Elements.swiperItem.length ; i++) {
-					SWIPEMANAGER.Event.Variables.ItemX[i] = 100*i;
+					SWIPEMANAGER.Event.Variables.ItemX[i] = leftPerc*i;
 				}
 			}
 		},
@@ -79,12 +79,12 @@ var SWIPEMANAGER = {
 				var touchX = SWIPEMANAGER.Event.Variables.touchX;
 				var startTouchX = SWIPEMANAGER.Event.Variables.startTouchX;
 
-				var movePercent = (touchX-startTouchX)/SWIPEMANAGER.Event.Variables.screenX*100+SWIPEMANAGER.Event.Variables.startPercent;
+				var movePercent = (touchX-startTouchX)/SWIPEMANAGER.Event.Variables.screenX*leftPerc+SWIPEMANAGER.Event.Variables.startPercent;
 
-				if(movePercent <= 0 && movePercent >= -100*(length-1)) {
+				if(movePercent <= 0 && movePercent >= -leftPerc*(length-1)) {
 					for(i = 0 ; i < length ; i++) {
 			  			setTransition(i,'left 0s');
-			  			setLeft(i, movePercent+i*100);
+			  			setLeft(i, movePercent+i*leftPerc);
 			  		}
 			  	}
 			});
@@ -103,7 +103,7 @@ var SWIPEMANAGER = {
 						SWIPEMANAGER.Event.Variables.startTouchX,
 						leftValue);
 					
-					setTransition(i,'left 0.5s');					
+					setTransition(i,'left '+delayTime+'s');					
 					setLeft(i, leftValue);
 					
 					SWIPEMANAGER.Event.Variables.ItemX[i] = leftValue;
@@ -111,10 +111,10 @@ var SWIPEMANAGER = {
 
 				setTimeout(function(){
 					for(i = 0 ; i < length ; i++) {
-						setTransition(i,'left 0s');
-						setLeft(i, SWIPEMANAGER.Event.Variables.ItemX[i] == 0 ? 0 : -100);
+						setTransition(i,'left '+delayZero+'s');
+						setLeft(i, SWIPEMANAGER.Event.Variables.ItemX[i] == 0 ? 0 : -leftPerc);
 			  		}
-			  	},500);
+			  	},delayMs);
 			});
 		},
 
