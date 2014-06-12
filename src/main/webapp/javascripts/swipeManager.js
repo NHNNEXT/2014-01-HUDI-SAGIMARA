@@ -1,3 +1,14 @@
+var SW = {
+	Constants : {
+		swipeArea : document.getElementById('detail-info'),
+		swiperItem : [
+			document.getElementById("location-info"),
+			document.getElementById("watch-info"),
+			document.getElementById("caution-info")
+		]
+	}
+};
+
 var swiper;
 var swiperItem = [];
 var touchX;
@@ -33,7 +44,7 @@ var swipeManager = {
 		  	//startPercent = parseInt(swiperItem[0].style.left);
 		  	startPercent = ItemX[0];
 		});
-	}
+	},
 
 	touchmoveEvent : function(setTransition) {
 		swiper.addEventListener('touchmove', function(event) {
@@ -47,7 +58,7 @@ var swipeManager = {
 		  		}
 		  	}
 		});
-	}
+	},
 
 	touchendEvent : function(swipeCheck, setTransition) {
 		swiper.addEventListener('touchend', function() {
@@ -72,7 +83,7 @@ var swipeManager = {
 		  		}
 		  	},500);
 		});
-	}
+	},
 
 	eventRegister : function() {
 		var swipeCheck = this.swipeCheck;
