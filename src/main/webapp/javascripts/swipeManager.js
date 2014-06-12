@@ -66,9 +66,6 @@ var SWIPEMANAGER = {
 				event.preventDefault();
 			 	SWIPEMANAGER.Event.Variables.startTouchX = event.touches[0].pageX;
 			  	SWIPEMANAGER.Event.Variables.startPercent = SWIPEMANAGER.Event.Variables.ItemX[0];
-			  	
-			  	console.log(SWIPEMANAGER.Event.Variables.startTouchX);
-			  	console.log(SWIPEMANAGER.Event.Variables.startPercent);
 			});
 		},
 
@@ -90,9 +87,6 @@ var SWIPEMANAGER = {
 			  			setLeft(i, movePercent+i*100);
 			  		}
 			  	}
-
-			  	console.log(SWIPEMANAGER.Event.Variables.touchX);
-			  	console.log(movePercent);
 			});
 		},
 
@@ -102,7 +96,6 @@ var SWIPEMANAGER = {
 
 			SWIPEMANAGER.Elements.swipeArea.addEventListener('touchend', function() {
 				for(i = 0 ; i < length ; i++) {
-					//console.log("bef : "+swiperItem[i].style.left);
 					var leftValue = parseFloat(swiperItem[i].style.left);
 					
 					leftValue = swipeCheck(
@@ -114,14 +107,12 @@ var SWIPEMANAGER = {
 					setLeft(i, leftValue);
 					
 					SWIPEMANAGER.Event.Variables.ItemX[i] = leftValue;
-					//console.log("0.5s");
 				}
 
 				setTimeout(function(){
 					for(i = 0 ; i < length ; i++) {
 						setTransition(i,'left 0s');
 						setLeft(i, SWIPEMANAGER.Event.Variables.ItemX[i] == 0 ? 0 : -100);
-						//console.log("0s");
 			  		}
 			  	},500);
 			});
