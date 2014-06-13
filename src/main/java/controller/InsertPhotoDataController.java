@@ -22,7 +22,9 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.log4j.Logger;
 
 import utility.JsonBuilder;
+import database.VerificationDAO;
 import database.VideoDAO;
+import dto.Verification;
 import dto.Video;
 
 public class InsertPhotoDataController implements Controller {
@@ -96,9 +98,15 @@ public class InsertPhotoDataController implements Controller {
 			Video video = new Video(id, videoLink, date);
 			VideoDAO videoDAO = new VideoDAO();
 
+			VerificationDAO verificationDAO = new VerificationDAO();
+			Verification verification = new Verification(
+					(String) request.getParameter("id"),
+					(String) request.getParameter("date"), "1");
+			
 			try {
 				if (videoDAO.selectById(id) == null) {
 					if (videoDAO.add(video)) {
+						verificationDAO.add(verification);
 						json = jb.requestSuccessJSON();
 					} else {
 						json = jb.requestFailedJSON();

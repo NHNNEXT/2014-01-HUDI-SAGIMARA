@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import utility.JsonBuilder;
 import database.LocationDAO;
+import database.VerificationDAO;
 import dto.Location;
+import dto.Verification;
 
 public class InsertLocationDataController implements Controller {
 	private JsonBuilder jb;
@@ -22,27 +24,38 @@ public class InsertLocationDataController implements Controller {
 
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see controller.Controller#run()
 	 */
 	@Override
-	public String run(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public String run(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
 		LocationDAO locationDAO = new LocationDAO();
-		Location location = new Location((String) request.getParameter("id"), (String) request.getParameter("date"), (String) request.getParameter("location"));
+		Location location = new Location((String) request.getParameter("id"),
+				(String) request.getParameter("date"),
+				(String) request.getParameter("location"));
 		String json = null;
+
+		VerificationDAO verificationDAO = new VerificationDAO();
+		Verification verification = new Verification(
+				(String) request.getParameter("id"),
+				(String) request.getParameter("date"), "1");
 		
 		try {
-			if(locationDAO.add(location)){
+			if (locationDAO.add(location)) {
+				verificationDAO.add(verification);
 				json = jb.requestSuccessJSON();
-			}else{
+			} else {
 				json = jb.requestFailedJSON();
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		request.setAttribute("json", json);
 		return forwardPath;
 
