@@ -30,26 +30,26 @@ public class InsertPhotoDataController implements Controller {
 	private JsonBuilder jb;
 	private String photoImagePath;
 	private String forwardPath;
-	
+
 	public InsertPhotoDataController(String forwardPath) {
 		super();
 		this.logger = SagimaraLogger.logger;
 		this.jb = JsonBuilder.getJsonBuilder();
 		this.forwardPath = forwardPath;
-		
+
 	}
-	
-	public String run(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException{
+
+	public String run(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		String id = null;
 		String videoLink = null;
 		String date = null;
 		String json = null;
-		
+
 		ServletContext context = request.getServletContext();
 		String fullPath = context.getRealPath("/updatedImages/");
 		photoImagePath = fullPath;
-		logger.info("Photo Image Full Path "+ fullPath);
+		logger.info("Photo Image Full Path " + fullPath);
 		boolean isMultipart = ServletFileUpload.isMultipartContent(request);
 		if (isMultipart) {
 			FileItemFactory factory = new DiskFileItemFactory();
@@ -61,27 +61,27 @@ public class InsertPhotoDataController implements Controller {
 				e.printStackTrace();
 			}
 
-
 			Iterator<FileItem> ir = items.iterator();
-			
+
 			while (ir.hasNext()) {
 				FileItem item = (FileItem) ir.next();
 				if (item.isFormField()) {
 					// Process form field.
 					String name = item.getFieldName();
 					String value = item.getString();
-					
-					if(name.equals("id")){
+
+					if (name.equals("id")) {
 						id = value;
 					}
-					if(name.equals("date")){
+					if (name.equals("date")) {
 						date = value;
 					}
-			
+
 				} else {
 					// Process uploaded file.
 					Date curDate = new Date();
-					videoLink = photoImagePath +"/"+ id+"-"+curDate.getTime()+"."+ "jpg" ;
+					videoLink = photoImagePath + "/" + id + "-"
+							+ curDate.getTime() + "." + "jpg";
 					logger.info("Photo Link :" + videoLink);
 					try {
 						File file = new File(videoLink);
@@ -91,26 +91,35 @@ public class InsertPhotoDataController implements Controller {
 					}
 				}
 			}
-			
+
 			Video video = new Video(id, videoLink, date);
 			VideoDAO videoDAO = new VideoDAO();
-			
+
 			try {
-				if(videoDAO.add(video)){
-					json = jb.requestSuccessJSON();
+				VideoDAO tmpVideoDAO = new VideoDAO();
+				if (tmpVideoDAO.selectById(id) == null) {
+					if (videoDAO.add(video)) {
+						json = jb.requestSuccessJSON();
+					} else {
+						json = jb.requestFailedJSON();
+					}
 				}else{
-					json = jb.requestFailedJSON();
+					if (videoDAO.update(video)) {
+						json = jb.requestSuccessJSON();
+					} else {
+						json = jb.requestFailedJSON();
+					}
 				}
+
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
+
 		}
-		
 
 		request.setAttribute("json", json);
-				
+
 		return forwardPath;
 	}
 }

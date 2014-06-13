@@ -20,7 +20,9 @@ public class VideoDAO {
 	public VideoDAO() {
 		this.connector = new DatabaseConnector();
 	}
-
+	
+	
+	
 	public boolean add(Video video) throws SQLException {
 		conn = connector.getMysqlConnection();
 		String tableName = video.getTableName();
@@ -52,6 +54,38 @@ public class VideoDAO {
 		return true;
 	}
 
+	public boolean update(Video video) throws SQLException {
+		conn = connector.getMysqlConnection();
+		String tableName = video.getTableName();
+		String sql = "UPDATE " + tableName
+				+ "SET video_link=?, video_date=?"
+				+ "WHERE USER_user_phone = ?";
+
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		
+		pstmt.setString(1, video.getVideoLink());
+		pstmt.setString(2, video.getVideoDate());
+		pstmt.setString(3, video.getVideoId());
+		
+		int result = pstmt.executeUpdate();
+
+		if (result == 1) {
+			logger.info(String.format("Add Complete %s : %s, %s, %s",
+					tableName, video.getVideoId(),
+					video.getVideoLink(),
+					video.getVideoDate()));
+		} else {
+			logger.info("Add Fail " + tableName);
+			pstmt.close();
+			conn.close();
+			return false;
+		}
+
+		pstmt.close();
+		conn.close();
+		return true;
+	}
+	
 	public Video selectById(String phoneNum) throws SQLException {
 		conn = connector.getMysqlConnection();
 		
