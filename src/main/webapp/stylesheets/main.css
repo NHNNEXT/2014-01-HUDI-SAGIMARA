@@ -632,12 +632,6 @@ div, section, section {
 /* editing... */
 
 @media screen and (max-width: 520px) {
-	body {
-		overflow-x: hidden;
-	}
-}
-
-@media screen and (max-width: 520px) {
 	#location-info {
 		position: relative;
 		top: 0px;
@@ -656,6 +650,17 @@ div, section, section {
 		left: 100%;
 	} 
 }
+
+@media screen and (max-width: 520px) {
+	#caution-info {
+		position: relative;
+		top: -440px;
+		height: 100%;
+		width: 100%;
+		left: 200%;
+	} 
+}
+
 @media screen and (max-width: 520px) {
 	#caution-info {
 		position: relative;
