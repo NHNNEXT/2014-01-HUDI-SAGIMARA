@@ -60,6 +60,7 @@ var oNavigationElements = {
 	mainClickEvent : function(e){
 		oNavigationElements.removeActiveClass();
 		oNavigationElements.elMain.setAttribute("class", "active");
+		document.location.href = './index';
 		console.log(e.target);
 	},
 	removeActiveClass : function(){

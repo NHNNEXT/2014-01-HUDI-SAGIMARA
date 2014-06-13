@@ -21,8 +21,9 @@
 		<div id="container">
 			<nav class="nav">
 				<ul>
-					<li class="active"><a>회원목록</a></li>
-					<li><a>인증요청관리</a></li>
+					<li><a>메인</a></li>
+					<li><a>회원목록</a></li>
+					<li class="active"><a>인증요청관리</a></li>
 					<li><a>신고 처리</a></li>
 				</ul>
 			</nav>
