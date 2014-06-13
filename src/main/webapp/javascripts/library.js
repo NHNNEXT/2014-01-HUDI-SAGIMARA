@@ -122,8 +122,9 @@ var tableEditor = {
 		var newCell = row.insertCell(cellNum);
 		var newDiv = document.createElement("div");
 		if (text !== "") {
-			text = "/updatedImages" + text.split('updatedImages')[1]
+			text = "updatedImages" + text.split('updatedImages')[1]
 			newDiv.innerHTML = "<a href='../" + text + "'>img</a>";
+			console.log(text);
 			newCell.appendChild(newDiv);
 		}
 	}
