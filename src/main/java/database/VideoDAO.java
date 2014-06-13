@@ -58,8 +58,8 @@ public class VideoDAO {
 		conn = connector.getMysqlConnection();
 		String tableName = video.getTableName();
 		String sql = "UPDATE " + tableName
-				+ "SET video_link=?, video_date=?"
-				+ "WHERE USER_user_phone = ?";
+				+ " SET video_link=?, video_date=?"
+				+ " WHERE USER_user_phone = ?";
 
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		
@@ -70,7 +70,7 @@ public class VideoDAO {
 		int result = pstmt.executeUpdate();
 
 		if (result == 1) {
-			logger.info(String.format("Add Complete %s : %s, %s, %s",
+			logger.info(String.format("Update Complete %s : %s, %s, %s",
 					tableName, video.getVideoId(),
 					video.getVideoLink(),
 					video.getVideoDate()));
