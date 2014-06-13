@@ -3,6 +3,7 @@ package controller;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -79,7 +80,8 @@ public class InsertPhotoDataController implements Controller {
 			
 				} else {
 					// Process uploaded file.
-					videoLink = photoImagePath +"/"+ id +"."+ "jpg" ;
+					Date curDate = new Date();
+					videoLink = photoImagePath +"/"+ id+"-"+curDate.getTime()+"."+ "jpg" ;
 					logger.info("Photo Link :" + videoLink);
 					try {
 						File file = new File(videoLink);
