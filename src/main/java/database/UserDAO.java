@@ -132,4 +132,29 @@ public class UserDAO {
 		}
 		return data;
 	}
+
+	public int updateStatus(String id, int status) throws SQLException {
+		
+		conn = connector.getMysqlConnection();
+		
+		String sql = "UPDATE USER set user_status= ? ,user_verification = 'true' where user_phone = ?";
+
+		
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, status);
+		pstmt.setString(2, id);
+		
+		int result = pstmt.executeUpdate();
+		if (result == 1) {
+			logger.info(String.format("User Update Complete %s : user_phone = %s, satus = %s",
+					"USER", id, status));
+		} else {
+			logger.info("Update Fail " + "USER");
+		}
+		pstmt.close();
+		conn.close();
+		
+		
+		return result;
+	}
 }

@@ -47,7 +47,7 @@
 									<th>위치인증 시간</th>
 									<th>사진</th>
 									<th>사진 전송 시간</th>
-
+									<th>인증</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -55,6 +55,17 @@
 							</tbody>
 						</table>
 					</article>
+				</section>
+				
+				<section id="userPopUp" class="border-radius input-form">
+					
+				<h1 class="title">
+					
+					<p class="exit-button">X</p>
+				</h1>
+				
+			
+			
 				</section>
 			</section>
 		</div>

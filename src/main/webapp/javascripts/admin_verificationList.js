@@ -1,3 +1,5 @@
+
+
 var updateManager = {
 	setAnimation : function(state) {
 		// 페이지 에니메이션을 시작시키는 함수
@@ -14,6 +16,42 @@ var oVerificationStatus = {
 
 	}
 };
+
+var oEventElements = {
+
+	elUserPopUp : editor.get("#userPopUp"),
+	
+	userPhotoClickEvent : function(e) {
+		var tr =e.target.parentElement.parentElement.parentNode;
+		var id = tr.children[0].textContent;
+		oEventElements.requestVerification(id, tr);
+		
+	},
+	
+	requestVerification : function(id, tr) {
+
+		var url = "/admin/data";
+		var request = new XMLHttpRequest();
+		var formdata = new FormData();
+		var result;
+
+		request.open("POST", url, true);
+		formdata.append("request", "verificationStatusChange");
+		formdata.append("id", id);
+		formdata.append("status", 0);
+		request.send(formdata);
+		
+		request.onreadystatechange = function() {
+			if (request.readyState == 4 && request.status == 200) {
+				result = utility.JSONparse(request.response);
+				if (result.code === "200") {
+					tr.childNodes[3].textContent = "0";
+					tr.childNodes[4].textContent = "true";
+				}
+			}
+		}
+	}
+}
 
 var oNavigationElements = {
 	elUlList : editor.get(".nav>ul"),
@@ -90,31 +128,33 @@ var sagimaraIndex = {
 				var elTableBody = editor.get("tbody", elSection);
 				for (i = 0; i < result.length; i++) {
 					var newRow = elTableBody.insertRow(elTableBody.rows.length);
-
-					tableEditor.insertRow(newRow, 0, result[i]["userID"]);
-					tableEditor.insertRow(newRow, 1,
-							result[i]["verificationTime"]);
-					tableEditor.insertRow(newRow, 2,
-							result[i]["verificationStatus"]);
-					tableEditor
-							.insertRow(newRow, 3, result[i]["currentStatus"]);
-					tableEditor.insertRow(newRow, 4, result[i]["verification"]);
-					tableEditor.insertRow(newRow, 5, result[i]["location"]);
-					tableEditor.insertRow(newRow, 6,
-							result[i]["location_coordinate"]);
-					tableEditor
-							.insertRow(newRow, 7, result[i]["location_time"]);
-					tableEditor
-							.insertLinkRow(newRow, 8, result[i]["videoLink"]);
-					tableEditor.insertRow(newRow, 9, result[i]["videoDate"]);
-
+					var userListKeyArr = htConstants.aUserListAllInfo;
+					var keyLength = htConstants.aUserListAllInfo.length;
+					for (var k = 0; k < keyLength; k++) {
+						if (userListKeyArr[k] === "videoLink") {
+							var linkText = result[i][userListKeyArr[k]];
+							tableEditor
+							.insertLinkRow(newRow, k, linkText);
+							
+						} else if(userListKeyArr[k] === "button"){ 
+							tableEditor
+							.insertVerificationRow(newRow,k,oEventElements.userPhotoClickEvent);
+						}else{
+							tableEditor.insertRow(newRow, k,
+									result[i][userListKeyArr[k]]);
+						}
+					}
 				}
 			}
 		}
 	}
 
 };
-
+var htConstants = {
+		aUserListAllInfo : [ "userID", "verificationTime", "verificationStatus",
+				"currentStatus", "verification", "location",
+				"location_coordinate", "location_time", "videoLink", "videoDate","button"]
+	}
 var contentAreaResize = function() {
 	var width = (window.innerWidth || self.innerWidth
 			|| document.documentElement.clientWidth || document.body.clientWidth);

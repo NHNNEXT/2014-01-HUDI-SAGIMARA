@@ -118,15 +118,24 @@ var tableEditor = {
 		newCell.appendChild(newText);
 	},
 
-	insertLinkRow : function(row, cellNum, text) {
+	insertLinkRow : function(row, cellNum, text, eventName) {
 		var newCell = row.insertCell(cellNum);
 		var newDiv = document.createElement("div");
 		if (text !== "") {
 			text = "updatedImages" + text.split('updatedImages')[1]
-			newDiv.innerHTML = "<a href='../" + text + "'>img</a>";
-			console.log(text);
+			newDiv.innerHTML = "<a href='" + eventName + "'>img</a>";
 			newCell.appendChild(newDiv);
 		}
+	},
+	insertVerificationRow : function(row,cellNum,eventName){
+		var newCell = row.insertCell(cellNum);
+		var newDiv = document.createElement("div");
+		newDiv.innerHTML = "<a href='javascript:;' >확인</a>";
+		newDiv.addEventListener("click",function(e) {
+			utility.requestPreventEvent(e);
+			eventName(e);
+		}, false);
+		newCell.appendChild(newDiv);
 	}
 }
 

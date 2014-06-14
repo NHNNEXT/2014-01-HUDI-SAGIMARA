@@ -242,3 +242,13 @@
 	bottom : 10%;
 }
 
+
+
+#userPopUp {
+	/* RegisterPopUp은 처음에 안보여야 하기 때문에 display:none*/
+	height:410px;
+	display:none;
+	color: #fff;
+	z-index:2;
+
+}

@@ -11,6 +11,7 @@ import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import logger.SagimaraLogger;
 
@@ -122,12 +123,41 @@ public class AdminAjaxController implements Controller {
 			json = jb.objectToJson(requestList);
 			logger.info(json);
 			request.setAttribute("json", json);
+		} else if (requestMap.get("request").equals("verificationStatusChange")) {
+			int status = Integer.parseInt(requestMap.get("status"));
+			String id = requestMap.get("id");
+			
+			if (usetStatusChange(id,status)) {
+				json = jb.requestSuccessJSON();
+			} else {
+				json = jb.requestFailedJSON();
+			}
+			
+			logger.info(json);
+			request.setAttribute("json", json);
 		}
+		
+		
+		
+		
 		return forwardPath;
 	}
 
 
 
+
+	private boolean usetStatusChange(String id, int status) {
+		UserDAO userDAO = new UserDAO();
+		 try {
+			if(userDAO.updateStatus(id, status)==1){
+				 return true;
+			 }
+		} catch (SQLException e) {
+			logger.info("User update Fail");
+			e.printStackTrace();
+		};
+		return false;
+	}
 
 	private Map<String, String> makeParameterMap(HttpServletRequest request) throws IOException {
 		FileItemFactory factory = new DiskFileItemFactory();
