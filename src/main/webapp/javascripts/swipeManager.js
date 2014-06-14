@@ -10,7 +10,7 @@ var SWIPEMANAGER = {
 	},
 
 	Constants : {
-		3figure : 100,
+		figure_3 : 100,
 		delayTime : 0.5,
 		delayMs : 0.5*1000,
 		delayZero : 0,
@@ -21,14 +21,15 @@ var SWIPEMANAGER = {
 	Calculate : {
 		swipeCheck : function(touchPos, startPos, value) {
 			var validLength = SWIPEMANAGER.Event.Variables.screenX/5;
+			var figure_3 = SWIPEMANAGER.Constants.figure_3;
 
 			if(touchPos-startPos > validLength) { // right swipe action
-				return Math.ceil(value/3figure)*3figure;
+				return Math.ceil(value/figure_3)*figure_3;
 			}
 			else if(startPos-touchPos > validLength) { // left swipe action
-				return Math.floor(value/3figure)*3figure;
+				return Math.floor(value/figure_3)*figure_3;
 			}
-			else return Math.round(value/3figure)*3figure;
+			else return Math.round(value/figure_3)*figure_3;
 		}
 	},
 
@@ -56,16 +57,18 @@ var SWIPEMANAGER = {
 			ItemX : [],
 			init : function() {
 				for(var i = 0 ; i < SWIPEMANAGER.Elements.swiperItem.length ; i++) {
-					SWIPEMANAGER.Event.Variables.ItemX[i] = leftPerc*i;
+					SWIPEMANAGER.Event.Variables.ItemX[i] = SWIPEMANAGER.Constants.leftPerc*i;
 				}
 			}
 		},
 
 		touchStart : function() {
 			SWIPEMANAGER.Elements.swipeArea.addEventListener('touchstart', function(event) {
+				var v = SWIPEMANAGER.Event.Variables;
+
 				event.preventDefault();
-			 	SWIPEMANAGER.Event.Variables.startTouchX = event.touches[0].pageX;
-			  	SWIPEMANAGER.Event.Variables.startPercent = SWIPEMANAGER.Event.Variables.ItemX[0];
+			 	v.startTouchX = event.touches[0].pageX;
+			  	v.startPercent = v.ItemX[0];
 			});
 		},
 
@@ -73,13 +76,15 @@ var SWIPEMANAGER = {
 			SWIPEMANAGER.Elements.swipeArea.addEventListener('touchmove', function(event) {
 				event.preventDefault();
 
-				SWIPEMANAGER.Event.Variables.touchX = event.touches[0].pageX;
+				var v = SWIPEMANAGER.Event.Variables;
+				v.touchX = event.touches[0].pageX;
 
+				var leftPerc = SWIPEMANAGER.Constants.leftPerc;
 				var length = SWIPEMANAGER.Elements.swiperItem.length;
-				var touchX = SWIPEMANAGER.Event.Variables.touchX;
-				var startTouchX = SWIPEMANAGER.Event.Variables.startTouchX;
+				var touchX = v.touchX;
+				var startTouchX = v.startTouchX;
 
-				var movePercent = (touchX-startTouchX)/SWIPEMANAGER.Event.Variables.screenX*leftPerc+SWIPEMANAGER.Event.Variables.startPercent;
+				var movePercent = (touchX-startTouchX)/v.screenX*leftPerc+v.startPercent;
 
 				if(movePercent <= 0 && movePercent >= -leftPerc*(length-1)) {
 					for(i = 0 ; i < length ; i++) {
@@ -91,30 +96,29 @@ var SWIPEMANAGER = {
 		},
 
 		touchEnd : function(swipeCheck, setTransition, setLeft) {
-			var length = SWIPEMANAGER.Elements.swiperItem.length;
 			var swiperItem = SWIPEMANAGER.Elements.swiperItem;
+			var length = swiperItem.length;
+			var v = SWIPEMANAGER.Event.Variables;
+			var c = SWIPEMANAGER.Constants;
 
 			SWIPEMANAGER.Elements.swipeArea.addEventListener('touchend', function() {
 				for(i = 0 ; i < length ; i++) {
 					var leftValue = parseFloat(swiperItem[i].style.left);
 					
-					leftValue = swipeCheck(
-						SWIPEMANAGER.Event.Variables.touchX,
-						SWIPEMANAGER.Event.Variables.startTouchX,
-						leftValue);
+					leftValue = swipeCheck(v.touchX,v.startTouchX,leftValue);
 					
-					setTransition(i,'left '+delayTime+'s');					
+					setTransition(i,'left '+c.delayTime+'s');					
 					setLeft(i, leftValue);
 					
-					SWIPEMANAGER.Event.Variables.ItemX[i] = leftValue;
+					v.ItemX[i] = leftValue;
 				}
 
-				setTimeout(function(){
+				setTimeout( function() {
 					for(i = 0 ; i < length ; i++) {
-						setTransition(i,'left '+delayZero+'s');
-						setLeft(i, SWIPEMANAGER.Event.Variables.ItemX[i] == 0 ? 0 : -leftPerc);
+						setTransition(i,'left '+c.delayZero+'s');
+						setLeft(i, v.ItemX[i] == 0 ? 0 : -c.leftPerc);
 			  		}
-			  	},delayMs);
+			  	},c.delayMs);
 			});
 		},
 
