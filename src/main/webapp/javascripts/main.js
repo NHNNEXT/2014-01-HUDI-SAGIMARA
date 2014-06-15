@@ -181,7 +181,9 @@ var requestLayer = {
 				if (request.readyState == 4 && request.status == 200) {
 					// json ajax 통신 부분
 					console.log(request.response);
-					
+					alert(requestor + "에서" + sagimaraMain.phoneNumber + "로 인증 요청했습니다.");
+				} else {
+					alert("인증요청 실패");
 				}
 			}
 		}
