@@ -123,6 +123,9 @@ public class UserDAO {
 			
 		
 		}
+		pstmt.close();
+		rs.close();
+		conn.close();
 		return user;
 	}
 
