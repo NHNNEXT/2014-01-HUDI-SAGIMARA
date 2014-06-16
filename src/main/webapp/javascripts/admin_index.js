@@ -150,7 +150,7 @@ var sagimaraIndex = {
 						//현재 등급
 						tableEditor.insertRow(newRow,2,result[i]["verificationStatus"]);
 						//사진 링크
-						tableEditor.insertRow(newRow,3,result[i]["videoLink"]);
+						tableEditor.insertLinkRow(newRow,3,result[i]["videoLink"]);
 						//위치 정보
 						tableEditor.insertRow(newRow,4,result[i]["locationCoordinate"]);
 						
