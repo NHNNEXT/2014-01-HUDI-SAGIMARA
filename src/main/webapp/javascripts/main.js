@@ -246,4 +246,4 @@ window.onresize = function() {
 	requestLayer.requestPopupRelocation();
 };
 
-window.onload = sagimaraMain.init();
+window.DOMContentLoaded = sagimaraMain.init();
