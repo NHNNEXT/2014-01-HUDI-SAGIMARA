@@ -29,106 +29,99 @@ var userStatusInfo = {
 	}
 }
 
-var updateManager = {
-	updatePage : function(result) {
-		// 각요소 전부에게 새로운 정보를 주고 업데이트 시키는 함수
-		visitInfoBarManager.setVisitNumberSet(result.profileInquiry);
-		this.updateProfile(result);
-		this.updateStatus(result);
-		this.updateVisit(result);
-		this.updateLocation(result);
-		this.updateWatch(result);
-		this.updateCaution(result);
-	},
-	
-	updateProfile : function(userData) {
-		// userProfile부분의 업데이트를 하는 함수
-		var elProfileInfo = editor.get("#profile-detail-section");
-		var elProfileInfoDetail = editor.getAll("p", elProfileInfo);
-		// update될 자료에 대한 확정 필요 - 우선 주석처리
-		// var join = "profilePhone : " + userData.profilePhone;
-		// var Verification = "profileStatus : " + userData.profileStatus;
-		// var Accept = "profileVerificatione : " +
-		// userData.profileVerificatione;
-		// editor.updateInnerHTML(elProfileInfoDetail[0], join);
-		// editor.updateInnerHTML(elProfileInfoDetail[1], Verification);
-		// editor.updateInnerHTML(elProfileInfoDetail[2], Accept);
-		var type = editor.resultFeatureDetector;
-		editor.setStyle(elProfileInfo, type, "running");
-	},
-	
-	updateStatus : function(userData) {
-		// user Status부분의 업데이트
-		var elProfileStatus = editor.get("#profile-status");
-		var elProfileStatusContents = editor.get(".contents", elProfileStatus);
-		editor.setStyle(elProfileStatus, "height", "150px");
-		
-		if (userData.profileStatus == userStatusInfo.safety.code) {
-		
-			editor.setStyle(elProfileStatus, "background", userStatusInfo.safety.color);
-			editor.updateInnerHTML(elProfileStatusContents,
-					userStatusInfo.safety.contents)
-					
-		} else if (userData.profileStatus == userStatusInfo.warning.code) {
-			
-			editor.setStyle(elProfileStatus, "background", userStatusInfo.warning.color);
-			editor.updateInnerHTML(elProfileStatusContents, userStatusInfo.warning.contents)
-			
-		} else {
-			
-			editor.setStyle(elProfileStatus, "background", userStatusInfo.danger.color);
-			editor.updateInnerHTML(elProfileStatusContents, userStatusInfo.danger.contents)
-		
-		}
-	},	
-	
-	updateVisit : function(userData) {
-		// 해당번호 검색(방문)한 수를 업데이트
-		var elVisitInfo = editor.get("#visited-info");
-		var elVisitInfoDetail = editor.get("#visited-graph", elVisitInfo);
-		var elVisitedInfoBar = editor.getAll("#visited-graph .bar-section", elVisitInfo);
-		var type = editor.resultFeatureDetector;
-		editor.setStyle(elVisitInfoDetail, type, "running");
-		visitInfoBarManager.executeBarAnimation(elVisitedInfoBar);
-	},
-	
-	updateLocation : function(userData) {
-		// user의 위치정보를 업데이트
-		var elLocationInfo = editor.get("#location-info");
-		var elLocationInfoDetail = editor.get("#map-canvas p", elLocationInfo);
-		var type = editor.resultFeatureDetector;
-		editor.setStyle(elLocationInfo, type, "running");
-		editor.updateInnerHTML(elLocationInfoDetail, userData.profileLocation);
-	},
+var updateManager = {};
 
-	updateWatch : function(userData) {
-		// user를 지켜보고(등록) 있는 사람의 수를 업데이트
-		var elWatchInfo = editor.get("#watch-info");
-		var elWatchInfoDetail = editor.get("#watch-tool p", elWatchInfo);
-		var type = editor.resultFeatureDetector;
-		editor.setStyle(elWatchInfo, type, "running");
-		editor.updateInnerHTML(elWatchInfoDetail, userData.profileWatch);
+updateManager.updatePage = function(result) {
+	// 각요소 전부에게 새로운 정보를 주고 업데이트 시키는 함수
+	visitInfoBarManager.setVisitNumberSet(result.profileInquiry);
+	this.updateProfile(result);
+	this.updateStatus(result);
+	this.updateVisit(result);
+	this.updateLocation(result);
+	this.updateWatch(result);
+	this.updateCaution(result);
+}
 
-	},
+updateManager.updateProfile = function(userData) {
+	// userProfile부분의 업데이트를 하는 함수
+	var elProfileInfo = editor.get("#profile-detail-section");
+	var elProfileInfoDetail = editor.getAll("p", elProfileInfo);
+	var type = editor.resultFeatureDetector;
+	editor.setStyle(elProfileInfo, type, "running");
+}
+
+
+updateManager.updateStatus = function(userData) {
+	// user Status부분의 업데이트
+	var elProfileStatus = editor.get("#profile-status");
+	var elProfileStatusContents = editor.get(".contents", elProfileStatus);
+	editor.setStyle(elProfileStatus, "height", "150px");
 	
-	updateCaution : function(userData) {
-		// 경고나 신고가 들어온 수를 업데이트
-		var elCautionInfo = editor.get("#caution-info");
-		var elCautionInfoDetail = editor.get("#caution-tool p", elCautionInfo);
-		var type = editor.resultFeatureDetector;
-		editor.setStyle(elCautionInfo, type, "running");
-		editor.updateInnerHTML(elCautionInfoDetail, userData.profileNotify);
-	},
+	if (userData.profileStatus == userStatusInfo.safety.code) {
 	
-	setAnimation : function(state) {
-		// 페이지 에니메이션을 시작시키는 함수
-		var elContainer = editor.get("#container");
-		var elFooter = editor.get("footer");
+		editor.setStyle(elProfileStatus, "background", userStatusInfo.safety.color);
+		editor.updateInnerHTML(elProfileStatusContents,
+				userStatusInfo.safety.contents)
+				
+	} else if (userData.profileStatus == userStatusInfo.warning.code) {
 		
-		var type = editor.resultFeatureDetector;
-		editor.setStyle(elContainer, type, state);
-		editor.setStyle(elFooter, type, state);
+		editor.setStyle(elProfileStatus, "background", userStatusInfo.warning.color);
+		editor.updateInnerHTML(elProfileStatusContents, userStatusInfo.warning.contents)
+		
+	} else {
+		
+		editor.setStyle(elProfileStatus, "background", userStatusInfo.danger.color);
+		editor.updateInnerHTML(elProfileStatusContents, userStatusInfo.danger.contents)
+	
 	}
+}
+
+updateManager.updateVisit = function(userData) {
+	// 해당번호 검색(방문)한 수를 업데이트
+	var elVisitInfo = editor.get("#visited-info");
+	var elVisitInfoDetail = editor.get("#visited-graph", elVisitInfo);
+	var elVisitedInfoBar = editor.getAll("#visited-graph .bar-section", elVisitInfo);
+	var type = editor.resultFeatureDetector;
+	editor.setStyle(elVisitInfoDetail, type, "running");
+	visitInfoBarManager.executeBarAnimation(elVisitedInfoBar);
+}
+
+updateManager.updateLocation = function(userData) {
+	// user의 위치정보를 업데이트
+	var elLocationInfo = editor.get("#location-info");
+	var elLocationInfoDetail = editor.get("#map-canvas p", elLocationInfo);
+	var type = editor.resultFeatureDetector;
+	editor.setStyle(elLocationInfo, type, "running");
+	editor.updateInnerHTML(elLocationInfoDetail, userData.profileLocation);
+}
+
+updateManager.updateWatch = function(userData) {
+	// user를 지켜보고(등록) 있는 사람의 수를 업데이트
+	var elWatchInfo = editor.get("#watch-info");
+	var elWatchInfoDetail = editor.get("#watch-tool p", elWatchInfo);
+	var type = editor.resultFeatureDetector;
+	editor.setStyle(elWatchInfo, type, "running");
+	editor.updateInnerHTML(elWatchInfoDetail, userData.profileWatch);
+
+}
+
+updateManager.updateCaution = function(userData) {
+	// 경고나 신고가 들어온 수를 업데이트
+	var elCautionInfo = editor.get("#caution-info");
+	var elCautionInfoDetail = editor.get("#caution-tool p", elCautionInfo);
+	var type = editor.resultFeatureDetector;
+	editor.setStyle(elCautionInfo, type, "running");
+	editor.updateInnerHTML(elCautionInfoDetail, userData.profileNotify);
+}
+
+updateManager.setAnimation = function(state) {
+	// 페이지 에니메이션을 시작시키는 함수
+	var elContainer = editor.get("#container");
+	var elFooter = editor.get("footer");
+	
+	var type = editor.resultFeatureDetector;
+	editor.setStyle(elContainer, type, state);
+	editor.setStyle(elFooter, type, state);
 }
 
 var requestLayer = {
