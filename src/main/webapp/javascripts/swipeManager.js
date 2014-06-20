@@ -87,7 +87,7 @@ var SWIPEMANAGER = {
 				var movePercent = (touchX-startTouchX)/v.screenX*leftPerc+v.startPercent;
 
 				if(movePercent <= 0 && movePercent >= -leftPerc*(length-1)) {
-					for(i = 0 ; i < length ; i++) {
+					for(var i = 0 ; i < length ; i++) {
 			  			setTransition(i,'left 0s');
 			  			setLeft(i, movePercent+i*leftPerc);
 			  		}
@@ -102,7 +102,7 @@ var SWIPEMANAGER = {
 			var c = SWIPEMANAGER.Constants;
 
 			SWIPEMANAGER.Elements.swipeArea.addEventListener('touchend', function() {
-				for(i = 0 ; i < length ; i++) {
+				for(var i = 0 ; i < length ; i++) {
 					var leftValue = parseFloat(swiperItem[i].style.left);
 					
 					leftValue = swipeCheck(v.touchX,v.startTouchX,leftValue);
